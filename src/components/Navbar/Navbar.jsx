@@ -24,6 +24,13 @@ export const Navbar = () => {
             <a href="/open">A OPEN</a>
           </li>
         </ul>
+        <button className="button">
+          <i
+            className="fa-regular fa-file-lines"
+            style={{ color: "#ffffff" }}
+          ></i>
+          Inscrição
+        </button>
       </nav>
     </header>
   );
