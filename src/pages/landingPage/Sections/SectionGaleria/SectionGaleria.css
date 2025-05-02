@@ -11,21 +11,32 @@
   text-align: center;
 }
 
-/* .section-galeria h3 {
-  color: #dda92e;
-  font-size: 40px;
-  font-weight: 600;
-} */
+/* lado esquerdo  */
+.section-galeria-left {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
 
+.card-imagens img {
+  width: 250px;
+  border-radius: 5px;
+}
+
+/* lado direito */
 .section-galeria-right {
   display: flex;
   flex-direction: column;
   gap: 16px;
   text-align: left;
+  justify-content: center;
+  padding-left: 12%;
 }
 .section-galeria-right h3 {
   color: #02093a;
-  font-size: 40px;
+  font-size: 60px;
   font-weight: 600;
 }
 .section-galeria-right h5 {

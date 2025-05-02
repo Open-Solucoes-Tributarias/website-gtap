@@ -61,9 +61,7 @@ export const SectionTemas = () => {
           </div>
         ))}
       </div>
-      <div className="section-temas-right">
-        <p>teste</p>
-      </div>
+      <div className="section-temas-right"></div>
     </section>
   );
 };
