@@ -1,0 +1,52 @@
+.section-galeria {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding-block: 5%;
+  padding-inline: 12%;
+  background-image: url("../../../../assets/backgroundSalvador.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+}
+
+/* .section-galeria h3 {
+  color: #dda92e;
+  font-size: 40px;
+  font-weight: 600;
+} */
+
+.section-galeria-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+.section-galeria-right h3 {
+  color: #02093a;
+  font-size: 40px;
+  font-weight: 600;
+}
+.section-galeria-right h5 {
+  color: #02093a;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.section-galeria-right button {
+  color: #02093a;
+  font-size: 14px;
+  font-weight: 500;
+  background: linear-gradient(to right, #dda92e, #ffdf92);
+  border: none;
+  border-radius: 15px;
+  padding-inline: 14px;
+  padding-block: 10px;
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  cursor: pointer;
+}
