@@ -1,0 +1,64 @@
+.section-temas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.section-temas-left {
+  background: linear-gradient(to right, #000d74, #02093a);
+  padding-left: 25%;
+  padding-block: 7%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-temas-left h3 {
+  color: #ffdf92;
+  font-size: 40px;
+  font-weight: 600;
+  text-align: left;
+}
+.section-temas-left h5 {
+  color: #fff;
+}
+
+/* cards tema */
+.card-tema {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: linear-gradient(to right, #dda92e, #ffdf92);
+  border-radius: 20px;
+  width: 90%;
+}
+.card-tema span {
+  background: linear-gradient(to right, #02093a, #000d74);
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  min-width: 70px;
+  min-height: 70px;
+  margin-left: -15px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  font-size: 45px;
+  -webkit-text-stroke: 1.5px #ffdf92;
+}
+.card-tema p {
+  color: #02093a;
+  padding-block: 10px;
+  padding-inline: 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* cards direito */
+.section-temas-right {
+  background: url("../../../../assets/background2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
