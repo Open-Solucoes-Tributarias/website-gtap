@@ -1,5 +1,5 @@
 import "./SectionAtuacao.css";
-import image1 from "../../../../assets/image1.jpg";
+import image1 from "../../../../assets/image1.png";
 
 export const SectionAtuacao = () => {
   return (
@@ -23,6 +23,25 @@ export const SectionAtuacao = () => {
       </div>
       <div className="right">
         <img src={image1} alt="banner evento gtap" />
+      </div>
+      <div className="bottom">
+        <div className="container-box">
+          <h3>Confira as áreas de atuação do público-alvo</h3>
+          <h4>
+            Quem lida com os desafios tributários da administração pública marca
+            presença no IX GTAP.
+          </h4>
+          <div className="container-tags">
+            <span>Recursos Humanos</span>
+            <span>Gestão Orçamentária</span>
+            <span>Licitações e Contratos</span>
+            <span>Gestão Contábil</span>
+            <span>Controle Interno</span>
+            <span>Financeiro</span>
+            <span>Jurídica</span>
+            <span>Fiscal</span>
+          </div>
+        </div>
       </div>
     </section>
   );

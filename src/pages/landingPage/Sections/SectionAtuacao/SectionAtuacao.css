@@ -1,6 +1,7 @@
 .section-atuacao {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-auto-rows: auto;
   justify-content: space-between;
   padding-block: 5%;
   padding-inline: 12%;
@@ -45,7 +46,7 @@
 }
 
 .right img {
-  width: 90%;
+  width: 80%;
 }
 .text-title {
   font-size: 32px;
@@ -54,4 +55,58 @@
 
 .text-title b {
   font-weight: bold;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  grid-column: 1 / -1;
+  margin-block: 40px;
+  background-color: #02093a;
+  border-radius: 16px;
+  width: 100%;
+  height: 400px;
+  max-width: 100%;
+  align-items: center;
+  background: url("../../../../assets/imagebg1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 16px;
+}
+
+.container-box {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-inline: 15%;
+}
+
+.container-box h3 {
+  color: #ffdf92;
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.container-box h4 {
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* tags areas de atuacao */
+.container-tags {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.container-tags span {
+  color: #fff;
+  background-color: #02093a;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 10px;
 }
