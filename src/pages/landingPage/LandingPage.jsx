@@ -2,6 +2,7 @@ import { BannerSection } from "../../components/Banner/Banner";
 import { Navbar } from "../../components/Navbar/Navbar";
 // import "./LandingPage.css";
 import { SectionAtuacao } from "./Sections/SectionAtuacao/SectionAtuacao";
+import { SectionDepoimentos } from "./Sections/SectionDepoimentos/SectionDepoimentos";
 import { SectionGaleria } from "./Sections/SectionGaleria/SectionGaleria";
 import { SectionPalestrantes } from "./Sections/SectionPalestrantes/SectionPalestrantes";
 import { SectionPublico } from "./Sections/SectionPublico/SectionPublico";
@@ -17,6 +18,7 @@ export const LandingPage = () => {
       <SectionPalestrantes />
       <SectionGaleria />
       <SectionPublico />
+      <SectionDepoimentos />
     </div>
   );
 };

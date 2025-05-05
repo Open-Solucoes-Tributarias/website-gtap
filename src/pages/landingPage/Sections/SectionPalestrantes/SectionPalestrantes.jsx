@@ -1,23 +1,16 @@
+import { useState, useEffect } from "react";
 import "./SectionPalestrantes.css";
-import alexandreImg from "../../../../assets/palestrantes/alexandre-marques.jpg";
-import gustavoReis from "../../../../assets/palestrantes/gustavo-reis.jpg";
-
-const palestrantes = [
-  {
-    id: 0,
-    name: "Alexandre Marques",
-    description: "Consultor da Open Soluções Tributárias",
-    imageUrl: alexandreImg,
-  },
-  {
-    id: 1,
-    name: "Gustavo Reis",
-    description: "Consultor da Open Soluções Tributárias",
-    imageUrl: gustavoReis,
-  },
-];
 
 export const SectionPalestrantes = () => {
+  const [palestrantes, setPalestrantes] = useState([]);
+
+  useEffect(() => {
+    fetch("./api/palestrantes.json")
+      .then((res) => res.json())
+      .then(setPalestrantes)
+      .catch((err) => console.error("Erro ao carregar palestrantes", err));
+  }, []);
+
   return (
     <section className="section-palestrantes">
       <div>

@@ -1,51 +1,16 @@
+import { useEffect, useState } from "react";
 import "./SectionTemas.css";
-// import image1 from "../../../../assets/image1.png";
-
-const temas = [
-  {
-    id: 0,
-    number: 1,
-    description: "Retenção de IBS/CBS nas compras pela administração pública;",
-  },
-  {
-    id: 1,
-    number: 2,
-    description:
-      "O mecanismo do split payment e suas implicações para adquirentes e fornecedores;",
-  },
-  {
-    id: 2,
-    number: 3,
-    description:
-      "Local de incidência do ISS e do IBS: o princípio do destino e seus desdobramentos práticos;",
-  },
-  {
-    id: 3,
-    number: 4,
-    description:
-      "O uso da tecnologia como pilar fundamental do novo sistema de tributação;",
-  },
-  {
-    id: 4,
-    number: 5,
-    description:
-      "Impactos da reforma tributária nas obrigações acessórias e documentos fiscais;",
-  },
-  {
-    id: 5,
-    number: 6,
-    description:
-      "Da lista de serviços da Lei Complementar 116 para a NBS: desafios da transição;",
-  },
-  {
-    id: 6,
-    number: 7,
-    description:
-      "Impactos da reforma tributária na planilha de formação de preços dos contratos públicos.",
-  },
-];
 
 export const SectionTemas = () => {
+  const [temas, setTemas] = useState([]);
+
+  useEffect(() => {
+    fetch("./api/temas.json")
+      .then((res) => res.json())
+      .then(setTemas)
+      .catch((err) => console.error("Erro ao carregar galeria", err));
+  }, []);
+
   return (
     <section className="section-temas">
       <div className="section-temas-left">

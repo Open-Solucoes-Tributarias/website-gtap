@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding-block: 3%;
+  padding-block: 5%;
   padding-inline: 12%;
   background: linear-gradient(to right, #02093a, #000d74);
   background-position: bottom;
