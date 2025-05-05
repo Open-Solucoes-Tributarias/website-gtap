@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./SectionGaleria.css";
 
 const IMAGES_VISIBLE = 6;
-const INTERVAL_MS = 4000;
+const INTERVAL_MS = 5000;
 
 export const SectionGaleria = () => {
   const [images, setImages] = useState([]);
