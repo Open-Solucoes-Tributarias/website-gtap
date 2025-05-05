@@ -1,5 +1,5 @@
 import { FloatingWhatsApp } from "react-floating-whatsapp";
-import { LandingPage } from "./pages/LandingPage/LandingPage";
+import { LandingPage } from "./pages/landingPage/LandingPage";
 
 function App() {
   return (
