@@ -7,7 +7,7 @@ export const Navbar = () => {
       <nav className="navbar-container" aria-label="Navegação principal">
         <h1 className="navbar-logo">
           <a href="">
-            <img src="/logo.svg" alt="logo do site" />
+            <img src="./logo.svg" alt="logo do site" />
           </a>
         </h1>
         <ul className="navbar-links">
