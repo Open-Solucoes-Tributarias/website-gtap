@@ -4,6 +4,7 @@ import { Navbar } from "../../components/Navbar/Navbar";
 import { SectionAtuacao } from "./Sections/SectionAtuacao/SectionAtuacao";
 import { SectionGaleria } from "./Sections/SectionGaleria/SectionGaleria";
 import { SectionPalestrantes } from "./Sections/SectionPalestrantes/SectionPalestrantes";
+import { SectionPublico } from "./Sections/SectionPublico/SectionPublico";
 import { SectionTemas } from "./Sections/SectionTemas/SectionTemas";
 
 export const LandingPage = () => {
@@ -15,6 +16,7 @@ export const LandingPage = () => {
       <SectionTemas />
       <SectionPalestrantes />
       <SectionGaleria />
+      <SectionPublico />
     </div>
   );
 };
