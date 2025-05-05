@@ -4,7 +4,7 @@ import "./SectionDepoimentos.css";
 export const SectionDepoimentos = () => {
   const [depoimentos, setDepoimentos] = useState([]);
   useEffect(() => {
-    fetch("/api/depoimentos.json")
+    fetch(`${import.meta.env.BASE_URL}api/depoimentos.json`)
       .then((res) => res.json())
       .then(setDepoimentos)
       .catch((err) => console.error("Erro ao carregar depoimentos", err));

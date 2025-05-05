@@ -5,7 +5,7 @@ export const SectionTemas = () => {
   const [temas, setTemas] = useState([]);
 
   useEffect(() => {
-    fetch("./api/temas.json")
+    fetch(`${import.meta.env.BASE_URL}api/temas.json`)
       .then((res) => res.json())
       .then(setTemas)
       .catch((err) => console.error("Erro ao carregar galeria", err));

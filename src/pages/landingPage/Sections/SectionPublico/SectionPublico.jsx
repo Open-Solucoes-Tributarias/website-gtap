@@ -4,7 +4,7 @@ import "./SectionPublico.css";
 export const SectionPublico = () => {
   const [clientes, setClientes] = useState([]);
   useEffect(() => {
-    fetch("/api/clientes.json")
+    fetch(`${import.meta.env.BASE_URL}api/clientes.json`)
       .then((res) => res.json())
       .then(setClientes)
       .catch((err) => console.error("Erro ao carregar clientes", err));

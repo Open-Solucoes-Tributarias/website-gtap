@@ -5,7 +5,7 @@ export const SectionPalestrantes = () => {
   const [palestrantes, setPalestrantes] = useState([]);
 
   useEffect(() => {
-    fetch("./api/palestrantes.json")
+    fetch(`${import.meta.env.BASE_URL}api/palestrantes.json`)
       .then((res) => res.json())
       .then(setPalestrantes)
       .catch((err) => console.error("Erro ao carregar palestrantes", err));

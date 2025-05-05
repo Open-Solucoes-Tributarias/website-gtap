@@ -10,7 +10,7 @@ export const SectionGaleria = () => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    fetch("/api/galeria.json")
+    fetch(`${import.meta.env.BASE_URL}api/galeria.json`)
       .then((res) => res.json())
       .then(setImages)
       .catch((err) => console.error("Erro ao carregar galeria", err));
