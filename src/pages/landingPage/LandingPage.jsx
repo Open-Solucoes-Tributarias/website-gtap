@@ -10,7 +10,7 @@ import { SectionTemas } from "./Sections/SectionTemas/SectionTemas";
 
 export const LandingPage = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <BannerSection />
       <SectionAtuacao />
@@ -19,6 +19,6 @@ export const LandingPage = () => {
       <SectionGaleria />
       <SectionPublico />
       <SectionDepoimentos />
-    </div>
+    </>
   );
 };
