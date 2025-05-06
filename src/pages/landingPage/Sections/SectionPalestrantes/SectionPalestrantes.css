@@ -57,3 +57,23 @@
   font-weight: 400;
   padding-bottom: 5%;
 }
+
+@media (max-width: 768px) {
+  .section-palestrantes h5 {
+    font-size: 15px;
+    padding: 0;
+  }
+
+  .container-palestrantes {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    justify-content: left;
+    gap: 10px;
+    padding-inline: 0;
+  }
+
+  .card-palestrantes {
+    min-width: 230px;
+    min-height: 350px;
+  }
+}

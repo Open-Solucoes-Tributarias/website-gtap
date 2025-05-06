@@ -1,48 +1,183 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+/* Baseado no Reset CSS de Eric Meyer v2.0 atualizado com melhorias */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-    display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
+
+/* Adicionar box-sizing para evitar problemas com padding e bordas */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Configurar o corpo e o HTML */
+html,
 body {
-    line-height: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 1.3;
+  overflow-x: hidden; /* Evita transbordamento horizontal */
 }
-ol, ul {
-    list-style: none;
+
+/* Remove estilos padrão de listas */
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-    quotes: none;
+
+/* Remove aspas padrão em blockquotes */
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
+
+/* Remover espaçamento entre células em tabelas */
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Definir estilo base para imagens */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Garantir que botões não herdem estilos desnecessários */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+/* Garantir que elementos de formulário não tenham estilos inconsistentes */
+textarea {
+  resize: none; /* Desativa o redimensionamento padrão */
+}
+
+/* Ajustar links para não sublinhar por padrão */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Garantir que a rolagem funcione sempre de forma consistente */
+html {
+  scroll-behavior: smooth;
 }

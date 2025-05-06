@@ -62,3 +62,31 @@
   background-size: cover;
   background-position: center;
 }
+
+@media (max-width: 768px) {
+  .section-temas {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+  .section-temas-right {
+    display: none;
+  }
+  .section-temas-left {
+    text-align: center;
+    padding: 8%;
+    width: 100%;
+  }
+  .section-temas-left h3 {
+    text-align: center;
+    font-size: 28px;
+  }
+  .section-temas-left h5 {
+    font-size: 14px;
+  }
+  .card-tema {
+    width: 100%;
+    font-size: 12px;
+    text-align: left;
+  }
+}

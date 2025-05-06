@@ -16,9 +16,10 @@
   object-fit: contain; /* Faz o vídeo cobrir o espaço */
   z-index: 1;
 }
-@media screen and (min-width: 1280px) {
+@media (min-width: 1280px) {
   .video-background {
     margin-top: -24.6vh;
     max-height: 1200px;
   }
 }
+
