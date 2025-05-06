@@ -8,7 +8,7 @@
   display: flex;
   align-items: flex-start; /* Alinha ao topo da section */
   align-items: flex-start;
-  margin-block: -24.6vh;
+  margin-bottom: -20vh;
   height: 850px;
   min-height: 1200px;
   max-height: 100%;
@@ -16,7 +16,7 @@
   object-fit: contain; /* Faz o vídeo cobrir o espaço */
   z-index: 1;
 }
-@media screen and (max-width: 1280px) {
+@media screen and (min-width: 1280px) {
   .video-background {
     margin-top: -24.6vh;
     max-height: 1200px;
