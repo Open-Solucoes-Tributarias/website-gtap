@@ -17,52 +17,54 @@ export const SectionDepoimentos = () => {
           Veja o que <b>nosso público</b> fala sobre o GTAP
         </h3>
       </div>
-      {depoimentos.map((depoimento, index) => (
-        <div key={depoimento.id} className="container-depoimentos">
-          {index % 2 === 0 ? (
-            <>
-              <div className="content-video-depoimentos">
-                <iframe
-                  width="560px"
-                  height="315px"
-                  src={depoimento.videoUrl}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
+      <div>
+        {depoimentos.map((depoimento, index) => (
+          <div key={depoimento.id}>
+            {index % 2 === 0 ? (
+              <div className="container-depoimentos">
+                <div className="content-video-depoimentos">
+                  <iframe
+                    width="500px"
+                    height="270px"
+                    src={depoimento.videoUrl}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+                <div className="content-depoimento-descricao">
+                  <h6>{depoimento.title}</h6>
+                  <p>{depoimento.description}</p>
+                </div>
               </div>
-              <div className="content-depoimento-descricao">
-                <h6>{depoimento.title}</h6>
-                <p>{depoimento.description}</p>
+            ) : (
+              <div className="container-depoimentos-second">
+                <div
+                  className="content-depoimento-descricao"
+                  style={{ textAlign: "right" }}
+                >
+                  <h6>{depoimento.title}</h6>
+                  <p>{depoimento.description}</p>
+                </div>
+                <div className="content-video-depoimentos">
+                  <iframe
+                    width="500px"
+                    height="270px"
+                    src={depoimento.videoUrl}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
               </div>
-            </>
-          ) : (
-            <>
-              <div
-                className="content-depoimento-descricao"
-                style={{ textAlign: "right" }}
-              >
-                <h6>{depoimento.title}</h6>
-                <p>{depoimento.description}</p>
-              </div>
-              <div className="content-video-depoimentos">
-                <iframe
-                  width="560px"
-                  height="315px"
-                  src={depoimento.videoUrl}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
-              </div>
-            </>
-          )}
-        </div>
-      ))}
+            )}
+          </div>
+        ))}
+      </div>
       <div className="content-mais-depoimentos">
         <a>
           <p>Veja todos os nossos depoimentos</p>

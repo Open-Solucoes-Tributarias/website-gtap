@@ -25,7 +25,7 @@ export const SectionGaleria = () => {
       setTimeout(() => {
         setStartIndex((prev) => (prev + 6) % images.length); // avança 1 posição
         setVisible(true); // aplica fade-in
-      }, 500);
+      }, 800);
     }, INTERVAL_MS);
 
     return () => clearInterval(interval);
@@ -44,9 +44,13 @@ export const SectionGaleria = () => {
 
   return (
     <section className="section-galeria">
-      <div className={`section-galeria-left ${visible ? "visible" : "hidden"}`}>
-        {currentGroup.map((img) => (
-          <div className="card-imagens" key={img.id}>
+      <div className="section-galeria-left">
+        {currentGroup.map((img, index) => (
+          <div
+            className={`card-imagens ${visible ? "visible" : ""}`}
+            key={img.id}
+            style={{ transitionDelay: `${index * 100}ms` }}
+          >
             <img src={img.imageUrl} alt="" />
           </div>
         ))}
