@@ -24,8 +24,6 @@ export const SectionDepoimentos = () => {
               <div className="container-depoimentos">
                 <div className="content-video-depoimentos">
                   <iframe
-                    width="500px"
-                    height="270px"
                     src={depoimento.videoUrl}
                     title="YouTube video player"
                     frameBorder="0"
@@ -50,8 +48,6 @@ export const SectionDepoimentos = () => {
                 </div>
                 <div className="content-video-depoimentos">
                   <iframe
-                    width="500px"
-                    height="270px"
                     src={depoimento.videoUrl}
                     title="YouTube video player"
                     frameBorder="0"
