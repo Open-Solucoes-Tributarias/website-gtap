@@ -17,7 +17,7 @@ export const SectionPublico = () => {
     if (!container) return;
 
     let scrollAmount = 0;
-    const step = 140; // px por vez
+    const step = 200; // px por vez
     const interval = 3000; //(3 segundos)
 
     const scroll = () => {

@@ -1,7 +1,5 @@
 import { BannerSection } from "../../components/Banner/Banner";
-import { Forms } from "../../components/Forms/Forms";
 import { Navbar } from "../../components/Navbar/Navbar";
-// import "./LandingPage.css";
 import { SectionAtuacao } from "./Sections/SectionAtuacao/SectionAtuacao";
 import { SectionDepoimentos } from "./Sections/SectionDepoimentos/SectionDepoimentos";
 import { SectionForms } from "./Sections/SectionForms/SectionForms";

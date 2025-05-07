@@ -12,7 +12,7 @@ export const SectionTemas = () => {
   }, []);
 
   return (
-    <section className="section-temas">
+    <section className="section-temas" id="temas">
       <div className="section-temas-left">
         <h3>Temas confirmados</h3>
         <h5>

@@ -12,16 +12,16 @@ export const Navbar = () => {
         </h1>
         <ul className="navbar-links">
           <li>
-            <a href="/">INÍCIO</a>
+            <a href="#temas">TEMAS</a>
           </li>
           <li>
-            <a href="/sobre">GALERIA</a>
+            <a href="#galeria">GALERIA</a>
           </li>
           <li>
-            <a href="/contato">CONTATO</a>
+            <a href="#contato">CONTATO</a>
           </li>
           <li>
-            <a href="/open">A OPEN</a>
+            <a href="https://opentreinamentos.com.br">A OPEN</a>
           </li>
         </ul>
         <button className="button">

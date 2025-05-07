@@ -43,7 +43,7 @@ export const SectionGaleria = () => {
   const currentGroup = getVisibleImages();
 
   return (
-    <section className="section-galeria">
+    <section className="section-galeria" id="galeria">
       <div className="section-galeria-left">
         {currentGroup.map((img, index) => (
           <div
