@@ -14,10 +14,10 @@ export const SectionAtuacao = () => {
         </div>
         <div className="data-section">
           <h3>
-            <i class="fa-regular fa-calendar"></i>16 e 17 de Outubro de 2025
+            <i className="fa-regular fa-calendar"></i>16 e 17 de Outubro de 2025
           </h3>
           <h3>
-            <i class="fa-solid fa-location-dot"></i>Salvador/BA
+            <i className="fa-solid fa-location-dot"></i>Salvador/BA
           </h3>
         </div>
       </div>

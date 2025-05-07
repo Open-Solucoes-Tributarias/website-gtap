@@ -2,10 +2,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding-inline: 12%;
-  background: url("/src/assets/farol-barra.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: #d3d3d3;
+  background-blend-mode: multiply;
 }
 
 .section-localizacao-left {

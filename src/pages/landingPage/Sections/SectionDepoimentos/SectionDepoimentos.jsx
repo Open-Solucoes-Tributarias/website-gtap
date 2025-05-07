@@ -65,7 +65,7 @@ export const SectionDepoimentos = () => {
         <a>
           <p>Veja todos os nossos depoimentos</p>
         </a>
-        <i class="fa-solid fa-arrow-right"></i>
+        <i className="fa-solid fa-arrow-right"></i>
       </div>
     </section>
   );
