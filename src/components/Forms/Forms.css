@@ -1,0 +1,67 @@
+.container-forms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  background: linear-gradient(to left, #dda92e, #ffdf92);
+  color: #fff;
+  border-radius: 10px;
+}
+.container-forms-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 8%;
+  color: #02093a;
+}
+.form-input {
+  display: flex;
+  flex-direction: column;
+  margin-block: 10px;
+}
+.form-input label {
+  font-size: 18px;
+  font-weight: 600;
+}
+.form-input input {
+  border: 1px solid #7c7c7c;
+  color: #02093a;
+  border-radius: 5px;
+  background-color: #fff;
+  padding-block: 8px;
+  padding-inline: 3px;
+}
+
+.form-input button {
+  background-color: #02093a;
+  color: #fff;
+  padding-block: 2%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.container-forms-left p {
+  font-size: 28px;
+  color: #02093a;
+  font-weight: 600;
+}
+
+.container-forms-right {
+  background-image: url("https://www.tributomunicipal.com.br/portal/images/EVENTO-GTAP-2022-2.jpg");
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container-forms {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 2%;
+  }
+  .container-forms-right {
+    display: none;
+  }
+}

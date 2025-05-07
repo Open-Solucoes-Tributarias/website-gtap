@@ -1,0 +1,61 @@
+.section-localizacao {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-inline: 12%;
+  background: url("/src/assets/farol-barra.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.section-localizacao-left {
+  padding-block: 10%;
+}
+.section-localizacao-left iframe {
+  border: none;
+  border-radius: 10px;
+  width: 500px;
+  height: 500px;
+}
+
+.section-localizacao-right {
+  display: flex;
+  padding-block: 10%;
+  align-items: end;
+}
+.box-text-local {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.box-text-local h5 {
+  font-size: 28px;
+  font-weight: 500;
+  color: #fff;
+}
+.box-text-local b {
+  color: #dda92e;
+}
+
+.box-text-local p {
+  font-size: 16px;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .section-localizacao {
+    display: flex;
+    flex-direction: column;
+  }
+  .section-localizacao-left iframe {
+    border: none;
+    border-radius: 10px;
+    width: 300px;
+    height: 200px;
+  }
+}

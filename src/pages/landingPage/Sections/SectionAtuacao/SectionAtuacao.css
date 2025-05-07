@@ -117,9 +117,23 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+    padding-inline: 2%;
+  }
+  .data-section {
+    justify-content: center;
+  }
+  .right {
+    text-align: center;
+  }
+  .right {
+    justify-self: center;
+  }
+
+  .right img {
+    width: 80%;
   }
   .text-title {
-    font-size: 25px;
+    font-size: 23px;
   }
   .data-section h3 {
     font-size: 15px;

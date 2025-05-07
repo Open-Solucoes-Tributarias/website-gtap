@@ -1,0 +1,10 @@
+.section-forms {
+  padding-inline: 12%;
+  padding-block: 2%;
+}
+
+@media (max-width: 768px) {
+  .section-forms {
+    padding-inline: 2%;
+  }
+}
