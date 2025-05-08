@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { BannerSection } from "../../components/Banner/Banner";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { SectionAtuacao } from "./Sections/SectionAtuacao/SectionAtuacao";
@@ -8,15 +9,31 @@ import { SectionLocal } from "./Sections/SectionLocal/SectionLocal";
 import { SectionPalestrantes } from "./Sections/SectionPalestrantes/SectionPalestrantes";
 import { SectionPublico } from "./Sections/SectionPublico/SectionPublico";
 import { SectionTemas } from "./Sections/SectionTemas/SectionTemas";
+import { supabase } from "../../supabaseClient";
 
 export const LandingPage = () => {
+  const [data, setData] = useState([]);
+
+  const fetchData = async () => {
+    const { data, error } = await supabase.from("landing_page").select("*");
+    if (error) {
+      console.error("erro ao buscar dados", error);
+      return;
+    }
+    setData(data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <Navbar />
       <BannerSection />
       <SectionAtuacao />
       <SectionTemas />
-      <SectionPalestrantes />
+      <SectionPalestrantes data={data} />
       <SectionGaleria />
       <SectionPublico />
       <SectionDepoimentos />

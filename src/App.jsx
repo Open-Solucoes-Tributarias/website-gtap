@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
 import { LandingPage } from "./pages/landingPage/LandingPage";
-import { AdminPage } from "./pages/admin/adminpage";
+import { AdminLoginPage } from "./pages/login/AdminLoginPage";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
               </>
             }
           />
-          <Route path="/website-gtap/admin" element={<AdminPage />} />
+          <Route path="/website-gtap/admin" element={<AdminLoginPage />} />
         </>
       </Routes>
     </BrowserRouter>

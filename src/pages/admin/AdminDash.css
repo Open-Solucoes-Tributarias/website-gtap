@@ -1,0 +1,38 @@
+.section-admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-inline: 12%;
+  padding-block: 8%;
+}
+
+.section-admin-dashboard img {
+  width: 80px;
+}
+
+.section-admin-dashboard h5 {
+  font-size: 30px;
+}
+.table-admin {
+  border: 1px solid #6d6d6d;
+}
+.table-admin tr td {
+  border: 1px solid #6d6d6d;
+  padding: 5px;
+}
+
+.table-admin th {
+  border: 1px solid #6d6d6d;
+  padding: 5px;
+}
+
+.table-admin thead {
+  font-weight: 600;
+  background-color: rgb(241, 241, 241);
+}
+
+.table-admin tbody i {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+}

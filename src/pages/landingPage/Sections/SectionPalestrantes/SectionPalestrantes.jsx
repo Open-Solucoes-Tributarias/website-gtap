@@ -1,15 +1,8 @@
 import { useState, useEffect } from "react";
 import "./SectionPalestrantes.css";
 
-export const SectionPalestrantes = () => {
-  const [palestrantes, setPalestrantes] = useState([]);
-
-  useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}api/palestrantes.json`)
-      .then((res) => res.json())
-      .then(setPalestrantes)
-      .catch((err) => console.error("Erro ao carregar palestrantes", err));
-  }, []);
+export const SectionPalestrantes = ({ data }) => {
+  const palestrantes = data.filter((item) => item.type === 0);
 
   return (
     <section className="section-palestrantes">
@@ -26,10 +19,10 @@ export const SectionPalestrantes = () => {
         {palestrantes.map((palestrante) => (
           <div
             className="card-palestrantes"
-            style={{ backgroundImage: `url(${palestrante.imageUrl})` }}
+            style={{ backgroundImage: `url(${palestrante.mediaUrl})` }}
             key={palestrante.id}
           >
-            <h6>{palestrante.name}</h6>
+            <h6>{palestrante.title}</h6>
             <p>{palestrante.description}</p>
           </div>
         ))}
