@@ -1,0 +1,70 @@
+.login-page-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.login-page-left-container {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 20%;
+  justify-content: center;
+}
+
+.login-page-left-container img {
+  width: 100px;
+}
+.login-page-left-container p {
+  font-size: 30px;
+  color: #02093a;
+  text-align: center;
+}
+
+.form-input-admin {
+  display: flex;
+  flex-direction: column;
+  margin-block: 10px;
+}
+.form-input-admin label {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+.form-input-admin input {
+  border: 1px solid #7c7c7c;
+  color: #02093a;
+  border-radius: 5px;
+  background-color: #fff;
+  padding-block: 8px;
+  padding-inline: 3px;
+}
+
+.form-input-admin button {
+  background-color: #2b8c8d;
+  color: #fff;
+  padding-block: 2%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-page-right-container {
+  color: aliceblue;
+  background-image: url(../../assets/faroldabarra.png);
+  background-position: center;
+  background-size: cover;
+}
+
+@media (max-width: 768px) {
+  .login-page-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+
+  .login-page-right-container {
+    display: none;
+  }
+}
