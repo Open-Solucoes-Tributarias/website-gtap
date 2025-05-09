@@ -1,15 +1,15 @@
 .banner-container {
   display: flex;
   position: relative;
-  overflow: hidden;
+  margin-bottom: -8rem;
 }
 
 .video-background {
   display: flex;
   align-items: flex-start; /* Alinha ao topo da section */
   width: 100vw;
-  height: 80vw;
-  min-height: 80vh;
+  height: 100vw;
+  min-height: 100vh;
   border: none;
   object-fit: contain; /* Faz o vídeo cobrir o espaço */
 }
