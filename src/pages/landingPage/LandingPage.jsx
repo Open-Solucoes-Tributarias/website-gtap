@@ -32,11 +32,11 @@ export const LandingPage = () => {
       <Navbar />
       <BannerSection />
       <SectionAtuacao />
-      <SectionTemas />
+      <SectionTemas data={data} />
       <SectionPalestrantes data={data} />
       <SectionGaleria />
-      <SectionPublico />
-      <SectionDepoimentos />
+      <SectionPublico data={data} />
+      <SectionDepoimentos data={data} />
       <SectionLocal />
       <SectionForms />
     </>

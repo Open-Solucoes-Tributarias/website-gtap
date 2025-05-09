@@ -70,7 +70,7 @@ export const AdminDash = () => {
       alert("Dados salvos com sucesso!");
       fetchDados();
       setFormData({ type: "0", title: "", description: "", mediaUrl: "" }); // Limpa o formulário
-      setEditingItem(null);
+      setEditItem(null);
       setOpenModal(false);
     }
   };
@@ -134,7 +134,7 @@ export const AdminDash = () => {
                 placeholder="URL da imagem ou vídeo"
                 value={formData.mediaUrl}
                 onChange={handleChange}
-                required
+                // required
               />
             </div>
             <div className="form-content-buttons">

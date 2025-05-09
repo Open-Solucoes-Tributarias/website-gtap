@@ -1,14 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./SectionPublico.css";
 
-export const SectionPublico = () => {
-  const [clientes, setClientes] = useState([]);
-  useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}api/clientes.json`)
-      .then((res) => res.json())
-      .then(setClientes)
-      .catch((err) => console.error("Erro ao carregar clientes", err));
-  }, []);
+export const SectionPublico = ({ data }) => {
+  const clientes = data.filter((cliente) => cliente.type === 2);
 
   const containerRef = useRef(null);
 
@@ -52,7 +46,7 @@ export const SectionPublico = () => {
       <div ref={containerRef} className="container-publico">
         {clientes.map((cliente) => (
           <div key={cliente.id} className="card-publico">
-            <img src={cliente.imageUrl} alt={`Cliente ${cliente.id}`} />
+            <img src={cliente.mediaUrl} alt={`Cliente ${cliente?.title}`} />
           </div>
         ))}
       </div>

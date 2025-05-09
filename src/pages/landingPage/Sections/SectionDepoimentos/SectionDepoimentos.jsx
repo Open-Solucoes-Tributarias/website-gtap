@@ -1,14 +1,7 @@
-import { useState, useEffect } from "react";
 import "./SectionDepoimentos.css";
 
-export const SectionDepoimentos = () => {
-  const [depoimentos, setDepoimentos] = useState([]);
-  useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}api/depoimentos.json`)
-      .then((res) => res.json())
-      .then(setDepoimentos)
-      .catch((err) => console.error("Erro ao carregar depoimentos", err));
-  }, []);
+export const SectionDepoimentos = ({ data }) => {
+  const depoimentos = data.filter((depoimento) => depoimento.type === 3);
 
   return (
     <section className="section-depoimentos">
@@ -24,8 +17,8 @@ export const SectionDepoimentos = () => {
               <div className="container-depoimentos">
                 <div className="content-video-depoimentos">
                   <iframe
-                    src={depoimento.videoUrl}
-                    title="YouTube video player"
+                    src={depoimento.mediaUrl}
+                    title="vimeo"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
@@ -46,10 +39,10 @@ export const SectionDepoimentos = () => {
                   <h6>{depoimento.title}</h6>
                   <p>{depoimento.description}</p>
                 </div>
-                <div className="content-video-depoimentos">
+                <div className="content-video-depoimentos-second">
                   <iframe
-                    src={depoimento.videoUrl}
-                    title="YouTube video player"
+                    src={depoimento.mediaUrl}
+                    title="vimeo"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"

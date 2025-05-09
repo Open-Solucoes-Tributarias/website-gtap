@@ -1,15 +1,8 @@
 import { useEffect, useState } from "react";
 import "./SectionTemas.css";
 
-export const SectionTemas = () => {
-  const [temas, setTemas] = useState([]);
-
-  useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}api/temas.json`)
-      .then((res) => res.json())
-      .then(setTemas)
-      .catch((err) => console.error("Erro ao carregar galeria", err));
-  }, []);
+export const SectionTemas = ({ data }) => {
+  const temas = data.filter((tema) => tema.type === 1);
 
   return (
     <section className="section-temas" id="temas">
@@ -21,7 +14,7 @@ export const SectionTemas = () => {
         </h5>
         {temas.map((tema) => (
           <div className="card-tema" key={tema.id}>
-            <span>{tema.number}</span>
+            <span>{Number(tema.title)}</span>
             <p>{tema.description}</p>
           </div>
         ))}

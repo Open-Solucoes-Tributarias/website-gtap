@@ -48,16 +48,15 @@
 .container-depoimentos iframe {
   border-radius: 10px;
   width: 500px;
-  height: 270px;
+  height: 280px;
 }
+
 .container-depoimentos-second iframe {
   border-radius: 10px;
   width: 500px;
-  height: 270px;
+  height: 280px;
 }
-/* .content-video-depoimentos {
- 
-} */
+
 .content-depoimento-descricao {
   display: flex;
   flex-direction: column;
