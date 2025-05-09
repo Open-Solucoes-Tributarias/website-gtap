@@ -1,4 +1,3 @@
-import React from "react";
 import "./Navbar.css";
 
 export const Navbar = () => {
@@ -7,7 +6,7 @@ export const Navbar = () => {
       <nav className="navbar-container" aria-label="Navegação principal">
         <h1 className="navbar-logo">
           <a href="">
-            <img src="./logo.svg" alt="logo do site" />
+            <img src="./logo-gtap.svg" alt="logo do site" />
           </a>
         </h1>
         <ul className="navbar-links">
@@ -15,22 +14,22 @@ export const Navbar = () => {
             <a href="#temas">TEMAS</a>
           </li>
           <li>
+            <a href="#temas">PALESTRANTES</a>
+          </li>
+
+          <li>
             <a href="#galeria">GALERIA</a>
+          </li>
+          <li>
+            <a href="#temas">PREÇOS</a>
+          </li>
+          <li>
+            <a href="#temas">A OPEN</a>
           </li>
           <li>
             <a href="#contato">CONTATO</a>
           </li>
-          <li>
-            <a href="https://opentreinamentos.com.br">A OPEN</a>
-          </li>
         </ul>
-        <button className="button">
-          <i
-            className="fa-regular fa-file-lines"
-            style={{ color: "#ffffff" }}
-          ></i>
-          Inscrição
-        </button>
       </nav>
     </header>
   );
