@@ -30,7 +30,7 @@ export const LandingPage = () => {
   return (
     <>
       <Navbar />
-      <BannerSection />
+      <BannerSection data={data} />
       <SectionAtuacao />
       <SectionTemas data={data} />
       <SectionPalestrantes data={data} />
