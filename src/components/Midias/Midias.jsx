@@ -59,14 +59,7 @@ export const MidiaList = () => {
       <p>Biblioteca de Mídias</p>
       <input type="file" onChange={handleUpload} />
       {loading && <p>Carregando...</p>}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "20px",
-          marginTop: "20px",
-        }}
-      >
+      <div className="container-midias">
         {files.map((file) => {
           const { publicUrl } = supabase.storage
             .from("medias")
@@ -74,10 +67,7 @@ export const MidiaList = () => {
           const isImage = /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name);
           const isVideo = /\.(mp4|webm|ogg)$/i.test(file.name);
           return (
-            <div
-              key={file.id}
-              className="content-midias"
-            >
+            <div key={file.id} className="content-midias">
               {isImage && <img src={publicUrl} alt={file.name} width="150" />}
               {isVideo && (
                 <video width="250" controls>
@@ -91,9 +81,8 @@ export const MidiaList = () => {
               <button onClick={() => handleCopyLink(publicUrl)}>
                 Copiar link
               </button>
-              <p>{file.name}</p>
-              <button onClick={() => handleCopyLink(url)}>Copiar link</button>
               <button onClick={() => handleDelete(file.name)}>Excluir</button>
+              <p>{file.name}</p>
             </div>
           );
         })}

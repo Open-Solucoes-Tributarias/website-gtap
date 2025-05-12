@@ -5,7 +5,19 @@
   padding-inline: 12%;
   /* padding-block: 8%; */
 }
+.container-midias {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
 
+.section-midias-list button {
+  cursor: pointer;
+  background-color: rgb(217, 230, 255);
+  border-radius: 10px;
+  width: 90px;
+}
 .content-midias {
   display: flex;
   flex-direction: column;
