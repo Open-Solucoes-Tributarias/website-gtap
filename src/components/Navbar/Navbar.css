@@ -54,7 +54,13 @@
     padding-block: 2%;
   }
   .navbar-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    row-gap: 10px;
     font-size: 14px;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 }

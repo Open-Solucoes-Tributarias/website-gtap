@@ -72,3 +72,49 @@
 .button-right-submit {
   font-size: 22px;
 }
+
+@media (max-width: 768px) {
+  .card-buttons-container {
+    flex-direction: column;
+    gap: 10px;
+    bottom: 10px;
+    padding: 0 10px;
+  }
+
+  .card-button-left {
+    width: 100%;
+  }
+
+  .button-left-condition {
+    padding-inline: 20px;
+    font-size: 18px;
+  }
+
+  .button-left-data {
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+
+  .card-button-right {
+    flex-direction: column;
+    gap: 10px;
+    min-width: unset;
+    width: 100%;
+    padding: 10px 15px;
+  }
+
+  .card-button-right button {
+    width: 100%;
+    font-size: 16px;
+    padding: 8px 10px;
+  }
+
+  .money-card-button {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .button-right-submit {
+    font-size: 18px;
+  }
+}

@@ -1,6 +1,4 @@
 import "./SectionTemas.css";
-import bgTemas from "../../../../assets/bgtemas.svg";
-import bgTemas2 from "../../../../assets/bgtemas2.svg";
 export const SectionTemas = ({ data }) => {
   const temas = data.filter((tema) => tema.type === 1);
 
