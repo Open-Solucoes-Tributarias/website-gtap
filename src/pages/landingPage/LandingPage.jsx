@@ -11,6 +11,7 @@ import { SectionPublico } from "./Sections/SectionPublico/SectionPublico";
 import { SectionTemas } from "./Sections/SectionTemas/SectionTemas";
 import { supabase } from "../../supabaseClient";
 import { CardButton } from "../../components/CardButton/CardButton";
+import { SectionIdealizador } from "./Sections/SectionIdealizador/SectionIdealizador";
 
 export const LandingPage = () => {
   const [data, setData] = useState([]);
@@ -35,6 +36,7 @@ export const LandingPage = () => {
       <BannerSection data={data} />
       <SectionAtuacao />
       <SectionTemas data={data} />
+      <SectionIdealizador />
       <SectionPalestrantes data={data} />
       <SectionGaleria />
       <SectionPublico data={data} />

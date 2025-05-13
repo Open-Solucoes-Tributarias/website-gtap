@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import "./SectionPalestrantes.css";
 
 export const SectionPalestrantes = ({ data }) => {
