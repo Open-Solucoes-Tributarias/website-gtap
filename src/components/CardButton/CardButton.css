@@ -1,0 +1,74 @@
+.card-buttons-container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  width: 100%;
+
+  /* efeito de blur */
+}
+.card-button-left {
+  background-color: rgba(100, 100, 100, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.button-left-condition {
+  padding-inline: 90px;
+  padding-block: 5px;
+  font-size: 24px;
+}
+.card-button-left hr {
+  width: 100%;
+}
+.button-left-data {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.card-button-right {
+  background-color: rgba(100, 100, 100, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  min-width: 50vh;
+}
+
+.card-button-right button {
+  background: linear-gradient(to left, #dda92e, #ffdf92);
+  color: #000000;
+  padding-block: 2%;
+  border-radius: 10px;
+  cursor: pointer;
+  padding-inline: 20px;
+  padding-block: 10px;
+}
+
+.money-card-button {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.button-right-submit {
+  font-size: 22px;
+}

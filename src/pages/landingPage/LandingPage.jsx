@@ -10,6 +10,7 @@ import { SectionPalestrantes } from "./Sections/SectionPalestrantes/SectionPales
 import { SectionPublico } from "./Sections/SectionPublico/SectionPublico";
 import { SectionTemas } from "./Sections/SectionTemas/SectionTemas";
 import { supabase } from "../../supabaseClient";
+import { CardButton } from "../../components/CardButton/CardButton";
 
 export const LandingPage = () => {
   const [data, setData] = useState([]);
@@ -30,6 +31,7 @@ export const LandingPage = () => {
   return (
     <>
       <Navbar />
+      <CardButton />
       <BannerSection data={data} />
       <SectionAtuacao />
       <SectionTemas data={data} />
