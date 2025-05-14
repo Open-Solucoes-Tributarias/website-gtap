@@ -1,35 +1,28 @@
 import { useState, useEffect } from "react";
-import imageUndefined from "../../../../assets/farol-barra.jpg";
+import imageUndefined from "../../../../assets/faroldabarra.png";
 import "./SectionLocal.css";
 
-export const SectionLocal = () => {
-  const [images, setImages] = useState([]);
-  const [urlImage, setUrlImage] = useState({});
+export const SectionLocal = ({ data }) => {
+  const images = data.filter((item) => item.type === 7);
+
+  console.log(images);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}api/imagensSsa.json`)
-      .then((res) => res.json())
-      .then(setImages)
-      .catch((err) => console.error("Erro ao carregar imagens", err));
-  }, []);
-
-  useEffect(() => {
-    const imagesUrls = images.map((image) => image.imageUrl);
-    let index = 0;
-
     const interval = setInterval(() => {
-      setUrlImage(imagesUrls[index]);
-      index = (index + 1) % imagesUrls.length;
+      setIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [images]);
+  }, [images.length]);
+
+  const currentImage = images[index];
 
   return (
     <section
       className="section-localizacao"
       style={{
-        backgroundImage: `url(${urlImage || imageUndefined})`,
+        backgroundImage: `url(${currentImage?.mediaUrl|| imageUndefined})`,
       }}
     >
       <div className="section-localizacao-left">

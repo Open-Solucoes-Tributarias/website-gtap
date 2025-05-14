@@ -42,7 +42,7 @@ export const LandingPage = () => {
       <SectionGaleria />
       <SectionPublico data={data} />
       <SectionDepoimentos data={data} />
-      <SectionLocal />
+      <SectionLocal data={data} />
       <SectionForms />
       <Footer />
     </>

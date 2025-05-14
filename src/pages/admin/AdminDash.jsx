@@ -22,6 +22,7 @@ export const AdminDash = () => {
     4: "Galeria",
     5: "Investimento",
     6: "banner",
+    7: "backgrounds"
   };
 
   const fetchDados = async () => {
