@@ -30,6 +30,11 @@ export const SectionIdealizador = () => {
             profissionais a alcançarem resultados extraordinários.
           </p>
         </div>
+        <div>
+          <button>
+            <i className="fa-solid fa-camera"></i>Acompanhe pelo instagram
+          </button>
+        </div>
       </div>
       <div className="content-image-idealizador">
         <img src={ImageAlexandre} />

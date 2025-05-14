@@ -23,7 +23,7 @@
   border-radius: 5px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   justify-content: space-between;
-  padding-bottom: 35%;
+  padding-bottom: 25%;
 }
 
 .content-idealizador h3 {
@@ -49,4 +49,21 @@
 
 .content-image-idealizador img {
   width: 500px;
+}
+
+.content-idealizador button {
+  color: #02093a;
+  font-size: 14px;
+  font-weight: 500;
+  background: linear-gradient(to right, #dda92e, #ffdf92);
+  border: none;
+  border-radius: 5px;
+  padding-inline: 5px;
+  padding-block: 10px;
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+  cursor: pointer;
 }
