@@ -2,7 +2,7 @@ import "./SectionInvestimento.css";
 import { useLoteAtual } from "../../../../Utils/useLoteAtual";
 
 export const SectionInvestimento = () => {
-  const { loteAtual, lotes } = useLoteAtual();
+  const { lotes } = useLoteAtual();
 
   return (
     <section className="investimento-container">
@@ -36,6 +36,12 @@ export const SectionInvestimento = () => {
             <p>{lote.periodo}</p>
           </div>
         ))}
+      </div>
+      <div className="container-button-investimento">
+        <button>
+          <i class="fa-regular fa-user" style={{ color: "#000d74" }}></i>Confira
+          condições especiais para grupo
+        </button>
       </div>
     </section>
   );

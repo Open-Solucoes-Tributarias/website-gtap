@@ -5,7 +5,7 @@ export const SectionDepoimentos = ({ data }) => {
 
   return (
     <section className="section-depoimentos">
-      <div>
+      <div className="text-container-depoimento">
         <h3>
           Veja o que <b>nosso público</b> fala sobre o GTAP
         </h3>

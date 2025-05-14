@@ -105,3 +105,17 @@
   font-size: 33px;
   font-weight: 600;
 }
+
+.container-button-investimento {
+}
+
+.container-button-investimento button {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  background-color: #fff;
+  color: #000d74;
+  padding-inline: 30px;
+  padding-block: 8px;
+  border-radius: 6px;
+}

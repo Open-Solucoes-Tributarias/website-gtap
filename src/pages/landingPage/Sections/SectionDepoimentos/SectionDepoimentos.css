@@ -14,8 +14,9 @@
 
 .section-depoimentos h3 {
   color: #000d74;
-  font-size: 40px;
+  font-size: 35px;
   font-weight: 400;
+  text-align: center;
 }
 .section-depoimentos b {
   font-weight: 700;
