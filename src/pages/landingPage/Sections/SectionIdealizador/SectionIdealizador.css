@@ -67,3 +67,18 @@
   justify-content: center;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .section-idealizador {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 2%;
+  }
+
+  .content-image-idealizador img {
+    width: 200px;
+  }
+  .content-idealizador button {
+    width: 80%;
+  }
+}
