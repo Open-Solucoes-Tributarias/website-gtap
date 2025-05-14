@@ -1,6 +1,9 @@
 import "./SectionInvestimento.css";
+import { useLoteAtual } from "../../../../Utils/useLoteAtual";
 
 export const SectionInvestimento = () => {
+  const { loteAtual, lotes } = useLoteAtual();
+
   return (
     <section className="investimento-container">
       <div className="investimento-title">
@@ -8,37 +11,31 @@ export const SectionInvestimento = () => {
           Valor do <b>investimento</b> por participante
         </h3>
       </div>
+
       <div className="container-lotes">
-        <div className="card-lote">
-          <p className="name-lote">Primeiro Lote</p>
-          <div className="container-border">
-            <div className="border-recort"></div>
-            <div className="border-recort-right"></div>
+        {lotes.map((lote, index) => (
+          <div
+            key={index}
+            className={`card-lote ${lote.status}`}
+            style={{
+              background:
+                lote.status === "presente"
+                  ? undefined // aplica o CSS padrão
+                  : lote.status === "passado"
+                  ? "#010B5B"
+                  : "#fff",
+            }}
+          >
+            <p className="name-lote">{lote.nome}</p>
+            <div className="container-border">
+              <div className="border-recort"></div>
+              <div className="border-recort-right"></div>
+            </div>
+            <hr className="linea" />
+            <p className="valor-lote">{lote.preco}</p>
+            <p>{lote.periodo}</p>
           </div>
-          <hr className="linea" />
-          <p className="valor-lote">R$ 3.190,00</p>
-          <p>JANEIRO A MAIO</p>
-        </div>
-        <div className="card-lote-white">
-          <p className="name-lote">Segundo Lote</p>
-          <div className="container-border">
-            <div className="border-recort"></div>
-            <div className="border-recort-right"></div>
-          </div>
-          <hr className="linea" />
-          <p className="valor-lote">R$ 3.490,00</p>
-          <p>JUNHO A AGOSTO</p>
-        </div>
-        <div className="card-effect-blur">
-          <p className="name-lote">Terceiro Lote</p>
-          <div className="container-border">
-            <div className="border-recort"></div>
-            <div className="border-recort-right"></div>
-          </div>
-          <hr className="linea" />
-          <p className="valor-lote">R$ 3.690,00</p>
-          <p>SETEMBRO A OUTUBRO</p>
-        </div>
+        ))}
       </div>
     </section>
   );
