@@ -1,6 +1,24 @@
 import "./Forms.css";
+import { supabase } from "../../supabaseClient";
 
 export const Forms = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const name = e.target.nome.value;
+    const email = e.target.email.value;
+    const whatsapp = e.target.tel.value;
+
+    const data = { name, email, whatsapp };
+
+    const { error } = await supabase.from("forms").insert(data);
+    if (error) {
+      console.error("erro ao enviar fomrulário", error);
+      return;
+    } else {
+      alert("Seus dados foram recebidos com sucesso!");
+    }
+  };
+
   return (
     <div className="container-forms">
       <div className="container-forms-left">
@@ -10,12 +28,7 @@ export const Forms = () => {
         </p>
         <form
           onSubmit={(e) => {
-            e.preventDefault();
-            const nome = e.target.nome.value;
-            const email = e.target.email.value;
-            const tel = e.target.tel.value;
-            alert("Dados do formulário enviados");
-            console.log("dados enviados", { nome, email, tel });
+            handleSubmit(e);
           }}
         >
           <div className="form-input">
