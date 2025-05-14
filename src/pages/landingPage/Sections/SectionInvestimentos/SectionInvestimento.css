@@ -1,0 +1,107 @@
+.investimento-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 12%;
+  padding: 3%;
+  background: linear-gradient(
+    270deg,
+    var(--Azul-principal, #000d74) 0.68%,
+    var(--Azul-secundrio, #02093a) 99.32%
+  );
+}
+
+.investimento-title {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+}
+.investimento-title b {
+  color: #dda92e;
+}
+
+.container-lotes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  text-align: center;
+}
+.card-lote {
+  width: 250px;
+  height: 250px;
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    var(--Amarelo-principal, #dda92e) 0%,
+    var(--Amarelo-secundrio, #ffdf92) 100%
+  );
+
+  box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.1);
+  padding-block: 20px;
+  overflow: hidden;
+}
+
+.card-effect-blur {
+  width: 250px;
+  height: 250px;
+  border-radius: 16px;
+  background-color: rgba(100, 100, 100, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.1);
+  padding-block: 20px;
+  overflow: hidden;
+}
+.card-lote-white {
+  width: 250px;
+  height: 250px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.1);
+  padding-block: 20px;
+  overflow: hidden;
+}
+
+.name-lote {
+  color: #02093a;
+  font-size: 25px;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+
+.container-border {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.border-recort {
+  background-color: #010a4e;
+  width: 50px;
+  margin-left: -22px;
+  height: 50px;
+  aspect-ratio: 1/1;
+  border-top-right-radius: 100%;
+  border-bottom-right-radius: 100%;
+}
+.border-recort-right {
+  background-color: #010a4e;
+  width: 50px;
+  margin-right: -22px;
+  height: 50px;
+  aspect-ratio: 1/1;
+  border-top-left-radius: 100%;
+  border-bottom-left-radius: 100%;
+}
+
+.linea {
+  border: none;
+  border-top: 2px dashed #000000;
+  margin-top: -25px;
+}
+.valor-lote {
+  padding-top: 25px;
+  font-size: 30px;
+  font-weight: 600;
+}

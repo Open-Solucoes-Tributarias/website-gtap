@@ -70,7 +70,7 @@ export const MidiaList = () => {
             <div key={file.id} className="content-midias">
               {isImage && <img src={publicUrl} alt={file.name} width="150" />}
               {isVideo && (
-                <video width="250" controls>
+                <video width="250" controls poster="./bannerImagePreload.png">
                   <source
                     src={publicUrl}
                     type={`video/${file.name.split(".").pop()}`}
