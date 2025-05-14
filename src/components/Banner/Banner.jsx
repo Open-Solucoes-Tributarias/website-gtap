@@ -5,7 +5,7 @@ export const BannerSection = ({ data }) => {
   const url = videoBackground[0]?.mediaUrl;
 
   return (
-    <section className="banner-container">
+    <section className="banner-container" id="inicio">
       <video
         className="video-background"
         src={url}

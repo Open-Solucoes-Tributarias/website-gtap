@@ -12,6 +12,7 @@ import { SectionTemas } from "./Sections/SectionTemas/SectionTemas";
 import { supabase } from "../../supabaseClient";
 import { CardButton } from "../../components/CardButton/CardButton";
 import { SectionIdealizador } from "./Sections/SectionIdealizador/SectionIdealizador";
+import { Footer } from "../../components/Footer/Footer";
 
 export const LandingPage = () => {
   const [data, setData] = useState([]);
@@ -43,6 +44,7 @@ export const LandingPage = () => {
       <SectionDepoimentos data={data} />
       <SectionLocal />
       <SectionForms />
+      <Footer />
     </>
   );
 };

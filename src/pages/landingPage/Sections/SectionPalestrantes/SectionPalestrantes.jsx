@@ -4,7 +4,7 @@ export const SectionPalestrantes = ({ data }) => {
   const palestrantes = data.filter((item) => item.type === 0);
 
   return (
-    <section className="section-palestrantes">
+    <section className="section-palestrantes" id="palestrantes">
       <div>
         <h3>Palestrantes</h3>
       </div>
