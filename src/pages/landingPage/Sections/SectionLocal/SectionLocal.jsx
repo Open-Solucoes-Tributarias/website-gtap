@@ -5,7 +5,6 @@ import "./SectionLocal.css";
 export const SectionLocal = ({ data }) => {
   const images = data.filter((item) => item.type === 7);
 
-  console.log(images);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {

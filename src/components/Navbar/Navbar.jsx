@@ -14,17 +14,22 @@ export const Navbar = () => {
             <a href="#temas">TEMAS</a>
           </li>
           <li>
-            <a href="#temas">PALESTRANTES</a>
+            <a href="#palestrantes">PALESTRANTES</a>
           </li>
-
           <li>
             <a href="#galeria">GALERIA</a>
           </li>
           <li>
-            <a href="#temas">PREÇOS</a>
+            <a href="#preços">PREÇOS</a>
           </li>
           <li>
-            <a href="#temas">A OPEN</a>
+            <a
+              href="https://opentreinamentos.com.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              A OPEN
+            </a>
           </li>
           <li>
             <a href="#contato">CONTATO</a>

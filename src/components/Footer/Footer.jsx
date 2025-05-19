@@ -39,7 +39,7 @@ export const Footer = () => {
           <a href="#preços">
             <li>Preços</li>
           </a>
-          <a href="https://opentreinamentos.com.br/">
+         <a href="https://opentreinamentos.com.br/" target="_blank" rel="noopener noreferrer">
             <li>A Open</li>
           </a>
           <a href="#contato">

@@ -10,7 +10,6 @@ export const AdminLoginPage = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log("enviado", email, password);
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,

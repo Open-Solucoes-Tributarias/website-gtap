@@ -5,7 +5,7 @@ export const SectionInvestimento = () => {
   const { lotes } = useLoteAtual();
 
   return (
-    <section className="investimento-container">
+    <section className="investimento-container" id="preços">
       <div className="investimento-title">
         <h3>
           Valor do <b>investimento</b> por participante
