@@ -1,5 +1,5 @@
 import "./SectionIdealizador.css";
-import ImageAlexandre from "../../../../assets/alexandremarques.png";
+import ImageAlexandre from "@/assets/alexandremarques.png";
 
 export const SectionIdealizador = () => {
   return (

@@ -8,14 +8,14 @@ function App() {
       <Routes>
         <>
           <Route
-            path="/website-gtap"
+            path="/"
             element={
               <>
                 <LandingPage />
               </>
             }
           />
-          <Route path="/website-gtap/admin" element={<AdminLoginPage />} />
+          <Route path="/admin" element={<AdminLoginPage />} />
         </>
       </Routes>
     </BrowserRouter>
