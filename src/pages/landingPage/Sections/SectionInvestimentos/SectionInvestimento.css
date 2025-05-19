@@ -106,9 +106,6 @@
   font-weight: 600;
 }
 
-.container-button-investimento {
-}
-
 .container-button-investimento button {
   display: flex;
   flex-direction: row;
@@ -118,4 +115,17 @@
   padding-inline: 30px;
   padding-block: 8px;
   border-radius: 6px;
+}
+@media (max-width: 768px) {
+  .investimento-title {
+    text-align: center;
+    font-size: 25px;
+  }
+  .container-lotes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
 }

@@ -50,3 +50,9 @@
 .content-menu-footer li {
   padding-block: 5px;
 }
+
+@media (max-width: 768px) {
+  .content-text-footer {
+    display: none;
+  }
+}

@@ -15,7 +15,7 @@ function App() {
               </>
             }
           />
-          <Route path="/admin" element={<AdminLoginPage />} />
+          <Route path="admin" element={<AdminLoginPage />} />
         </>
       </Routes>
     </BrowserRouter>
