@@ -8,7 +8,13 @@
   width: 100%;
   top: 0;
   z-index: 1000;
-  
+  color: #fff;
+}
+
+.navbar-light {
+  background-color: #fff;
+  color: #02093a;
+ 
 }
 
 .navbar-container {
@@ -37,7 +43,6 @@
 }
 
 .navbar-links a {
-  color: #ffffff;
   text-decoration: none;
   font-weight: 500;
 }

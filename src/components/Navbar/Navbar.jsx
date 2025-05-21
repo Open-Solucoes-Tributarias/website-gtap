@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "./Navbar.css";
 
-export const Navbar = () => {
+export const Navbar = ({ lightTemplate }) => {
 
   const [renderNav, setRenderNav] = useState(true);
   const lastDirection = useRef(null); // 'up' ou 'down' add para cehcar e não dar loop de event listener 
@@ -29,11 +29,11 @@ export const Navbar = () => {
   return (
     <>
       {renderNav && (
-        <header className="navbar">
+        <header className={lightTemplate ? "navbar-light" : "navbar"}>
           <nav className="navbar-container" aria-label="Navegação principal">
             <h1 className="navbar-logo">
               <a href="">
-                <img src="./logo-gtap.svg" alt="logo do site" />
+                {lightTemplate ? <img src="./logo.svg" alt="logo gtap"/> : <img src="./logo-gtap.svg" alt="logo do site" />}
               </a>
             </h1>
             <ul className="navbar-links">
