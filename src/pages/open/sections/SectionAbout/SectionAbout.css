@@ -5,8 +5,13 @@
     color: #02093A;
     padding-inline: 12%;
     padding-block: 2%;
+    background-image: url(../../../../assets/bgocean.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
 }
+
 
 .about-section-open h4 {
     font-size: 35px;
@@ -27,6 +32,7 @@
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     padding-block: 30px;
     padding-inline: 20px;
+    background-color: #fff;
 }
 
 .content-about-open b {
@@ -42,11 +48,18 @@
     border-radius: 5px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     padding-block: 30px;
+     background-color: #fff;
 
 }
 
 .content-logo-about img {
     width: 160px;
+}
+.video-about-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
 }
 
 .video-about-container h5 {
@@ -54,9 +67,27 @@
     color: #02093A;
     font-weight: 400;
     text-align: center;
+    
 }
 
 .video-about-container h5 b {
+    font-weight: 600;
+}
 
+.video-about-container video {
+    border-radius: 10px;
+}
+
+.text-about-solutions {
+    border: 1px solid #dfdfdf;
+    background-color: #dfdfdf;
+    border-radius: 5px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    padding-block: 30px;
+    padding-inline: 120px;
+    text-align: center;
+}
+
+.text-about-solutions b {
     font-weight: 600;
 }
