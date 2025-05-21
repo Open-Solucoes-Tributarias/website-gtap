@@ -47,7 +47,18 @@
     color: #dda92e;
     font-weight: 600;
 }
+.typing-js::after {
+  content: "|";
+  animation: blink 0.7s steps(1) infinite;
+  margin-left: 2px;
+  color: #dda92e;
+}
 
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
 .section-left-open button {
     display: flex;
     flex-direction: row;
