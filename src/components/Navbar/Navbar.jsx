@@ -51,7 +51,7 @@ export const Navbar = () => {
               </li>
               <li>
                 <a
-                  href="https://opentreinamentos.com.br/"
+                  href="open-solucoes-tributarias"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
