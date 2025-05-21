@@ -32,7 +32,7 @@ export const Navbar = ({ lightTemplate }) => {
         <header className={lightTemplate ? "navbar-light" : "navbar"}>
           <nav className="navbar-container" aria-label="Navegação principal">
             <h1 className="navbar-logo">
-              <a href="">
+              <a href="/">
                 {lightTemplate ? <img src="./logo.svg" alt="logo gtap"/> : <img src="./logo-gtap.svg" alt="logo do site" />}
               </a>
             </h1>
