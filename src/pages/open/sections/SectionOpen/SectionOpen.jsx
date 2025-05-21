@@ -65,7 +65,9 @@ export const SectionOpen = () => {
                         tributário é <br /><b className="typing-js">{displayText}</b></h2>
                 </div>
                 <div>
+                    <a href="https://opentreinamentos.com.br/" target="_blank" rel="noopener noreferrer">
                     <button><img src={globoOPen} alt="globo open" />Saiba mais!</button>
+                    </a>
                 </div>
                 <div className="stars-content-open">
                     <i className="fa-solid fa-star" style={{ color: "#dda92e" }}></i>

@@ -62,6 +62,7 @@
 .section-left-open button {
     display: flex;
     flex-direction: row;
+    cursor: pointer;
     gap: 8px;
     align-items: center;
     background: linear-gradient(to left, #000d74, #02093a);
