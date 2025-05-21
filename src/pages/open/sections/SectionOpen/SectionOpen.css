@@ -3,8 +3,8 @@
     grid-template-columns: 1fr 1fr;
     padding-inline: 12%;
     align-items: center;
-    height: 90vh;
-    max-height: 90vh;
+    height: 100vh;
+    max-height: 100vh;
     background-color: rgb(255, 255, 255);
     color: #02093a;
 }
@@ -89,10 +89,6 @@
     font-weight: 600;
 }
 
-.section-empresas-open {
-    grid-column: 1 / -1; /* Ocupa todas as colunas */
-    background-color: #000d74;
-}
 
 /* seção galeria de imagens */
 
@@ -123,3 +119,15 @@
 .img4 { bottom: 180px; left: -10%; width: 180px; }
 .img5 { bottom: 0; right: 0; width: 250px; }
 .img6 { bottom: 18px; left: 15%; width: 120px; }
+
+/* seção carrosel de empresas */
+
+.section-empresas-open {
+    grid-column: 1 / -1; /* Ocupa todas as colunas */
+    display: flex;
+    flex-direction: row;
+}
+
+.section-empresas-open img {
+    width: 120px;
+}

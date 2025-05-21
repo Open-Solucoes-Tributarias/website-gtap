@@ -1,36 +1,11 @@
-import { useEffect, useRef } from "react";
 import "./SectionPublico.css";
+import { useCarrousel } from "../../../../Utils/useCarrousel";
 
 export const SectionPublico = ({ data }) => {
   const clientes = data.filter((cliente) => cliente.type === 2);
 
-  const containerRef = useRef(null);
+  const containerRef = useCarrousel();
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    let scrollAmount = 0;
-    const step = 200; // px por vez
-    const interval = 3000; //(3 segundos)
-
-    const scroll = () => {
-      if (
-        container.scrollLeft + container.clientWidth >=
-        container.scrollWidth
-      ) {
-        container.scrollTo({ left: 0, behavior: "smooth" }); // volta pro começo
-        scrollAmount = 0;
-      } else {
-        scrollAmount += step;
-        container.scrollTo({ left: scrollAmount, behavior: "smooth" });
-      }
-    };
-
-    const autoScroll = setInterval(scroll, interval);
-
-    return () => clearInterval(autoScroll);
-  }, []);
 
   return (
     <section className="section-publico">

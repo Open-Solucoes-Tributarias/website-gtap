@@ -9,6 +9,7 @@ import image3 from "@/assets/open/image-equipe.jpg"
 import image4 from "@/assets/open/image-apresentacao.jpg"
 import image5 from "@/assets/open/image-debate.jpg"
 import image6 from "@/assets/open/image-livro.png"
+import { useCarrousel } from "../../../../Utils/useCarrousel";
 
 const textsTitles = [
     { id: 0, value: "Segurança Financeira" },
@@ -19,32 +20,32 @@ const textsTitles = [
     { id: 1, value: "Economia inteligente" },
 ];
 
-export const SectionOpen = () => {
+export const SectionOpen = ({ clientes }) => {
 
-
+    const containerRef = useCarrousel(); //hook do carrosel
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [displayText, setDisplayText] = useState("&nbsp;");
+    const [displayText, setDisplayText] = useState("");
     const texts = textsTitles.map((t) => t.value);
 
- useEffect(() => {
-    let charIndex = -1;
-    const fullText = texts[currentIndex];
-    setDisplayText("");
+    useEffect(() => {
+        let charIndex = -1;
+        const fullText = texts[currentIndex];
+        setDisplayText("");
 
-    const typingInterval = setInterval(() => {
-        charIndex++;
-        if (charIndex < fullText.length) {
-            setDisplayText((prev) => prev + fullText[charIndex]);
-        } else {
-            clearInterval(typingInterval);
-            setTimeout(() => {
-                setCurrentIndex((prev) => (prev + 1) % texts.length);
-            }, 1500);
-        }
-    }, 100);
+        const typingInterval = setInterval(() => {
+            charIndex++;
+            if (charIndex < fullText.length) {
+                setDisplayText((prev) => prev + fullText[charIndex]);
+            } else {
+                clearInterval(typingInterval);
+                setTimeout(() => {
+                    setCurrentIndex((prev) => (prev + 1) % texts.length);
+                }, 1500);
+            }
+        }, 100);
 
-    return () => clearInterval(typingInterval);
-}, [currentIndex]);
+        return () => clearInterval(typingInterval);
+    }, [currentIndex]);
 
 
 
@@ -66,7 +67,7 @@ export const SectionOpen = () => {
                 </div>
                 <div>
                     <a href="https://opentreinamentos.com.br/" target="_blank" rel="noopener noreferrer">
-                    <button><img src={globoOPen} alt="globo open" />Saiba mais!</button>
+                        <button><img src={globoOPen} alt="globo open" />Saiba mais!</button>
                     </a>
                 </div>
                 <div className="stars-content-open">
@@ -89,8 +90,12 @@ export const SectionOpen = () => {
                 <img src={image5} alt="Imagem 5" className="img-open-gallery img5" />
                 <img src={image6} alt="Imagem 6" className="img-open-gallery img6" />
             </div>
-            <div className="section-empresas-open">
-                <p>teste</p>
+            <div ref={containerRef} className="section-empresas-open">
+                {clientes.map((cliente) => (
+                    <div key={cliente.id}>
+                        <img src={cliente.mediaUrl} alt={`Cliente ${cliente?.title}`} />
+                    </div>
+                ))}
             </div>
         </section>
     )

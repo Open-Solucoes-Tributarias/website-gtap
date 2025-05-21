@@ -6,6 +6,9 @@ export const Footer = () => {
       <div className="content-logo">
         <p>Realização</p>
         <img src="./logoopen.svg" />
+        <p className="adress-open">R. Frederico Simões, 125 - SL 401<br/>
+Edf. Liz Empresarial  - Caminho das Árvores<br/>
+Salvador/ BA <br/>CEP 41820-774</p>
       </div>
       <div className="content-text-footer">
         <p>

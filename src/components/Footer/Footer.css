@@ -24,6 +24,11 @@
   text-align: left;
 }
 
+.adress-open {
+  font-weight: 300;
+  padding-top: 20px;
+}
+
 .content-logo img {
   justify-content: flex-start;
   width: 200px;
