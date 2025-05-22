@@ -1,11 +1,9 @@
 import "./SectionPublico.css";
-import { useCarrousel } from "../../../../Utils/useCarrousel";
+import { useCarousel } from "../../../../Utils/useCarousel";
 
 export const SectionPublico = ({ data }) => {
   const clientes = data.filter((cliente) => cliente.type === 2);
-
-  const containerRef = useCarrousel();
-
+  const containerRef = useCarousel();
 
   return (
     <section className="section-publico">
@@ -18,6 +16,8 @@ export const SectionPublico = ({ data }) => {
           inovadoras e fortalecer parcerias institucionais.
         </h5>
       </div>
+
+      {/* Carrossel com duas linhas */}
       <div ref={containerRef} className="container-publico">
         {clientes.map((cliente) => (
           <div key={cliente.id} className="card-publico">

@@ -1,13 +1,6 @@
 import { useEffect, useRef } from "react";
 
-/**
- * Hook para aplicar auto-scroll horizontal suave a um container com overflow-x.
- *
- * @param {number} step - Quantidade de scroll (px) por iteração.
- * @param {number} interval - Intervalo entre scrolls (ms).
- * @returns {React.RefObject} - Ref que deve ser atribuído ao container.
- */
-export function useCarrousel(step = 200, interval = 3000) {
+export function useCarousel(step = 200, interval = 3000) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -17,10 +10,7 @@ export function useCarrousel(step = 200, interval = 3000) {
     let scrollAmount = 0;
 
     const scroll = () => {
-      if (
-        container.scrollLeft + container.clientWidth >=
-        container.scrollWidth
-      ) {
+      if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
         container.scrollTo({ left: 0, behavior: "smooth" });
         scrollAmount = 0;
       } else {
@@ -33,5 +23,17 @@ export function useCarrousel(step = 200, interval = 3000) {
     return () => clearInterval(autoScroll);
   }, [step, interval]);
 
-  return containerRef;
+  const scrollLeft = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: -step, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: step, behavior: "smooth" });
+    }
+  };
+
+  return { containerRef, scrollLeft, scrollRight };
 }
