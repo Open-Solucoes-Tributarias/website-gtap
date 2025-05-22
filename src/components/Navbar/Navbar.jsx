@@ -44,7 +44,7 @@ export const Navbar = ({ lightTemplate }) => {
                 <a href="#palestrantes">PALESTRANTES</a>
               </li>
               <li>
-                <a href="#galeria">GALERIA</a>
+                <a href="galeria">GALERIA</a>
               </li>
               <li>
                 <a href="#preços">PREÇOS</a>

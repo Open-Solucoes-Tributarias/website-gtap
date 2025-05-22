@@ -36,7 +36,7 @@ Salvador/ BA <br/>CEP 41820-774</p>
           <a href="#palestrantes">
             <li>Palestrantes</li>
           </a>
-          <a href="#galeria">
+           <a href="galeria">
             <li>Galeria</li>
           </a>
           <a href="#preços">

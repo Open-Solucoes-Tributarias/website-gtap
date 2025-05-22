@@ -58,9 +58,11 @@ export const SectionGaleria = () => {
       <div className="section-galeria-right">
         <h3>Galeria</h3>
         <h5>Acompanhe de perto o que o GTAP tem realizado nos últimos anos.</h5>
-        <button>
-          <i className="fa-solid fa-camera"></i>ACESSE A GALERIA
-        </button>
+        <a href="galeria">
+          <button>
+            <i className="fa-solid fa-camera"></i>ACESSE A GALERIA
+          </button>
+        </a>
       </div>
     </section>
   );
