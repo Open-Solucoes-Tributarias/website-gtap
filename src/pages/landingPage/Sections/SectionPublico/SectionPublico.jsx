@@ -1,4 +1,42 @@
 import "./SectionPublico.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const sliderSettings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 7,
+  slidesToScroll: 2,
+  rows: 2,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        rows: 2
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+        rows: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        rows: 1
+      }
+    }
+  ]
+};
+
 
 export const SectionPublico = ({ data }) => {
   const clientes = data.filter((cliente) => cliente.type === 2);
@@ -18,11 +56,13 @@ export const SectionPublico = ({ data }) => {
 
       {/* Carrossel com duas linhas */}
       <div className="container-publico">
-        {clientes.map((cliente) => (
-          <div key={cliente.id} className="card-publico">
-            <img src={cliente.mediaUrl} alt={`Cliente ${cliente?.title}`} />
-          </div>
-        ))}
+        <Slider {...sliderSettings}>
+          {clientes.map((cliente) => (
+            <div key={cliente.id} className="card-publico">
+              <img src={cliente.mediaUrl} alt={`Cliente ${cliente?.title}`} />
+            </div>
+          ))}
+        </Slider>
       </div>
     </section>
   );

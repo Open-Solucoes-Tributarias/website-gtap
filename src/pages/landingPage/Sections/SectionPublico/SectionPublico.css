@@ -26,31 +26,21 @@
 /* card dos clientes */
 
 .container-publico {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
-  justify-content: left;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  flex-wrap: wrap;
-  -webkit-overflow-scrolling: touch;
   padding-bottom: 10px;
 }
 
-.container-publico::-webkit-scrollbar {
-  display: none;
-}
 .card-publico {
-  flex: 0 0 auto;
-  scroll-snap-align: center;
+  padding: 10px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-publico img {
-  width: 140px;
-  height: 140px;
-  object-fit: cover;
+  width: 150px;
+  max-width: 150px;
+  height: 150px;
+  object-fit: contain;
   border-radius: 10px;
 }
 @media (max-width: 768px) {
