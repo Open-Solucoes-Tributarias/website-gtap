@@ -20,7 +20,7 @@ export const SectionDepoimentos = ({ data }) => {
                     src={depoimento.mediaUrl}
                     title="vimeo"
                     frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                   />
