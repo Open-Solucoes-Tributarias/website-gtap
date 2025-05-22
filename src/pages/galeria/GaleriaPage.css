@@ -1,0 +1,99 @@
+.container-banner-galeria {
+    height: 100vh;
+    background: url(../../../src/assets/bannergaleria.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.content-text-galeria-banner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: end;
+    color: #fff;
+    text-align: center;
+    gap: 20vh;
+}
+
+.div-text-galeria h5 {
+    font-size: 60px;
+    font-weight: 600;
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.8),
+        0 4px 8px rgba(0, 0, 0, 0.5);
+
+}
+
+.div-text-galeria p {
+    font-size: 38px;
+    font-weight: 400;
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.8),
+        0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.div-button-galeria-banner {
+    padding-bottom: 2%;
+}
+
+.container-banner-galeria button {
+    background-color: rgba(100, 100, 100, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    padding-inline: 15px;
+    padding-block: 10px;
+    font-size: 18px;
+
+}
+
+/* container section dos card gtap edições */
+
+.container-card-gtaps {
+    background-image: url("../../../src/assets//bgsection.png");
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: contain;
+    height: 100vh;
+    padding-inline: 12%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-block: 2%;
+}
+
+.container-card-gtaps h3 {
+    text-align: center;
+    font-size: 35px;
+    color: #02093A;
+}
+
+.content-card-gtaps {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px
+}
+.card-gtap {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 300px;
+    height: 200px;
+    display: flex;
+}
+
+.card-gtap {
+    color: #fff;
+    text-align: center;
+    justify-content: center;
+    align-items:end;
+    font-size: 40px;
+    padding-bottom: 20px;
+}
