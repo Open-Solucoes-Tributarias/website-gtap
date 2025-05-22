@@ -1,0 +1,19 @@
+/* seção carrosel de empresas */
+.container-empresas-open-slide {
+    padding-inline: 12%;
+}
+.section-empresas-open {
+    width: 100%;    
+}
+
+.logo-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-slide img {
+    max-width: 120px;
+    width: 120px;
+    object-fit: contain;
+}

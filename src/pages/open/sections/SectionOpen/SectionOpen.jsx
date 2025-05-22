@@ -9,7 +9,6 @@ import image3 from "@/assets/open/image-equipe.jpg"
 import image4 from "@/assets/open/image-apresentacao.jpg"
 import image5 from "@/assets/open/image-debate.jpg"
 import image6 from "@/assets/open/image-livro.png"
-import { useCarousel } from "../../../../Utils/useCarousel";
 
 
 const textsTitles = [
@@ -21,9 +20,9 @@ const textsTitles = [
     { id: 1, value: "Economia inteligente" },
 ];
 
-export const SectionOpen = ({ clientes }) => {
 
-    const { containerRef, scrollLeft, scrollRight } = useCarousel();//hook do carrosel
+export const SectionOpen = () => {
+
     const [currentIndex, setCurrentIndex] = useState(0);
     const [displayText, setDisplayText] = useState("");
     const texts = textsTitles.map((t) => t.value);
@@ -91,19 +90,8 @@ export const SectionOpen = ({ clientes }) => {
                 <img src={image5} alt="Imagem 5" className="img-open-gallery img5" />
                 <img src={image6} alt="Imagem 6" className="img-open-gallery img6" />
             </div>
-            <div className="section-empresas-open-wrapper">
-                <button onClick={scrollLeft} className="arrow-left">&gt;</button>
+        
 
-                <div ref={containerRef} className="section-empresas-open">
-                    {clientes.map((cliente) => (
-                        <div key={cliente.id}>
-                            <img src={cliente.mediaUrl} alt={`Cliente ${cliente?.title}`} />
-                        </div>
-                    ))}
-                </div>
-
-                <button onClick={scrollRight} className="arrow-right">&gt;</button>
-            </div>
         </section>
     )
 }

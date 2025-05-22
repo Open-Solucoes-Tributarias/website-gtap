@@ -1,9 +1,8 @@
 import "./SectionPublico.css";
-import { useCarousel } from "../../../../Utils/useCarousel";
 
 export const SectionPublico = ({ data }) => {
   const clientes = data.filter((cliente) => cliente.type === 2);
-  const containerRef = useCarousel();
+
 
   return (
     <section className="section-publico">
@@ -18,7 +17,7 @@ export const SectionPublico = ({ data }) => {
       </div>
 
       {/* Carrossel com duas linhas */}
-      <div ref={containerRef} className="container-publico">
+      <div className="container-publico">
         {clientes.map((cliente) => (
           <div key={cliente.id} className="card-publico">
             <img src={cliente.mediaUrl} alt={`Cliente ${cliente?.title}`} />

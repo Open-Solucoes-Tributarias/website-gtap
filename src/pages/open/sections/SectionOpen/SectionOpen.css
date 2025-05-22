@@ -120,29 +120,4 @@
 .img5 { bottom: 0; right: 0; width: 250px; }
 .img6 { bottom: 18px; left: 15%; width: 120px; }
 
-/* seção carrosel de empresas */
 
-
-.section-empresas-open-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.section-empresas-open {
-      grid-column: 1 / -1; /* Ocupa todas as colunas */
-    display: flex;
-    flex-direction: row;
-  display: flex;
-  overflow-x: auto;
-  gap: 1rem;
-  scroll-behavior: smooth;
-}
-
-.arrow-left, .arrow-right {
-  background: transparent;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 2;
-}

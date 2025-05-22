@@ -5,6 +5,7 @@ import { Navbar } from "../../components/Navbar/Navbar";
 import { SectionOpen } from "./sections/SectionOpen/SectionOpen";
 import { SectionAbout } from "./sections/SectionAbout/SectionAbout";
 import { Footer } from "../../components/Footer/Footer";
+import { CarouselEmpresas } from "./sections/Carousel/CarouselEmpresas";
 
 export const OpenPage = () => {
 
@@ -28,7 +29,8 @@ export const OpenPage = () => {
     return (
         <>
             <Navbar lightTemplate />
-            <SectionOpen clientes={clientes} />
+            <SectionOpen />
+            <CarouselEmpresas clientes={clientes} />
             <SectionAbout />
             <Footer />
         </>
