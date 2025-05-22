@@ -1,6 +1,7 @@
 /* seção carrosel de empresas */
 .container-empresas-open-slide {
     padding-inline: 12%;
+    padding-block: 2%;
 }
 
 .section-empresas-open {

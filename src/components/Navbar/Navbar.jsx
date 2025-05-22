@@ -52,8 +52,8 @@ export const Navbar = ({ lightTemplate }) => {
               <li>
                 <a
                   href="open-solucoes-tributarias"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  // target="_blank"
+                  // rel="noopener noreferrer"
                 >
                   A OPEN
                 </a>
