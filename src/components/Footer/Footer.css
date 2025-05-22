@@ -57,7 +57,18 @@
 }
 
 @media (max-width: 768px) {
+  .container-footer {
+    display: flex;
+    flex-direction: row;
+  }
   .content-text-footer {
     display: none;
   }
+  .content-logo img {
+  width: 100px;
+}
+.adress-open {
+  font-size: 12px;
+  width: 80%;
+}
 }

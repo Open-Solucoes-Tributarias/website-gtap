@@ -92,6 +92,13 @@
     font-weight: 600;
 }
 
-@media () {
-    
+@media (max-width: 768px) {
+    .container-sections-open {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .text-about-solutions {
+        padding: 20px;
+    }
 }
