@@ -6,7 +6,7 @@
     background-position: center;
     background-size: cover;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2px;
     padding-inline: 12%;
     align-items: center;
@@ -19,6 +19,10 @@
     color: #fff;
     padding-right: 20%;
     font-size: 17px;
+}
+
+.edition-galeria-left img {
+    width: 300px;
 }
 
 .edition-galeria-left hr {

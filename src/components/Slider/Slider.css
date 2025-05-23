@@ -1,5 +1,6 @@
 .slider-container {
-    width: 550px;;
+    width: 550px;
+    position: relative; 
 }
 
 .slider-for img {
@@ -14,6 +15,27 @@
     padding: 5px;
     cursor: pointer;
     transition: opacity 0.3s ease;
+}
+.slick-prev,
+.slick-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+/* //retira da tela a seta padrão do slick */
+.slick-prev:before { 
+    display: none;
+}
+.slick-next:before {
+    display: none;
+}
+.slick-prev {
+  left: -40px; 
+}
+
+.slick-next {
+  right: -40px;
 }
 
 .slider-nav {

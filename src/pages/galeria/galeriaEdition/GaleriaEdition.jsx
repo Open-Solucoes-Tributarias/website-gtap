@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
+import ScrollToTop from "../../../Utils/ScrollToTop";
 import "./GaleriaEdition.css";
 import { Navbar } from "../../../components/Navbar/Navbar";
 import { Footer } from "../../../components/Footer/Footer";
 import AsNavFor from "../../../components/Slider/Slider";
+import { useEffect, useState } from "react";
 
 const images = [
     {
@@ -20,43 +22,49 @@ const images = [
 ]
 
 export const GaleriaEdition = () => {
-
     // captura na url a edição clicada no compoente pai
     const { editionText } = useParams();
     //decodificar url para evitar espaços em branco como code
     const decodedText = decodeURIComponent(editionText);
+    //estado que gurda a logo correspodentes ao GTAP selecionado
+    const [logo, setLogo] = useState("");
 
-    console.log("valor recebido na editio galeria", decodedText);
-
-
-    switch (editionText) { //Edition trás o valor da label da edição selecionada
-        case "I GTAP":
-            //EXECUTAR SE FOR O CASO 1
-            break;
-        case "II GTAP":
-            break;
-        case "III GTAP":
-            break;
-        case "IV GTAP":
-            break;
-        case "V GTAP":
-            break;
-        case "VI GTAP":
-            break;
-        case "VII GTAP":
-            break;
-        case "VIII GTAP":
-            break;
-        default:
-            console.log("nenhuma das opções");
-    }
-
+    useEffect(() => {
+        switch (decodedText) { // valor da label da edição selecionada
+            case "I GTAP":
+                setLogo("/assets/logos/gtapi.svg");
+                break;
+            case "II GTAP":
+                setLogo("/assets/logos/iigtap.svg");
+                break;
+            case "III GTAP":
+                setLogo("/assets/logos/iiigtap.svg");
+                break;
+            case "IV GTAP":
+                setLogo("/assets/logos/ivgtap.svg");
+                break;
+            case "V GTAP":
+                setLogo("/assets/logos/vgtap.svg");
+                break;
+            case "VI GTAP":
+                setLogo("/assets/logos/vigtap.svg");
+                break;
+            case "VII GTAP":
+                setLogo("/assets/logos/viigtap.svg");
+                break;
+            case "VIII GTAP":
+                setLogo("/assets/logos/viiigtap.svg");
+                break;
+            default:
+                setLogo("/assets/logos/gtapi.svg");
+        }
+    }, [decodedText]);
     return (
         <>
             <Navbar />
             <section className="container-edition-galeria">
                 <div className="edition-galeria-left">
-                    <img src="./logo.svg" />
+                    <img src={logo} />
                     <hr />
                     <p>Reviva os <b>melhores momentos</b> do maior congresso de Gestão Tributária na Administração Pública.</p>
                 </div>
@@ -68,6 +76,6 @@ export const GaleriaEdition = () => {
             </section>
             <Footer />
         </>
-        
+
     )
 }
