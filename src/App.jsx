@@ -3,6 +3,7 @@ import { LandingPage } from "./pages/landingPage/LandingPage";
 import { AdminLoginPage } from "./pages/login/AdminLoginPage";
 import { OpenPage } from "./pages/open/openPage";
 import { GaleriaPage } from "./pages/galeria/GaleriaPage";
+import { GaleriaEdition } from "./pages/galeria/GaleriaEdition/GaleriaEdition";
 
 function App() {
   return (
@@ -17,8 +18,10 @@ function App() {
               </>
             }
           />
-          <Route path="open-solucoes-tributarias" element={<OpenPage/>} />
-           <Route path="galeria" element={<GaleriaPage/>} />
+          <Route path="open-solucoes-tributarias" element={<OpenPage />} />
+          <Route path="galeria" element={<GaleriaPage />} />
+          {/* Passo no parametro o evento clicado no card */}
+          <Route path=":editionText" element={<GaleriaEdition />} />
           <Route path="admin" element={<AdminLoginPage />} />
         </>
       </Routes>

@@ -1,6 +1,7 @@
-import "./GaleriaPage.css"
+import "./GaleriaPage.css";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { Footer } from "../../components/Footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 const images = [
     {
@@ -48,6 +49,11 @@ const images = [
 
 export const GaleriaPage = () => {
 
+    const navigate = useNavigate();
+
+    const handleSelected = (card) => { //capturo as informações da edição selecionada e coloco na URL
+        navigate(`/${encodeURIComponent(card?.text)}`);
+    };
 
     return (
         <>
@@ -71,6 +77,7 @@ export const GaleriaPage = () => {
                             className="card-gtap"
                             key={image.id}
                             style={{backgroundImage: `url(${image.url})`}}
+                            onClick={() => handleSelected(image)}
                         >
                             <p>{image.text}</p>
                         </div>
