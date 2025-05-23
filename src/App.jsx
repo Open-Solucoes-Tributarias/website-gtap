@@ -3,7 +3,7 @@ import { LandingPage } from "./pages/landingPage/LandingPage";
 import { AdminLoginPage } from "./pages/login/AdminLoginPage";
 import { OpenPage } from "./pages/open/openPage";
 import { GaleriaPage } from "./pages/galeria/GaleriaPage";
-import { GaleriaEdition } from "./pages/galeria/GaleriaEdition/GaleriaEdition";
+import { GaleriaEdition } from "./pages/galeria/galeriaEdition/GaleriaEdition";
 
 function App() {
   return (
