@@ -55,6 +55,7 @@ const AsNavFor = ({ images }) => {
           slidesToShow={1}
           slidesToScroll={1}
           fade={true}
+          dots={false}
         //   arrows={false}
           prevArrow={<PrevArrow/>}
           nextArrow={<NextArrow/>}
@@ -84,7 +85,7 @@ const AsNavFor = ({ images }) => {
           swipeToSlide={true}
           focusOnSelect={true}
           centerMode={true}
-          dots={true}
+          dots={false}
           arrows={false}
         >
           {images.map((img, index) => (
