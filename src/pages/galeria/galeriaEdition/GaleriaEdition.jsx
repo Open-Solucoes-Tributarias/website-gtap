@@ -1,7 +1,23 @@
 import { useParams } from "react-router-dom";
 import "./GaleriaEdition.css";
 import { Navbar } from "../../../components/Navbar/Navbar";
+import { Footer } from "../../../components/Footer/Footer";
+import AsNavFor from "../../../components/Slider/Slider";
 
+const images = [
+    {
+        id: 0,
+        url: "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/GTAP%20Galerias/1b1ecf_030606216269495e98e134d78d0b01a2.webp"
+    },
+    {
+        id: 1,
+        url: "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/GTAP%20Galerias/1b1ecf_0615fef6880e4bf3af44797de32b8d9f.webp"
+    },
+    {
+        id: 2,
+        url: "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/GTAP%20Galerias/1b1ecf_19b44faa97bb4738850bbe556d54a824.webp"
+    }
+]
 
 export const GaleriaEdition = () => {
 
@@ -11,6 +27,7 @@ export const GaleriaEdition = () => {
     const decodedText = decodeURIComponent(editionText);
 
     console.log("valor recebido na editio galeria", decodedText);
+
 
     switch (editionText) { //Edition trás o valor da label da edição selecionada
         case "I GTAP":
@@ -43,10 +60,14 @@ export const GaleriaEdition = () => {
                     <hr />
                     <p>Reviva os <b>melhores momentos</b> do maior congresso de Gestão Tributária na Administração Pública.</p>
                 </div>
+
                 <div className="edition-galeria-right">
-                    <img src="https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/cards%20Gtaps/gtap%20v.jpg" />
+                    <AsNavFor images={images} />
                 </div>
+
             </section>
+            <Footer />
         </>
+        
     )
 }

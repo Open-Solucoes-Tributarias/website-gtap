@@ -1,0 +1,30 @@
+.slider-container {
+    width: 550px;;
+}
+
+.slider-for img {
+    height: 500px;
+    width: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.slider-nav .slick-slide {
+    opacity: 0.5;
+    padding: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.slider-nav {
+    opacity: 1;
+    width: 100%;
+}
+
+.slider-nav img {
+    height: 80px;
+    width: 100%;
+    align-items: center;
+    object-fit: cover;
+    border-radius: 8px;
+}
