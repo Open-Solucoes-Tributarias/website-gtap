@@ -1,15 +1,50 @@
 import "./GaleriaPage.css"
 import { Navbar } from "../../components/Navbar/Navbar";
+import { Footer } from "../../components/Footer/Footer";
 
-const images = [{
-    id: 0,
-    url: "https://static.wixstatic.com/media/1b1ecf_534c5b7ae1834b0e88eb408345c521c2.jpg/v1/fill/w_260,h_146,fp_0.50_0.50,q_90,enc_auto/1b1ecf_534c5b7ae1834b0e88eb408345c521c2.webp",
-    text: "I GTAP",
-}, {
-    id: 1,
-    url: "https://static.wixstatic.com/media/1b1ecf_534c5b7ae1834b0e88eb408345c521c2.jpg/v1/fill/w_260,h_146,fp_0.50_0.50,q_90,enc_auto/1b1ecf_534c5b7ae1834b0e88eb408345c521c2.webp",
-    text: "II GTAP",
-}]
+const images = [
+    {
+        id: 0,
+        url: "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/cards%20Gtaps/gtap%20i.jpg",
+        text: "I GTAP",
+    },
+    {
+        id: 1,
+        url: "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/cards%20Gtaps/gtap%20ii.jpg",
+        text: "II GTAP",
+    },
+    {
+        id: 2,
+        url: "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/cards%20Gtaps/gtap%20iii.jpg",
+        text: "III GTAP",
+    },
+    {
+        id: 3,
+        url: "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/cards%20Gtaps/gtap%20iv.jpg",
+        text: "IV GTAP",
+    },
+    {
+        id: 4,
+        url: "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/cards%20Gtaps/gtap%20v.jpg",
+        text: "V GTAP",
+    },
+    {
+        id: 5,
+        url: "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/cards%20Gtaps/gtap%20vi.jpg",
+        text: "VI GTAP",
+    },
+    {
+        id: 6,
+        url: "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/cards%20Gtaps/gtap%20vii.jpg",
+        text: "VII GTAP",
+    },
+    {
+        id: 7,
+        url: "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/cards%20Gtaps/gtap%20viii.jpg",
+        text: "VIII GTAP",
+    }
+];
+
 
 export const GaleriaPage = () => {
 
@@ -35,26 +70,14 @@ export const GaleriaPage = () => {
                         <div
                             className="card-gtap"
                             key={image.id}
-                            style={{
-                                backgroundImage: `url(${image.url})`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center',
-                                width: '260px',
-                                height: '146px',
-                                borderRadius: '10px',
-                                display: 'flex',
-                                alignItems: 'flex-end',
-                                justifyContent: 'center',
-                                color: '#fff',
-                                padding: '10px',
-                            }}
+                            style={{backgroundImage: `url(${image.url})`}}
                         >
                             <p>{image.text}</p>
                         </div>
                     ))}
                 </div>
             </section>
-
+            <Footer />
         </>
     )
 }
