@@ -65,12 +65,7 @@ const AsNavFor = ({ images }) => {
               <img
                 src={img.url}
                 alt={`Imagem ${index}`}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
-                  borderRadius: "8px",
-                }}
+               
               />
             </div>
           ))}
