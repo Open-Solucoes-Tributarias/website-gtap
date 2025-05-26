@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import "./GaleriaEdition.css";
-import { supabase } from "../../../supabaseClient";
 import { Navbar } from "../../../components/Navbar/Navbar";
 import { Footer } from "../../../components/Footer/Footer";
 import AsNavFor from "../../../components/Slider/Slider";
@@ -20,35 +19,35 @@ useEffect(() => {
   switch (decodedText) {
     case "I GTAP":
       setLogo("/assets/logos/gtapi.svg");
-      setFolder("midias/galerias/i-gtap");
+      setFolder("i-gtap");
       break;
     case "II GTAP":
       setLogo("/assets/logos/iigtap.svg");
-      setFolder("midias/galerias/ii-gtap");
+      setFolder("ii-gtap");
       break;
     case "III GTAP":
       setLogo("/assets/logos/iiigtap.svg");
-      setFolder("midias/galerias/iii-gtap");
+      setFolder("iii-gtap");
       break;
     case "IV GTAP":
       setLogo("/assets/logos/ivgtap.svg");
-      setFolder("midias/galerias/iv-gtap");
+      setFolder("iv-gtap");
       break;
     case "V GTAP":
       setLogo("/assets/logos/vgtap.svg");
-      setFolder("midias/galerias/v-gtap");
+      setFolder("v-gtap");
       break;
     case "VI GTAP":
       setLogo("/assets/logos/vigtap.svg");
-      setFolder("midias/galerias/vi-gtap");
+      setFolder("vi-gtap");
       break;
     case "VII GTAP":
       setLogo("/assets/logos/viigtap.svg");
-      setFolder("midias/galerias/vii-gtap");
+      setFolder("vii-gtap");
       break;
     case "VIII GTAP":
       setLogo("/assets/logos/viiigtap.svg");
-      setFolder("midias/galerias/viii-gtap");
+      setFolder("viii-gtap");
       break;
     default:
       setLogo("/assets/logos/gtapi.svg");
@@ -56,34 +55,20 @@ useEffect(() => {
   }
 }, [decodedText]);
 
-
-const fetchImages = async () => {
+useEffect(() => {
   if (!folder) return;
 
-  const { data, error } = await supabase.storage
-    .from("medias")
-    .list(folder);
-
-  if (error) {
-    console.error("Erro ao listar arquivos:", error);
-    setImages([]);
-  } else {
-    const loadedImages = data
-      .filter(file => file.name.match(/\.(jpg|jpeg|png|webp)$/i))
-      .map((file, index) => ({
-        id: index,
-        url: `https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/${folder}/${file.name}`,
-      }));
-    setImages(loadedImages);
-  }
-};
-
-useEffect(() => {
-  if (folder) {
-    fetchImages();
-  }
+  fetch(`${import.meta.env.BASE_URL}api/galerias/${folder}.json`)
+    .then((res) => {
+      if (!res.ok) throw new Error(`Erro ao buscar o JSON: ${res.status}`);
+      return res.json();
+    })
+    .then((data) => setImages(data))
+    .catch((err) => {
+      console.error("Erro ao carregar galeria", err);
+      setImages([]);
+    });
 }, [folder]);
-
 
     return (
         <>
