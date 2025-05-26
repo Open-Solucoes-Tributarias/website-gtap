@@ -46,6 +46,7 @@
 .navbar-links a {
   text-decoration: none;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .navbar-links a:hover {

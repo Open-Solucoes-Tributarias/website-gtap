@@ -65,7 +65,9 @@ export const GaleriaPage = () => {
                         <p>A melhor edição de todos os tempos</p>
                     </div>
                     <div className="div-button-galeria-banner">
-                        <button>Acesse o álbum completo</button>
+                        <button onClick={() => {
+                            window.location.href = "/VIII%20GTAP";
+                        }}>Acessar álbum completo</button>
                     </div>
                 </div>
             </section>

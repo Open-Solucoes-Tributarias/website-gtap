@@ -26,6 +26,11 @@ export const Navbar = ({ lightTemplate }) => {
     return () => window.removeEventListener("wheel", handleScroll);
   }, []);
 
+   //função para redirecioar corretamnete quando são section com id
+  const hrefRedirect = (id) => {
+    window.location.href = `/#${id}`;
+  };
+
   return (
     <>
       {renderNav && (
@@ -38,16 +43,16 @@ export const Navbar = ({ lightTemplate }) => {
             </h1>
             <ul className="navbar-links">
               <li>
-                <a href="#temas">TEMAS</a>
+                <a onClick={() => hrefRedirect("temas")}>TEMAS</a>
               </li>
               <li>
-                <a href="#palestrantes">PALESTRANTES</a>
+                <a onClick={() => hrefRedirect("palestrantes")}>PALESTRANTES</a>
               </li>
               <li>
                 <a href="galeria">GALERIA</a>
               </li>
               <li>
-                <a href="#preços">PREÇOS</a>
+                <a onClick={() => hrefRedirect("preços")}>PREÇOS</a>
               </li>
               <li>
                 <a
