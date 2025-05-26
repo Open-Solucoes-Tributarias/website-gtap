@@ -1,0 +1,338 @@
+[
+  {
+    "id": 1,
+    "created_at": "2025-05-22 18:35:35+00",
+    "type": 0,
+    "title": "Alexandre Marques",
+    "description": "Consultor na Open Soluções Tributárias",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/alexandre-marques.jpg"
+  },
+  {
+    "id": 8,
+    "created_at": "2025-05-09 14:48:18.752887+00",
+    "type": 1,
+    "title": 1,
+    "description": "Retenção de IBS/CBS nas compras pela administração pública.",
+    "mediaUrl": ""
+  },
+  {
+    "id": 9,
+    "created_at": "2025-05-09 17:36:41.613235+00",
+    "type": 1,
+    "title": 2,
+    "description": "O mecanismo do split payment e suas implicações para adquirentes e fornecedores.",
+    "mediaUrl": ""
+  },
+  {
+    "id": 10,
+    "created_at": "2025-05-09 17:36:51.142996+00",
+    "type": 1,
+    "title": 3,
+    "description": "Local de incidência do ISS e do IBS: o princípio do destino e seus desdobramentos práticos.",
+    "mediaUrl": ""
+  },
+  {
+    "id": 11,
+    "created_at": "2025-05-09 17:41:07.210762+00",
+    "type": 1,
+    "title": 4,
+    "description": "O uso da tecnologia como pilar fundamental do novo sistema de tributação.",
+    "mediaUrl": ""
+  },
+  {
+    "id": 12,
+    "created_at": "2025-05-09 17:41:20.061334+00",
+    "type": 1,
+    "title": 5,
+    "description": "Impactos da reforma tributária nas obrigações acessórias e documentos fiscais.",
+    "mediaUrl": ""
+  },
+  {
+    "id": 13,
+    "created_at": "2025-05-09 17:41:29.317596+00",
+    "type": 1,
+    "title": 6,
+    "description": "Impactos da reforma tributária na planilha de formação de preços dos contratos públicos.",
+    "mediaUrl": ""
+  },
+  {
+    "id": 14,
+    "created_at": "2025-05-09 17:41:40.337232+00",
+    "type": 1,
+    "title": 7,
+    "description": "Da lista de serviços da Lei Complementar 116 para a NBS: desafios da transição.",
+    "mediaUrl": ""
+  },
+  {
+    "id": 16,
+    "created_at": "2025-05-09 17:48:04.780231+00",
+    "type": 6,
+    "title": "Banner video principal",
+    "description": "Banner video principal",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/video-bannergtap.mp4"
+  },
+  {
+    "id": 26,
+    "created_at": "2025-05-14 17:40:30.927768+00",
+    "type": 7,
+    "title": "Farol de Itapuã",
+    "description": "Farol de Itapuã",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/farolitapua.png"
+  },
+  {
+    "id": 27,
+    "created_at": "2025-05-14 17:47:31.944606+00",
+    "type": 7,
+    "title": "Farol da Barra",
+    "description": "Farol da Barra",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/BackgroundFaroldabarra.png"
+  },
+  {
+    "id": 29,
+    "created_at": "2025-05-19 18:17:06.87659+00",
+    "type": 3,
+    "title": "Alex Diego",
+    "description": "DNIT BAHIA",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/DEPOIMENTO%20-%20ALEX%20DNIT%20(1).mp4"
+  },
+  {
+    "id": 30,
+    "created_at": "2025-05-19 18:18:37.565735+00",
+    "type": 3,
+    "title": "Josenubia",
+    "description": "GOINFRA",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/DEPOIMENTO%20-%20JOSENUBIA%20GOINFRA%20(1).mp4"
+  },
+  {
+    "id": 37,
+    "created_at": "2025-05-22 18:06:22.193531+00",
+    "type": 2,
+    "title": "BNDS",
+    "description": "BNDS",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/BNDS.png"
+  },
+  {
+    "id": 38,
+    "created_at": "2025-05-22 18:07:28.973803+00",
+    "type": 2,
+    "title": "CNJ",
+    "description": "CNJ",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/CNJ.png"
+  },
+  {
+    "id": 39,
+    "created_at": "2025-05-22 18:08:03.71536+00",
+    "type": 2,
+    "title": "DPE PR",
+    "description": "DPE PR",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/DPE%20PR.png"
+  },
+  {
+    "id": 40,
+    "created_at": "2025-05-22 18:08:28.236674+00",
+    "type": 2,
+    "title": "ELETROBRAS",
+    "description": "ELETROBRAS",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/Eletrobras.png"
+  },
+  {
+    "id": 41,
+    "created_at": "2025-05-22 18:08:50.836566+00",
+    "type": 2,
+    "title": "EMBASA",
+    "description": "EMBASA",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/Embasa.png"
+  },
+  {
+    "id": 42,
+    "created_at": "2025-05-22 18:09:49.119546+00",
+    "type": 2,
+    "title": "GOV BA",
+    "description": "GOV BA",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/Governo%20do%20estado%20BA.png"
+  },
+  {
+    "id": 43,
+    "created_at": "2025-05-22 18:10:15.887845+00",
+    "type": 2,
+    "title": "IFBA",
+    "description": "IFBA",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/IFBA.png"
+  },
+  {
+    "id": 44,
+    "created_at": "2025-05-22 18:10:37.469596+00",
+    "type": 2,
+    "title": "IFES",
+    "description": "IFES",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/IFES.png"
+  },
+  {
+    "id": 45,
+    "created_at": "2025-05-22 18:11:04.662557+00",
+    "type": 2,
+    "title": "IFGO",
+    "description": "IFGO",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/IFGO.png"
+  },
+  {
+    "id": 46,
+    "created_at": "2025-05-22 18:11:41.070984+00",
+    "type": 2,
+    "title": "IFSP",
+    "description": "IFSP",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/IFSP.png"
+  },
+  {
+    "id": 47,
+    "created_at": "2025-05-22 18:12:09.291649+00",
+    "type": 2,
+    "title": "INEMA",
+    "description": "INEMA",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/inema.png"
+  },
+  {
+    "id": 48,
+    "created_at": "2025-05-22 18:12:39.189808+00",
+    "type": 2,
+    "title": "TRT CE",
+    "description": "TRT CE",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/TRT%20ceara.png"
+  },
+  {
+    "id": 49,
+    "created_at": "2025-05-22 18:13:01.641548+00",
+    "type": 2,
+    "title": "MPBA",
+    "description": "MPBA",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/Ministerio%20Publico%20BA.png"
+  },
+  {
+    "id": 50,
+    "created_at": "2025-05-22 18:13:22.127789+00",
+    "type": 2,
+    "title": "MPSE",
+    "description": "MPSE",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/MPSE.png"
+  },
+  {
+    "id": 51,
+    "created_at": "2025-05-22 18:13:48.828396+00",
+    "type": 2,
+    "title": "PGE RJ",
+    "description": "PGE RJ",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/PGE%20-%20RJ.png"
+  },
+  {
+    "id": 52,
+    "created_at": "2025-05-22 18:14:11.056421+00",
+    "type": 2,
+    "title": "SAEB",
+    "description": "SAEB",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/SAEB.png"
+  },
+  {
+    "id": 53,
+    "created_at": "2025-05-22 18:14:55.184635+00",
+    "type": 2,
+    "title": "SEBRAE",
+    "description": "SEBRAE",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/SEBRAE.png"
+  },
+  {
+    "id": 54,
+    "created_at": "2025-05-22 18:15:32.528453+00",
+    "type": 2,
+    "title": "SEBRAE",
+    "description": "SEBRAE",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/SEFAZ%20MT.png"
+  },
+  {
+    "id": 55,
+    "created_at": "2025-05-22 18:15:54.056459+00",
+    "type": 2,
+    "title": "SEFAZ MT",
+    "description": "SEFAZ MT",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/SEFAZ%20MT.png"
+  },
+  {
+    "id": 56,
+    "created_at": "2025-05-22 18:16:21.512543+00",
+    "type": 2,
+    "title": "SENAC",
+    "description": "SENAC",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/Senac.png"
+  },
+  {
+    "id": 57,
+    "created_at": "2025-05-22 18:16:43.061534+00",
+    "type": 2,
+    "title": "SESI",
+    "description": "SESI",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/Sesi.png"
+  },
+  {
+    "id": 58,
+    "created_at": "2025-05-22 18:17:09.105278+00",
+    "type": 2,
+    "title": "TCE PR",
+    "description": "TCE PR",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/TCEPR.png"
+  },
+  {
+    "id": 59,
+    "created_at": "2025-05-22 18:17:30.889041+00",
+    "type": 2,
+    "title": "TCU",
+    "description": "TCU",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/TCU.png"
+  },
+  {
+    "id": 60,
+    "created_at": "2025-05-22 18:18:00.868877+00",
+    "type": 2,
+    "title": "TJPR",
+    "description": "TJPR",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/TJPR.png"
+  },
+  {
+    "id": 61,
+    "created_at": "2025-05-22 18:18:20.574393+00",
+    "type": 2,
+    "title": "TRE ES",
+    "description": "TRE ES",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/TRE-ES.png"
+  },
+  {
+    "id": 62,
+    "created_at": "2025-05-22 18:18:48.079365+00",
+    "type": 2,
+    "title": "TRF2",
+    "description": "TRF2",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/TRF2.png"
+  },
+  {
+    "id": 63,
+    "created_at": "2025-05-22 18:19:06.211837+00",
+    "type": 2,
+    "title": "UESC",
+    "description": "UESC",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/UESC.png"
+  },
+  {
+    "id": 64,
+    "created_at": "2025-05-22 18:21:14.561514+00",
+    "type": 2,
+    "title": "UESC",
+    "description": "UESC",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/Clientes/UESC.png"
+  },
+  {
+    "id": 65,
+    "created_at": "2025-05-22 18:36:41.586831+00",
+    "type": 0,
+    "title": "Gustavo Reis",
+    "description": "Consultor na Open Soluções Tributárias",
+    "mediaUrl": "https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/gustavo-reis.jpg"
+  }
+]

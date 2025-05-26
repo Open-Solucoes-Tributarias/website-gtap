@@ -9,7 +9,7 @@ import { SectionLocal } from "./Sections/SectionLocal/SectionLocal";
 import { SectionPalestrantes } from "./Sections/SectionPalestrantes/SectionPalestrantes";
 import { SectionPublico } from "./Sections/SectionPublico/SectionPublico";
 import { SectionTemas } from "./Sections/SectionTemas/SectionTemas";
-import { supabase } from "../../supabaseClient";
+// import { supabase } from "../../supabaseClient";
 import { CardButton } from "../../components/CardButton/CardButton";
 import { SectionIdealizador } from "./Sections/SectionIdealizador/SectionIdealizador";
 import { Footer } from "../../components/Footer/Footer";
@@ -18,17 +18,24 @@ import { SectionInvestimento } from "./Sections/SectionInvestimentos/SectionInve
 export const LandingPage = () => {
   const [data, setData] = useState([]);
 
-  const fetchData = async () => {
-    const { data, error } = await supabase.from("landing_page").select("*");
-    if (error) {
-      console.error("erro ao buscar dados", error);
-      return;
-    }
-    setData(data);
-  };
+  // const fetchData = async () => {
+  //   const { data, error } = await supabase.from("landing_page").select("*");
+  //   if (error) {
+  //     console.error("erro ao buscar dados", error);
+  //     return;
+  //   }
+  //   setData(data);
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
-    fetchData();
+    fetch(`${import.meta.env.BASE_URL}api/landing_page.json`)
+      .then((res) => res.json())
+      .then(setData)
+      .catch((err) => console.error("Erro ao carregar dados LP", err));
   }, []);
 
   return (
