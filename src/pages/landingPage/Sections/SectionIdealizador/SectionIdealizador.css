@@ -1,7 +1,7 @@
 .section-idealizador {
   background-image: url("../../../../assets/backgroundescritorio.jpg");
-  background-size: auto;
-  background-repeat: space;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position: top;
   height: 100%;
   padding-inline: 12%;
@@ -60,7 +60,7 @@
   border-radius: 5px;
   padding-inline: 5px;
   padding-block: 10px;
-  width: 40%;
+  width: 50%;
   display: flex;
   flex-direction: row;
   gap: 8px;

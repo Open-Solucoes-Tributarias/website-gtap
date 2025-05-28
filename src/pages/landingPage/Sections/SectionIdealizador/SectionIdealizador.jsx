@@ -31,9 +31,11 @@ export const SectionIdealizador = () => {
           </p>
         </div>
         <div>
+         <a href="https://www.instagram.com/foco.tributario/" target="_blank" rel="noopener noreferrer">
           <button>
             <i className="fa-solid fa-camera"></i>Acompanhe pelo instagram
           </button>
+          </a>
         </div>
       </div>
       <div className="content-image-idealizador">
