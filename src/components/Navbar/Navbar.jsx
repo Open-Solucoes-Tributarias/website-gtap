@@ -64,7 +64,7 @@ export const Navbar = ({ lightTemplate }) => {
                 </a>
               </li>
               <li>
-                <a href="#contato">CONTATO</a>
+                <a onClick={() => hrefRedirect("contato")}>CONTATO</a>
               </li>
             </ul>
           </nav>

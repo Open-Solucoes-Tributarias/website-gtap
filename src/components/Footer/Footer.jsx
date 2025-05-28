@@ -1,6 +1,11 @@
 import "./Footer.css";
 
 export const Footer = () => {
+
+    const hrefRedirect = (id) => {
+    window.location.href = `/#${id}`;
+  };
+
   return (
     <footer className="container-footer">
       <div className="content-logo">
@@ -27,25 +32,25 @@ Salvador/ BA <br/>CEP 41820-774</p>
       </div>
       <div className="content-menu-footer">
         <ul>
-          <a href="#inicio">
+          <a href="/">
             <p>GTAP IX</p>
           </a>
-          <a href="#temas">
+          <a onClick={() => hrefRedirect("temas")}>
             <li>Temas</li>
           </a>
-          <a href="#palestrantes">
+          <a onClick={() => hrefRedirect("palestrantes")}>
             <li>Palestrantes</li>
           </a>
            <a href="galeria">
             <li>Galeria</li>
           </a>
-          <a href="#preços">
+          <a onClick={() => hrefRedirect("preços")}>
             <li>Preços</li>
           </a>
-         <a href="open-solucoes-tributarias" target="_blank" rel="noopener noreferrer">
+         <a href="open-solucoes-tributarias">
             <li>A Open</li>
           </a>
-          <a href="#contato">
+          <a onClick={() => hrefRedirect("contato")}>
             <li>Contato</li>
           </a>
         </ul>

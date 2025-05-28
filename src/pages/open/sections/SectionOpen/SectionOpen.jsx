@@ -53,16 +53,16 @@ export const SectionOpen = () => {
     return (
         <section className="section-sobre-open">
             <div className="section-left-open">
-                <div className="tag-open-page">
+                {/* <div className="tag-open-page">
                     <p>A mais de <b>17 anos</b> fazendo a <b>diferença</b> no setor tributário!</p>
-                </div>
-                <div className="src-page-open">
+                </div> */}
+                {/* <div className="src-page-open">
                     <p>
                         Home&nbsp;&gt;&gt;&nbsp;<b>A Open</b>
                     </p>
-                </div>
+                </div> */}
                 <div className="title-open-section">
-                    <h2>Conhecimento
+                    <h2>Conhecimento<br/>
                         tributário é <br /><b className="typing-js">{displayText}</b></h2>
                 </div>
                 <div>
