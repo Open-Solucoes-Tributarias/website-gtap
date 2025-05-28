@@ -74,7 +74,7 @@ export const GaleriaPage = () => {
             <section className="container-card-gtaps">
                 <h3>Confira as fotos das edições passadas</h3>
                 <div className="content-card-gtaps">
-                    {images.map((image) => (
+                    {images.slice().reverse().map((image) => (
                         <div
                             className="card-gtap"
                             key={image.id}

@@ -41,7 +41,7 @@ export const CardButton = () => {
 "
             target="blank"
           >
-            <button>Garantir Vaga</button>
+            <button>Garanta a sua vaga</button>
           </a>
         </div>
       </div>
