@@ -4,17 +4,15 @@
 }
 
 .slider-for img {
-    height: 500px;
     width: 100%;
     max-width: 800px;
+    height:400px;
     max-height: 500px;
-    min-height: 500px;
-    min-width: 500px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
     border-radius: 8px;
+    align-items: center;
 }
 
 .slider-nav .slick-slide {

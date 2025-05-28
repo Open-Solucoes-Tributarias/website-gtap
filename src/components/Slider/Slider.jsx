@@ -65,7 +65,6 @@ const AsNavFor = ({ images }) => {
               <img
                 src={img.url}
                 alt={`Imagem ${index}`}
-               
               />
             </div>
           ))}
