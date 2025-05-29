@@ -14,7 +14,7 @@ export const SectionAbout = () => {
                 <h5>Para um <b>mar de inseguranças</b>, temos uma <b>solução firme</b>.</h5>
                 <video width="100%" controls >
                     <source
-                        src="https://pzbntescgueoxaynlzoa.supabase.co/storage/v1/object/public/medias/midias/video_de_apresentacao_com_som%20(1080p).mp4"
+                        src="https://olive-hare-560073.hostingersite.com/midias/apresentacao.mp4"
                         type="video/mp4"
                     />.
                 </video>
