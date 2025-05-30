@@ -1,71 +1,48 @@
 import { useMemo } from "react";
-
-//essa função é um hook que veirifca a data atual e retorna como resultado, baseado na lista de lotes array
-
-//   loteAtual, // objeto com todas as informações do lote atual
-//     precoAtual, // string do valor do lote"
-//     nomeLoteAtual, string nome do lote
-//     lotes; // todos os lotes com status ('passado', 'presente', 'futuro')
+//essa função é um hook que verifica a data atual e retorna como resultado, baseado na lista de lotes array
 
 const lotes = [
   {
     nome: "Primeiro Lote",
     preco: "R$ 3.190,00",
-    mes: 1,
     ano: 2025,
-    periodo: "JANEIRO A MAIO",
+    mesInicio: 1,
+    mesFim: 4,
+    label: "JANEIRO A MAIO",
   },
   {
     nome: "Segundo Lote",
     preco: "R$ 3.490,00",
-    mes: 6,
     ano: 2025,
-    periodo: "JUNHO A AGOSTO",
+    mesInicio: 5,
+    mesFim: 8,
+    label: "JUNHO A AGOSTO",
   },
   {
     nome: "Terceiro Lote",
     preco: "R$ 3.690,00",
-    mes: 9,
     ano: 2025,
-    periodo: "SETEMBRO A OUTUBRO",
+    mesInicio: 9,
+    mesFim: 10,
+    label: "SETEMBRO A OUTUBRO",
   },
 ];
 
-const getStatusDoLote = (ano, periodo) => {
+const getStatusDoLote = (ano, mesInicio, mesFim) => {
   const hoje = new Date();
-  const [mesInicio, mesFim] = periodo.split(" A ").map((m) => m.trim());
+  const anoAtual = hoje.getFullYear();
+  const mesAtual = hoje.getMonth() + 1;
 
-  const meses = [
-    "JANEIRO",
-    "FEVEREIRO",
-    "MARÇO",
-    "ABRIL",
-    "MAIO",
-    "JUNHO",
-    "JULHO",
-    "AGOSTO",
-    "SETEMBRO",
-    "OUTUBRO",
-    "NOVEMBRO",
-    "DEZEMBRO",
-  ];
-
-  const mesInicioIndex = meses.indexOf(mesInicio.toUpperCase());
-  const mesFimIndex = meses.indexOf(mesFim.toUpperCase());
-
-  const dataInicio = new Date(ano, mesInicioIndex, 1);
-  const dataFim = new Date(ano, mesFimIndex + 1, 0); // último dia do mês
-
-  if (hoje >= dataInicio && hoje <= dataFim) return "presente";
-  if (hoje < dataInicio) return "futuro";
-  return "passado";
+  if (ano < anoAtual || (ano === anoAtual && mesFim < mesAtual)) return "passado";
+  if (ano === anoAtual && mesInicio <= mesAtual && mesFim >= mesAtual) return "presente";
+  return "futuro";
 };
 
 export const useLoteAtual = () => {
   const lotesComStatus = useMemo(() => {
     return lotes.map((lote) => ({
       ...lote,
-      status: getStatusDoLote(lote.ano, lote.periodo),
+      status: getStatusDoLote(lote.ano, lote.mesInicio, lote.mesFim),
     }));
   }, []);
 

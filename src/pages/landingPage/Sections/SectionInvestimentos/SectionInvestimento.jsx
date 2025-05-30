@@ -33,7 +33,7 @@ export const SectionInvestimento = () => {
             </div>
             <hr className="linea" />
             <p className="valor-lote">{lote.preco}</p>
-            <p>{lote.periodo}</p>
+            <p>{lote.label}</p>
           </div>
         ))}
       </div>
