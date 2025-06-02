@@ -24,7 +24,11 @@ export const SectionInvestimento = () => {
                   : lote.status === "passado"
                   ? "#010B5B"
                   : "#fff",
+
+                  filter: lote.status === "passado" ? "blur(4px)" : "none",
+                  userSelect: lote.status === "passado" ? "none" : null,
             }}
+            
           >
             <p className="name-lote">{lote.nome}</p>
             <div className="container-border">
