@@ -17,7 +17,7 @@ export const SectionDepoimentos = ({ data }) => {
               <div className="container-depoimentos">
                 <div className="content-video-depoimentos">
                   <iframe
-                    src={depoimento.mediaUrl}
+                    src={`${depoimento.mediaUrl}?autoplay=0&muted=1`}
                     title="vimeo"
                     frameBorder="0"
                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -41,7 +41,7 @@ export const SectionDepoimentos = ({ data }) => {
                 </div>
                 <div className="content-video-depoimentos-second">
                   <iframe
-                    src={depoimento.mediaUrl}
+                    src={`${depoimento.mediaUrl}?autoplay=0&muted=1`}
                     title="vimeo"
                     frameBorder="0"
                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
