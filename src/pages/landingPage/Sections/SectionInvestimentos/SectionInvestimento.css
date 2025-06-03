@@ -115,6 +115,7 @@
   padding-inline: 30px;
   padding-block: 8px;
   border-radius: 6px;
+  cursor: pointer;
 }
 @media (max-width: 768px) {
   .investimento-title {

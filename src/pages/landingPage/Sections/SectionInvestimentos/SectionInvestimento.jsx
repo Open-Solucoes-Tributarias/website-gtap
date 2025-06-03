@@ -42,10 +42,16 @@ export const SectionInvestimento = () => {
         ))}
       </div>
       <div className="container-button-investimento">
-        <button>
-          <i class="fa-regular fa-user" style={{ color: "#000d74" }}></i>Confira
-          condições especiais para grupo
-        </button>
+        <a
+          href="https://api.whatsapp.com/send/?phone=557193852662&text=Quero%20informa%C3%A7%C3%A3o%20sobre%20o%20GTAP&type=phone_number&app_absent=0
+"
+          target="blank"
+        >
+          <button>
+            <i class="fa-regular fa-user" style={{ color: "#000d74" }}></i>Confira
+            condições especiais para grupo
+          </button>
+        </a>
       </div>
     </section>
   );

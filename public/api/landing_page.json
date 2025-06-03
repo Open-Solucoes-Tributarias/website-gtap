@@ -334,5 +334,21 @@
     "title": "Gustavo Reis",
     "description": "Consultor na Open Soluções Tributárias",
     "mediaUrl": "https://gtap.com.br/midias/Palestrantes/gustavo-reis.jpg"
+  },
+   {
+    "id": 66,
+    "created_at": "2025-06-03 18:36:41.586831+00",
+    "type": 0,
+    "title": "Paulo Henrique Pegas",
+    "description": "Professor e Contador",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/paulo-henrique.jpg"
+  },
+    {
+    "id": 67,
+    "created_at": "2025-06-03 18:36:41.586831+00",
+    "type": 0,
+    "title": "Erivan de Franca",
+    "description": "Advogado",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/erivan-franca.jpg"
   }
 ]
