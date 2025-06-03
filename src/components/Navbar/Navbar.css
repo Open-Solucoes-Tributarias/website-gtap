@@ -1,8 +1,8 @@
 .navbar {
-  background-color: rgba(100, 100, 100, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px); /* Efeito de desfoque */
   -webkit-backdrop-filter: blur(10px); /* Safari */
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #ffffffc7;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
