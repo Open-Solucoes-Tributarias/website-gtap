@@ -6,12 +6,12 @@ import "slick-carousel/slick/slick-theme.css";
 const sliderSettings = {
   dots: false,
   infinite: true,
-  speed: 500,
+  speed: 5000,
   slidesToShow: 7,
-  slidesToScroll: 2,
+  slidesToScroll: 7,
   rows: 2,
   autoplay: true,
-  autoplaySpeed: 2000,
+  autoplaySpeed: 0,
   responsive: [
     {
       breakpoint: 1024,

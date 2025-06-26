@@ -28,6 +28,9 @@
   gap: 20px;
   text-align: center;
 }
+.container-lotes :hover {
+  transform: scale(1.02);
+}
 .card-lote {
   width: 250px;
   height: 250px;
