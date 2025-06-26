@@ -5,7 +5,8 @@
     "type": 0,
     "title": "Alexandre Marques",
     "description": "CEO da Open Soluções Tributárias",
-    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/alexandre-marques.jpg"
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/alexandre-marques.jpg",
+    "annotation": "Advogado atuante nas áreas de Direito Tributário e Empresarial; Contabilista; Consultor municipal e empresarial na área tributária e previdenciária; Pós-graduado em Direito Processual Civil; Sócio do escritório Damasceno & Marques Advocacia, em Salvador–Ba; Professor em cursos de pós-graduação e de capacitação para empresas e entidades públicas de todo o país. Autor dos livros Gestão Tributária de Contratos e Convênios e Tributação da Atividade de Saúde. Co-autor das obras ISS – Lei Complementar 116/03, coordenada por Ives Gandra da Silva Martins e Planejamento Tributário, coordenada por Marcelo Magalhães."
   },
   {
     "id": 8,
@@ -333,7 +334,8 @@
     "type": 0,
     "title": "Gustavo Reis",
     "description": "Consultor na Open Soluções Tributárias",
-    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/gustavo-reis.jpg"
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/gustavo-reis.jpg",
+    "annotation": "Advogado atuante na área de Direito Tributário, prestando assessoria jurídica e consultoria para empresas e entidades públicas. Pós-graduado em Planejamento Tributário. Advogado Associado do escritório Damasceno & Marques Advocacia, em Salvador/BA. Consultor da Open Soluções Tributárias. Supervisor do sistema web Gestão Tributária (gestaotributaria.com.br), inclusive do simulador de retenções online GT-Fácil. Colaborador do blog Foco Tributário (focotributario.com.br). Professor de cursos na área da Gestão Tributária de Contratos e Convênios pelo Brasil, já tendo realizado treinamentos abertos e in company para diversas entidades públicas e empresas de grande porte."
   },
    {
     "id": 66,
@@ -341,7 +343,8 @@
     "type": 0,
     "title": "Paulo Henrique Pegas",
     "description": "Professor e Contador",
-    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/paulo-henrique.jpg"
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/paulo-henrique.jpg",
+    "annotation": "Professor e Contador, com 40 anos de atuação profissional, 90% do tempo na área contábil-tributária e 2/3 em funções executivas, principalmente em instituições financeiras. Foi Superintendente de Risco de Crédito do BNDES no biênio 2019-2020. Desde 2011 é professor titular no curso de graduação em Ciências Contábeis do IBMEC-RJ e, desde 2008, atua como professor em cursos de MBA na FIPECAFI-SP). É coordenador do MBA de Reforma Tributária na BSSP e é sócio do Instituto de Pesquisa e Estudos Contábeis (IPEC-RJ), onde atua como professor em cursos de capacitação profissional, inclusive no formato in company. É conselheiro do CRC-RJ e autor de alguns livros na área contábil-tributária, sendo o principal o Manual de Contabilidade Tributária – 10ª edição."
   },
     {
     "id": 67,
@@ -349,6 +352,7 @@
     "type": 0,
     "title": "Erivan de Franca",
     "description": "Advogado",
-    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/erivan-franca.jpg"
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/erivan-franca.jpg",
+    "annotation": "Advogado (OAB/DF 18.166). Servidor do Tribunal de Contas da União desde 1997, onde exerceu as funções de Diretor de Apoio à Fiscalização de Contratos do TCU em Brasília/DF e Chefe do Serviço de Apoio à Fiscalização de Contratos e do Serviço de Instrução de Repactuações e Sanções Contratuais, ambos do TCU em Brasília/DF. É coautor do livro “Terceirização: Legislação, Doutrina e Jurisprudência” (Belo Horizonte: Fórum, 2017), coordenado pelo Professor Jorge Ulisses Jacoby Fernandes. É coautor do livro “Licitações e contratos administrativos: legislação aplicável”"
   }
 ]

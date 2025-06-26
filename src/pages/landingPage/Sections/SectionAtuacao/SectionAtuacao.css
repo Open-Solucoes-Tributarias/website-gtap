@@ -46,8 +46,13 @@
 }
 
 .right img {
-  width: 80%;
+  width: 80%;  
 }
+
+.right img:hover {
+  transform: scale(1.03);
+}
+
 .text-title {
   font-size: 32px;
   color: #02093a;
@@ -108,6 +113,11 @@
   padding: 10px;
   font-size: 20px;
   border-radius: 10px;
+}
+
+.container-tags span:hover {
+  transform: scale(1.03);
+  background-color: #02083a9f;
 }
 
 @media (max-width: 768px) {

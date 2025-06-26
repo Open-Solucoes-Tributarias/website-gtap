@@ -1,0 +1,154 @@
+/* Modal base */
+.modal-dialog {
+  display: flex;
+  border: none;
+  padding: 0;
+  background: transparent;
+  position: relative;
+  width: 90vw;              /* ou 50vw se quiser mais estreito */         /* Limita a altura visível */
+  overflow-x: hidden;           /* Permite rolagem do próprio dialog */
+  box-sizing: border-box;
+}
+
+.modal-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Estrutura do modal */
+.modal-structure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background: transparent;
+  position: relative;
+  width: 60%;
+}
+
+/* Lado esquerdo - foto */
+.modal-photo {
+  display: flex;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  width: 300px;
+  min-height: 350px;
+  height: 350px;
+  border-radius: 150px;
+  border: 2px solid #dda92e;
+  margin-right: 30px;
+}
+/* Lado direito - texto */
+.modal-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    padding-block: 15px;
+    padding-inline: 20px;
+}
+
+/* Título */
+.modal-box h2 {
+  font-size: 26px;
+  font-weight: 500;
+  text-align: left;
+  color: #02093a;
+ 
+}
+
+/* Subtítulo */
+.modal-box h4 {
+  font-size: 17px;
+  color: #02093a;
+  font-weight: 400;
+  text-align: left;
+ 
+}
+
+/* Texto do corpo */
+.modal-box p {
+  font-size: 0.95rem;
+    text-align: left;
+  color: #02093A;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Ícone do LinkedIn */
+.modal-box .linkedin-icon {
+  width: 28px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+/* Botão de fechar */
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Botões de navegação ⟨ ⟩ */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.6rem;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 10; /* garante que fique acima do modal */
+}
+
+.nav-left {
+  left: 5vw;
+}
+
+.nav-right {
+  right: 5vw;
+}
+
+/* Responsivo para telas pequenas */
+@media (max-width: 720px) {
+  .modal-structure {
+    flex-direction: column;
+  }
+
+  .modal-photo {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .modal-box {
+    border-radius: 0 0 16px 16px;
+    border-top-left-radius: 0;
+  }
+
+  .nav-arrow {
+    top: unset;
+    bottom: 10px;
+    transform: none;
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-left {
+    left: 10px;
+  }
+
+  .nav-right {
+    right: 10px;
+  }
+}

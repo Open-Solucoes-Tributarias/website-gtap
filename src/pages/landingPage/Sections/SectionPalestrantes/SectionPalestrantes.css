@@ -44,7 +44,13 @@
   background-repeat: no-repeat;
   border-radius: 10px;
   border: 2px solid #dda92e;
+  cursor: pointer;
 }
+
+.card-palestrantes:hover {
+  transform: scale(1.03);
+}
+
 .card-palestrantes h6 {
   color: #dda92e;
   font-size: 20px;

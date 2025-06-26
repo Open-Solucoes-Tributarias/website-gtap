@@ -23,18 +23,19 @@
   border-radius: 5px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   justify-content: space-between;
-  padding-bottom: 25%;
+  padding-bottom: 25px;
 }
 
 .content-idealizador h3 {
   color: #dda92e;
-  font-size: 40px;
+  font-size: 45px;
   font-weight: 600;
 }
 
 .content-idealizador p {
   color: #fff;
   font-weight: 300;
+  font-size: 18px;
 }
 .content-idealizador b {
   font-weight: 600;
@@ -58,8 +59,9 @@
   background: linear-gradient(to right, #dda92e, #ffdf92);
   border: none;
   border-radius: 5px;
-  padding-inline: 5px;
+  padding-inline: 3px;
   padding-block: 10px;
+  margin-bottom: 20px;
   width: 50%;
   display: flex;
   flex-direction: row;

@@ -1,7 +1,13 @@
+import { ModalPalestrantes } from "../../../../components/ModalPalestrante/ModalPalestrante";
 import "./SectionPalestrantes.css";
+import { useState } from "react";
 
 export const SectionPalestrantes = ({ data }) => {
   const palestrantes = data.filter((item) => item.type === 0);
+    const [palestranteSelecionado, setPalestranteSelecionado] = useState(null);
+
+  const abrirModal = (palestrante) => setPalestranteSelecionado(palestrante);
+  const fecharModal = () => setPalestranteSelecionado(null);
 
   return (
     <section className="section-palestrantes" id="palestrantes">
@@ -20,6 +26,7 @@ export const SectionPalestrantes = ({ data }) => {
             className="card-palestrantes"
             style={{ backgroundImage: `url(${palestrante.mediaUrl})` }}
             key={palestrante.id}
+            onClick={() => abrirModal(palestrante)}
           >
             <h6>{palestrante.title}</h6>
             <p>{palestrante.description}</p>
@@ -29,6 +36,13 @@ export const SectionPalestrantes = ({ data }) => {
       <div>
         <h5>Aguarde a confirmação dos próximos!</h5>
       </div>
+       {palestranteSelecionado && (
+          <ModalPalestrantes
+          palestrantes={palestrantes}
+          selecionado={palestranteSelecionado}
+          onClose={fecharModal}
+        />
+      )}
     </section>
   );
 };
