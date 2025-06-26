@@ -35,7 +35,7 @@ export const ModalPalestrantes = ({ palestrantes, selecionado, onClose }) => {
     return (
 
         <dialog className="modal-dialog" ref={dialogRef} onClose={fecharModal}>
-            <button className="nav-arrow nav-left" onClick={prev}>⟨</button>
+            <button className="nav-arrow nav-left" onClick={prev}><i class="fa-solid fa-chevron-left"></i></button>
             <div className="modal-structure">
                 <div className="modal-photo"  style={{ backgroundImage: `url(${current?.mediaUrl})` }}>
 
@@ -62,7 +62,7 @@ export const ModalPalestrantes = ({ palestrantes, selecionado, onClose }) => {
                     </div>
                 </div>
             </div>
-            <button className="nav-arrow nav-right" onClick={next}>⟩</button>
+            <button className="nav-arrow nav-right" onClick={next}><i class="fa-solid fa-chevron-right"></i></button>
         </dialog>
 
     );

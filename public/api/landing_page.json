@@ -93,16 +93,18 @@
     "created_at": "2025-05-19 18:17:06.87659+00",
     "type": 3,
     "title": "Alex Diego",
-    "description": "DNIT BAHIA",
-    "mediaUrl": "https://gtap.com.br/midias/depoimentos/DEPOIMENTO%20-%20ALEX%20DNIT%20(1).mp4"
+    "description": "DNIT - Bahia",
+    "mediaUrl": "https://gtap.com.br/midias/depoimentos/DEPOIMENTO%20-%20ALEX%20DNIT%20(1).mp4",
+    "annotation": "“Um evento de uma singularidade, de uma perfeição… é ímpar no nosso país e tem tudo pra prosperar muito — e cada vez mais. Com certeza, a gente estará presente na próxima!”"
   },
   {
     "id": 30,
     "created_at": "2025-05-19 18:18:37.565735+00",
     "type": 3,
     "title": "Josenubia",
-    "description": "GOINFRA",
-    "mediaUrl": "https://gtap.com.br/midias/depoimentos/DEPOIMENTO%20-%20JOSENUBIA%20GOINFRA%20(1).mp4"
+    "description": "GOINFRA - Goiânia",
+    "mediaUrl": "https://gtap.com.br/midias/depoimentos/DEPOIMENTO%20-%20JOSENUBIA%20GOINFRA%20(1).mp4",
+    "annotation": "“Tá aqui, né? Dentro das novas atualizações na área tributária, tá agregando muito conhecimento pra execução do nosso trabalho!”"
   },
   {
     "id": 37,
@@ -354,5 +356,32 @@
     "description": "Advogado",
     "mediaUrl": "https://gtap.com.br/midias/Palestrantes/erivan-franca.jpg",
     "annotation": "Advogado (OAB/DF 18.166). Servidor do Tribunal de Contas da União desde 1997, onde exerceu as funções de Diretor de Apoio à Fiscalização de Contratos do TCU em Brasília/DF e Chefe do Serviço de Apoio à Fiscalização de Contratos e do Serviço de Instrução de Repactuações e Sanções Contratuais, ambos do TCU em Brasília/DF. É coautor do livro “Terceirização: Legislação, Doutrina e Jurisprudência” (Belo Horizonte: Fórum, 2017), coordenado pelo Professor Jorge Ulisses Jacoby Fernandes. É coautor do livro “Licitações e contratos administrativos: legislação aplicável”"
+  },
+  {
+    "id": 68,
+    "created_at": "2025-05-19 18:18:37.565735+00",
+    "type": 3,
+    "title": "Edno de Paula",
+    "description": "PGE- Rio de janeiro",
+    "mediaUrl": "https://gtap.com.br/midias/depoimentos/DEPOIMENTO%20-%20JOSENUBIA%20GOINFRA%20(1).mp4",
+    "annotation": "“Tá aqui, né? Dentro das novas atualizações na área tributária, tá agregando muito conhecimento pra execução do nosso trabalho!"
+  },
+    {
+    "id": 69,
+    "created_at": "2025-05-19 18:18:37.565735+00",
+    "type": 3,
+    "title": "Raimundo Nonato",
+    "description": "GOINFRA - Goiânia",
+    "mediaUrl": "https://gtap.com.br/midias/depoimentos/DEPOIMENTO%20-%20JOSENUBIA%20GOINFRA%20(1).mp4",
+    "annotation": "“Participar desse evento pra mim foi maravilhoso!”"
+  },
+   {
+    "id": 70,
+    "created_at": "2025-05-19 18:18:37.565735+00",
+    "type": 3,
+    "title": "Valmir Tosta",
+    "description": "Secretaria da Fazenda - Bahia",
+    "mediaUrl": "https://gtap.com.br/midias/depoimentos/DEPOIMENTO%20-%20JOSENUBIA%20GOINFRA%20(1).mp4",
+    "annotation": "“Achei fantástico! São tantos conhecimentos que a gente leva pra casa… e isso aí vai nos ajudar muito, muito mesmo no nosso dia a dia!”"
   }
 ]

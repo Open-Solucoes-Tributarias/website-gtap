@@ -107,6 +107,7 @@
   border: none;
   font-size: 1.6rem;
   width: 38px;
+  padding-top: 4px;
   height: 38px;
   cursor: pointer;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
