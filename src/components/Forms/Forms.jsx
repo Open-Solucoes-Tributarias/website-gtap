@@ -1,23 +1,6 @@
 import "./Forms.css";
-import { supabase } from "../../supabaseClient";
 
 export const Forms = () => {
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const name = e.target.nome.value;
-    const email = e.target.email.value;
-    const whatsapp = e.target.tel.value;
-
-    const data = { name, email, whatsapp };
-
-    const { error } = await supabase.from("forms").insert(data);
-    if (error) {
-      console.error("erro ao enviar fomrulário", error);
-      return;
-    } else {
-      alert("Seus dados foram recebidos com sucesso!");
-    }
-  };
 
   return (
     <div className="container-forms">
@@ -26,11 +9,7 @@ export const Forms = () => {
           Preencha o formulário abaixo e fale com nossa equipe para saber mais
           sobre o evento.
         </p>
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
+        <form action="https://formsubmit.co/italo.opentreinamentos@gmail.com" method="POST" >
           <div className="form-input">
             <label htmlFor="nome">Nome *</label>
             <input
