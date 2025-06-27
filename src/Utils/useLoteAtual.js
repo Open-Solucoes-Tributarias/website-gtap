@@ -20,11 +20,11 @@ const lotes = [
   },
   {
     nome: "Terceiro Lote",
-    preco: "R$ 3.690,00",
+    preco: "R$ 3.970,00",
     ano: 2025,
     mesInicio: 6,
     mesFim: 10,
-    label: "SETEMBRO A OUTUBRO",
+    label: "JUNHO A OUTUBRO",
   },
 ];
 
