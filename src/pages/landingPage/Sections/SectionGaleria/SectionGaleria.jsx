@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "animate.css";
 import "./SectionGaleria.css";
 
 const IMAGES_VISIBLE = 6;
@@ -47,9 +48,10 @@ export const SectionGaleria = () => {
       <div className="section-galeria-left">
         {currentGroup.map((img, index) => (
           <div
-            className={`card-imagens ${visible ? "visible" : ""}`}
+            className={`card-imagens ${visible ? "animate__animated animate__fadeIn" : ""
+              }`}
             key={img.id}
-            style={{ transitionDelay: `${index * 100}ms` }}
+            style={{ animationDelay: `${index * 0.1}s` }}
           >
             <img src={img.imageUrl} alt="" />
           </div>

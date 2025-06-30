@@ -22,23 +22,37 @@
   color: #fff;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 .button-left-condition {
   padding-inline: 90px;
-  padding-block: 5px;
+  padding-top: 4px;
   font-size: 24px;
   text-align: center;
 }
 .card-button-left hr {
   width: 100%;
 }
+
 .button-left-data {
   display: flex;
-  justify-content: center;
-  padding-bottom: 10px;
+  flex-direction: row;
+  white-space: nowrap;
+  max-width: 150px;
+  gap: 30px;
+  padding-bottom: 8px;
   color: #FFDF92;
+  animation: scroll 5s linear infinite;
 }
 
+@keyframes scroll {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
 .card-button-right {
    background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);

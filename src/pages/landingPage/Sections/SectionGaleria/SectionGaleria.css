@@ -22,8 +22,6 @@
 /* efeito individual de fade */
 .card-imagens {
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .card-imagens.visible {
