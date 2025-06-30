@@ -84,6 +84,23 @@
   margin-top: 1rem;
   cursor: pointer;
 }
+.footer-modal {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  text-align: left;
+}
+.iconbutton-social {
+  border: 2px solid #c7c7c7;
+  padding-block: 7px;
+  padding-inline: 10px;
+  border-radius: 100%;
+  font-size: 16px;
+  text-align: left;
+  color: #02093A;
+  cursor: pointer;
+  
+}
 
 /* Botão de fechar */
 .close {

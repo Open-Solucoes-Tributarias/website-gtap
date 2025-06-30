@@ -49,14 +49,26 @@ export const ModalPalestrantes = ({ palestrantes, selecionado, onClose }) => {
                     <div>
                         <p>{current.annotation}</p>
                     </div>
-                    <div>
+                    <div className="footer-modal">
+                        {current.instagram && (
+                            <a href={current.instagram} target="_blank" rel="noopener noreferrer">
+                            <button className="iconbutton-social">
+                                <i class="fa-brands fa-instagram"></i>
+                            </button>                             
+                            </a>
+                        )}
+                        {current.youtube && (
+                            <a href={current.youtube} target="_blank" rel="noopener noreferrer">
+                            <button className="iconbutton-social">
+                                <i class="fa-brands fa-youtube"></i>
+                            </button>                             
+                            </a>
+                        )}
                         {current.linkedin && (
                             <a href={current.linkedin} target="_blank" rel="noopener noreferrer">
-                                <img
-                                    src="/linkedin-icon.png"
-                                    alt="LinkedIn"
-                                    className="linkedin-icon"
-                                />
+                            <button className="iconbutton-social">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </button>                             
                             </a>
                         )}
                     </div>
