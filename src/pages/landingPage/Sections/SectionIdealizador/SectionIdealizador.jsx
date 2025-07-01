@@ -30,7 +30,7 @@ export const SectionIdealizador = () => {
             profissionais a alcançarem resultados extraordinários.
           </p>
         </div>
-        <div>
+        <div className="desktop-button-instagram">
          <a href="https://www.instagram.com/foco.tributario/" target="_blank" rel="noopener noreferrer">
           <button>
             <i className="fa-solid fa-camera"></i>Acompanhe pelo instagram
@@ -40,7 +40,15 @@ export const SectionIdealizador = () => {
       </div>
       <div className="content-image-idealizador">
         <img src={ImageAlexandre} alt="alexandre-marques"/>
+        
       </div>
+      <div className="mobile-button-instagram">
+          <a href="https://www.instagram.com/foco.tributario/" target="_blank" rel="noopener noreferrer">
+            <button>
+              <i className="fa-solid fa-camera"></i>Acompanhe pelo instagram
+            </button>
+          </a>
+        </div>
     </section>
   );
 };

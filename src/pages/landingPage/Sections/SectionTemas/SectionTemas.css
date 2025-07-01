@@ -1,5 +1,6 @@
 .section-temas {
-  background: url("../../../../assets/BackgroundTemas.png"); /* se houver plano de fundo */
+  background: url("../../../../assets/BackgroundTemas.png");
+  /* se houver plano de fundo */
   background-size: cover;
   padding: 60px 20px;
   text-align: center;
@@ -44,8 +45,9 @@
   font-size: 21px;
   text-align: center;
   width: 250px;
-  height: 265px; /* altura fixa que combine com o SVG */
-  padding: 0px 26px 20px;
+  height: 265px;
+  /* altura fixa que combine com o SVG */
+  padding: 0px 26px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,6 +83,7 @@
 }
 
 @media (max-width: 768px) {
+
   .section-temas-content h3 {
     font-size: 28px;
   }
@@ -91,7 +94,6 @@
 
   .card-tema {
     font-size: 20px;
-    padding: 30px 15px 15px;
   }
 
   .circle-number {
@@ -100,5 +102,9 @@
     font-size: 18px;
     top: -15px;
     left: 50%;
+  }
+
+  .card-tema.bgTemas2 {
+    background-image: url(../../../../assets/bgtemas.svg);
   }
 }

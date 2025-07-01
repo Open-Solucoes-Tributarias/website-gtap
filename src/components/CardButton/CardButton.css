@@ -94,7 +94,7 @@
     flex-direction: column;
     gap: 10px;
     bottom: 10px;
-    padding: 0 10px;
+    padding-inline: 26px;
   }
 
   .card-button-left {
@@ -112,11 +112,10 @@
   }
 
   .card-button-right {
-    flex-direction: column;
+    flex-direction: row;   
     gap: 10px;
-    min-width: unset;
-    width: 100%;
-    padding: 10px 15px;
+    min-width: fit-content;
+    
   }
 
   .card-button-right button {
@@ -127,7 +126,7 @@
 
   .money-card-button {
     font-size: 20px;
-    text-align: center;
+    text-align: left
   }
 
   .button-right-submit {

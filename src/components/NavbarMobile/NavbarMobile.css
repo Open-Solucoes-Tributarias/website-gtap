@@ -35,14 +35,14 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 4.5rem;
+    padding-top: 5.5rem;
     z-index: 1000;
     
     
   }
 
   .navbar-dialog-content {
-    background: #02093A80;
+    background: #02083a9a;
     border: 1px solid #fff;
     width: 90%;
     max-width: 400px;
@@ -60,7 +60,7 @@
     flex-direction: row;
     margin: 0.55rem 0;
     text-align: left;
-    background-color: #00052933;
+    background-color: #00052950;
     border-radius: 8px;
     padding-inline: 10px;
     width: 90%;

@@ -1,5 +1,6 @@
 import "./SectionAtuacao.css";
 import image1 from "../../../../assets/image1.png";
+import image2 from "../../../../assets/image-mobile.png";
 
 export const SectionAtuacao = () => {
   return (
@@ -8,6 +9,18 @@ export const SectionAtuacao = () => {
         <h2 className="text-title">
           O único congresso do país sobre <b>Gestão Tributária</b> voltado
           exclusivamente para a <b>Administração Pública</b> e <b>Sistema S</b>.
+          <hr className="mobile-hr-display" />
+          <div className="data-section-mobile">
+            <h3>
+              <i className="fa-regular fa-calendar"></i>16 e 17 de Outubro de 2025
+            </h3>
+            <h3>
+              <i className="fa-solid fa-location-dot"></i>Salvador/BA
+            </h3>
+          </div>
+          <div className="image-mobile-phone">
+            <img src={image2} alt="banner evento gtap" />
+          </div>
         </h2>
         <div>
           <hr />
