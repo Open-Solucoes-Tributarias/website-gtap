@@ -1,0 +1,83 @@
+/* Cabeçalho alinhado: logo esquerda, menu direita */
+.navbar-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Ícone hamburguer */
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* Estilo geral do menu mobile */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  /* (Antigo) menu inline desativado */
+  .navbar-links {
+    display: none;
+  }
+
+  /* NOVO: Dialog de navegação flutuante */
+  .navbar-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 4.5rem;
+    z-index: 1000;
+    
+    
+  }
+
+  .navbar-dialog-content {
+    background: #02093A80;
+    border: 1px solid #fff;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    padding: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+  }
+
+  .navbar-dialog-content li {
+    display: flex;
+    flex-direction: row;
+    margin: 0.55rem 0;
+    text-align: left;
+    background-color: #00052933;
+    border-radius: 8px;
+    padding-inline: 10px;
+    width: 90%;
+  }
+
+  .navbar-dialog-content a {
+    color: #fff;
+    font-weight: 400;
+    font-size: 1.2rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+  }
+
+  .navbar-dialog-content a:hover {
+    background-color: #f1f1f1;
+    color: #164854;
+  }
+}
