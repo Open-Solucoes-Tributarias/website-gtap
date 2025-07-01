@@ -65,21 +65,33 @@
 }
 
 @media (max-width: 768px) {
+  .section-palestrantes {
+    padding-inline: 5%;
+    padding-block: 10%;
+  }
+
   .section-palestrantes h5 {
     font-size: 15px;
     padding: 0;
   }
 
   .container-palestrantes {
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    justify-content: left;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
     padding-inline: 0;
   }
 
   .card-palestrantes {
-    min-width: 230px;
-    min-height: 350px;
+    width: calc(50% - 10px); /* duas por linha com gap */
+    max-width: 200px;
+    height: 250px;
+  }
+  .card-palestrantes h6 {
+    font-size: 15px;
+  }
+  .card-palestrantes p {
+    font-size: 12px;
   }
 }
+

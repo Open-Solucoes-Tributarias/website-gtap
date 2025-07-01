@@ -141,25 +141,62 @@
 
 /* Responsivo para telas pequenas */
 @media (max-width: 720px) {
+  .modal-dialog {
+    width: 95vw;
+    max-height: 90vh;
+    padding: 0;
+    overflow: auto;
+  }
+
   .modal-structure {
     flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding-inline: 10px;
   }
 
-  .modal-photo {
-    border-radius: 16px 16px 0 0;
-  }
+    .modal-photo {
+      display: none;
+    }
 
   .modal-box {
-    border-radius: 0 0 16px 16px;
-    border-top-left-radius: 0;
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .modal-box h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .modal-box h4 {
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .modal-box p {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .footer-modal {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .close {
+    top: 10px;
+    right: 25px;
   }
 
   .nav-arrow {
-    top: unset;
     bottom: 10px;
+    top: unset;
     transform: none;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
   }
 
   .nav-left {
@@ -170,3 +207,4 @@
     right: 10px;
   }
 }
+

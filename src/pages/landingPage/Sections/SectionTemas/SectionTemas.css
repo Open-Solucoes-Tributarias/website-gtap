@@ -104,6 +104,10 @@
     left: 50%;
   }
 
+  .container-cards-tema {
+  row-gap: 20px;
+}
+
   .card-tema.bgTemas2 {
     background-image: url(../../../../assets/bgtemas.svg);
   }

@@ -45,6 +45,7 @@ export const SectionGaleria = () => {
 
   return (
     <section className="section-galeria" id="galeria">
+       <h3 className="title-galeria-mobile">Galeria</h3>
       <div className="section-galeria-left">
         {currentGroup.map((img, index) => (
           <div
