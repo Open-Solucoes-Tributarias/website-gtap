@@ -6,6 +6,7 @@
   color: #fff;
   border-radius: 10px;
 }
+
 .container-forms-left {
   display: flex;
   flex-direction: column;
@@ -14,15 +15,18 @@
   padding-block: 15%;
   color: #02093a;
 }
+
 .form-input {
   display: flex;
   flex-direction: column;
   margin-block: 10px;
 }
+
 .form-input label {
   font-size: 18px;
   font-weight: 600;
 }
+
 .form-input input {
   border: 1px solid #7c7c7c;
   color: #02093a;
@@ -61,7 +65,13 @@
     flex-direction: column;
     padding-inline: 2%;
   }
+
   .container-forms-right {
     display: none;
   }
+
+  .container-forms-left p {
+    font-size: 22px;
+  }
+
 }

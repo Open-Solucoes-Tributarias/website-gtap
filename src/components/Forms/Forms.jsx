@@ -60,7 +60,7 @@ export const Forms = () => {
             />
           </div>
           <div className="form-input">
-            <button type="submit">SOLICITAR INFORMAÇÕES</button>
+            <button type="submit">QUERO INFORMAÇÕES</button>
           </div>
         </form>
       </div>

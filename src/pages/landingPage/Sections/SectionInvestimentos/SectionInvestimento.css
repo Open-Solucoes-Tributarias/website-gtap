@@ -132,4 +132,9 @@
     align-items: center;
     justify-content: center;
   }
+  .container-button-investimento {
+    width: 80%;
+    font-size: 12px;
+    padding-bottom: 10px;
+  }
 }

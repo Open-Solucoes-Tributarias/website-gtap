@@ -59,16 +59,20 @@
 @media (max-width: 768px) {
   .container-footer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    font-size: 13px;
   }
-  .content-text-footer {
+
+  .content-logo img {
+    width: 180px;
+  }
+
+  .adress-open {
+    font-size: 13px;
+    width: 80%;
+  }
+
+  .content-menu-footer {
     display: none;
   }
-  .content-logo img {
-  width: 100px;
-}
-.adress-open {
-  font-size: 12px;
-  width: 80%;
-}
 }

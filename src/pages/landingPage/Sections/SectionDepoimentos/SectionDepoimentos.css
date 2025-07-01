@@ -22,6 +22,7 @@
   font-size: 32px;
   font-weight: 400;
 }
+
 .section-depoimentos h4 b {
   font-weight: 700;
 }
@@ -51,8 +52,9 @@
   max-width: 300px;
   flex: 0 0 auto;
   margin-right: 30px;
-   scroll-snap-align: start;
+  scroll-snap-align: start;
 }
+
 .video-container {
   display: flex;
   justify-content: center;
@@ -64,7 +66,7 @@
 
 .video-container iframe {
   border: 2px solid #dda92e;
- 
+
 }
 
 .depoimento-card h6 {
@@ -89,12 +91,14 @@
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
+
 .nav.left {
   margin-right: 12px;
 }
+
 .nav.right {
   margin-left: 12px;
 }
@@ -102,6 +106,23 @@
 
 @media (max-width: 768px) {
   .depoimento-card {
-    min-width: 90%;
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 0;
+  }
+  .section-depoimentos {
+    padding: 3% 2%;
+    gap: 0;
+  }
+  .section-depoimentos h4 {
+    margin: 0 auto;
+    width: 90%;
+    font-size: 25px;
+  }
+  .depoimento-card p {
+    text-align: center;
+  }
+  .depoimento-card h6 {
+    text-align: center;
   }
 }

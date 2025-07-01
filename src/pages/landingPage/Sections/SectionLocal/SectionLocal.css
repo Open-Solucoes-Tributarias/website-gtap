@@ -52,12 +52,17 @@
 @media (max-width: 768px) {
   .section-localizacao {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    padding-inline: 20px;
+
   }
   .section-localizacao-left iframe {
     border: none;
     border-radius: 10px;
-    width: 300px;
-    height: 200px;
+    width: 100%;
+    height: 300px;
   }
+  .box-text-local p {
+  font-size: 13px;
+}
 }

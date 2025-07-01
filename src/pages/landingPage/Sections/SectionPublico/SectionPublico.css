@@ -30,7 +30,7 @@
 }
 
 .card-publico {
-  padding: 10px;
+  padding: 5px;
   display: flex !important;
   justify-content: center;
   align-items: center;
@@ -46,6 +46,7 @@
 @media (max-width: 768px) {
   .section-publico {
     padding-inline: 5%;
+    gap: 10px;
   }
   .container-publico {
     justify-content: left;
@@ -53,9 +54,19 @@
   }
   .section-publico h3 {
     font-size: 22px;
+    padding-inline: 0;
   }
 
   .section-publico h5 {
-    font-size: 16px;
+    font-size: 14px;
+    padding-inline: 0;
+    font-weight: 300;
   }
+  .card-publico img {
+  width: 120px;
+  max-width: 120px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 10px;
+}
 }

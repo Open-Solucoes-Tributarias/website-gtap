@@ -2,7 +2,7 @@ import "./Footer.css";
 
 export const Footer = () => {
 
-    const hrefRedirect = (id) => {
+  const hrefRedirect = (id) => {
     window.location.href = `/#${id}`;
   };
 
@@ -11,9 +11,9 @@ export const Footer = () => {
       <div className="content-logo">
         <p>Realização</p>
         <img src="./logoopen.svg" alt="logo-open" />
-        <p className="adress-open">R. Frederico Simões, 125 - SL 401<br/>
-Edf. Liz Empresarial  - Caminho das Árvores<br/>
-Salvador/ BA <br/>CEP 41820-774</p>
+        <p className="adress-open">R. Frederico Simões, 125 - SL 401<br />
+          Edf. Liz Empresarial  - Caminho das Árvores<br />
+          Salvador/ BA <br />CEP 41820-774</p>
       </div>
       <div className="content-text-footer">
         <p>
@@ -41,13 +41,13 @@ Salvador/ BA <br/>CEP 41820-774</p>
           <a onClick={() => hrefRedirect("palestrantes")}>
             <li>Palestrantes</li>
           </a>
-           <a href="galeria">
+          <a href="galeria">
             <li>Galeria</li>
           </a>
           <a onClick={() => hrefRedirect("preços")}>
             <li>Preços</li>
           </a>
-         <a href="open-solucoes-tributarias">
+          <a href="open-solucoes-tributarias">
             <li>A Open</li>
           </a>
           <a onClick={() => hrefRedirect("contato")}>

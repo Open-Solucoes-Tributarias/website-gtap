@@ -87,7 +87,7 @@
 
 .card-gtap {
     color: #fff;
-     text-shadow:
+    text-shadow:
         0 2px 4px rgba(0, 0, 0, 0.8),
         0 4px 8px rgba(0, 0, 0, 0.5);
     text-align: center;
@@ -113,7 +113,38 @@
 }
 
 @media (max-width: 768px) {
+    .container-banner-galeria {
+        height: 100%;
+        background: url(../../../src/assets/banner-mobile-galeria.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .div-text-galeria p {
+        font-weight: 300;
+        font-size: 25px;
+        padding-inline: 5px;
+    }
+
+    .content-text-galeria-banner {
+        justify-content: center;
+        color: #fff;
+        text-align: center;
+        gap: 20px;
+        padding-top: 230px;
+        padding-bottom: 20px;
+    }
+    .div-text-galeria h5 {
+        font-size: 20px;
+        align-items: bottom;
+     }
+    .container-card-gtaps h3 {
+        font-size: 20px;
+    }
     .container-card-gtaps {
-        overflow: auto;
+        height: max-content;
+        padding-inline: 5px;
+        justify-content: center;
+       align-items: center;
     }
 }
