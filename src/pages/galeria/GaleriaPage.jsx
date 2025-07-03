@@ -6,42 +6,42 @@ import { useNavigate } from "react-router-dom";
 const images = [
     {
         id: 0,
-        url: "https://gtap.com.br/midias/cards/gtap%20i.jpg",
+        url: "https://gtap.com.br/midias/cards/gtap%20i.webp",
         text: "I GTAP",
     },
     {
         id: 1,
-        url: "https://gtap.com.br/midias/cards/gtap%20ii.jpg",
+        url: "https://gtap.com.br/midias/cards/gtap%20ii.webp",
         text: "II GTAP",
     },
     {
         id: 2,
-        url: "https://gtap.com.br/midias/cards/gtap%20iii.jpg",
+        url: "https://gtap.com.br/midias/cards/gtap%20iii.webp",
         text: "III GTAP",
     },
     {
         id: 3,
-        url: "https://gtap.com.br/midias/cards/gtap%20iv.jpg",
+        url: "https://gtap.com.br/midias/cards/gtap%20iv.webp",
         text: "IV GTAP",
     },
     {
         id: 4,
-        url: "https://gtap.com.br/midias/cards/gtap%20v.jpg",
+        url: "https://gtap.com.br/midias/cards/gtap%20v.webp",
         text: "V GTAP",
     },
     {
         id: 5,
-        url: "https://gtap.com.br/midias/cards/gtap%20vi.jpg",
+        url: "https://gtap.com.br/midias/cards/gtap%20vi.webp",
         text: "VI GTAP",
     },
     {
         id: 6,
-        url: "https://gtap.com.br/midias/cards/gtap%20vii.jpg",
+        url: "https://gtap.com.br/midias/cards/gtap%20vii.webp",
         text: "VII GTAP",
     },
     {
         id: 7,
-        url: "https://gtap.com.br/midias/cards/gtap%20viii.jpg",
+        url: "https://gtap.com.br/midias/cards/gtap%20viii.webp",
         text: "VIII GTAP",
     }
 ];
