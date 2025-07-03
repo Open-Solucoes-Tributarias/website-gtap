@@ -54,7 +54,7 @@ export const SectionGaleria = () => {
             key={img.id}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <img src={img.imageUrl} alt="" />
+            <img src={img.imageUrl} alt="image-url" loading="lazy" />
           </div>
         ))}
       </div>

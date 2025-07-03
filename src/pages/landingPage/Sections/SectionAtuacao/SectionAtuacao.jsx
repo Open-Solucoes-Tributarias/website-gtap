@@ -19,7 +19,7 @@ export const SectionAtuacao = () => {
             </h3>
           </div>
           <div className="image-mobile-phone">
-            <img src={image2} alt="banner evento gtap" />
+            <img src={image2} alt="banner evento gtap" loading="lazy" />
           </div>
         </h2>
         <div>
@@ -35,7 +35,7 @@ export const SectionAtuacao = () => {
         </div>
       </div>
       <div className="right">
-        <img src={image1} alt="banner evento gtap" />
+        <img src={image1} alt="banner evento gtap" loading="lazy" />
       </div>
       <div className="bottom">
         <div className="container-box">

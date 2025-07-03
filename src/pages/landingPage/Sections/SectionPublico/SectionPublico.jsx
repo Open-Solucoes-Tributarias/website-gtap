@@ -59,7 +59,7 @@ export const SectionPublico = ({ data }) => {
         <Slider {...sliderSettings}>
           {clientes.map((cliente) => (
             <div key={cliente.id} className="card-publico">
-              <img src={cliente.mediaUrl} alt={`Cliente ${cliente?.title}`} />
+              <img src={cliente.mediaUrl} alt={`Cliente ${cliente?.title}`} loading="lazy" />
             </div>
           ))}
         </Slider>

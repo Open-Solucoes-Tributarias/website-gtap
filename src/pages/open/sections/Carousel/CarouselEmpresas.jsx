@@ -42,7 +42,7 @@ export const CarouselEmpresas = ({clientes}) => {
                 <Slider {...sliderSettings}>
                     {clientes.map((cliente) => (
                         <div key={cliente.id} className="logo-slide">
-                            <img src={cliente.mediaUrl} alt={`Cliente ${cliente?.title}`} />
+                            <img src={cliente.mediaUrl} loading="lazy" alt={`Cliente ${cliente?.title}`} />
                         </div>
                     ))}
                 </Slider>

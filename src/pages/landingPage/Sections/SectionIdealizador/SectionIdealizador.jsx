@@ -39,7 +39,7 @@ export const SectionIdealizador = () => {
         </div>
       </div>
       <div className="content-image-idealizador">
-        <img src={ImageAlexandre} alt="alexandre-marques"/>
+        <img src={ImageAlexandre} alt="alexandre-marques" loading="lazy"/>
         
       </div>
       <div className="mobile-button-instagram">

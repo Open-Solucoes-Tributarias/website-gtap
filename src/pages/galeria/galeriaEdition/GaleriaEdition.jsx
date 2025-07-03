@@ -75,7 +75,7 @@ useEffect(() => {
             <Navbar />
             <section className="container-edition-galeria">
                 <div className="edition-galeria-left">
-                    <img src={logo} />
+                    <img src={logo} alt="img-gtap"/>
                     <hr />
                     <p>Reviva os <b>melhores momentos</b> do maior congresso de Gestão Tributária na Administração Pública.</p>
                 </div>

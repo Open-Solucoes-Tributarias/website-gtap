@@ -72,11 +72,11 @@ export const SectionOpen = () => {
                 </div>
                 <div>
                     <a href="https://opentreinamentos.com.br/" target="_blank" rel="noopener noreferrer">
-                        <button><img src={globoOPen} alt="globo open" />Saiba mais!</button>
+                        <button><img src={globoOPen} alt="globo open" loading="lazy" />Saiba mais!</button>
                     </a>
                 </div>
                 <div className="content-image-mobile-open">
-                    <img src={imageMobile} alt="Imagem mobile" />
+                    <img src={imageMobile} alt="Imagem mobile" loading="lazy" />
                 </div>
                 <div className="stars-content-open">
                     <i className="fa-solid fa-star" style={{ color: "#dda92e" }}></i>
@@ -91,12 +91,12 @@ export const SectionOpen = () => {
                 </div>
             </div>
             <div className="section-right-open">
-                <img src={image1} alt="Imagem 1" className="img-open-gallery img1" />
-                <img src={image2} alt="Imagem 2" className="img-open-gallery img2" />
-                <img src={image3} alt="Imagem 3" className="img-open-gallery img3" />
-                <img src={image4} alt="Imagem 4" className="img-open-gallery img4" />
-                <img src={image5} alt="Imagem 5" className="img-open-gallery img5" />
-                <img src={image6} alt="Imagem 6" className="img-open-gallery img6" />
+                <img src={image1} loading="lazy" alt="Imagem 1" className="img-open-gallery img1" />
+                <img src={image2} loading="lazy" alt="Imagem 2" className="img-open-gallery img2" />
+                <img src={image3} loading="lazy" alt="Imagem 3" className="img-open-gallery img3" />
+                <img src={image4} loading="lazy" alt="Imagem 4" className="img-open-gallery img4" />
+                <img src={image5} loading="lazy" alt="Imagem 5" className="img-open-gallery img5" />
+                <img src={image6} loading="lazy" alt="Imagem 6" className="img-open-gallery img6" />
             </div>
         </section>
     )

@@ -16,7 +16,7 @@ export const NavbarMobile = ({ lightTemplate }) => {
                     <h1 className="navbar-logo">
                         <a href="/">
                             {lightTemplate ? (
-                                <img src="./logo.svg" alt="logo gtap" />
+                                <img src="./logo.svg" alt="logo gtap" loading='' />
                             ) : (
                                 <img src="./logo-gtap.svg" alt="logo do site" />
                             )}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, lazy } from "react";
 import "./Slider.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -101,7 +101,7 @@ const AsNavFor = ({ images }) => {
         <Slider {...sliderForSettings}>
           {images.map((img, index) => (
             <div key={index}>
-              <img src={img.url} alt={`Imagem ${index}`} />
+              <img src={img.url} alt={`Imagem ${index}`} loading="lazy"/>
             </div>
           ))}
         </Slider>
@@ -111,7 +111,7 @@ const AsNavFor = ({ images }) => {
         <Slider {...sliderNavSettings}>
           {images.map((img, index) => (
             <div key={index}>
-              <img src={img.url} alt={`Miniatura ${index}`} />
+              <img src={img.url} alt={`Miniatura ${index}`} loading="lazy" />
             </div>
           ))}
         </Slider>
