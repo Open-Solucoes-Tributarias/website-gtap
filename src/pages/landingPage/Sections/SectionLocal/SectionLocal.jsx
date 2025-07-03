@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import imageUndefined from "../../../../assets/faroldabarra.png";
+import imageUndefined from "../../../../assets/faroldabarra.webp";
 import "./SectionLocal.css";
 
 export const SectionLocal = ({ data }) => {

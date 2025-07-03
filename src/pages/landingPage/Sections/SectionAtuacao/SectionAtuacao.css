@@ -7,7 +7,7 @@
   padding-inline: 12%;
   gap: 5%;
   flex-wrap: wrap;
-  background-image: url("../../../../assets/bgsection.png");
+  background-image: url("../../../../assets/bgsection.webp");
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -86,7 +86,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: url("../../../../assets/imagebg1.png");
+  background: url("../../../../assets/imagebg1.webp");
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 16px;

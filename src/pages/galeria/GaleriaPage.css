@@ -1,6 +1,6 @@
 .container-banner-galeria {
     height: 100vh;
-    background: url(../../../src/assets/bannergaleria.png);
+    background: url(../../../src/assets/bannergaleria.webp);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -57,7 +57,7 @@
 /* container section dos card gtap edições */
 
 .container-card-gtaps {
-    background-image: url("../../../src/assets//bgsection.png");
+    background-image: url("../../../src/assets/bgsection.webp");
     background-position: bottom;
     background-repeat: repeat-x;
     background-size: contain;
@@ -115,7 +115,7 @@
 @media (max-width: 768px) {
     .container-banner-galeria {
         height: 100%;
-        background: url(../../../src/assets/banner-mobile-galeria.png);
+        background: url(../../../src/assets/banner-mobile-galeria.webp);
         background-size: cover;
         background-repeat: no-repeat;
     }

@@ -1,6 +1,6 @@
 import "./SectionAtuacao.css";
-import image1 from "../../../../assets/image1.png";
-import image2 from "../../../../assets/image-mobile.png";
+import image1 from "../../../../assets/image1.webp";
+import image2 from "../../../../assets/image-mobile.webp";
 
 export const SectionAtuacao = () => {
   return (

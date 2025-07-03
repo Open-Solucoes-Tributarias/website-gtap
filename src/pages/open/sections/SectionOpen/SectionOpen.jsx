@@ -3,13 +3,13 @@ import "./SectionOpen.css"
 import globoOPen from "@/assets/globo-open.svg";
 
 //imagens da seção
-import image1 from "@/assets/open/image-escritorio.jpg"
-import image2 from "@/assets/open/image-alexandre.png"
-import image3 from "@/assets/open/image-equipe.jpg"
-import image4 from "@/assets/open/image-apresentacao.jpg"
-import image5 from "@/assets/open/image-debate.jpg"
-import image6 from "@/assets/open/image-livro.png"
-import imageMobile from "@/assets/open/group-image-open.png"
+import image1 from "@/assets/open/image-escritorio.webp"
+import image2 from "@/assets/open/image-alexandre.webp"
+import image3 from "@/assets/open/image-equipe.webp"
+import image4 from "@/assets/open/image-apresentacao.webp"
+import image5 from "@/assets/open/image-debate.webp"
+import image6 from "@/assets/open/image-livro.webp"
+import imageMobile from "@/assets/open/group-image-open.webp"
 
 
 const textsTitles = [

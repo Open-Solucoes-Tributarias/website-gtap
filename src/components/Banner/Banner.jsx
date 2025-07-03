@@ -9,8 +9,8 @@ export const BannerSection = ({ data }) => {
       <video
         className="video-background"
         src={url}
-        preload="auto"
-        poster="./bannerImagePreload.png"
+        preload="none"
+        poster="./preloadBanner.webp"
         autoPlay
         muted
         loop
