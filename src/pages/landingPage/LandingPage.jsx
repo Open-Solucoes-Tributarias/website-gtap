@@ -18,19 +18,6 @@ import { SectionInvestimento } from "./Sections/SectionInvestimentos/SectionInve
 export const LandingPage = () => {
   const [data, setData] = useState([]);
 
-  // const fetchData = async () => {
-  //   const { data, error } = await supabase.from("landing_page").select("*");
-  //   if (error) {
-  //     console.error("erro ao buscar dados", error);
-  //     return;
-  //   }
-  //   setData(data);
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}api/landing_page.json`)
       .then((res) => res.json())

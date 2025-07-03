@@ -9,6 +9,7 @@ import image3 from "@/assets/open/image-equipe.jpg"
 import image4 from "@/assets/open/image-apresentacao.jpg"
 import image5 from "@/assets/open/image-debate.jpg"
 import image6 from "@/assets/open/image-livro.png"
+import imageMobile from "@/assets/open/group-image-open.png"
 
 
 const textsTitles = [
@@ -62,13 +63,20 @@ export const SectionOpen = () => {
                     </p>
                 </div> */}
                 <div className="title-open-section">
-                    <h2>Conhecimento<br/>
+                    <h2>Conhecimento<br />
+                        tributário é <br /><b className="typing-js">{displayText}</b></h2>
+                </div>
+                <div className="title-open-section-mobile">
+                    <h2>Conhecimento
                         tributário é <br /><b className="typing-js">{displayText}</b></h2>
                 </div>
                 <div>
                     <a href="https://opentreinamentos.com.br/" target="_blank" rel="noopener noreferrer">
                         <button><img src={globoOPen} alt="globo open" />Saiba mais!</button>
                     </a>
+                </div>
+                <div className="content-image-mobile-open">
+                    <img src={imageMobile} alt="Imagem mobile" />
                 </div>
                 <div className="stars-content-open">
                     <i className="fa-solid fa-star" style={{ color: "#dda92e" }}></i>
@@ -90,8 +98,6 @@ export const SectionOpen = () => {
                 <img src={image5} alt="Imagem 5" className="img-open-gallery img5" />
                 <img src={image6} alt="Imagem 6" className="img-open-gallery img6" />
             </div>
-        
-
         </section>
     )
 }

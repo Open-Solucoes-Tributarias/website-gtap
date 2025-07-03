@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// confiuração da lib de slide carossel
+// configuração da lib de slide carossel
 const sliderSettings = {
     dots: false,
     infinite: true,
@@ -28,7 +28,7 @@ const sliderSettings = {
         {
             breakpoint: 480,
             settings: {
-                slidesToShow: 2,
+                slidesToShow: 5,
             }
         }
     ]

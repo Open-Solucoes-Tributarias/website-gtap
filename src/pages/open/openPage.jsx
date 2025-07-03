@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../../supabaseClient";
 import "./OpenPage.css"
 import { Navbar } from "../../components/Navbar/Navbar";
 import { SectionOpen } from "./sections/SectionOpen/SectionOpen";
@@ -11,26 +10,20 @@ export const OpenPage = () => {
 
     const [clientes, setClientes] = useState([]);
 
-    const fetchData = async () => {
-        const { data, error } = await supabase.from("landing_page").select("*").eq("type", 2);
-        // Filtra no bando as linhas de tipo 2
-        if (error) {
-            console.error("erro ao buscar dados", error);
-            return;
-        }
-        setClientes(data);
-    };
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}api/landing_page.json`)
+      .then((res) => res.json())
+      .then(setClientes)
+      .catch((err) => console.error("Erro ao carregar dados LP", err));
+  }, []);
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
+  const clientesEmpresas = clientes.filter((cliente) => cliente.type === 2);
 
     return (
         <>
             <Navbar lightTemplate />
             <SectionOpen />
-            <CarouselEmpresas clientes={clientes} />
+            <CarouselEmpresas clientes={clientesEmpresas} />
             <SectionAbout />
             <Footer />
         </>

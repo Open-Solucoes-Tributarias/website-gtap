@@ -45,16 +45,20 @@
 }
 
 @media (max-width: 768px) {
+
+/* seção carrosel de empresas */
+    .container-empresas-open-slide {
+        padding-inline: 0;
+        padding-block: 8px;
+    }
+
     .section-empresas-open::before,
     .section-empresas-open::after {
-        display: none;
+        width: 85px;
     }
 
-    .section-empresas-open::before {
-        display: none;
-    }
-
-    .section-empresas-open::after {
-        display: none;
+    .logo-slide img {
+        width: 70px;
+        object-fit: contain;
     }
 }

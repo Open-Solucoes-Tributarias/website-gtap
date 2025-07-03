@@ -141,10 +141,9 @@
   .section-atuacao {
     flex-direction: row;
     padding-inline: 5%;
-    padding-block: 10%;
+    padding-block: 2px;
     align-items: left;
     text-align: left;
-    margin-top: -25%;
   }
 
   .left {

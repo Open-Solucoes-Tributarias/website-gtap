@@ -122,7 +122,7 @@
 
     .div-text-galeria p {
         font-weight: 300;
-        font-size: 25px;
+        font-size: 18px;
         padding-inline: 5px;
     }
 
@@ -140,6 +140,7 @@
      }
     .container-card-gtaps h3 {
         font-size: 20px;
+        padding-top: 8px;
     }
     .container-card-gtaps {
         height: max-content;

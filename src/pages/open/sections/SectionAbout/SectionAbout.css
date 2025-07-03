@@ -93,12 +93,35 @@
 }
 
 @media (max-width: 768px) {
-    .container-sections-open {
+
+    .about-section-open {
+        padding-inline: 5%;
+}
+  .container-sections-open {
         display: flex;
         flex-direction: column;
+        text-align: center;
     }
 
     .text-about-solutions {
         padding: 20px;
     }
+    .about-section-open h4 {
+    font-size: 25px;
+}
+.content-about-open {
+    padding-block: 20px;
+    padding-inline: 10px;
+    font-size: 15px;
+}
+.content-logo-about {
+    display: none;
+}
+.video-about-container h5 {
+    font-size: 23px;    
+}
+.text-about-solutions {
+    font-size: 15px;
+    padding-inline: 10px;
+}
 }
