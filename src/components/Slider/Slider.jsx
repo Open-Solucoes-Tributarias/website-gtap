@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Slider.css"
+import "./Slider.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,14 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 const PrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
-    <div
-      className={className}
-      onClick={onClick}
-      style={{
-        ...style,
-      
-      }}
-    >
+    <div className={className} onClick={onClick} style={{ ...style }}>
       <i className="fa-solid fa-chevron-left" style={{ fontSize: "30px", color: "#fff" }}></i>
     </div>
   );
@@ -23,13 +16,7 @@ const PrevArrow = (props) => {
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
-    <div
-      className={className}
-      onClick={onClick}
-      style={{
-        ...style,
-      }}
-    >
+    <div className={className} onClick={onClick} style={{ ...style }}>
       <i className="fa-solid fa-chevron-right" style={{ fontSize: "30px", color: "#fff" }}></i>
     </div>
   );
@@ -46,48 +33,85 @@ const AsNavFor = ({ images }) => {
     setNav2(sliderRef2.current);
   }, []);
 
+  const sliderForSettings = {
+    asNavFor: nav2,
+    ref: sliderRef1,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    fade: true,
+    dots: false,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
+  const sliderNavSettings = {
+    asNavFor: nav1,
+    ref: sliderRef2,
+    slidesToShow: 4,
+    swipeToSlide: true,
+    focusOnSelect: true,
+    centerMode: true,
+    dots: false,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <div className="slider-container">
       <div className="slider-for">
-        <Slider
-          asNavFor={nav2}
-          ref={sliderRef1}
-          slidesToShow={1}
-          slidesToScroll={1}
-          fade={true}
-          dots={false}
-        //   arrows={false}
-          prevArrow={<PrevArrow/>}
-          nextArrow={<NextArrow/>}
-        >
+        <Slider {...sliderForSettings}>
           {images.map((img, index) => (
             <div key={index}>
-              <img
-                src={img.url}
-                alt={`Imagem ${index}`}
-              />
+              <img src={img.url} alt={`Imagem ${index}`} />
             </div>
           ))}
         </Slider>
       </div>
 
       <div className="slider-nav">
-        <Slider
-          asNavFor={nav1}
-          ref={sliderRef2}
-          slidesToShow={4}
-          swipeToSlide={true}
-          focusOnSelect={true}
-          centerMode={true}
-          dots={false}
-          arrows={false}
-        >
+        <Slider {...sliderNavSettings}>
           {images.map((img, index) => (
             <div key={index}>
-              <img
-                src={img.url}
-                alt={`Miniatura ${index}`}
-              />
+              <img src={img.url} alt={`Miniatura ${index}`} />
             </div>
           ))}
         </Slider>

@@ -58,6 +58,16 @@
 
 @media (max-width: 768px) {
     .slider-container {
-        width: 100%;
-    }
+            width: 100%;
+        }
+    
+        .slider-for img {
+            width: 280px;
+            height: auto;
+        }
+    
+        .slider-nav img {
+            height: 35px;
+    
+        }
 }

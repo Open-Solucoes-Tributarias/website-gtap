@@ -83,7 +83,6 @@ useEffect(() => {
                 <div className="edition-galeria-right">
                     <AsNavFor images={images} />
                 </div>
-
             </section>
             <Footer />
         </>

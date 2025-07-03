@@ -16,13 +16,13 @@ const sliderSettings = {
         {
             breakpoint: 1024,
             settings: {
-                slidesToShow: 4,
+                slidesToShow: 10,
             }
         },
         {
             breakpoint: 768,
             settings: {
-                slidesToShow: 3,
+                slidesToShow: 8,
             }
         },
         {

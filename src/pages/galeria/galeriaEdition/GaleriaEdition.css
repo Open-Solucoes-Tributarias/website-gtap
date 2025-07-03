@@ -53,14 +53,17 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        padding-top: 80vh;
-        padding-bottom: 80vh;
+        padding-top: 20vh;
+       
     }
     .edition-galeria-left {
         padding: 10px;
         text-align: center;
     }
+  .edition-galeria-right {
+  min-height: 60%;
+margin-bottom: 60px;
+}
 }
 
 
