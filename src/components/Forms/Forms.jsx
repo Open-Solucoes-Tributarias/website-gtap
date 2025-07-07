@@ -1,23 +1,39 @@
 import "./Forms.css";
-import { supabase } from "../../supabaseClient";
 
 export const Forms = () => {
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const name = e.target.nome.value;
-    const email = e.target.email.value;
-    const whatsapp = e.target.tel.value;
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const data = { name, email, whatsapp };
+  const name = e.target.name.value;
+  const email = e.target.email.value;
+  const whatsapp = e.target.tel.value;
 
-    const { error } = await supabase.from("forms").insert(data);
-    if (error) {
-      console.error("erro ao enviar fomrulário", error);
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('email', email);
+  formData.append('whatsapp', whatsapp);
+
+  try {
+    const response = await fetch("https://gtap.com.br/form-handler.php", {
+      method: "POST",
+      body: formData
+    });
+
+    if (!response.ok) {
+      // Se o status HTTP não for 200-299
+      alert("❌ Não foi possível enviar informações, tente novamente");
+      console.log('erro ao enviar informações', response.status)
       return;
     } else {
-      alert("Seus dados foram recebidos com sucesso!");
+      alert("✅ Dados salvos e e-mail enviado!");
     }
-  };
+
+  } catch (error) {
+    console.error("❌ Erro ao processar:", error);
+  }
+};
+
+//os dados são recebidos no arquivo .php que salva no banco de dados mySQl e envia o valor recebido para o e-mails lsitado no form-handler
 
   return (
     <div className="container-forms">
@@ -32,12 +48,12 @@ export const Forms = () => {
           }}
         >
           <div className="form-input">
-            <label htmlFor="nome">Nome *</label>
+            <label htmlFor="name">Nome *</label>
             <input
-              name="nome"
+              name="name"
               type="text"
               placeholder="Seu nome"
-              aria-label="nome"
+              aria-label="name"
               required
             />
           </div>

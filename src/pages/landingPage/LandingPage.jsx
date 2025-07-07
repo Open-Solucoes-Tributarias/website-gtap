@@ -9,7 +9,6 @@ import { SectionLocal } from "./Sections/SectionLocal/SectionLocal";
 import { SectionPalestrantes } from "./Sections/SectionPalestrantes/SectionPalestrantes";
 import { SectionPublico } from "./Sections/SectionPublico/SectionPublico";
 import { SectionTemas } from "./Sections/SectionTemas/SectionTemas";
-// import { supabase } from "../../supabaseClient";
 import { CardButton } from "../../components/CardButton/CardButton";
 import { SectionIdealizador } from "./Sections/SectionIdealizador/SectionIdealizador";
 import { Footer } from "../../components/Footer/Footer";
