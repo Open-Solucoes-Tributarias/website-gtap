@@ -2,6 +2,9 @@ import "./Forms.css";
 
 export const Forms = () => {
 const handleSubmit = async (e) => {
+
+  const form = document.getElementById('contactForm');
+
   e.preventDefault();
 
   const name = e.target.name.value;
@@ -12,6 +15,7 @@ const handleSubmit = async (e) => {
   formData.append('name', name);
   formData.append('email', email);
   formData.append('whatsapp', whatsapp);
+
 
   try {
     const response = await fetch("https://gtap.com.br/form-handler.php", {
@@ -26,6 +30,8 @@ const handleSubmit = async (e) => {
       return;
     } else {
       alert("✅ Dados salvos e e-mail enviado!");
+       //limpando dados após envio
+      form.reset();
     }
 
   } catch (error) {
@@ -46,6 +52,7 @@ const handleSubmit = async (e) => {
           onSubmit={(e) => {
             handleSubmit(e);
           }}
+          id="contactForm"
         >
           <div className="form-input">
             <label htmlFor="name">Nome *</label>
