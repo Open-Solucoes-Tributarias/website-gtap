@@ -1,11 +1,17 @@
+import { useState } from "react";
 import "./Forms.css";
 
 export const Forms = () => {
+
+const [isSend, isSetSend] = useState(false);
+
 const handleSubmit = async (e) => {
+  console.log('submissão clicada')
 
   const form = document.getElementById('contactForm');
 
   e.preventDefault();
+  isSetSend(true); //desativa botao
 
   const name = e.target.name.value;
   const email = e.target.email.value;
@@ -36,6 +42,8 @@ const handleSubmit = async (e) => {
 
   } catch (error) {
     console.error("❌ Erro ao processar:", error);
+  } finally {
+    isSetSend(false);
   }
 };
 
@@ -83,7 +91,7 @@ const handleSubmit = async (e) => {
             />
           </div>
           <div className="form-input">
-            <button type="submit">QUERO INFORMAÇÕES</button>
+            <button type="submit" disabled={isSend}>{isSend ? "ENVIANDO..." : "QUERO INFORMAÇÕES"}</button>
           </div>
         </form>
       </div>
