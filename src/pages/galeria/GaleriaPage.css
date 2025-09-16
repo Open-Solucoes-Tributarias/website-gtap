@@ -61,7 +61,7 @@
     background-position: bottom;
     background-repeat: repeat-x;
     background-size: contain;
-    height: 100vh;
+    height: auto;
     padding-inline: 12%;
     display: flex;
     flex-direction: column;
