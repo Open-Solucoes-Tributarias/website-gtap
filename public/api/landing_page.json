@@ -345,7 +345,7 @@
     "youtube": "",
     "linkedin": "https://www.linkedin.com/in/gustavo-reis-14b503129/"
   },
-   {
+  {
     "id": 66,
     "created_at": "2025-06-03 18:36:41.586831+00",
     "type": 0,
@@ -357,7 +357,7 @@
     "youtube": "",
     "linkedin": "https://www.linkedin.com/in/paulo-henrique-p%C3%AAgas-92238a152/"
   },
-    {
+  {
     "id": 67,
     "created_at": "2025-06-03 18:36:41.586831+00",
     "type": 0,
@@ -378,7 +378,7 @@
     "mediaUrl": "https://gtap.com.br/midias/depoimentos/Edno%20de%20Paula.mp4",
     "annotation": "“Espero poder tá participando mais vezes desse grande evento nessa cidade maravilhosa que é Salvador!”"
   },
-    {
+  {
     "id": 69,
     "created_at": "2025-05-19 18:18:37.565735+00",
     "type": 3,
@@ -387,7 +387,7 @@
     "mediaUrl": "https://gtap.com.br/midias/depoimentos/Raimundo%20Donato.mp4",
     "annotation": "“Participar desse evento pra mim foi maravilhoso!”"
   },
-   {
+  {
     "id": 70,
     "created_at": "2025-05-19 18:18:37.565735+00",
     "type": 3,
@@ -395,5 +395,53 @@
     "description": "Secretaria da Fazenda - Bahia",
     "mediaUrl": "https://gtap.com.br/midias/depoimentos/Valmir%20Tosta.mp4",
     "annotation": "“Achei fantástico! São tantos conhecimentos que a gente leva pra casa… e isso aí vai nos ajudar muito, muito mesmo no nosso dia a dia!”"
+  },
+   {
+    "id": 71,
+    "created_at": "2025-09-22 15:36:41.586831+00",
+    "type": 0,
+    "title": "Rosa Freitas",
+    "description": "Doutora em Direito",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/drarosa-freitas.png",
+    "annotation": "Rosa Freitas é Doutora em Direito e pelo PPGD/UFPE, servidora pública, com 20 anos de experiência nas áreas pública e privada, Pós-Graduada em Transição Energética e novos Negócios pela PUC-PR, autora de livros e artigos jurídicos, dentre \"A Reforma Tributária e seus impactos nos Municípios\", \"Gestão Municipal de Resíduos Sólidos\", \"A nova Dogmática da Tributação de Serviços no Brasil\" e \"A Reforma Tributária e as compras governamentais\", todos pela editora IGEDUC",
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "https://www.linkedin.com/in/rosa-maria-freitas-a5758952/"
+  },
+   {
+    "id": 72,
+    "created_at": "2025-09-22 15:36:41.586831+00",
+    "type": 0,
+    "title": "Leonardo Godoi",
+    "description": "Mestre em direito tributário",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/leonardo-godoi.jpg",
+    "annotation": "Mestre em Direito Tributário do Instituto Brasileiro de Estudos Tributário (IBET). Pós-graduado em Direito Tributário pelo IBET e em Direito Público e Privado, com ênfase em Direito Tributário, pelo Instituto Superior do Ministério Público do Estado do Rio de Janeiro (ISMP/RJ). Coordenador do GT1 (tributação imobiliária) no CTAT (Conselho Técnico das Administrações Tributárias) da CNM (Confederação Nacional dos Municípios). Professor de Direito Tributário do IBET e dos cursos de Gestão Tributária Municipal e Fiscalização Tributária do Instituto Brasileiro de Administração Municipal (IBAM). Conteúdista do Curso de Gestão Tributária Municipal publicado pela Escola Nacional da Administração Pública (ENAP, vinculada ao Ministério do Planejamento, Desenvolvimento e Gestão). Diretor e membro fundador da Associação dos Auditores e Fiscais Tributários Municipais do Estado do Rio de Janeiro - AFIMERJ. Auditor Fiscal Municipal. Em âmbito da Reforma Tributária sobre o Consumo, represento a CNM a nível nacional como membro suplente no Pré-Comitê Gestor do IBS/CBS (criado mediante acordo de cooperação técnica entre COMSEFAZ, FNP e CNM) no Grupo de Coordenação Técnica Normativa (GCTN) e no Grupo Técnico 01 (Normas Gerais) e ainda no GT de Conformidade pelo protocolo ENAT.",
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "https://www.linkedin.com/in/leonardo-godoi-b20b8879/"
+  },
+   {
+    "id": 73,
+    "created_at": "2025-05-22 18:21:14.561514+00",
+    "type": 2,
+    "title": "STF",
+    "description": "STF",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/STF.webp"
+  },
+   {
+    "id": 74,
+    "created_at": "2025-05-22 18:21:14.561514+00",
+    "type": 2,
+    "title": "AGU",
+    "description": "AGU",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/AGU.webp"
+  },
+   {
+    "id": 75,
+    "created_at": "2025-05-22 18:21:14.561514+00",
+    "type": 2,
+    "title": "TSE",
+    "description": "TSE",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/TSE.webp"
   }
 ]
