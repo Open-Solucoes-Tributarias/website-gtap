@@ -20,7 +20,7 @@ const lotes = [
   },
   {
     nome: "Terceiro Lote",
-    preco: "R$ 3.970,00",
+    preco: "X GTAP",
     ano: 2025,
     mesInicio: 6,
     mesFim: 10,

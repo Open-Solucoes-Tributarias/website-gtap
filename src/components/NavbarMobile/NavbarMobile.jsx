@@ -31,12 +31,13 @@ export const NavbarMobile = ({ lightTemplate }) => {
             {menuOpen && (
                 <div className="navbar-dialog" onClick={() => setMenuOpen(false)}>
                     <ul className="navbar-dialog-content" onClick={(e) => e.stopPropagation()}>
-                        <li><img alt="icon" src="/assets/icons/bookicon.svg"/><a onClick={() => hrefRedirect("temas")}>Temas</a></li>
+                        <li onClick={() => hrefRedirect("temas")}><img alt="icon" src="/assets/icons/bookicon.svg"/><a onClick={() => hrefRedirect("temas")}>Temas</a></li>
                         <li><img alt="icon" src="/assets/icons/peopleicon.svg"/><a onClick={() => hrefRedirect("palestrantes")}>Palestrantes</a></li>
                         <li><img alt="icon" src="/assets/icons/photoicon.svg"/><a href="galeria">Galeria</a></li>
-                        <li><img alt="icon" src="/assets/icons/caricon.svg"/><a onClick={() => hrefRedirect("preços")}>Preços</a></li>
+                        <li><img alt="icon" src="/assets/icons/contacticon.svg"/><a onClick={() => hrefRedirect("contato")}>Localização</a></li>
+                        {/* <li><img alt="icon" src="/assets/icons/caricon.svg"/><a onClick={() => hrefRedirect("preços")}>Preços</a></li> */}
                         <li><img alt="icon" src="/assets/icons/openmini.svg"/><a href="open-solucoes-tributarias">A Open</a></li>
-                        <li><img alt="icon" src="/assets/icons/contacticon.svg"/><a onClick={() => hrefRedirect("contato")}>Contato</a></li>
+                        {/* <li><img alt="icon" src="/assets/icons/contacticon.svg"/><a onClick={() => hrefRedirect("contato")}>Contato</a></li> */}
                     </ul>
                 </div>
             )}

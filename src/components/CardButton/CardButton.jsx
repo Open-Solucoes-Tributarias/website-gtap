@@ -13,7 +13,7 @@ export const CardButton = () => {
       case "Segundo Lote":
         return "LOTE 2 DISPONÍVEL";
       case "Terceiro Lote":
-        return "LOTE 3 DISPONÍVEL";
+        return "DISPONÍVEL EM BREVE";
       default:
         return "CONSULTAR LOTES";
     }
@@ -42,11 +42,10 @@ export const CardButton = () => {
         </div>
         <div className="button-right-submit">
           <a
-            href="https://api.whatsapp.com/send/?phone=5571992084907&text=Quero%20informa%C3%A7%C3%A3o%20sobre%20o%20GTAP&type=phone_number&app_absent=0
-"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeDUzRWaUN4nBptFGYWQcwAz8r76OUSLiJ1CUi5w1jQefYurQ/viewform?usp=header"
             target="blank"
           >
-            <button>Garanta a sua vaga</button>
+            <button>Sugerir Tema</button>
           </a>
         </div>
       </div>
