@@ -102,6 +102,7 @@
 
   .desktop-button-instagram {
     display: none;
+    
   }
 
   .mobile-button-instagram {
@@ -114,8 +115,7 @@
     position: absolute;
     z-index: 10;
     bottom: 60px;
-    left: 55px;
-    margin: 0 auto;
+    left: 25vw;
     color: #02093a;
     font-size: 14px;
     font-weight: 500;

@@ -13,7 +13,7 @@ export const CardButton = () => {
       case "Segundo Lote":
         return "LOTE 2 DISPONÍVEL";
       case "Terceiro Lote":
-        return "DISPONÍVEL EM BREVE";
+        return "LOTE 3 DISPONÍVEL";
       default:
         return "CONSULTAR LOTES";
     }
@@ -27,12 +27,12 @@ export const CardButton = () => {
         </div>
         <hr />
         <div className="button-left-data">
-          <p>16 E 17 DE OUTUBRO DE 2025</p>
-          <p>16 E 17 DE OUTUBRO DE 2025</p>
-          <p>16 E 17 DE OUTUBRO DE 2025</p>
-          <p>16 E 17 DE OUTUBRO DE 2025</p>
-          <p>16 E 17 DE OUTUBRO DE 2025</p>
-          <p>16 E 17 DE OUTUBRO DE 2025</p>
+          <p>08 E 09 DE OUTUBRO DE 2026</p>
+          <p>08 E 09 DE OUTUBRO DE 2026</p>
+          <p>08 E 09 DE OUTUBRO DE 2026</p>
+          <p>08 E 09 DE OUTUBRO DE 2026</p>
+          <p>08 E 09 DE OUTUBRO DE 2026</p>
+          <p>08 E 09 DE OUTUBRO DE 2026</p>
         </div>
       </div>
       <div className="card-button-right">
@@ -42,10 +42,11 @@ export const CardButton = () => {
         </div>
         <div className="button-right-submit">
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSeDUzRWaUN4nBptFGYWQcwAz8r76OUSLiJ1CUi5w1jQefYurQ/viewform?usp=header"
+            href="https://api.whatsapp.com/send/?phone=5571992084907&text=Quero%20informa%C3%A7%C3%A3o%20sobre%20o%20GTAP&type=phone_number&app_absent=0
+"
             target="blank"
           >
-            <button>Sugerir Tema</button>
+            <button>Garanta a sua vaga</button>
           </a>
         </div>
       </div>

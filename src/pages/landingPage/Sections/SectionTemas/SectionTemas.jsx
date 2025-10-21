@@ -7,10 +7,11 @@ export const SectionTemas = ({ data }) => {
       <div className="section-temas-content">
         <h3>Temas confirmados</h3>
         <h5>
-          Prepare-se para entender os impactos da Reforma Tributária sobre a
-          Administração Pública
+          {/* Prepare-se para entender os impactos da Reforma Tributária sobre a
+          Administração Pública */}
+          Aguarde a confirmação dos temas para o X GTAP...
           <br />
-          (enquanto sujeito ativo e passivo de obrigações)
+          {/* (enquanto sujeito ativo e passivo de obrigações) */}
         </h5>
 
         <div className="container-cards-tema">
@@ -30,6 +31,11 @@ export const SectionTemas = ({ data }) => {
           })}
         </div>
       </div>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeDUzRWaUN4nBptFGYWQcwAz8r76OUSLiJ1CUi5w1jQefYurQ/viewform?usp=header"
+        target="blank"
+      >
+        <button className="sugerir-tema-btn">Sugerir Tema - X GTAP</button>
+      </a>
     </section>
   );
 };

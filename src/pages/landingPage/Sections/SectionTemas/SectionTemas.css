@@ -1,9 +1,14 @@
 .section-temas {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
   background: url("../../../../assets/BackgroundTemas.webp");
   /* se houver plano de fundo */
   background-size: cover;
   padding: 60px 20px;
   text-align: center;
+  min-height: 90vh;
 }
 
 .section-temas-content {
@@ -80,6 +85,24 @@
   color: #02093a;
   font-size: 30px;
   font-weight: 700;
+}
+
+.sugerir-tema-btn {
+  color: #02093a;
+  font-size: 20px;
+  font-weight: 500;
+  background: linear-gradient(to right, #dda92e, #ffdf92);
+  border: none;
+  border-radius: 10px;
+  padding-inline: 14px;
+  padding-block: 10px;
+  min-width: 15%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

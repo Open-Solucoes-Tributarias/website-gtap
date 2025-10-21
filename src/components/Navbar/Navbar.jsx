@@ -65,10 +65,9 @@ export const Navbar = ({ lightTemplate }) => {
               <li><a onClick={() => hrefRedirect("temas")}>TEMAS</a></li>
               <li><a onClick={() => hrefRedirect("palestrantes")}>PALESTRANTES</a></li>
               <li><a href="galeria">GALERIA</a></li>
-              <li><a onClick={() => hrefRedirect("localizacao")}>LOCAL</a></li>
-              {/* <li><a onClick={() => hrefRedirect("preços")}>PREÇOS</a></li> */}
+              <li><a onClick={() => hrefRedirect("preços")}>PREÇOS</a></li>
               <li><a href="open-solucoes-tributarias">A OPEN</a></li>
-              {/* <li><a onClick={() => hrefRedirect("contato")}>CONTATO</a></li> */}
+              <li><a onClick={() => hrefRedirect("contato")}>CONTATO</a></li>
             </ul>
           </nav>
         </header>

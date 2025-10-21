@@ -11,69 +11,14 @@
     "youtube": "https://www.youtube.com/@FocoTribut%C3%A1rio",
     "linkedin": "https://www.linkedin.com/in/alexandremarques-open/"
   },
-  {
-    "id": 8,
-    "created_at": "2025-05-09 14:48:18.752887+00",
-    "type": 1,
-    "title": 1,
-    "description": "Retenção de IBS/CBS nas compras pela administração pública.",
-    "mediaUrl": ""
-  },
-  {
-    "id": 9,
-    "created_at": "2025-05-09 17:36:41.613235+00",
-    "type": 1,
-    "title": 2,
-    "description": "O mecanismo do split payment e suas implicações para adquirentes e fornecedores.",
-    "mediaUrl": ""
-  },
-  {
-    "id": 10,
-    "created_at": "2025-05-09 17:36:51.142996+00",
-    "type": 1,
-    "title": 3,
-    "description": "Local de incidência do ISS e do IBS: o princípio do destino e seus desdobramentos práticos.",
-    "mediaUrl": ""
-  },
-  {
-    "id": 11,
-    "created_at": "2025-05-09 17:41:07.210762+00",
-    "type": 1,
-    "title": 4,
-    "description": "O uso da tecnologia como pilar fundamental do novo sistema de tributação.",
-    "mediaUrl": ""
-  },
-  {
-    "id": 12,
-    "created_at": "2025-05-09 17:41:20.061334+00",
-    "type": 1,
-    "title": 5,
-    "description": "Impactos da reforma tributária nas obrigações acessórias e documentos fiscais.",
-    "mediaUrl": ""
-  },
-  {
-    "id": 13,
-    "created_at": "2025-05-09 17:41:29.317596+00",
-    "type": 1,
-    "title": 6,
-    "description": "Impactos da reforma tributária na planilha de formação de preços dos contratos públicos.",
-    "mediaUrl": ""
-  },
-  {
-    "id": 14,
-    "created_at": "2025-05-09 17:41:40.337232+00",
-    "type": 1,
-    "title": 7,
-    "description": "Da lista de serviços da Lei Complementar 116 para a NBS: desafios da transição.",
-    "mediaUrl": ""
-  },
+ 
   {
     "id": 16,
     "created_at": "2025-05-09 17:48:04.780231+00",
     "type": 6,
     "title": "Banner video principal",
     "description": "Banner video principal",
-    "mediaUrl": "https://gtap.com.br/midias/gtap_banner_full.mp4"
+    "mediaUrl": "https://gtap.com.br/midias/gtap_banner_video.mp4"
   },
   {
     "id": 26,
@@ -346,30 +291,6 @@
     "linkedin": "https://www.linkedin.com/in/gustavo-reis-14b503129/"
   },
   {
-    "id": 66,
-    "created_at": "2025-06-03 18:36:41.586831+00",
-    "type": 0,
-    "title": "Paulo Henrique Pegas",
-    "description": "Professor e Contador",
-    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/paulo-henrique.jpg",
-    "annotation": "Professor e Contador, com 40 anos de atuação profissional, 90% do tempo na área contábil-tributária e 2/3 em funções executivas, principalmente em instituições financeiras. Foi Superintendente de Risco de Crédito do BNDES no biênio 2019-2020. Desde 2011 é professor titular no curso de graduação em Ciências Contábeis do IBMEC-RJ e, desde 2008, atua como professor em cursos de MBA na FIPECAFI-SP). É coordenador do MBA de Reforma Tributária na BSSP e é sócio do Instituto de Pesquisa e Estudos Contábeis (IPEC-RJ), onde atua como professor em cursos de capacitação profissional, inclusive no formato in company. É conselheiro do CRC-RJ e autor de alguns livros na área contábil-tributária, sendo o principal o Manual de Contabilidade Tributária – 10ª edição.",
-    "instagram": "",
-    "youtube": "",
-    "linkedin": "https://www.linkedin.com/in/paulo-henrique-p%C3%AAgas-92238a152/"
-  },
-  {
-    "id": 67,
-    "created_at": "2025-06-03 18:36:41.586831+00",
-    "type": 0,
-    "title": "Erivan de Franca",
-    "description": "Advogado",
-    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/erivan-franca.jpg",
-    "annotation": "Advogado (OAB/DF 18.166). Servidor do Tribunal de Contas da União desde 1997, onde exerceu as funções de Diretor de Apoio à Fiscalização de Contratos do TCU em Brasília/DF e Chefe do Serviço de Apoio à Fiscalização de Contratos e do Serviço de Instrução de Repactuações e Sanções Contratuais, ambos do TCU em Brasília/DF. É coautor do livro “Terceirização: Legislação, Doutrina e Jurisprudência” (Belo Horizonte: Fórum, 2017), coordenado pelo Professor Jorge Ulisses Jacoby Fernandes. É coautor do livro “Licitações e contratos administrativos: legislação aplicável”",
-    "instagram": "",
-    "youtube": "",
-    "linkedin": ""
-  },
-  {
     "id": 68,
     "created_at": "2025-05-19 18:18:37.565735+00",
     "type": 3,
@@ -395,30 +316,6 @@
     "description": "Secretaria da Fazenda - Bahia",
     "mediaUrl": "https://gtap.com.br/midias/depoimentos/Valmir%20Tosta.mp4",
     "annotation": "“Achei fantástico! São tantos conhecimentos que a gente leva pra casa… e isso aí vai nos ajudar muito, muito mesmo no nosso dia a dia!”"
-  },
-   {
-    "id": 71,
-    "created_at": "2025-09-22 15:36:41.586831+00",
-    "type": 0,
-    "title": "Rosa Freitas",
-    "description": "Doutora em Direito",
-    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/drarosa-freitas.png",
-    "annotation": "Rosa Freitas é Doutora em Direito e pelo PPGD/UFPE, servidora pública, com 20 anos de experiência nas áreas pública e privada, Pós-Graduada em Transição Energética e novos Negócios pela PUC-PR, autora de livros e artigos jurídicos, dentre \"A Reforma Tributária e seus impactos nos Municípios\", \"Gestão Municipal de Resíduos Sólidos\", \"A nova Dogmática da Tributação de Serviços no Brasil\" e \"A Reforma Tributária e as compras governamentais\", todos pela editora IGEDUC",
-    "instagram": "",
-    "youtube": "",
-    "linkedin": "https://www.linkedin.com/in/rosa-maria-freitas-a5758952/"
-  },
-   {
-    "id": 72,
-    "created_at": "2025-09-22 15:36:41.586831+00",
-    "type": 0,
-    "title": "Leonardo Godoi",
-    "description": "Mestre em direito tributário",
-    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/leonardo-godoi.jpg",
-    "annotation": "Mestre em Direito Tributário do Instituto Brasileiro de Estudos Tributário (IBET). Pós-graduado em Direito Tributário pelo IBET e em Direito Público e Privado, com ênfase em Direito Tributário, pelo Instituto Superior do Ministério Público do Estado do Rio de Janeiro (ISMP/RJ). Coordenador do GT1 (tributação imobiliária) no CTAT (Conselho Técnico das Administrações Tributárias) da CNM (Confederação Nacional dos Municípios). Professor de Direito Tributário do IBET e dos cursos de Gestão Tributária Municipal e Fiscalização Tributária do Instituto Brasileiro de Administração Municipal (IBAM). Conteúdista do Curso de Gestão Tributária Municipal publicado pela Escola Nacional da Administração Pública (ENAP, vinculada ao Ministério do Planejamento, Desenvolvimento e Gestão). Diretor e membro fundador da Associação dos Auditores e Fiscais Tributários Municipais do Estado do Rio de Janeiro - AFIMERJ. Auditor Fiscal Municipal. Em âmbito da Reforma Tributária sobre o Consumo, represento a CNM a nível nacional como membro suplente no Pré-Comitê Gestor do IBS/CBS (criado mediante acordo de cooperação técnica entre COMSEFAZ, FNP e CNM) no Grupo de Coordenação Técnica Normativa (GCTN) e no Grupo Técnico 01 (Normas Gerais) e ainda no GT de Conformidade pelo protocolo ENAT.",
-    "instagram": "",
-    "youtube": "",
-    "linkedin": "https://www.linkedin.com/in/leonardo-godoi-b20b8879/"
   },
    {
     "id": 73,

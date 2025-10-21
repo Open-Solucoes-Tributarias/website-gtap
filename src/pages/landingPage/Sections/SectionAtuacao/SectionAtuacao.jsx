@@ -12,7 +12,7 @@ export const SectionAtuacao = () => {
           <hr className="mobile-hr-display" />
           <div className="data-section-mobile">
             <h3>
-              <i className="fa-regular fa-calendar"></i>16 e 17 de Outubro de 2025
+              <i className="fa-regular fa-calendar"></i>08 e 09 de Outubro de 2026
             </h3>
             <h3>
               <i className="fa-solid fa-location-dot"></i>Salvador/BA
@@ -27,7 +27,7 @@ export const SectionAtuacao = () => {
         </div>
         <div className="data-section">
           <h3>
-            <i className="fa-regular fa-calendar"></i>16 e 17 de Outubro de 2025
+            <i className="fa-regular fa-calendar"></i>08 e 09 de Outubro de 2026
           </h3>
           <h3>
             <i className="fa-solid fa-location-dot"></i>Salvador/BA
@@ -42,7 +42,7 @@ export const SectionAtuacao = () => {
           <h3>Confira as áreas de atuação do público-alvo</h3>
           <h4>
             Quem lida com os desafios tributários da administração pública marca
-            presença no IX GTAP.
+            presença no X GTAP.
           </h4>
           <div className="container-tags">
             <span>Recursos Humanos</span>
