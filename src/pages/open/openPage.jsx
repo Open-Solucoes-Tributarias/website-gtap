@@ -17,7 +17,7 @@ export const OpenPage = () => {
       .catch((err) => console.error("Erro ao carregar dados LP", err));
   }, []);
 
-  const clientesEmpresas = clientes.filter((cliente) => cliente.type === 2);
+  const clientesEmpresas = clientes.filter((cliente) => cliente.type === 2 || cliente.type === 5);
 
     return (
         <>
