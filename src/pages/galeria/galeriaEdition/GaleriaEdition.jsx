@@ -49,6 +49,10 @@ useEffect(() => {
       setLogo("/assets/logos/viiigtap.svg");
       setFolder("viii-gtap");
       break;
+    case "IX GTAP":
+      setLogo("/assets/logos/ixgtap.svg");
+      setFolder("ix-gtap");
+      break;
     default:
       setLogo("/assets/logos/gtapi.svg");
       setFolder(null);

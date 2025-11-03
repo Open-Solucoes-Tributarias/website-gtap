@@ -30,8 +30,8 @@ const lotes = [
     preco: "R$ 4.290,00",
     ano: 2026,
     mesInicio: 7,  // JUL/2026
-    mesFim: 12,    // DEZ/2026 (ajuste se quiser ir além)
-    label: "JULHO A DEZEMBRO/2026",
+    mesFim: 10,    // DEZ/2026 (ajuste se quiser ir além)
+    label: "JULHO A OUTUBRO/2026",
   },
 ];
 

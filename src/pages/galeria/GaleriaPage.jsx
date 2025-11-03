@@ -61,12 +61,12 @@ export const GaleriaPage = () => {
             <section className="container-banner-galeria">
                 <div className="content-text-galeria-banner">
                     <div className="div-text-galeria">
-                        <h5>VIII GTAP</h5>
+                        <h5>IX GTAP</h5>
                         <p>A melhor edição de todos os tempos</p>
                     </div>
                     <div className="div-button-galeria-banner">
                         <button onClick={() => {
-                            window.location.href = "/VIII%20GTAP";
+                            window.location.href = "/IX%20GTAP";
                         }}>Acessar álbum completo</button>
                     </div>
                 </div>
