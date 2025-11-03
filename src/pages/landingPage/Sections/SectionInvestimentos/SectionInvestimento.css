@@ -133,8 +133,10 @@
     justify-content: center;
   }
   .container-button-investimento {
+    display: flex;
     width: 80%;
     font-size: 12px;
     padding-bottom: 10px;
+    justify-content: center;
   }
 }
