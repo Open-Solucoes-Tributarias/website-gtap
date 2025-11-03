@@ -43,6 +43,11 @@ const images = [
         id: 7,
         url: "https://gtap.com.br/midias/cards/gtap%20viii.webp",
         text: "VIII GTAP",
+    },
+    {
+        id: 8,
+        url: "https://gtap.com.br/midias/cards/gtap%20ix.webp",
+        text: "IX GTAP",
     }
 ];
 
