@@ -2,6 +2,8 @@ import "./SectionTemas.css";
 export const SectionTemas = ({ data }) => {
   const temas = data.filter((tema) => tema.type === 1);
 
+  const urlVideo = "https://gtap.com.br/midias/sobre-gtap.mp4";
+
   return (
     <section className="section-temas" id="temas">
       <div className="section-temas-content">
@@ -31,6 +33,18 @@ export const SectionTemas = ({ data }) => {
           })}
         </div>
       </div>
+       {/* Video condicional, enquanto não temos temas confirmados */}
+        <div className="video-sobre-edition">
+        <video
+          controls
+          playsInline
+          preload="metadata"
+          poster="./preload-tema.webp"
+          width="300"
+          src={urlVideo}
+          style={{ borderRadius: 10, width: "100%", height: "100%", display: "block" }}        
+        ></video>
+        </div>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSeDUzRWaUN4nBptFGYWQcwAz8r76OUSLiJ1CUi5w1jQefYurQ/viewform?usp=header"
         target="blank"
       >

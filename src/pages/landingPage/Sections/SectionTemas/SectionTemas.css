@@ -105,6 +105,12 @@
   cursor: pointer;
 }
 
+.video-sobre-edition {
+  display: flex;
+  padding-inline: 20%;
+  margin-bottom: 2%;
+}
+
 @media (max-width: 768px) {
 
   .section-temas-content h3 {
@@ -134,4 +140,8 @@
   .card-tema.bgTemas2 {
     background-image: url(../../../../assets/bgtemas.svg);
   }
-}
+
+    .video-sobre-edition {
+      padding: 0;
+    }
+    }

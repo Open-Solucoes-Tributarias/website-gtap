@@ -34,7 +34,7 @@ export const Footer = () => {
       <div className="content-menu-footer">
         <ul>
           <a href="/">
-            <p>GTAP IX</p>
+            <p>X GTAP</p>
           </a>
           <a onClick={() => hrefRedirect("temas")}>
             <li>Temas</li>
