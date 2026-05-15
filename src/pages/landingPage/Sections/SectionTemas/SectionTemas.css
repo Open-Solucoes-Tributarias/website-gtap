@@ -56,6 +56,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  white-space: pre-wrap;
 }
 
 .card-tema.bgTemas {
@@ -144,4 +145,5 @@
     .video-sobre-edition {
       padding: 0;
     }
-    }
+}
+

@@ -11,7 +11,6 @@
     "youtube": "https://www.youtube.com/@FocoTribut%C3%A1rio",
     "linkedin": "https://www.linkedin.com/in/alexandremarques-open/"
   },
- 
   {
     "id": 16,
     "created_at": "2025-05-09 17:48:04.780231+00",
@@ -70,7 +69,7 @@
     "description": "CNJ",
     "mediaUrl": "https://gtap.com.br/midias/Clientes/CNJ.webp"
   },
-    {
+  {
     "id": 73,
     "created_at": "2025-05-22 18:21:14.561514+00",
     "type": 5,
@@ -78,7 +77,7 @@
     "description": "STF",
     "mediaUrl": "https://gtap.com.br/midias/Clientes/STF.webp"
   },
-   {
+  {
     "id": 74,
     "created_at": "2025-05-22 18:21:14.561514+00",
     "type": 5,
@@ -86,7 +85,7 @@
     "description": "AGU",
     "mediaUrl": "https://gtap.com.br/midias/Clientes/AGU.webp"
   },
-   {
+  {
     "id": 75,
     "created_at": "2025-05-22 18:21:14.561514+00",
     "type": 5,
@@ -340,5 +339,66 @@
     "description": "Secretaria da Fazenda - Bahia",
     "mediaUrl": "https://gtap.com.br/midias/depoimentos/Valmir%20Tosta.mp4",
     "annotation": "“Achei fantástico! São tantos conhecimentos que a gente leva pra casa… e isso aí vai nos ajudar muito, muito mesmo no nosso dia a dia!”"
+  },
+  {
+    "id": 101,
+    "created_at": "2026-05-15T17:58:12.097Z",
+    "type": 1,
+    "title": "1",
+    "description": "A nova era dos documentos fiscais eletrônicos."
+  },
+  {
+    "id": 102,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "2",
+    "description": "Imunidades tributárias no contexto do IBS e da CBS."
+  },
+  {
+    "id": 103,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "3",
+    "description": "Contratos administrativos e a Reforma Tributária - é verdade que os preços vão aumentar?"
+  },
+  {
+    "id": 104,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "4",
+    "description": "Base de cálculo do IBS e da CBS e sua repercussão nas incidências não alcançadas pela Reforma Tributária."
+  },
+  {
+    "id": 105,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "5",
+    "description": "Local de incidência do IBS e os aspectos relacionados a sua destinação."
+  },
+  {
+    "id": 106,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "6",
+    "description": "Formas de quitação do IBS e da CBS - É o fim da retenção na fonte?"
+  },
+  {
+    "id": 107,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "7",
+    "description": "O Simples Nacional sob a ótica da Reforma Tributária."
+  },
+  {
+    "id": 108,
+    "created_at": "2026-05-15T18:23:26.997Z",
+    "type": 0,
+    "title": "Arick Farias",
+    "description": "Consultor na Open Soluções Tributárias",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/arick-farias.jpg",
+    "annotation": "Arick Pires Farias é consultor tributário na Open Soluções Tributárias, onde atua desde 2022 prestando consultoria a órgãos públicos e empresas privadas, elaborando pareceres, petições e recursos tributários e cíveis. Formado em Direito pela Faculdade Baiana de Direito e integrou a Comissão das Sociedades de Advogados da OAB/BA. Foi campeão do II Moot Brasileiro de Direito Tributário (2020) e admitido para o LLM em Direito Americano na George Mason University (EUA).",
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "https://www.linkedin.com/in/arickfarias/"
   }
 ]

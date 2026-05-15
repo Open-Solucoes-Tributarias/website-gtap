@@ -9,11 +9,10 @@ export const SectionTemas = ({ data }) => {
       <div className="section-temas-content">
         <h3>Temas confirmados</h3>
         <h5>
-          {/* Prepare-se para entender os impactos da Reforma Tributária sobre a
-          Administração Pública */}
-          Aguarde a confirmação dos temas para o X GTAP...
+          Prepare-se para entender os impactos da Reforma Tributária sobre a
+          Administração Pública
           <br />
-          {/* (enquanto sujeito ativo e passivo de obrigações) */}
+          (enquanto sujeito ativo e passivo de obrigações)
         </h5>
 
         <div className="container-cards-tema">
@@ -34,6 +33,7 @@ export const SectionTemas = ({ data }) => {
         </div>
       </div>
        {/* Video condicional, enquanto não temos temas confirmados */}
+       {/* 
         <div className="video-sobre-edition">
         <video
           controls
@@ -45,6 +45,7 @@ export const SectionTemas = ({ data }) => {
           style={{ borderRadius: 10, width: "100%", height: "100%", display: "block" }}        
         ></video>
         </div>
+        */}
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSeDUzRWaUN4nBptFGYWQcwAz8r76OUSLiJ1CUi5w1jQefYurQ/viewform?usp=header"
         target="blank"
       >
