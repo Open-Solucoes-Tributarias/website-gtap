@@ -22,8 +22,8 @@ export const SectionIdealizador = () => {
             públicas desde 2002. Pós-graduado em Advocacia Tributária e Direito
             Processual Civil.
             <br /> <br />
-            Mais de <b>32 mil inscritos</b> no seu canal do YouTube e
-            <b> 11 mil seguidores no Instagram</b>.
+            Mais de <b>36 mil inscritos</b> no seu canal do YouTube e
+            <b> 14 mil seguidores no Instagram</b>.
             <br /> <br />
             Criador da mentoria <b>Tributarista 7D</b>, onde compartilha seu
             conhecimento e metodologia comprovada para ajudar outros

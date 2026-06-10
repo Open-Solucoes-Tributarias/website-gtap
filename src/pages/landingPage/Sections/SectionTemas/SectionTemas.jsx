@@ -46,11 +46,11 @@ export const SectionTemas = ({ data }) => {
         ></video>
         </div>
         */}
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeDUzRWaUN4nBptFGYWQcwAz8r76OUSLiJ1CUi5w1jQefYurQ/viewform?usp=header"
+      {/* <a href="https://docs.google.com/forms/d/e/1FAIpQLSeDUzRWaUN4nBptFGYWQcwAz8r76OUSLiJ1CUi5w1jQefYurQ/viewform?usp=header"
         target="blank"
       >
-        <button className="sugerir-tema-btn">Sugerir Tema - X GTAP</button>
-      </a>
+        <button className="sugerir-tema-btn">Sugerir Tema - XI GTAP</button>
+      </a> */}
     </section>
   );
 };
