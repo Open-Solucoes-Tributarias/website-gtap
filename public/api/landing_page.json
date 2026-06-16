@@ -24,6 +24,30 @@
     "linkedin": "https://www.linkedin.com/in/bernard-appy-53687843/"
   },
   {
+    "id": 110,
+    "created_at": "2026-06-16T15:10:00.000Z",
+    "type": 0,
+    "title": "Vanessa Canado",
+    "description": "Assessora Especial do Ministro da Economia",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/vanessa.png",
+    "annotation": "Doutora e Mestra em Direito pela PUC/SP, atua hoje como Assessora Especial do Ministro da Economia para a reforma tributária e como professora e coordenadora no Insper. Com vasta trajetória acadêmica na FGV-SP e experiência como advogada e diretora do Centro de Cidadania Fiscal (CCiF), dedica-se especialmente ao estudo da reforma tributária e tributos sobre o consumo, como IBS e CBS. É também coautora de obra vencedora do Prêmio Jabuti em Direito (2008).",
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "https://www.linkedin.com/in/vanessa-rahal-canado/"
+  },
+  {
+    "id": 111,
+    "created_at": "2026-06-16T15:10:00.000Z",
+    "type": 0,
+    "title": "Eduardo Tanaka",
+    "description": "Auditor-Fiscal da Receita Federal do Brasil",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/tanaka.png",
+    "annotation": "Auditor-Fiscal da Receita Federal do Brasil e Professor de Direito Previdenciário, Direito Constitucional, Direito Administrativo e Direito Tributário. Desenvolvedor dos programas eSocial e EFD-REINF - Escrituração Fiscal Digital de Retenções e Outras Informações Fiscais. Membro do Grupo de Trabalho eSocial e EFD-REINF pela Secretaria da Receita Federal do Brasil. Especialista em Direito Constitucional. Graduado em Direito pela Universidade Federal de Mato Grosso do Sul, tendo iniciado seus estudos por três semestres na USP. Graduado em Odontologia. Autor de diversas obras sobre Direito, dentre elas: Direito Previdenciário - Editora Campus Elsevier - 2ª edição - 2011; Direito e Responsabilidade - em co-autoria com Giselda Hironaka - Editora Del Rey - 2002. YouTuber de conteúdo educacional nas áreas preparatórias para concursos públicos (Direito Previdenciário e Direito Administrativo) e conteúdo profissional e técnico referente ao eSocial e EFD-REINF",
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "https://www.linkedin.com/in/profeduardotanaka/"
+  },
+  {
     "id": 16,
     "created_at": "2025-05-09 17:48:04.780231+00",
     "type": 6,
