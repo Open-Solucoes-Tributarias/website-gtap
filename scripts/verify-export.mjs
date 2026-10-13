@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile, access } from 'node:fs/promises';
 
 const openUrl = /https:\/\/www\.opensolucoestributarias\.com\.br\//;
-const editions = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+const editions = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 const routes = ['', 'galeria', ...editions.map((n) => `${n} GTAP`)];
 // Teto de [<script src>, <link rel="stylesheet">] por página, medido no build anterior às animações.
 // Home: +1 script assíncrono de ~260 B (carregador dos imports dinâmicos do modal e do Lenis).
@@ -28,7 +28,13 @@ for (const route of routes) {
   const html = await readFile(`out/${route ? `${route}/` : ''}index.html`, 'utf8');
   assert.match(html, /<html lang="pt-BR"/);
   assert.match(html, /<link[^>]+rel="canonical"/);
-  assert.match(html, /property="og:image"/);
+  assert.match(html, /property="og:image" content="[^"]*\/og-gtap\.png"/);
+  assert.match(html, /<img[^>]+src="\/logo-xi-gtap\.webp"[^>]+width="480"[^>]+height="150"/);
+  assert.doesNotMatch(html, /\/logo\.svg|icon-gtap\.svg/);
+  // Meta Pixel em todas as páginas, carregado depois do load (sem <script src> no HTML).
+  assert.match(html, /fbq\('init','549971842334998'\)/);
+  assert.doesNotMatch(html, /<script[^>]+src="https:\/\/connect\.facebook\.net/);
+  assert.doesNotMatch(html, /form-handler\.php/);
   assert.match(html, /property="og:type"/);
   assert.match(html, /property="og:site_name"/);
   assert.doesNotMatch(html, /__next_error__/);
@@ -36,7 +42,8 @@ for (const route of routes) {
   assert.doesNotMatch(html, /href="\/open-solucoes-tributarias/);
   assertBudget(route, html);
   if (!route) {
-    assert.match(html, /Temas confirmados/);
+    assert.match(html, /discutir no XI GTAP/);
+    assert.doesNotMatch(html, /de outubro de 2026/i);
     assert.match(html, /Alexandre Marques/);
     assert.match(html, /fetchPriority="high"/i);
     assert.match(html, /class="banner-poster"/);
@@ -56,10 +63,35 @@ for (const route of routes) {
   }
   if (route.endsWith(' GTAP')) {
     assert.match(html, /\/assets\/logos\//);
-    // Fotos otimizadas versionadas (240/960 px); a primeira (LCP) com prioridade alta.
-    assert.match(html, /<img[^>]+srcSet="\/galeria-otimizada\/[^"]+ 240w/);
-    assert.match(html, /<img[^>]+fetchPriority="high"[^>]+src="\/galeria-otimizada\//i);
+    // Fotos otimizadas versionadas (240/480/960/1280 px); a capa (LCP) com AVIF e prioridade alta.
+    if (route !== 'X GTAP') assert.match(html, /<img[^>]+srcSet="\/galeria-otimizada\/[^"]+ 240w, [^"]+ 480w/);
+    assert.match(html, /<source type="image\/avif" srcSet="\/optimized\/[^"]+"[^>]*><img[^>]+fetchPriority="high"[^>]+class="album-hero-img"/i);
     assert.doesNotMatch(html, /<img[^>]+src="https:\/\/gtap\.com\.br\/midias\//);
+    // Chips por dia e "Carregar mais" só no álbum grande importado (X GTAP). O CSS do
+    // álbum vem embutido em todas as páginas: checa o markup, não as classes no CSS.
+    const chips = html.match(/<button[^>]+class="album-chip"/g) ?? [];
+    if (route === 'X GTAP') {
+      assert.equal(chips.length, 3, 'X GTAP: chips Todos/Primeiro Dia/Segundo Dia');
+      assert.match(html, /aria-pressed="true"[^>]*>Todos/);
+      assert.match(html, />Carregar mais fotos</);
+      assert.match(html, /Fotos: Alan Gois/);
+      assert.match(html, /src="\/assets\/logos\/xgtap\.webp"/);
+      assert.equal(html.match(/<li class="album-item/g)?.length, 60, 'X GTAP: 60 fotos no HTML inicial');
+      assert.match(html, /srcSet="\/galerias\/x-gtap\/thumb\/[^"]+ 360w, \/galerias\/x-gtap\/mid\/[^"]+ 800w/);
+    } else {
+      assert.equal(chips.length, 0, `${route}: sem chips de dia`);
+      assert.doesNotMatch(html, />Carregar mais fotos</);
+    }
+  }
+  if (route === 'galeria') {
+    // Banner e CTA apontam para a edição mais recente.
+    assert.match(html, /<h5[^>]*>X GTAP<\/h5>/);
+    assert.match(html, /class="galeria-banner-cta[^"]*"[^>]+href="\/X%20GTAP\/"|href="\/X%20GTAP\/"[^>]+class="galeria-banner-cta/);
+  }
+  if (!route) {
+    // Fotos de evento da home vêm do X GTAP (2026).
+    assert.match(html, /\/galerias\/x-gtap\/(?:thumb|mid|full)\//);
+    assert.doesNotMatch(html, /galeria-otimizada\//);
   }
   // data-href: lista de CSS embutido (experimental.inlineCss), separada por espaço.
   for (const match of html.matchAll(/\s(?:src|href|data-href)="([^"]+)"/g)) {

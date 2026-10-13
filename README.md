@@ -37,10 +37,10 @@ Páginas exportadas: home, `/galeria/` e nove álbuns. A antiga página interna 
 1. Gere e valide `out/` com os comandos acima.
 2. Faça backup dos arquivos atuais de `public_html`, incluindo `.htaccess`.
 3. Publique **o conteúdo** de `out/` em `public_html`, incluindo `out/.htaccess` (arquivo oculto). Não envie a pasta `out` como subdiretório.
-4. Preserve `form-handler.php`, suas dependências/configuração, o diretório `midias`, banco de dados e quaisquer outros endpoints PHP existentes. Eles não são fornecidos pelo export. Não apague `public_html` para publicar.
+4. Preserve o diretório `midias`, banco de dados e quaisquer outros endpoints PHP existentes. Eles não são fornecidos pelo export. Não apague `public_html` para publicar. O formulário de contato não usa mais o `form-handler.php`: envia direto para o RD Station (identificador `site-gtap-xi`).
 5. Substitua o `.htaccess` antigo pelo exportado e concilie regras próprias de HTTPS, domínio e PHP, mantendo a `RewriteRule` que redireciona `/open-solucoes-tributarias/` (301) para o site oficial da Open. O arquivo ativa Deflate para tipos textuais e cache longo para arquivos com hash, cache de um dia para mídias e revalidação para HTML/JSON. Cada URL tem seu `index.html`; não deve haver fallback geral para a home. O `.htaccess` da raiz e o de `public/` são iguais; o de `public/` é copiado automaticamente no build.
 6. A pasta antiga `public_html/open-solucoes-tributarias/` pode ser apagada. Se ela continuar no servidor, o redirecionamento funciona do mesmo jeito.
-7. Confira acesso direto e reload à home, à galeria e aos nove álbuns, o 301 de `/open-solucoes-tributarias/`, a resposta 404, as mídias e o formulário. Limpe o cache do host/CDN e refaça PageSpeed desktop e mobile em produção.
+7. Confira acesso direto e reload à home, à galeria e aos dez álbuns, o 301 de `/open-solucoes-tributarias/`, a resposta 404, as mídias e o formulário. Limpe o cache do host/CDN e refaça PageSpeed desktop e mobile em produção.
 
 `robots.txt` e `sitemap.xml` são gerados estaticamente. O domínio canônico adotado é `https://gtap.com.br`.
 

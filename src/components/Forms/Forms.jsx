@@ -1,77 +1,79 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { buildRdBody, captureTracking, formatPhone, isValidEmail, isValidPhone, sendConversion } from "../../Utils/leadForm";
+import { trackLead } from "../MetaPixel/MetaPixel";
 import "./Forms.css";
 
 // Retorno do envio, mostrado abaixo do botão (região aria-live, no lugar do alert()).
 const FEEDBACK = {
   success: "Recebemos seus dados! Em breve entraremos em contato.",
   error: "Não foi possível enviar agora. Tente novamente em instantes.",
+  invalid: "Confira o e-mail e o WhatsApp com DDD.",
 };
 
+const sessionStore = () => {
+  try {
+    return window.sessionStorage;
+  } catch {
+    return null;
+  }
+};
+
+// Os dados vão direto para o RD Station (identificador site-gtap-xi); o envio
+// bem-sucedido também registra o evento Lead no Meta Pixel.
 export const Forms = () => {
 
 const [isSend, isSetSend] = useState(false);
-const [feedback, setFeedback] = useState(null); // null | "success" | "error"
+const [feedback, setFeedback] = useState(null); // null | "success" | "error" | "invalid"
+const trackingRef = useRef({});
+
+// UTMs da visita (guardadas na sessão para quem navega antes de enviar).
+useEffect(() => {
+  trackingRef.current = captureTracking(window.location.search, sessionStore());
+}, []);
 
 const handleSubmit = async (e) => {
-
-  const form = e.currentTarget;
-
   e.preventDefault();
-  isSetSend(true); //desativa botao
+  const form = e.currentTarget;
+  const lead = {
+    name: form.elements.name.value,
+    email: form.elements.email.value,
+    phone: form.elements.tel.value,
+  };
   setFeedback(null); //limpa a mensagem anterior para a nova ser anunciada e animada
 
-  const name = e.target.name.value;
-  const email = e.target.email.value;
-  const whatsapp = e.target.tel.value;
+  if (!isValidEmail(lead.email) || !isValidPhone(lead.phone)) {
+    setFeedback("invalid");
+    (isValidEmail(lead.email) ? form.elements.tel : form.elements.email).focus();
+    return;
+  }
 
-  const formData = new FormData();
-  formData.append('name', name);
-  formData.append('email', email);
-  formData.append('whatsapp', whatsapp);
-
-
+  isSetSend(true); //desativa botao
   try {
-    const response = await fetch("https://gtap.com.br/form-handler.php", {
-      method: "POST",
-      body: formData
-    });
-
-    if (!response.ok) {
-      // Se o status HTTP não for 200-299
-      setFeedback("error");
-      return;
-    } else {
-      setFeedback("success");
-       //limpando dados após envio
-      form.reset();
-    }
-
+    await sendConversion(buildRdBody(lead, trackingRef.current));
+    trackLead();
+    setFeedback("success");
+    form.reset(); //limpando dados após envio
   } catch {
-    setFeedback("error"); //falha de rede também avisa o usuário (a mensagem já explica)
+    setFeedback("error"); //falha de rede ou resposta de erro do RD
   } finally {
     isSetSend(false);
   }
 };
 
-//os dados são recebidos no arquivo .php que salva no banco de dados mySQl e envia o valor recebido para o e-mails lsitado no form-handler
-
   return (
     <div className="container-forms" data-reveal="scale">
       <div className="container-forms-left">
-        <p data-reveal>
-          Preencha o formulário abaixo e fale com nossa equipe para saber mais
-          sobre o evento.
+        <p className="forms-title" data-reveal>
+          Preencha o formulário abaixo e <b>fale com nossa equipe</b> para saber mais sobre o evento.
         </p>
         <form
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
+          onSubmit={handleSubmit}
           id="contactForm"
           data-reveal-stagger
         >
-          <div className="form-input" data-reveal>
+          <div className="form-input form-input--full" data-reveal>
             <label htmlFor="name">Nome *</label>
             <input
               id="name"
@@ -100,14 +102,16 @@ const handleSubmit = async (e) => {
               autoComplete="tel"
               name="tel"
               type="tel"
+              inputMode="numeric"
               placeholder="(00) 00000-0000"
+              onInput={(event) => { event.currentTarget.value = formatPhone(event.currentTarget.value); }}
               required
             />
           </div>
-          <div className="form-input" data-reveal>
-            <button type="submit" disabled={isSend}>
+          <div className="form-input form-input--full" data-reveal>
+            <button type="submit" className="btn btn--navy form-submit" disabled={isSend}>
               {isSend && <span className="form-spinner" aria-hidden="true" />}
-              {isSend ? "ENVIANDO..." : "QUERO INFORMAÇÕES"}
+              {isSend ? "Enviando..." : "Quero informações"}
             </button>
           </div>
           {/* Região sempre montada: o leitor de tela anuncia quando o texto muda. */}

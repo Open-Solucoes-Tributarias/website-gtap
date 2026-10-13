@@ -1,4 +1,5 @@
 import localFont from 'next/font/local';
+import { MetaPixel } from '../src/components/MetaPixel/MetaPixel';
 import '../src/styles/reset.css';
 import '../src/styles/generated-media.css';
 import '../src/styles/global.css';
@@ -18,10 +19,9 @@ export const metadata = {
   description,
   authors: [{ name: 'Open Soluções Tributárias' }],
   robots: { index: true, follow: true },
-  icons: { icon: '/icon-gtap.svg' },
-  openGraph: { title, description, type: 'website', siteName: title, images: ['/icon-gtap.svg'] },
+  openGraph: { title, description, type: 'website', siteName: title, images: [{ url: '/og-gtap.png', width: 1200, height: 630, alt: 'XI GTAP' }] },
 };
 
 export default function RootLayout({ children }) {
-  return <html lang="pt-BR" className={roboto.variable}><body>{children}</body></html>;
+  return <html lang="pt-BR" className={roboto.variable}><body>{children}<MetaPixel /></body></html>;
 }
