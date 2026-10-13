@@ -4,6 +4,8 @@ const paths = {
   'camera': 'M3 7h4l2-3h6l2 3h4v14H3ZM12 10a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z',
   'chevron-left': 'm15 5-7 7 7 7',
   'chevron-right': 'm9 5 7 7-7 7',
+  'close': 'M6 6l12 12M18 6 6 18',
+  'expand': 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7',
   'user': 'M12 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM4 22v-4a8 8 0 0 1 16 0v4',
   'instagram': 'M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10ZM18 6h.01',
   'linkedin-in': 'M4 9v12M4 3v.01M10 21V9m0 5c0-6 10-6 10 0v7',
