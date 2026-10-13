@@ -1,61 +1,57 @@
 "use client";
 
-import { Icon } from "../../../../components/Icon/Icon";
 import "./SectionInvestimento.css";
 import { useLoteAtual } from "../../../../Utils/useLoteAtual";
 
+const WHATSAPP_URL = "https://api.whatsapp.com/send/?phone=5571992084907&text=Quero%20informa%C3%A7%C3%A3o%20sobre%20o%20GTAP&type=phone_number&app_absent=0";
+
+// Ingressos no estilo do website-gtap, adaptado ao fundo azul da seção.
 export const SectionInvestimento = () => {
-  const { lotes } = useLoteAtual();
+  const { lotes, loteAtual } = useLoteAtual();
 
   return (
-    <section className="investimento-container" id="preços">
-      <div className="investimento-title">
-        <h3>
-          Valor do <b>investimento</b> por participante
-        </h3>
+    <section className="tickets" id="preços" aria-labelledby="tickets-title">
+      <h2 id="tickets-title" className="tickets__title" data-reveal>Garanta sua <b>participação</b></h2>
+
+      <div className="tickets__grid" data-reveal-stagger>
+        {lotes.map((lote, index) => {
+          const current = lote.status === "presente";
+          const expired = lote.status === "passado";
+          return (
+            <article
+              key={lote.nome}
+              className={`ticket ${current ? "ticket--current" : "ticket--inactive"}`}
+              aria-labelledby={`ticket-lot-${index}`}
+              data-reveal="scale"
+            >
+              <div className="ticket__top">
+                <span className="ticket__status">{current ? "Disponível" : expired ? "Encerrado" : "Em breve"}</span>
+                <h3 id={`ticket-lot-${index}`} className="ticket__name">{lote.nome}</h3>
+              </div>
+              <div className="ticket__tear" aria-hidden="true" />
+              <div className="ticket__pricing">
+                <p className={`ticket__price${expired ? " ticket__price--closed" : ""}`} aria-label={expired ? "Valor do lote encerrado" : undefined}>
+                  {expired ? <span aria-hidden="true">{lote.preco}</span> : lote.preco}
+                </p>
+                <p className="ticket__unit">por participante</p>
+                {current && <p className="ticket__window">{lote.label}</p>}
+              </div>
+              {current ? (
+                <a className="ticket__btn btn btn--navy" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                  Garantir minha vaga
+                </a>
+              ) : (
+                <p className="ticket__closed">{expired ? "Inscrições encerradas" : "Aguarde a abertura"}</p>
+              )}
+            </article>
+          );
+        })}
       </div>
 
-      <div className="container-lotes">
-        {lotes.map((lote, index) => (
-          <div
-            key={index}
-            className={`card-lote ${lote.status}`}
-            style={{
-              background:
-                lote.status === "presente"
-                  ? undefined // aplica o CSS padrão
-                  : lote.status === "passado"
-                  ? "#010B5B"
-                  : "#fff",
-
-                  filter: lote.status === "passado" ? "blur(4px)" : "none",
-                  userSelect: lote.status === "passado" ? "none" : null,
-            }}
-            
-          >
-            <p className="name-lote">{lote.nome}</p>
-            <div className="container-border">
-              <div className="border-recort"></div>
-              <div className="border-recort-right"></div>
-            </div>
-            <hr className="linea" />
-            <p className="valor-lote">{lote.preco}</p>
-            <p>{lote.label}</p>
-          </div>
-        ))}
-      </div>
-      <div className="container-button-investimento">
-        <a
-          href="https://api.whatsapp.com/send/?phone=5571992084907&text=Quero%20informa%C3%A7%C3%A3o%20sobre%20o%20GTAP&type=phone_number&app_absent=0
-"
-          target="blank"
-        >
-          <button>
-            <Icon name="user"  style={{ color: "#000d74" }} />Confira
-            condições especiais para grupo
-          </button>
-        </a>
-      </div>
+      {!loteAtual && <p className="tickets__notice">Consulte as condições vigentes com a nossa equipe.</p>}
+      <a className="ticket-group btn btn--ghost" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" data-reveal>
+        Condições especiais para equipes e órgãos <span aria-hidden="true">↗</span>
+      </a>
     </section>
   );
 };

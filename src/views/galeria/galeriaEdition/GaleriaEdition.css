@@ -1,71 +1,161 @@
-.container-edition-galeria {
-    height: 100vh;
-    min-height: 100vh;
-    background-image: var(--gtap-bg-src-assets-backgroundgaleria-webp);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    padding-inline: 12%;
-    align-items: center;
+/* ====== Abertura do álbum: foto de capa em tela cheia ====== */
+.album-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-end;
+  min-height: 88vh;
+  min-height: 88svh;
+  padding-top: calc(var(--header-h) + var(--space-6));
+  padding-bottom: var(--space-10);
+  padding-inline: var(--section-px);
+  background: var(--color-navy-900);
+  color: var(--text-on-dark);
 }
 
-.edition-galeria-left {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    color: #fff;
-    padding-right: 20%;
-    font-size: 17px;
-}
-
-.edition-galeria-left img {
-    width: 300px;
-}
-
-.edition-galeria-left hr {
-    width: 100%;
-    height: 2px;
-    border: none;
-    background: linear-gradient(to left, #FFDF92, #DDA92E);
-}
-
-.edition-galeria-left b {
-    font-weight: 600;
-    color: #FFDF92;
-}
-
-/* lado direto */
-.edition-galeria-right {
+.album-hero-img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+}
+
+/* Véu navy: forte à esquerda e embaixo (texto), leve sobre o resto da foto. */
+.album-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to top, rgb(2 9 58 / 95%), rgb(2 9 58 / 40%) 45%, rgb(2 9 58 / 20%)),
+    linear-gradient(to right, rgb(2 9 58 / 75%), rgb(2 9 58 / 0%) 65%);
+}
+
+.album-hero-content {
   display: flex;
   flex-direction: column;
-  align-items: end;
-  justify-content: center;
-  margin-block: 5%; 
+  align-items: flex-start;
+  gap: var(--space-2);
+  max-width: 560px;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-body);
 }
+
+.album-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-0-5);
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--text-on-dark-muted);
+  text-decoration: none;
+  transition: color var(--dur-ui) var(--ease-out), transform var(--dur-ui) var(--ease-out);
+}
+
+.album-back:hover {
+  color: var(--color-gold-200);
+  transform: translateX(-4px);
+}
+
+.album-logo {
+  width: min(360px, 80%);
+  height: auto;
+}
+
+.album-hero-content hr {
+  width: 100%;
+  height: 2px;
+  margin: 0;
+  border: none;
+  background: var(--gradient-gold);
+}
+
+.album-hero-content p {
+  margin: 0;
+}
+
+.album-hero-content b {
+  font-weight: var(--fw-semibold);
+  color: var(--color-gold-200);
+}
+
+.album-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  margin-top: var(--space-1);
+}
+
+/* Crédito do fotógrafo (álbuns importados). */
+.album-hero-content .album-credit {
+  font-size: var(--fs-small);
+  color: var(--text-on-dark-muted);
+}
+
+/* Entrada no primeiro paint (data-enter): voltar, logo, linha, texto e botão. */
+.album-hero-content > :nth-child(2) { --i: 1; }
+.album-hero-content > :nth-child(3) { --i: 2; }
+.album-hero-content > :nth-child(4) { --i: 3; }
+.album-hero-content > :nth-child(5) { --i: 4; }
+
+/* ====== Fotos ====== */
+.album-fotos {
+  padding-block: var(--section-py);
+  padding-inline: var(--section-px);
+  scroll-margin-top: var(--space-2);
+}
+
+/* ====== Outras edições ====== */
+.album-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--stack-gap);
+  padding-block: 0 var(--section-py);
+  padding-inline: var(--section-px);
+}
+
+.album-nav h3 {
+  margin: 0;
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
+  color: var(--text-on-light);
+  text-align: center;
+}
+
+.album-nav-cards {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 400px);
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.album-nav-cards > :nth-child(2) { --i: 1; }
 
 @media (max-width: 768px) {
-    .container-edition-galeria {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 20vh;
-       
-    }
-    .edition-galeria-left {
-        padding: 10px;
-        text-align: center;
-    }
-  .edition-galeria-right {
-  min-height: 60%;
-margin-bottom: 60px;
+  .album-hero {
+    min-height: 80svh;
+    padding-bottom: var(--space-6);
+  }
+
+  .album-hero::after {
+    background: linear-gradient(to top, rgb(2 9 58 / 96%), rgb(2 9 58 / 55%) 55%, rgb(2 9 58 / 25%));
+  }
+
+  .album-nav-cards {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+  }
+
+  .album-nav-cards > :nth-child(2) { --i: 0; }
 }
-}
-
-
-
-

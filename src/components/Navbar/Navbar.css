@@ -1,26 +1,62 @@
+/* Header flutuante: cápsula de vidro recuada das bordas, no mesmo estilo da
+   barra de inscrição (CardButton). */
 .navbar {
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px); /* Efeito de desfoque */
-  -webkit-backdrop-filter: blur(10px); /* Safari */
-  border-bottom: 1px solid #ffffffc7;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   position: fixed;
-  width: 100%;
-  top: 0;
+  top: var(--float-gap);
+  left: 0;
+  right: 0;
+  width: min(var(--container), calc(100% - 2 * var(--float-gap)));
+  margin-inline: auto;
   z-index: 1000;
-  color: #fff;
+  color: var(--text-on-dark);
+  border-radius: var(--glass-radius);
 }
 
-.navbar-light {
-  background-color: #fff;
-  color: #02093a;
-  border-bottom: 2px solid #e5e5e5;
- 
+/* O vidro fica num pseudo-elemento: backdrop-filter no próprio header faria
+   dele o bloco de contenção dos filhos fixed (o menu mobile sairia do lugar).
+   z-index -1 = atrás do conteúdo, dentro do header (contexto de empilhamento). */
+.navbar::before,
+.navigation-desktop .navbar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.navbar::before {
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(22px) saturate(160%);
+}
+
+/* Header desktop: sempre montado. Esconde ao rolar para baixo só com transform
+   (sobe além do recuo e da sombra) e volta ao rolar para cima. */
+.navigation-desktop .navbar {
+  transition: transform 450ms var(--ease-out);
+}
+
+.navigation-desktop .navbar--hidden {
+  transform: translateY(calc(-100% - var(--float-gap) - var(--space-5)));
+}
+
+/* Fora do topo o vidro fica mais sólido: camada extra que só muda de opacidade
+   (sem animar background nem box-shadow). */
+.navigation-desktop .navbar::after {
+  /* navy-900 a 40%: sem token de alfa equivalente */
+  background-color: rgb(2 9 58 / 40%);
+  opacity: 0;
+  transition: opacity 360ms var(--ease-out);
+}
+
+.navigation-desktop .navbar--scrolled::after {
+  opacity: 1;
 }
 
 .navbar-container {
-  padding-inline: 12%;
-  padding-block: 1%;
+  padding-inline: clamp(var(--space-2), 2.5vw, var(--space-4));
+  padding-block: clamp(var(--space-1), 0.9vw, var(--space-2));
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -29,46 +65,113 @@
 }
 
 .navbar-logo a {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  color: inherit;
   text-decoration: none;
+}
+
+.navbar-logo img {
+  /* Logo XI GTAP (480x150): altura fixa por faixa, largura proporcional. */
+  width: auto;
+  height: 56px;
+  transition: transform var(--dur-ui) var(--ease-out);
+}
+
+@media (max-width: 1199px) {
+  .navbar-logo img {
+    height: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-logo img {
+    height: 44px;
+  }
 }
 
 .navbar-links {
   list-style: none;
   display: flex;
-  gap: 4rem;
+  gap: clamp(var(--space-3), 3.2vw, var(--space-6));
   margin: 0;
   padding: 0;
 }
 
 .navbar-links a {
+  position: relative;
+  display: inline-block;
   text-decoration: none;
-  font-weight: 500;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
   cursor: pointer;
+  transition: color var(--dur-ui) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
 
-.navbar-links a:hover {
-  color: #83BCE7;
+/* Sublinhado que desliza: entra pela esquerda, sai pela direita. */
+.navbar-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(-1 * var(--space-0-5));
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 360ms var(--ease-out);
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .navbar-links a:hover {
+    color: var(--color-sky-300);
+  }
+
+  .navbar-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  .navbar-logo a:hover img {
+    transform: translateY(-2px);
+  }
+}
+
+.navbar-links a:focus-visible {
+  color: var(--color-sky-300);
+}
+
+.navbar-links a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.navbar-logo a:focus-visible img {
+  transform: translateY(-2px);
+}
+
+/* Clique: volta ao repouso rápido. */
+.navbar-links a:active {
+  transform: translateY(1px);
+  transition-duration: 120ms;
+}
+
+.navbar-logo a:active img {
+  transform: scale(0.97);
+  transition-duration: 120ms;
 }
 
 @media (max-width: 768px) {
+  /* Header mobile (NavbarMobile reaproveita estas classes; os links inline
+     ficam ocultos lá e o menu abre em diálogo). */
   .navbar-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding-block: 4%;
-  }
-  .navbar-links {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    text-align: center;
-    justify-content: center;
-    row-gap: 10px;
-    font-size: 14px;
-    gap: 1rem;
+    gap: var(--space-2);
+    padding-block: var(--space-2);
   }
 }
 

@@ -1,132 +1,117 @@
+/* Entidades participantes: título + duas faixas de logos em loop contínuo. */
+/* Fundo branco (os logos recortados têm fundo branco). */
 .section-publico {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding-block: 5%;
-  padding-inline: 12%;
-  background: linear-gradient(to right, #02093a, #000d74);
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
+  padding-block: var(--section-py);
+  background: var(--color-white);
+  color: var(--text-on-light);
+  overflow: hidden;
+}
+
+.publico-titulo {
+  margin-bottom: var(--stack-gap);
+  padding-inline: var(--section-px);
+  color: var(--color-navy-900);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
   text-align: center;
 }
 
-.section-publico h3 {
-  color: #dda92e;
-  font-size: 40px;
-  font-weight: 600;
+.publico-faixas {
+  display: grid;
+  gap: var(--space-3);
 }
 
-.section-publico h5 {
-  color: #fff;
-  font-size: 20px;
-  padding-inline: 18%;
+/* As bordas somem num degradê para indicar continuidade. */
+.publico-faixa {
+  overflow: hidden;
+  -webkit-mask-image: var(--gradient-fade-x);
+  mask-image: var(--gradient-fade-x);
 }
 
-.container-publico {
-  min-width: 0;
-  padding-bottom: 10px;
-}
-
-.publico-carousel-controls {
+.publico-trilha {
+  --gap: var(--space-3);
   display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: var(--gap);
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: gtap-publico-marquee 60s linear infinite;
 }
 
-.publico-carousel-controls button {
-  display: grid;
-  width: 36px;
-  height: 36px;
-  place-items: center;
-  border: 1px solid rgb(255 255 255 / 55%);
-  border-radius: 50%;
-  color: #fff;
-  background: transparent;
-  cursor: pointer;
+.publico-faixa--reversa .publico-trilha {
+  animation-direction: reverse;
 }
 
-.publico-carousel-controls button:hover,
-.publico-carousel-controls button:focus-visible {
-  color: #02093a;
-  background: #fff;
+/* Dois grupos idênticos + gap no fim de cada card: -50% encaixa sem salto. */
+@keyframes gtap-publico-marquee {
+  to {
+    transform: translateX(calc(-50% - var(--gap) / 2));
+  }
 }
 
-.publico-carousel-controls button:focus-visible,
-.publico-carousel:focus-visible {
-  outline: 3px solid #dda92e;
-  outline-offset: 3px;
+@media (hover: hover) and (pointer: fine) {
+  .publico-faixas:hover .publico-trilha {
+    animation-play-state: paused;
+  }
 }
 
-.publico-carousel-controls span {
-  font-size: 28px;
-  line-height: 1;
-}
-
-.publico-carousel {
-  display: grid;
-  grid-auto-columns: clamp(110px, 14vw, 160px);
-  grid-auto-flow: column;
-  grid-template-rows: repeat(2, minmax(100px, auto));
-  gap: 12px;
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-  padding: 5px 3px 12px;
-  scroll-snap-type: x mandatory;
-  scrollbar-color: rgb(255 255 255 / 55%) transparent;
-  scrollbar-width: thin;
-  -webkit-overflow-scrolling: touch;
-}
-
+/* Logos soltos e coloridos; o branco do recorte some no fundo branco (multiply). */
 .card-publico {
-  display: flex;
-  min-width: 0;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  scroll-snap-align: start;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 160px;
+  height: 96px;
 }
 
+/* Limites em px: % de altura não resolve dentro da célula do grid. */
 .card-publico img {
-  width: 150px;
-  max-width: 100%;
-  height: 150px;
+  width: auto;
+  height: auto;
+  max-width: 160px;
+  max-height: 88px;
   object-fit: contain;
-  border-radius: 10px;
+  mix-blend-mode: multiply;
+  transition: transform var(--dur-ui) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-publico:hover img {
+    transform: scale(1.06);
+  }
 }
 
 @media (max-width: 768px) {
-  .section-publico {
-    gap: 10px;
-    padding-inline: 5%;
-  }
-
-  .section-publico h3 {
-    padding-inline: 0;
-    font-size: 22px;
-  }
-
-  .section-publico h5 {
-    padding-inline: 0;
-    font-size: 14px;
-    font-weight: 300;
-  }
-
-  .publico-carousel {
-    grid-auto-columns: 120px;
-    grid-template-rows: repeat(2, minmax(90px, auto));
-    gap: 4px;
+  .card-publico {
+    width: 120px;
+    height: 72px;
   }
 
   .card-publico img {
-    width: 120px;
-    height: 100px;
+    max-width: 120px;
+    max-height: 64px;
+  }
+
+  .publico-faixas {
+    gap: var(--space-2);
+  }
+
+  .publico-trilha {
+    --gap: var(--space-2);
   }
 }
 
+/* Movimento reduzido: sem animação; a faixa vira rolagem horizontal manual. */
 @media (prefers-reduced-motion: reduce) {
-  .publico-carousel {
-    scroll-behavior: auto;
+  .publico-trilha {
+    animation: none;
+  }
+
+  .publico-faixa {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }

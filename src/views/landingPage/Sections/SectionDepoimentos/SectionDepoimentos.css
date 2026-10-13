@@ -1,43 +1,34 @@
 .section-depoimentos {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 5% 10%;
-  background-image: var(--gtap-bg-src-assets-bgsection-webp);
-  background-position: right;
-  background-repeat: repeat-x;
-  background-size: contain;
+  gap: var(--stack-gap);
+  padding-block: var(--section-py);
+  padding-inline: var(--section-px);
+}
+
+.section-depoimentos-head {
+  display: grid;
+  gap: var(--space-2);
+  text-align: center;
 }
 
 .section-depoimentos h3 {
-  color: #dda92e;
-  font-size: 28px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.section-depoimentos h4 {
-  text-align: center;
-  color: #000d74;
-  font-size: 32px;
-  font-weight: 400;
-}
-
-.section-depoimentos h4 b {
-  font-weight: 700;
+  color: var(--color-navy-900);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
 }
 
 .slider-wrapper {
   position: relative;
   display: flex;
   align-items: center;
-  padding-block: 20px;
+  padding-block: var(--space-3);
 }
 
 .slider {
   display: flex;
   overflow-x: auto;
-  scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   width: 990px;
   margin: 0 auto;
@@ -51,73 +42,38 @@
   min-width: 300px;
   max-width: 300px;
   flex: 0 0 auto;
-  margin-right: 30px;
+  margin-right: var(--space-4);
   scroll-snap-align: start;
 }
 
 .video-container {
   display: flex;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   aspect-ratio: 16/9;
-  margin-bottom: 10px;
-}
-
-.video-container iframe {
-  border: 2px solid #dda92e;
-
+  margin-bottom: var(--space-2);
 }
 
 .depoimento-card h6 {
-  font-size: 22px;
-  font-weight: 600;
-  color: #02093A;
-  margin-bottom: 6px;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  color: var(--text-on-light);
+  margin-bottom: var(--space-1);
 }
 
 .depoimento-card p {
-  font-size: 15px;
-  color: #02093A;
-  line-height: 1.5;
+  font-size: var(--fs-body);
+  color: var(--text-on-light);
+  line-height: var(--lh-body);
 }
-
-.nav {
-  font-size: 26px;
-  background: #fff;
-  color: #02093a;
-  border: none;
-  cursor: pointer;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.nav.left {
-  margin-right: 12px;
-}
-
-.nav.right {
-  margin-left: 12px;
-}
-
 
 @media (max-width: 768px) {
   .depoimento-card {
     width: 100%;
     max-width: 100%;
     padding-inline: 0;
-  }
-  .section-depoimentos {
-    padding: 3% 2%;
-    gap: 0;
-  }
-  .section-depoimentos h4 {
-    margin: 0 auto;
-    width: 90%;
-    font-size: 25px;
   }
   .depoimento-card p {
     text-align: center;
@@ -127,4 +83,221 @@
   }
 }
 
-.testimonial-arrow { border: 0; background: transparent; color: #dda92e; font-size: 30px; cursor: pointer; flex-shrink: 0; }
+.testimonial-arrow {
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-gold-500);
+  font-size: var(--fs-h2);
+  cursor: pointer;
+}
+
+/* ====================== Movimento ====================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  .section-depoimentos .slider {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Folga vertical dentro do slider para o card subir no hover sem ser cortado
+   (o total de 24px por lado do wrapper continua o mesmo). */
+.section-depoimentos .slider-wrapper {
+  --i: 2;
+  padding-block: var(--space-2);
+}
+
+.section-depoimentos .slider {
+  padding-block: var(--space-1);
+}
+
+.section-depoimentos .testimonial-arrow {
+  transition:
+    color var(--dur-ui) var(--ease-out),
+    opacity var(--dur-ui) var(--ease-out),
+    transform var(--dur-ui) var(--ease-out);
+}
+
+.section-depoimentos .testimonial-arrow:focus-visible {
+  color: var(--color-navy-900);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .section-depoimentos .testimonial-arrow:not([aria-disabled="true"]):hover {
+    color: var(--color-navy-900);
+  }
+
+  .section-depoimentos .testimonial-arrow-prev:not([aria-disabled="true"]):hover {
+    transform: translateX(-3px);
+  }
+
+  .section-depoimentos .testimonial-arrow-next:not([aria-disabled="true"]):hover {
+    transform: translateX(3px);
+  }
+}
+
+.section-depoimentos .testimonial-arrow:not([aria-disabled="true"]):active {
+  transform: scale(0.88);
+  transition-duration: 120ms;
+}
+
+/* Início/fim do slider: a seta continua focável, só fica apagada. */
+.section-depoimentos .testimonial-arrow[aria-disabled="true"] {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.section-depoimentos .depoimento-card {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Sombra do vídeo, atrás do texto do card: só opacity/transform animam. */
+.section-depoimentos .depoimento-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 400ms var(--ease-out),
+    transform 400ms var(--ease-out);
+}
+
+.section-depoimentos .video-container {
+  position: relative;
+  transition: transform 400ms var(--ease-out);
+}
+
+/* Borda dourada por cima do vídeo (não bloqueia os controles). */
+.section-depoimentos .video-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-ui) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .section-depoimentos .depoimento-card:hover::before,
+  .section-depoimentos .depoimento-card:hover .video-container {
+    transform: translateY(-4px);
+  }
+
+  .section-depoimentos .depoimento-card:hover::before,
+  .section-depoimentos .depoimento-card:hover .video-container::after {
+    opacity: 1;
+  }
+}
+
+.section-depoimentos .depoimento-card:focus-within .video-container::after {
+  opacity: 1;
+}
+
+/* ====== Capa + play (base: website-gtap) ====== */
+.section-depoimentos .video-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--gradient-navy);
+}
+
+.depoimento-capa,
+.depoimento-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.depoimento-video {
+  object-fit: cover;
+  background: var(--color-black);
+}
+
+.depoimento-capa {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+}
+
+.depoimento-capa > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 900ms var(--ease-out);
+}
+
+/* Véu inferior para o botão e a capa terem contraste. */
+.depoimento-capa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--gradient-scrim);
+}
+
+.depoimento-play {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: var(--space-8);
+  height: var(--space-8);
+  border: 2px solid rgb(255 255 255 / 85%);
+  border-radius: var(--radius-pill);
+  background-color: rgb(2 9 58 / 35%);
+  transition: transform 360ms var(--ease-out), background-color var(--dur-ui) var(--ease-out), border-color var(--dur-ui) var(--ease-out);
+}
+
+/* Triângulo do arquivo aponta para cima: gira para a direita e compensa o centro óptico. */
+.depoimento-play img {
+  width: 40%;
+  height: auto;
+  margin-left: 8%;
+  transform: rotate(90deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .depoimento-capa:hover > img {
+    transform: scale(1.05);
+  }
+
+  .depoimento-capa:hover .depoimento-play {
+    transform: scale(1.08);
+    border-color: var(--color-gold-500);
+    background-color: var(--color-gold-500);
+  }
+}
+
+.depoimento-capa:active .depoimento-play {
+  transform: scale(0.94);
+  transition-duration: 120ms;
+}
+
+.depoimento-capa:focus-visible {
+  outline-offset: -3px;
+}
+
+.depoimento-card .depoimento-inst {
+  color: var(--text-on-light-muted);
+}
+
+.depoimento-quote {
+  margin: 0;
+  color: var(--text-on-light);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}

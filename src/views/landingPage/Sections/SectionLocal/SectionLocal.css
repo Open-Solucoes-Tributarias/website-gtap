@@ -1,68 +1,163 @@
 .section-localizacao {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding-inline: 12%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
-  height: 100%;
-  background-color: #d3d3d3;
-  background-blend-mode: multiply;
+  /* Mapa e texto lado a lado, com as bases alinhadas: as duas colunas têm a
+     altura da linha (a do mapa) e o texto desce até o fim da sua. O par fica
+     centralizado na altura da seção. */
+  align-content: center;
+  column-gap: var(--space-8);
+  padding-block: var(--section-py);
+  padding-inline: var(--section-px);
+  /* Antes era height:100% do body (= altura da tela); agora a janela é o
+     contêiner de rolagem, então a altura da tela vem direto do viewport. */
+  min-height: 100vh;
+  min-height: 100svh;
+  background-color: var(--color-gray-300);
 }
 
-.section-localizacao-left {
-  padding-block: 10%;
+/* Fundo em camadas (crossfade): a camada ativa entra por cima com opacity;
+   a anterior continua visível por baixo e só some depois que a nova cobriu tudo. */
+.section-localizacao-fundo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 }
+
+.section-localizacao-fundo-camada {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-gray-300);
+  background-blend-mode: multiply;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0s linear 1200ms;
+}
+
+.section-localizacao-fundo-camada.is-active {
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 1200ms var(--ease-in-out);
+}
+
 .section-localizacao-left iframe {
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   width: 500px;
+  max-width: 100%;
   height: 500px;
+}
+
+/* Moldura do mapa: recebe o hover (o iframe não tem ::after). */
+.section-localizacao .section-localizacao-mapa {
+  position: relative;
+  width: fit-content;
+  border-radius: var(--radius-sm);
+  transition: transform 500ms var(--ease-out);
+}
+
+.section-localizacao .section-localizacao-mapa iframe {
+  display: block;
+}
+
+.section-localizacao .section-localizacao-mapa::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    0 0 0 2px var(--color-gold-500),
+    var(--shadow-lg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms var(--ease-out);
+}
+
+.section-localizacao .section-localizacao-mapa:focus-within::after {
+  opacity: 1;
 }
 
 .section-localizacao-right {
   display: flex;
-  padding-block: 10%;
-  align-items: end;
+  align-items: flex-end;
 }
+
+/* Cartão de vidro sobre a foto (sem token de vidro: é mais translúcido que o do header). */
 .box-text-local {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 20px;
+  background: rgb(255 255 255 / 10%);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(255 255 255 / 20%);
+  box-shadow: var(--shadow-sm);
+}
+
+.section-localizacao .box-text-local {
+  position: relative;
+  transition: transform 500ms var(--ease-out);
+}
+
+/* Borda mais clara no hover: só a opacidade anima. */
+.section-localizacao .box-text-local::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgb(255 255 255 / 45%);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .section-localizacao .section-localizacao-mapa:hover {
+    transform: translateY(-6px);
+  }
+
+  .section-localizacao .section-localizacao-mapa:hover::after,
+  .section-localizacao .box-text-local:hover::after {
+    opacity: 1;
+  }
+
+  .section-localizacao .box-text-local:hover {
+    transform: translateY(-4px);
+  }
 }
 
 .box-text-local h5 {
-  font-size: 28px;
-  font-weight: 500;
-  color: #fff;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
+  color: var(--text-on-dark);
 }
 .box-text-local b {
-  color: #dda92e;
+  font-weight: var(--fw-bold);
+  color: var(--color-gold-500);
 }
 
 .box-text-local p {
-  font-size: 16px;
-  color: #fff;
+  margin-top: var(--space-1);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-on-dark);
 }
 
 @media (max-width: 768px) {
   .section-localizacao {
     display: flex;
     flex-direction: column-reverse;
-    padding-inline: 20px;
-
+    align-items: stretch;
+    gap: var(--stack-gap);
   }
   .section-localizacao-left iframe {
-    border: none;
-    border-radius: 10px;
     width: 100%;
     height: 300px;
   }
-  .box-text-local p {
-  font-size: 13px;
-}
+  .section-localizacao .section-localizacao-mapa {
+    width: auto;
+  }
 }

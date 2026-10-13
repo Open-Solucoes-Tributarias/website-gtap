@@ -1,0 +1,569 @@
+{
+  "/preloadBanner.webp": {
+    "src": "/optimized/50147b51c13f5da3400c-1440.webp",
+    "srcSet": "/optimized/50147b51c13f5da3400c-320.webp 320w, /optimized/50147b51c13f5da3400c-640.webp 640w, /optimized/50147b51c13f5da3400c-960.webp 960w, /optimized/50147b51c13f5da3400c-1440.webp 1440w",
+    "avifSrcSet": "/optimized/50147b51c13f5da3400c-320.avif 320w, /optimized/50147b51c13f5da3400c-640.avif 640w, /optimized/50147b51c13f5da3400c-960.avif 960w, /optimized/50147b51c13f5da3400c-1440.avif 1440w",
+    "width": 1920,
+    "height": 1170
+  },
+  "https://gtap.com.br/midias/BackgroundFaroldabarra.png": {
+    "src": "/optimized/526b46a6f6b356aeeefc-1440.webp",
+    "srcSet": "/optimized/526b46a6f6b356aeeefc-320.webp 320w, /optimized/526b46a6f6b356aeeefc-640.webp 640w, /optimized/526b46a6f6b356aeeefc-960.webp 960w, /optimized/526b46a6f6b356aeeefc-1440.webp 1440w",
+    "avifSrcSet": "/optimized/526b46a6f6b356aeeefc-320.avif 320w, /optimized/526b46a6f6b356aeeefc-640.avif 640w, /optimized/526b46a6f6b356aeeefc-960.avif 960w, /optimized/526b46a6f6b356aeeefc-1440.avif 1440w",
+    "width": 1920,
+    "height": 842
+  },
+  "https://gtap.com.br/midias/Clientes/AGU.webp": {
+    "src": "/optimized/e194629909de6db3ac67-207.webp",
+    "srcSet": "/optimized/e194629909de6db3ac67-207.webp 207w",
+    "avifSrcSet": "/optimized/e194629909de6db3ac67-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/BNDS.webp": {
+    "src": "/optimized/51cbd21b8aae1367ee43-207.webp",
+    "srcSet": "/optimized/51cbd21b8aae1367ee43-207.webp 207w",
+    "avifSrcSet": "/optimized/51cbd21b8aae1367ee43-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/CNJ.webp": {
+    "src": "/optimized/4cbc224c1a3bfa2f9021-207.webp",
+    "srcSet": "/optimized/4cbc224c1a3bfa2f9021-207.webp 207w",
+    "avifSrcSet": "/optimized/4cbc224c1a3bfa2f9021-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/DPE%20PR.webp": {
+    "src": "/optimized/45d5a9a700fe401637cb-207.webp",
+    "srcSet": "/optimized/45d5a9a700fe401637cb-207.webp 207w",
+    "avifSrcSet": "/optimized/45d5a9a700fe401637cb-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/Eletrobras.webp": {
+    "src": "/optimized/547f5b96ecdb39d6dfec-207.webp",
+    "srcSet": "/optimized/547f5b96ecdb39d6dfec-207.webp 207w",
+    "avifSrcSet": "/optimized/547f5b96ecdb39d6dfec-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/Embasa.webp": {
+    "src": "/optimized/75cdeec1a461d6fa9c6e-207.webp",
+    "srcSet": "/optimized/75cdeec1a461d6fa9c6e-207.webp 207w",
+    "avifSrcSet": "/optimized/75cdeec1a461d6fa9c6e-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/Governo%20do%20estado%20BA.webp": {
+    "src": "/optimized/675fbc79df3535deab58-207.webp",
+    "srcSet": "/optimized/675fbc79df3535deab58-207.webp 207w",
+    "avifSrcSet": "/optimized/675fbc79df3535deab58-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/IFBA.webp": {
+    "src": "/optimized/06326add15ae452f23bc-207.webp",
+    "srcSet": "/optimized/06326add15ae452f23bc-207.webp 207w",
+    "avifSrcSet": "/optimized/06326add15ae452f23bc-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/IFES.webp": {
+    "src": "/optimized/8096d9337fbd95a54a0f-207.webp",
+    "srcSet": "/optimized/8096d9337fbd95a54a0f-207.webp 207w",
+    "avifSrcSet": "/optimized/8096d9337fbd95a54a0f-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/IFGO.webp": {
+    "src": "/optimized/57e8802b1100d893ab65-207.webp",
+    "srcSet": "/optimized/57e8802b1100d893ab65-207.webp 207w",
+    "avifSrcSet": "/optimized/57e8802b1100d893ab65-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/IFSP.webp": {
+    "src": "/optimized/70dff3d27c0dbb86b95a-207.webp",
+    "srcSet": "/optimized/70dff3d27c0dbb86b95a-207.webp 207w",
+    "avifSrcSet": "/optimized/70dff3d27c0dbb86b95a-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/MPSE.webp": {
+    "src": "/optimized/3c6456a955637617dd75-207.webp",
+    "srcSet": "/optimized/3c6456a955637617dd75-207.webp 207w",
+    "avifSrcSet": "/optimized/3c6456a955637617dd75-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/Ministerio%20Publico%20BA.webp": {
+    "src": "/optimized/283a55cef103b1ad5472-207.webp",
+    "srcSet": "/optimized/283a55cef103b1ad5472-207.webp 207w",
+    "avifSrcSet": "/optimized/283a55cef103b1ad5472-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/PGE%20-%20RJ.webp": {
+    "src": "/optimized/f5eca1ac6aa2ebfdc547-207.webp",
+    "srcSet": "/optimized/f5eca1ac6aa2ebfdc547-207.webp 207w",
+    "avifSrcSet": "/optimized/f5eca1ac6aa2ebfdc547-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/SAEB.webp": {
+    "src": "/optimized/ed5780b16926d909aacc-207.webp",
+    "srcSet": "/optimized/ed5780b16926d909aacc-207.webp 207w",
+    "avifSrcSet": "/optimized/ed5780b16926d909aacc-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/SEBRAE.webp": {
+    "src": "/optimized/99c89e000d2ed2a562e1-207.webp",
+    "srcSet": "/optimized/99c89e000d2ed2a562e1-207.webp 207w",
+    "avifSrcSet": "/optimized/99c89e000d2ed2a562e1-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/SEFAZ%20MT.webp": {
+    "src": "/optimized/7c5db94cafa0c07676e2-207.webp",
+    "srcSet": "/optimized/7c5db94cafa0c07676e2-207.webp 207w",
+    "avifSrcSet": "/optimized/7c5db94cafa0c07676e2-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/STF.webp": {
+    "src": "/optimized/4a651e031a5e84e5b3ff-207.webp",
+    "srcSet": "/optimized/4a651e031a5e84e5b3ff-207.webp 207w",
+    "avifSrcSet": "/optimized/4a651e031a5e84e5b3ff-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/Senac.webp": {
+    "src": "/optimized/4bdece5fc41479af3af5-207.webp",
+    "srcSet": "/optimized/4bdece5fc41479af3af5-207.webp 207w",
+    "avifSrcSet": "/optimized/4bdece5fc41479af3af5-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/Sesi.webp": {
+    "src": "/optimized/7cfa495e260a5f21fa7d-207.webp",
+    "srcSet": "/optimized/7cfa495e260a5f21fa7d-207.webp 207w",
+    "avifSrcSet": "/optimized/7cfa495e260a5f21fa7d-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/TCEPR.webp": {
+    "src": "/optimized/973516547214133b3120-207.webp",
+    "srcSet": "/optimized/973516547214133b3120-207.webp 207w",
+    "avifSrcSet": "/optimized/973516547214133b3120-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/TCU.webp": {
+    "src": "/optimized/ea3e1403e15ff32dbae4-207.webp",
+    "srcSet": "/optimized/ea3e1403e15ff32dbae4-207.webp 207w",
+    "avifSrcSet": "/optimized/ea3e1403e15ff32dbae4-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/TJPR.webp": {
+    "src": "/optimized/dd8044bddc0e535707bc-207.webp",
+    "srcSet": "/optimized/dd8044bddc0e535707bc-207.webp 207w",
+    "avifSrcSet": "/optimized/dd8044bddc0e535707bc-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/TRE-ES.webp": {
+    "src": "/optimized/a0d8b841787da55d774e-207.webp",
+    "srcSet": "/optimized/a0d8b841787da55d774e-207.webp 207w",
+    "avifSrcSet": "/optimized/a0d8b841787da55d774e-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/TRF2.webp": {
+    "src": "/optimized/d172513bcc872f00ed81-207.webp",
+    "srcSet": "/optimized/d172513bcc872f00ed81-207.webp 207w",
+    "avifSrcSet": "/optimized/d172513bcc872f00ed81-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/TRT%20ceara.webp": {
+    "src": "/optimized/009535774a75eddf0638-207.webp",
+    "srcSet": "/optimized/009535774a75eddf0638-207.webp 207w",
+    "avifSrcSet": "/optimized/009535774a75eddf0638-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/TSE.webp": {
+    "src": "/optimized/77f287c92817b5ff5b3f-207.webp",
+    "srcSet": "/optimized/77f287c92817b5ff5b3f-207.webp 207w",
+    "avifSrcSet": "/optimized/77f287c92817b5ff5b3f-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/UESC.webp": {
+    "src": "/optimized/ac113f83d79b59d15eae-207.webp",
+    "srcSet": "/optimized/ac113f83d79b59d15eae-207.webp 207w",
+    "avifSrcSet": "/optimized/ac113f83d79b59d15eae-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Clientes/inema.webp": {
+    "src": "/optimized/bb4ef6b68dbece1b57a6-207.webp",
+    "srcSet": "/optimized/bb4ef6b68dbece1b57a6-207.webp 207w",
+    "avifSrcSet": "/optimized/bb4ef6b68dbece1b57a6-207.avif 207w",
+    "width": 207,
+    "height": 207
+  },
+  "https://gtap.com.br/midias/Palestrantes/alexandre-marques.jpg": {
+    "src": "/optimized/c4cf2839561d1fabd657-316.webp",
+    "srcSet": "/optimized/c4cf2839561d1fabd657-316.webp 316w",
+    "avifSrcSet": "/optimized/c4cf2839561d1fabd657-316.avif 316w",
+    "width": 316,
+    "height": 406
+  },
+  "https://gtap.com.br/midias/Palestrantes/arick.jpg": {
+    "src": "/optimized/cc674d5ef86f7350a7d2-316.webp",
+    "srcSet": "/optimized/cc674d5ef86f7350a7d2-316.webp 316w",
+    "avifSrcSet": "/optimized/cc674d5ef86f7350a7d2-316.avif 316w",
+    "width": 316,
+    "height": 406
+  },
+  "https://gtap.com.br/midias/Palestrantes/bernard.png": {
+    "src": "/optimized/f2d6977eb768f309fc0c-316.webp",
+    "srcSet": "/optimized/f2d6977eb768f309fc0c-316.webp 316w",
+    "avifSrcSet": "/optimized/f2d6977eb768f309fc0c-316.avif 316w",
+    "width": 316,
+    "height": 406
+  },
+  "https://gtap.com.br/midias/Palestrantes/gustavo-reis.jpg": {
+    "src": "/optimized/2b54b5453e6daa29a886-316.webp",
+    "srcSet": "/optimized/2b54b5453e6daa29a886-316.webp 316w",
+    "avifSrcSet": "/optimized/2b54b5453e6daa29a886-316.avif 316w",
+    "width": 316,
+    "height": 406
+  },
+  "https://gtap.com.br/midias/Palestrantes/paulo-pegas.png": {
+    "src": "/optimized/4b3ce85ff91412fb81a5-632.webp",
+    "srcSet": "/optimized/4b3ce85ff91412fb81a5-320.webp 320w, /optimized/4b3ce85ff91412fb81a5-632.webp 632w",
+    "avifSrcSet": "/optimized/4b3ce85ff91412fb81a5-320.avif 320w, /optimized/4b3ce85ff91412fb81a5-632.avif 632w",
+    "width": 632,
+    "height": 812
+  },
+  "https://gtap.com.br/midias/Palestrantes/tanaka.png": {
+    "src": "/optimized/ddaf8776277c0135d451-632.webp",
+    "srcSet": "/optimized/ddaf8776277c0135d451-320.webp 320w, /optimized/ddaf8776277c0135d451-632.webp 632w",
+    "avifSrcSet": "/optimized/ddaf8776277c0135d451-320.avif 320w, /optimized/ddaf8776277c0135d451-632.avif 632w",
+    "width": 632,
+    "height": 812
+  },
+  "https://gtap.com.br/midias/Palestrantes/vanessa.png": {
+    "src": "/optimized/e8d074e82e8add682fca-632.webp",
+    "srcSet": "/optimized/e8d074e82e8add682fca-320.webp 320w, /optimized/e8d074e82e8add682fca-632.webp 632w",
+    "avifSrcSet": "/optimized/e8d074e82e8add682fca-320.avif 320w, /optimized/e8d074e82e8add682fca-632.avif 632w",
+    "width": 632,
+    "height": 812
+  },
+  "https://gtap.com.br/midias/farolitapua.png": {
+    "src": "/optimized/dec6e320b73faae83448-1440.webp",
+    "srcSet": "/optimized/dec6e320b73faae83448-320.webp 320w, /optimized/dec6e320b73faae83448-640.webp 640w, /optimized/dec6e320b73faae83448-960.webp 960w, /optimized/dec6e320b73faae83448-1440.webp 1440w",
+    "avifSrcSet": "/optimized/dec6e320b73faae83448-320.avif 320w, /optimized/dec6e320b73faae83448-640.avif 640w, /optimized/dec6e320b73faae83448-960.avif 960w, /optimized/dec6e320b73faae83448-1440.avif 1440w",
+    "width": 1536,
+    "height": 842
+  },
+  "https://gtap.com.br/midias/galeria/galeria%207.jpg": {
+    "src": "/optimized/346afdb33141736abd34-306.webp",
+    "srcSet": "/optimized/346afdb33141736abd34-306.webp 306w",
+    "avifSrcSet": "/optimized/346afdb33141736abd34-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria1.jpg": {
+    "src": "/optimized/b581fb6112833b88ef55-306.webp",
+    "srcSet": "/optimized/b581fb6112833b88ef55-306.webp 306w",
+    "avifSrcSet": "/optimized/b581fb6112833b88ef55-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria10.jpg": {
+    "src": "/optimized/1ed4f02bb603d410f809-306.webp",
+    "srcSet": "/optimized/1ed4f02bb603d410f809-306.webp 306w",
+    "avifSrcSet": "/optimized/1ed4f02bb603d410f809-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria11.jpg": {
+    "src": "/optimized/3f60f34c072dfafdaf18-306.webp",
+    "srcSet": "/optimized/3f60f34c072dfafdaf18-306.webp 306w",
+    "avifSrcSet": "/optimized/3f60f34c072dfafdaf18-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria12.jpg": {
+    "src": "/optimized/32627faf3f0e3d7f1581-306.webp",
+    "srcSet": "/optimized/32627faf3f0e3d7f1581-306.webp 306w",
+    "avifSrcSet": "/optimized/32627faf3f0e3d7f1581-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria13.jpg": {
+    "src": "/optimized/49f3173b494107a3e4f6-306.webp",
+    "srcSet": "/optimized/49f3173b494107a3e4f6-306.webp 306w",
+    "avifSrcSet": "/optimized/49f3173b494107a3e4f6-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria14.jpg": {
+    "src": "/optimized/ffe90b93c563bcb50585-306.webp",
+    "srcSet": "/optimized/ffe90b93c563bcb50585-306.webp 306w",
+    "avifSrcSet": "/optimized/ffe90b93c563bcb50585-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria15.jpg": {
+    "src": "/optimized/ce45f8e592f09ed5f561-306.webp",
+    "srcSet": "/optimized/ce45f8e592f09ed5f561-306.webp 306w",
+    "avifSrcSet": "/optimized/ce45f8e592f09ed5f561-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria16.jpg": {
+    "src": "/optimized/35572f3744cddbe771cd-306.webp",
+    "srcSet": "/optimized/35572f3744cddbe771cd-306.webp 306w",
+    "avifSrcSet": "/optimized/35572f3744cddbe771cd-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria17.jpg": {
+    "src": "/optimized/63a97f88ab9dbab77a2d-306.webp",
+    "srcSet": "/optimized/63a97f88ab9dbab77a2d-306.webp 306w",
+    "avifSrcSet": "/optimized/63a97f88ab9dbab77a2d-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria18.jpg": {
+    "src": "/optimized/c994559837055e20a8a6-306.webp",
+    "srcSet": "/optimized/c994559837055e20a8a6-306.webp 306w",
+    "avifSrcSet": "/optimized/c994559837055e20a8a6-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria2.jpg": {
+    "src": "/optimized/7c97d7b835d17a5bef29-306.webp",
+    "srcSet": "/optimized/7c97d7b835d17a5bef29-306.webp 306w",
+    "avifSrcSet": "/optimized/7c97d7b835d17a5bef29-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria3.jpg": {
+    "src": "/optimized/cbbe952e68d39da699a1-306.webp",
+    "srcSet": "/optimized/cbbe952e68d39da699a1-306.webp 306w",
+    "avifSrcSet": "/optimized/cbbe952e68d39da699a1-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria4.jpg": {
+    "src": "/optimized/c13cd12f12267146b7e9-306.webp",
+    "srcSet": "/optimized/c13cd12f12267146b7e9-306.webp 306w",
+    "avifSrcSet": "/optimized/c13cd12f12267146b7e9-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria5.jpg": {
+    "src": "/optimized/81d8b4c0fd9326e4819c-306.webp",
+    "srcSet": "/optimized/81d8b4c0fd9326e4819c-306.webp 306w",
+    "avifSrcSet": "/optimized/81d8b4c0fd9326e4819c-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria6.jpg": {
+    "src": "/optimized/c5853f2b63a96ea25d3b-306.webp",
+    "srcSet": "/optimized/c5853f2b63a96ea25d3b-306.webp 306w",
+    "avifSrcSet": "/optimized/c5853f2b63a96ea25d3b-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria8.jpg": {
+    "src": "/optimized/fd3401eb176daea0bd14-306.webp",
+    "srcSet": "/optimized/fd3401eb176daea0bd14-306.webp 306w",
+    "avifSrcSet": "/optimized/fd3401eb176daea0bd14-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "https://gtap.com.br/midias/galeria/galeria9.jpg": {
+    "src": "/optimized/e717285a11a9fb2d647e-306.webp",
+    "srcSet": "/optimized/e717285a11a9fb2d647e-306.webp 306w",
+    "avifSrcSet": "/optimized/e717285a11a9fb2d647e-306.avif 306w",
+    "width": 306,
+    "height": 306
+  },
+  "src/assets/alexandre.webp": {
+    "src": "/optimized/81605f4b914f690a95d1-665.webp",
+    "srcSet": "/optimized/81605f4b914f690a95d1-320.webp 320w, /optimized/81605f4b914f690a95d1-640.webp 640w, /optimized/81605f4b914f690a95d1-665.webp 665w",
+    "avifSrcSet": "/optimized/81605f4b914f690a95d1-320.avif 320w, /optimized/81605f4b914f690a95d1-640.avif 640w, /optimized/81605f4b914f690a95d1-665.avif 665w",
+    "width": 665,
+    "height": 971
+  },
+  "src/assets/atuacao-salvador.webp": {
+    "src": "/optimized/99afb92e16437c7b4d15-788.webp",
+    "srcSet": "/optimized/99afb92e16437c7b4d15-320.webp 320w, /optimized/99afb92e16437c7b4d15-640.webp 640w, /optimized/99afb92e16437c7b4d15-788.webp 788w",
+    "avifSrcSet": "/optimized/99afb92e16437c7b4d15-320.avif 320w, /optimized/99afb92e16437c7b4d15-640.avif 640w, /optimized/99afb92e16437c7b4d15-788.avif 788w",
+    "width": 788,
+    "height": 788
+  },
+  "src/assets/background2.webp": {
+    "src": "/optimized/84fa815dc48d3011cbc5-710.webp",
+    "srcSet": "/optimized/84fa815dc48d3011cbc5-320.webp 320w, /optimized/84fa815dc48d3011cbc5-640.webp 640w, /optimized/84fa815dc48d3011cbc5-710.webp 710w",
+    "avifSrcSet": "/optimized/84fa815dc48d3011cbc5-320.avif 320w, /optimized/84fa815dc48d3011cbc5-640.avif 640w, /optimized/84fa815dc48d3011cbc5-710.avif 710w",
+    "width": 710,
+    "height": 1112
+  },
+  "src/assets/backgroundFooter.webp": {
+    "src": "/optimized/ce4d0588f91179abf3c5-1440.webp",
+    "srcSet": "/optimized/ce4d0588f91179abf3c5-320.webp 320w, /optimized/ce4d0588f91179abf3c5-640.webp 640w, /optimized/ce4d0588f91179abf3c5-960.webp 960w, /optimized/ce4d0588f91179abf3c5-1440.webp 1440w",
+    "avifSrcSet": "/optimized/ce4d0588f91179abf3c5-320.avif 320w, /optimized/ce4d0588f91179abf3c5-640.avif 640w, /optimized/ce4d0588f91179abf3c5-960.avif 960w, /optimized/ce4d0588f91179abf3c5-1440.avif 1440w",
+    "width": 1920,
+    "height": 488
+  },
+  "src/assets/backgroundSalvador.webp": {
+    "src": "/optimized/b4e8f782d6286bc9f3ec-1440.webp",
+    "srcSet": "/optimized/b4e8f782d6286bc9f3ec-320.webp 320w, /optimized/b4e8f782d6286bc9f3ec-640.webp 640w, /optimized/b4e8f782d6286bc9f3ec-960.webp 960w, /optimized/b4e8f782d6286bc9f3ec-1440.webp 1440w",
+    "avifSrcSet": "/optimized/b4e8f782d6286bc9f3ec-320.avif 320w, /optimized/b4e8f782d6286bc9f3ec-640.avif 640w, /optimized/b4e8f782d6286bc9f3ec-960.avif 960w, /optimized/b4e8f782d6286bc9f3ec-1440.avif 1440w",
+    "width": 1536,
+    "height": 1176
+  },
+  "src/assets/backgroundescritorio.webp": {
+    "src": "/optimized/6a400f5ee1ca5ef6c046-1440.webp",
+    "srcSet": "/optimized/6a400f5ee1ca5ef6c046-320.webp 320w, /optimized/6a400f5ee1ca5ef6c046-640.webp 640w, /optimized/6a400f5ee1ca5ef6c046-960.webp 960w, /optimized/6a400f5ee1ca5ef6c046-1440.webp 1440w",
+    "avifSrcSet": "/optimized/6a400f5ee1ca5ef6c046-320.avif 320w, /optimized/6a400f5ee1ca5ef6c046-640.avif 640w, /optimized/6a400f5ee1ca5ef6c046-960.avif 960w, /optimized/6a400f5ee1ca5ef6c046-1440.avif 1440w",
+    "width": 1920,
+    "height": 1045
+  },
+  "src/assets/banner-mobile-galeria.webp": {
+    "src": "/optimized/9b44f32b2c4a58f1be0e-393.webp",
+    "srcSet": "/optimized/9b44f32b2c4a58f1be0e-320.webp 320w, /optimized/9b44f32b2c4a58f1be0e-393.webp 393w",
+    "avifSrcSet": "/optimized/9b44f32b2c4a58f1be0e-320.avif 320w, /optimized/9b44f32b2c4a58f1be0e-393.avif 393w",
+    "width": 393,
+    "height": 409
+  },
+  "src/assets/bannergaleria.webp": {
+    "src": "/optimized/f48fb58fa4f5137f4b6d-1440.webp",
+    "srcSet": "/optimized/f48fb58fa4f5137f4b6d-320.webp 320w, /optimized/f48fb58fa4f5137f4b6d-640.webp 640w, /optimized/f48fb58fa4f5137f4b6d-960.webp 960w, /optimized/f48fb58fa4f5137f4b6d-1440.webp 1440w",
+    "avifSrcSet": "/optimized/f48fb58fa4f5137f4b6d-320.avif 320w, /optimized/f48fb58fa4f5137f4b6d-640.avif 640w, /optimized/f48fb58fa4f5137f4b6d-960.avif 960w, /optimized/f48fb58fa4f5137f4b6d-1440.avif 1440w",
+    "width": 1920,
+    "height": 1080
+  },
+  "src/assets/capas/i-gtap.webp": {
+    "src": "/optimized/4fdd0cf6ee2c94a89be3-1280.webp",
+    "srcSet": "/optimized/4fdd0cf6ee2c94a89be3-320.webp 320w, /optimized/4fdd0cf6ee2c94a89be3-640.webp 640w, /optimized/4fdd0cf6ee2c94a89be3-960.webp 960w, /optimized/4fdd0cf6ee2c94a89be3-1280.webp 1280w",
+    "avifSrcSet": "/optimized/4fdd0cf6ee2c94a89be3-320.avif 320w, /optimized/4fdd0cf6ee2c94a89be3-640.avif 640w, /optimized/4fdd0cf6ee2c94a89be3-960.avif 960w, /optimized/4fdd0cf6ee2c94a89be3-1280.avif 1280w",
+    "width": 1280,
+    "height": 960
+  },
+  "src/assets/capas/ii-gtap.webp": {
+    "src": "/optimized/70056b2b18579bd8f136-1280.webp",
+    "srcSet": "/optimized/70056b2b18579bd8f136-320.webp 320w, /optimized/70056b2b18579bd8f136-640.webp 640w, /optimized/70056b2b18579bd8f136-960.webp 960w, /optimized/70056b2b18579bd8f136-1280.webp 1280w",
+    "avifSrcSet": "/optimized/70056b2b18579bd8f136-320.avif 320w, /optimized/70056b2b18579bd8f136-640.avif 640w, /optimized/70056b2b18579bd8f136-960.avif 960w, /optimized/70056b2b18579bd8f136-1280.avif 1280w",
+    "width": 1280,
+    "height": 848
+  },
+  "src/assets/capas/iii-gtap.webp": {
+    "src": "/optimized/22ffac2f162d1a94ec51-960.webp",
+    "srcSet": "/optimized/22ffac2f162d1a94ec51-320.webp 320w, /optimized/22ffac2f162d1a94ec51-640.webp 640w, /optimized/22ffac2f162d1a94ec51-960.webp 960w",
+    "avifSrcSet": "/optimized/22ffac2f162d1a94ec51-320.avif 320w, /optimized/22ffac2f162d1a94ec51-640.avif 640w, /optimized/22ffac2f162d1a94ec51-960.avif 960w",
+    "width": 960,
+    "height": 636
+  },
+  "src/assets/capas/iv-gtap.webp": {
+    "src": "/optimized/84d2522e44ca8c69fb8a-1280.webp",
+    "srcSet": "/optimized/84d2522e44ca8c69fb8a-320.webp 320w, /optimized/84d2522e44ca8c69fb8a-640.webp 640w, /optimized/84d2522e44ca8c69fb8a-960.webp 960w, /optimized/84d2522e44ca8c69fb8a-1280.webp 1280w",
+    "avifSrcSet": "/optimized/84d2522e44ca8c69fb8a-320.avif 320w, /optimized/84d2522e44ca8c69fb8a-640.avif 640w, /optimized/84d2522e44ca8c69fb8a-960.avif 960w, /optimized/84d2522e44ca8c69fb8a-1280.avif 1280w",
+    "width": 1280,
+    "height": 853
+  },
+  "src/assets/capas/ix-gtap.webp": {
+    "src": "/optimized/64d99ba15ed8f1e249e9-1280.webp",
+    "srcSet": "/optimized/64d99ba15ed8f1e249e9-320.webp 320w, /optimized/64d99ba15ed8f1e249e9-640.webp 640w, /optimized/64d99ba15ed8f1e249e9-960.webp 960w, /optimized/64d99ba15ed8f1e249e9-1280.webp 1280w",
+    "avifSrcSet": "/optimized/64d99ba15ed8f1e249e9-320.avif 320w, /optimized/64d99ba15ed8f1e249e9-640.avif 640w, /optimized/64d99ba15ed8f1e249e9-960.avif 960w, /optimized/64d99ba15ed8f1e249e9-1280.avif 1280w",
+    "width": 1280,
+    "height": 853
+  },
+  "src/assets/capas/v-gtap.webp": {
+    "src": "/optimized/b2cec6c751f107435ef3-1280.webp",
+    "srcSet": "/optimized/b2cec6c751f107435ef3-320.webp 320w, /optimized/b2cec6c751f107435ef3-640.webp 640w, /optimized/b2cec6c751f107435ef3-960.webp 960w, /optimized/b2cec6c751f107435ef3-1280.webp 1280w",
+    "avifSrcSet": "/optimized/b2cec6c751f107435ef3-320.avif 320w, /optimized/b2cec6c751f107435ef3-640.avif 640w, /optimized/b2cec6c751f107435ef3-960.avif 960w, /optimized/b2cec6c751f107435ef3-1280.avif 1280w",
+    "width": 1280,
+    "height": 960
+  },
+  "src/assets/capas/vi-gtap.webp": {
+    "src": "/optimized/42426d38fac5c4f6559e-1280.webp",
+    "srcSet": "/optimized/42426d38fac5c4f6559e-320.webp 320w, /optimized/42426d38fac5c4f6559e-640.webp 640w, /optimized/42426d38fac5c4f6559e-960.webp 960w, /optimized/42426d38fac5c4f6559e-1280.webp 1280w",
+    "avifSrcSet": "/optimized/42426d38fac5c4f6559e-320.avif 320w, /optimized/42426d38fac5c4f6559e-640.avif 640w, /optimized/42426d38fac5c4f6559e-960.avif 960w, /optimized/42426d38fac5c4f6559e-1280.avif 1280w",
+    "width": 1280,
+    "height": 847
+  },
+  "src/assets/capas/vii-gtap.webp": {
+    "src": "/optimized/3b001e2dbd02a10ab0bd-1280.webp",
+    "srcSet": "/optimized/3b001e2dbd02a10ab0bd-320.webp 320w, /optimized/3b001e2dbd02a10ab0bd-640.webp 640w, /optimized/3b001e2dbd02a10ab0bd-960.webp 960w, /optimized/3b001e2dbd02a10ab0bd-1280.webp 1280w",
+    "avifSrcSet": "/optimized/3b001e2dbd02a10ab0bd-320.avif 320w, /optimized/3b001e2dbd02a10ab0bd-640.avif 640w, /optimized/3b001e2dbd02a10ab0bd-960.avif 960w, /optimized/3b001e2dbd02a10ab0bd-1280.avif 1280w",
+    "width": 1280,
+    "height": 847
+  },
+  "src/assets/capas/viii-gtap.webp": {
+    "src": "/optimized/eda5af87f8f25f238c86-1280.webp",
+    "srcSet": "/optimized/eda5af87f8f25f238c86-320.webp 320w, /optimized/eda5af87f8f25f238c86-640.webp 640w, /optimized/eda5af87f8f25f238c86-960.webp 960w, /optimized/eda5af87f8f25f238c86-1280.webp 1280w",
+    "avifSrcSet": "/optimized/eda5af87f8f25f238c86-320.avif 320w, /optimized/eda5af87f8f25f238c86-640.avif 640w, /optimized/eda5af87f8f25f238c86-960.avif 960w, /optimized/eda5af87f8f25f238c86-1280.avif 1280w",
+    "width": 1280,
+    "height": 853
+  },
+  "src/assets/capas/x-gtap.webp": {
+    "src": "/optimized/b7ea5262397f97eb1bec-1280.webp",
+    "srcSet": "/optimized/b7ea5262397f97eb1bec-320.webp 320w, /optimized/b7ea5262397f97eb1bec-640.webp 640w, /optimized/b7ea5262397f97eb1bec-960.webp 960w, /optimized/b7ea5262397f97eb1bec-1280.webp 1280w",
+    "avifSrcSet": "/optimized/b7ea5262397f97eb1bec-320.avif 320w, /optimized/b7ea5262397f97eb1bec-640.avif 640w, /optimized/b7ea5262397f97eb1bec-960.avif 960w, /optimized/b7ea5262397f97eb1bec-1280.avif 1280w",
+    "width": 1280,
+    "height": 801
+  },
+  "src/assets/eventogtapforms.webp": {
+    "src": "/optimized/28133ceed26e323427d7-772.webp",
+    "srcSet": "/optimized/28133ceed26e323427d7-320.webp 320w, /optimized/28133ceed26e323427d7-640.webp 640w, /optimized/28133ceed26e323427d7-772.webp 772w",
+    "avifSrcSet": "/optimized/28133ceed26e323427d7-320.avif 320w, /optimized/28133ceed26e323427d7-640.avif 640w, /optimized/28133ceed26e323427d7-772.avif 772w",
+    "width": 772,
+    "height": 772
+  },
+  "src/assets/faroldabarra.webp": {
+    "src": "/optimized/da0b1a87821204599490-1440.webp",
+    "srcSet": "/optimized/da0b1a87821204599490-320.webp 320w, /optimized/da0b1a87821204599490-640.webp 640w, /optimized/da0b1a87821204599490-960.webp 960w, /optimized/da0b1a87821204599490-1440.webp 1440w",
+    "avifSrcSet": "/optimized/da0b1a87821204599490-320.avif 320w, /optimized/da0b1a87821204599490-640.avif 640w, /optimized/da0b1a87821204599490-960.avif 960w, /optimized/da0b1a87821204599490-1440.avif 1440w",
+    "width": 1536,
+    "height": 842
+  },
+  "src/assets/image-mobile.webp": {
+    "src": "/optimized/ba9f420e7d2239729993-105.webp",
+    "srcSet": "/optimized/ba9f420e7d2239729993-105.webp 105w",
+    "avifSrcSet": "/optimized/ba9f420e7d2239729993-105.avif 105w",
+    "width": 105,
+    "height": 105
+  },
+  "src/assets/imagebg1.webp": {
+    "src": "/optimized/618e17d7786c0754f375-1284.webp",
+    "srcSet": "/optimized/618e17d7786c0754f375-320.webp 320w, /optimized/618e17d7786c0754f375-640.webp 640w, /optimized/618e17d7786c0754f375-960.webp 960w, /optimized/618e17d7786c0754f375-1284.webp 1284w",
+    "avifSrcSet": "/optimized/618e17d7786c0754f375-320.avif 320w, /optimized/618e17d7786c0754f375-640.avif 640w, /optimized/618e17d7786c0754f375-960.avif 960w, /optimized/618e17d7786c0754f375-1284.avif 1284w",
+    "width": 1284,
+    "height": 456
+  },
+  "src/assets/temas-foto-1.webp": {
+    "src": "/optimized/fdd76c2c62331a78b347-920.webp",
+    "srcSet": "/optimized/fdd76c2c62331a78b347-320.webp 320w, /optimized/fdd76c2c62331a78b347-640.webp 640w, /optimized/fdd76c2c62331a78b347-920.webp 920w",
+    "avifSrcSet": "/optimized/fdd76c2c62331a78b347-320.avif 320w, /optimized/fdd76c2c62331a78b347-640.avif 640w, /optimized/fdd76c2c62331a78b347-920.avif 920w",
+    "width": 920,
+    "height": 920
+  },
+  "src/assets/temas-foto-2.webp": {
+    "src": "/optimized/b633f84c21465d11a58e-920.webp",
+    "srcSet": "/optimized/b633f84c21465d11a58e-320.webp 320w, /optimized/b633f84c21465d11a58e-640.webp 640w, /optimized/b633f84c21465d11a58e-920.webp 920w",
+    "avifSrcSet": "/optimized/b633f84c21465d11a58e-320.avif 320w, /optimized/b633f84c21465d11a58e-640.avif 640w, /optimized/b633f84c21465d11a58e-920.avif 920w",
+    "width": 920,
+    "height": 1227
+  }
+}

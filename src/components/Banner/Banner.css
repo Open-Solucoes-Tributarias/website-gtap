@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #02093a;
+  background: var(--color-navy-900);
 }
 
 .banner-poster,
@@ -20,11 +20,10 @@
 
 .banner-poster {
   z-index: 1;
-  transition: opacity 300ms ease;
+  /* Crossfade pôster → vídeo mais suave (só opacity do pôster, nunca na carga). */
+  transition: opacity 600ms var(--ease-out);
   pointer-events: none;
 }
-
-
 
 .banner-poster.is-hidden {
   opacity: 0;
@@ -37,8 +36,9 @@
 
 @media (max-width: 768px) {
   .banner-container {
-    margin-top: 20%;
-    height: 300px;
+    /* O vídeo começa no topo e passa por trás do header de vidro (como no
+       desktop): sem faixa branca acima. Abaixo do header sobra um quadro 16:9. */
+    height: calc(var(--float-gap) + var(--header-h) + 56.25vw);
   }
 }
 

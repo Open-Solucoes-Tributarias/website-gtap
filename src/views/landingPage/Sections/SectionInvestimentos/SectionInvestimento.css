@@ -1,142 +1,207 @@
-.investimento-container {
+/* Ingressos (base: website-gtap) sobre o fundo azul da seção. */
+.tickets {
+  padding-block: var(--section-py);
+  padding-inline: var(--section-px);
+  background: var(--gradient-navy);
+  color: var(--text-on-dark);
+}
+
+/* Título de seção: mesmo padrão das demais seções (h1, bold, tight). */
+.tickets__title {
+  margin: 0 0 var(--stack-gap);
+  text-align: center;
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
+  color: var(--text-on-dark);
+}
+
+.tickets__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.15fr;
+  gap: var(--space-3);
+  max-width: 1080px;
+  margin-inline: auto;
+  align-items: stretch;
+}
+
+/* Recortes do ingresso com máscara: o fundo azul (degradê) aparece pelos furos. */
+.ticket {
+  --tear: 128px;
+  --ticket-pad: var(--space-3);
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
-  padding-inline: 12%;
-  padding: 3%;
-  background: linear-gradient(
-    270deg,
-    var(--Azul-principal, #000d74) 0.68%,
-    var(--Azul-secundrio, #02093a) 99.32%
-  );
-}
-
-.investimento-title {
-  color: #fff;
-  font-size: 30px;
-  font-weight: 600;
-}
-.investimento-title b {
-  color: #dda92e;
-}
-
-.container-lotes {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  padding: var(--ticket-pad);
+  border-radius: var(--radius-lg);
   text-align: center;
-}
-.container-lotes :hover {
-  transform: scale(1.02);
-}
-.card-lote {
-  width: 250px;
-  height: 250px;
-  border-radius: 16px;
-  background: linear-gradient(
-    180deg,
-    var(--Amarelo-principal, #dda92e) 0%,
-    var(--Amarelo-secundrio, #ffdf92) 100%
-  );
-
-  box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.1);
-  padding-block: 20px;
-  overflow: hidden;
+  -webkit-mask: radial-gradient(circle 14px at 0 var(--tear), #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle 14px at 100% var(--tear), #0000 98%, #000) right / 51% 100% no-repeat;
+  mask: radial-gradient(circle 14px at 0 var(--tear), #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle 14px at 100% var(--tear), #0000 98%, #000) right / 51% 100% no-repeat;
+  transition: transform 400ms var(--ease-out);
 }
 
-.card-effect-blur {
-  width: 250px;
-  height: 250px;
-  border-radius: 16px;
-  background-color: rgba(100, 100, 100, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.1);
-  padding-block: 20px;
-  overflow: hidden;
-}
-.card-lote-white {
-  width: 250px;
-  height: 250px;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.1);
-  padding-block: 20px;
-  overflow: hidden;
+.ticket--current {
+  background: var(--gradient-gold-rich);
+  color: var(--text-on-light);
 }
 
-.name-lote {
-  color: #02093a;
-  font-size: 25px;
-  font-weight: 600;
-  padding-bottom: 10px;
+.ticket--inactive {
+  background: rgb(255 255 255 / 7%);
+  color: rgb(255 255 255 / 62%);
 }
 
-.container-border {
+.ticket__top {
+  height: calc(var(--tear) - var(--ticket-pad));
+}
+
+.ticket__status {
+  display: inline-block;
+  margin-bottom: var(--space-1);
+  padding-block: var(--space-0-5);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
+}
+
+.ticket--current .ticket__status {
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-navy-900);
+  color: var(--text-on-dark);
+}
+
+.ticket__name {
+  margin: 0;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.ticket__tear {
+  margin-inline: calc(var(--ticket-pad) * -1);
+  border-top: 1px dashed currentColor;
+  opacity: 0.3;
+}
+
+.ticket__pricing {
+  flex: 1;
+  padding-top: var(--space-3);
+}
+
+.ticket__price {
+  margin: 0;
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  white-space: nowrap;
+}
+
+.ticket--current .ticket__price {
+  color: var(--text-on-light);
+}
+
+.ticket__price--closed span {
+  display: inline-block;
+  filter: blur(6px);
+  opacity: 0.65;
+  user-select: none;
+}
+
+.ticket__unit {
+  margin: var(--space-1) 0 0;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-snug);
+}
+
+.ticket__window {
+  margin: var(--space-2) 0 0;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+/* Visual do botão vem de .btn .btn--navy (global.css); aqui só o layout. */
+.ticket__btn {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.border-recort {
-  background-color: #010a4e;
-  width: 50px;
-  margin-left: -22px;
-  height: 50px;
-  aspect-ratio: 1/1;
-  border-top-right-radius: 100%;
-  border-bottom-right-radius: 100%;
-}
-.border-recort-right {
-  background-color: #010a4e;
-  width: 50px;
-  margin-right: -22px;
-  height: 50px;
-  aspect-ratio: 1/1;
-  border-top-left-radius: 100%;
-  border-bottom-left-radius: 100%;
+  margin-top: var(--space-3);
 }
 
-.linea {
-  border: none;
-  border-top: 2px dashed #000000;
-  margin-top: -25px;
-}
-.valor-lote {
-  padding-top: 25px;
-  font-size: 33px;
-  font-weight: 600;
+.ticket__closed {
+  margin: var(--space-3) 0 0;
+  padding-top: var(--space-2);
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
 }
 
-.container-button-investimento button {
+/* Visual do botão vem de .btn .btn--ghost (global.css); aqui só o layout. */
+.ticket-group {
   display: flex;
-  flex-direction: row;
-  gap: 10px;
-  background-color: #fff;
-  color: #000d74;
-  padding-inline: 30px;
-  padding-block: 8px;
-  border-radius: 6px;
-  cursor: pointer;
+  width: fit-content;
+  margin: var(--space-4) auto 0;
 }
-@media (max-width: 768px) {
-  .investimento-title {
-    text-align: center;
-    font-size: 25px;
+
+.tickets__notice {
+  margin: var(--space-3) 0 0;
+  text-align: center;
+  color: var(--text-on-dark-muted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ticket--current:hover {
+    transform: translateY(-6px);
   }
-  .container-lotes {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+}
+
+.ticket--current :focus-visible {
+  outline-color: var(--color-navy-900);
+}
+
+@media (max-width: 800px) {
+  .tickets__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+    max-width: 560px;
   }
-  .container-button-investimento {
-    display: flex;
-    width: 80%;
-    font-size: 12px;
-    padding-bottom: 10px;
-    justify-content: center;
+
+  .ticket--current {
+    grid-column: 1 / -1;
+  }
+
+  .ticket {
+    --tear: 112px;
+    padding-inline: var(--space-2);
+  }
+
+  .ticket__tear {
+    margin-inline: calc(var(--space-2) * -1);
+  }
+
+  /* Duas colunas estreitas: um degrau abaixo na escala para caber. */
+  .ticket--inactive .ticket__name {
+    font-size: var(--fs-h3);
+  }
+
+  .ticket--inactive .ticket__price {
+    font-size: var(--fs-h1);
+  }
+}
+
+@media (max-width: 720px) {
+  .tickets__grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 340px;
+  }
+
+  .ticket--inactive {
+    display: none;
+  }
+
+  .ticket-group {
+    max-width: 100%;
   }
 }
