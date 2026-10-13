@@ -7,8 +7,9 @@
      height:100% (removido para a janela voltar a ser o contêiner de rolagem). */
   min-height: 100vh;
   min-height: 100svh;
-  padding-inline: 12%;
-  padding-top: 2%;
+  /* Sem respiro embaixo: a foto do idealizador encosta na base da seção. */
+  padding-block: var(--section-py) 0;
+  padding-inline: var(--section-px);
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -16,35 +17,36 @@
 .content-idealizador {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding-block: 2%;
-  margin-bottom: 8%;
-  padding-inline: 3%;
-  margin-inline: 5%;
-  background-color: rgba(100, 100, 100, 0.3);
+  gap: var(--space-2);
+  padding-block: var(--space-3);
+  padding-inline: var(--space-4);
+  margin-bottom: var(--space-8);
+  margin-inline: var(--space-4);
+  /* vidro neutro (cinza translúcido) próprio deste painel: sem token */
+  background-color: rgb(100 100 100 / 30%);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 5px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
   justify-content: space-between;
-  padding-bottom: 25px;
 }
 
 .content-idealizador h3 {
-  color: #dda92e;
-  font-size: 45px;
-  font-weight: 600;
+  color: var(--color-gold-500);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
 }
 
 .content-idealizador p {
-  color: #fff;
-  font-weight: 300;
-  font-size: 18px;
+  color: var(--text-on-dark);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
 }
 
 .content-idealizador b {
-  font-weight: 600;
-  color: #ffdf92;
+  font-weight: var(--fw-semibold);
+  color: var(--color-gold-200);
 }
 
 .content-image-idealizador {
@@ -60,23 +62,11 @@
   display: none;
 }
 
-.content-idealizador button {
-  position: relative;
-  color: #02093a;
-  font-size: 14px;
-  font-weight: 500;
-  background: linear-gradient(to right, #dda92e, #ffdf92);
-  border: none;
-  border-radius: 5px;
-  padding-inline: 3px;
-  padding-block: 10px;
-  margin-bottom: 20px;
-  width: 50%;
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  justify-content: center;
-  cursor: pointer;
+/* Botão do Instagram: visual vem do padrão global .btn .btn--gold;
+   aqui só a largura e o respiro dentro do painel. */
+.desktop-button-instagram .btn {
+  width: fit-content;
+  margin-bottom: var(--space-2);
 }
 
 /* ====== Movimento ======
@@ -99,91 +89,20 @@
   --i: 1;
 }
 
-/* Botões do Instagram: sobem 2px, ícone dá um "toque" e apertam no clique.
-   Só transform anima (a sombra de 200px do botão mobile fica parada). */
-.section-idealizador button {
-  transition: transform 300ms var(--ease-out);
-}
-
-.section-idealizador button svg {
-  transition: transform var(--dur-ui) var(--ease-out);
-}
-
-/* Brilho dourado do botão desktop: pseudo-elemento, só a opacidade anima. */
-.section-idealizador .desktop-button-instagram button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: 0 10px 22px -8px rgb(221 169 46 / 60%);
-  opacity: 0;
-  transition: opacity 300ms var(--ease-out);
-  pointer-events: none;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .section-idealizador button:hover {
-    transform: translateY(-2px);
-  }
-
-  .section-idealizador .desktop-button-instagram button:hover::before {
-    opacity: 1;
-  }
-
-  .section-idealizador button:hover svg {
-    transform: rotate(-10deg) scale(1.12);
-  }
-}
-
-/* Foco por teclado igual ao hover (o link e o botão recebem foco). */
-.section-idealizador a:focus-visible button,
-.section-idealizador button:focus-visible {
-  transform: translateY(-2px);
-}
-
-.section-idealizador .desktop-button-instagram a:focus-visible button::before,
-.section-idealizador .desktop-button-instagram button:focus-visible::before {
-  opacity: 1;
-}
-
-.section-idealizador a:focus-visible button svg,
-.section-idealizador button:focus-visible svg {
-  transform: rotate(-10deg) scale(1.12);
-}
-
-.section-idealizador button:active {
-  transform: translateY(0) scale(0.97);
-  transition-duration: 120ms;
-}
-
 @media (max-width: 768px) {
   .section-idealizador {
     display: flex;
     flex-direction: column;
-    padding-inline: 2%;
-  }
-
-  .content-idealizador h3 {
-    font-size: 25px;
-  }
-
-  .content-idealizador p {
-    font-size: 15px;
   }
 
   .content-image-idealizador img {
     z-index: 1;
     width: 300px;
-    margin-top: -50px;
-  }
-
-  .content-idealizador button {
-    width: 80%;
+    margin-top: calc(var(--space-6) * -1);
   }
 
   .desktop-button-instagram {
     display: none;
-    
   }
 
   .mobile-button-instagram {
@@ -191,27 +110,16 @@
     position: relative;
   }
 
-  .mobile-button-instagram button {
-    box-shadow: 0 0 200px 50px #dda92e63;
+  /* Botão mobile sobreposto à foto, centralizado sem transform
+     (o transform fica livre para o hover/clique do .btn). */
+  .mobile-button-instagram .btn {
     position: absolute;
     z-index: 10;
-    bottom: 60px;
-    left: 25vw;
-    color: #02093a;
-    font-size: 14px;
-    font-weight: 500;
-    background: linear-gradient(to right, #dda92e, #ffdf92);
-    border: none;
-    border-radius: 5px;
-    padding-inline: 3px;
-    padding-block: 10px;
-    align-items: center;
-    width: 230px;
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    text-align: center;
-    justify-content: center;
-    cursor: pointer;
+    bottom: var(--space-8);
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: max-content;
+    max-width: calc(100% - 2 * var(--space-2));
   }
 }

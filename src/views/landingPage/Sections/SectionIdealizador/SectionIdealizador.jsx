@@ -8,7 +8,7 @@ export const SectionIdealizador = ({ localImages = {} }) => {
     <section className="section-idealizador">
       <div className="content-idealizador" data-reveal="left">
         <div data-reveal>
-          <h3>Idealizador</h3>
+          <h3><b>Idealizador</b></h3>
         </div>
         <div data-reveal>
           <p>
@@ -33,10 +33,8 @@ export const SectionIdealizador = ({ localImages = {} }) => {
           </p>
         </div>
         <div className="desktop-button-instagram" data-reveal>
-         <a href="https://www.instagram.com/foco.tributario/" target="_blank" rel="noopener noreferrer">
-          <button>
-            <Icon name="camera"  />Acompanhe pelo instagram
-          </button>
+          <a className="btn btn--gold" href="https://www.instagram.com/foco.tributario/" target="_blank" rel="noopener noreferrer">
+            <Icon name="camera" />Acompanhe pelo Instagram
           </a>
         </div>
       </div>
@@ -45,10 +43,8 @@ export const SectionIdealizador = ({ localImages = {} }) => {
         
       </div>
       <div className="mobile-button-instagram" data-reveal>
-          <a href="https://www.instagram.com/foco.tributario/" target="_blank" rel="noopener noreferrer">
-            <button>
-              <Icon name="camera"  />Acompanhe pelo instagram
-            </button>
+          <a className="btn btn--gold" href="https://www.instagram.com/foco.tributario/" target="_blank" rel="noopener noreferrer">
+            <Icon name="camera" />Acompanhe pelo Instagram
           </a>
         </div>
     </section>

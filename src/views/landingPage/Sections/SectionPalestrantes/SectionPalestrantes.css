@@ -1,26 +1,25 @@
 .section-palestrantes {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding-block: 5%;
-  padding-inline: 12%;
-  background-image: var(--gtap-bg-src-assets-bgsection-webp);
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
+  gap: var(--stack-gap);
+  padding-block: var(--section-py);
+  padding-inline: var(--section-px);
   text-align: center;
 }
 
-.section-palestrantes h3 {
-  color: #dda92e;
-  font-size: 40px;
-  font-weight: 600;
+/* Bloco de título: título + texto de abertura */
+.section-palestrantes-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-.section-palestrantes h5 {
-  color: #02093a;
-  font-size: 20px;
-  padding-inline: 28%;
+.section-palestrantes h3 {
+  color: var(--color-navy-900);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
 }
 
 /* card dos palestrantes */
@@ -28,35 +27,37 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: var(--space-3);
   justify-content: center;
 }
 
 .card-palestrantes {
   position: relative;
-  background: #02093a;
+  background: var(--color-navy-900);
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 4px;
+  gap: var(--space-0-5);
   width: 230px;
   height: 350px;
+  padding-inline: var(--space-1);
+  padding-block-end: var(--space-3);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 10px;
-  border: 2px solid #dda92e;
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: transform 400ms var(--ease-out);
 }
 
-/* Máscara da foto (antes era o overflow do card): recorta o zoom sem cortar o brilho. */
+/* Máscara da foto (antes era o overflow do card): recorta o zoom sem cortar o brilho.
+   Raio interno = raio do card menos a borda de 2px. */
 .card-palestrantes-foto {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 /* Degradê no rodapé da foto: só aparece no hover/foco, para o nome seguir legível com o zoom. */
@@ -64,7 +65,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(2, 9, 58, 0.6), rgba(2, 9, 58, 0) 45%);
+  background: var(--gradient-scrim);
   opacity: 0;
   transition: opacity 400ms var(--ease-out);
 }
@@ -78,39 +79,37 @@
   transition: transform 900ms var(--ease-out);
 }
 
-/* Brilho dourado + sombra: box-shadow fixo num pseudo-elemento; só a opacidade anima. */
+/* Sombra do hover: box-shadow fixo num pseudo-elemento; só a opacidade anima. */
 .card-palestrantes::after {
   content: "";
   position: absolute;
-  inset: -2px;
-  border-radius: 10px;
+  inset: 0;
+  border-radius: inherit;
   box-shadow:
-    0 0 0 1px rgba(221, 169, 46, 0.45),
-    0 16px 36px -14px rgba(221, 169, 46, 0.55),
-    0 26px 40px -26px rgba(2, 9, 58, 0.7);
+    0 24px 40px -20px rgb(2 9 58 / 60%);
   opacity: 0;
   transition: opacity 400ms var(--ease-out);
   pointer-events: none;
 }
 
 .card-palestrantes h6, .card-palestrantes p { position: relative; z-index: 1; }
-.card-palestrantes:focus-visible { outline: 3px solid #02093a; outline-offset: 4px; }
+.card-palestrantes:focus-visible { outline: 3px solid var(--color-navy-900); outline-offset: 4px; }
 
 .card-palestrantes h6 {
-  color: #dda92e;
-  font-size: 20px;
-  font-weight: 500;
-  transition: color var(--dur-ui) var(--ease-out);
+  color: var(--text-on-dark);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
 }
 
 .card-palestrantes p {
-  color: #fff;
-  font-size: 13px;
-  font-weight: 400;
-  padding-bottom: 5%;
+  color: var(--text-on-dark);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-snug);
 }
 
-/* Hover (só mouse/trackpad) e foco pelo teclado: card sobe, foto aproxima, nome clareia. */
+/* Hover (só mouse/trackpad) e foco pelo teclado: card sobe e foto aproxima. */
 @media (hover: hover) and (pointer: fine) {
   .card-palestrantes:hover {
     transform: translateY(-6px);
@@ -125,9 +124,6 @@
     transform: scale(1.06);
   }
 
-  .card-palestrantes:hover h6 {
-    color: #ffdf92;
-  }
 }
 
 .card-palestrantes:focus-visible {
@@ -143,9 +139,6 @@
   transform: scale(1.06);
 }
 
-.card-palestrantes:focus-visible h6 {
-  color: #ffdf92;
-}
 
 /* Clique: volta ao repouso rápido, com leve "aperto". */
 .card-palestrantes:active {
@@ -162,46 +155,37 @@
 .container-palestrantes > :nth-child(4n + 3) { --i: 2; }
 .container-palestrantes > :nth-child(4n + 4) { --i: 3; }
 
-/* Entre ~960px e ~1288px cabem 3 cards por linha. */
-@media (max-width: 1288px) {
+/* 4 cards = 4×230 + 3×24 = 992px de conteúdo + 2×24 de gutter: abaixo de 1040px cabem 3. */
+@media (max-width: 1039px) {
   .container-palestrantes > :nth-child(n) { --i: 0; }
   .container-palestrantes > :nth-child(3n + 2) { --i: 1; }
   .container-palestrantes > :nth-child(3n + 3) { --i: 2; }
 }
 
-/* Duas colunas (desktop estreito e mobile). */
-@media (max-width: 959px) {
+/* 3 cards = 738px + 48px de gutter: abaixo de 786px ficam 2 colunas (desktop estreito e mobile). */
+@media (max-width: 785px) {
   .container-palestrantes > :nth-child(n) { --i: 0; }
   .container-palestrantes > :nth-child(2n + 2) { --i: 1; }
 }
 
 @media (max-width: 768px) {
-  .section-palestrantes {
-    padding-inline: 5%;
-    padding-block: 10%;
-  }
-
-  .section-palestrantes h5 {
-    font-size: 15px;
-    padding: 0;
-  }
-
   .container-palestrantes {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    padding-inline: 0;
+    gap: var(--space-2);
   }
 
   .card-palestrantes {
-    width: calc(50% - 10px); /* duas por linha com gap */
+    width: calc(50% - var(--space-1)); /* duas por linha com gap */
     max-width: 200px;
     height: 250px;
+    padding-block-end: var(--space-2);
   }
+
+  /* Card estreito (~170px): o nome desce um degrau na escala para não quebrar demais. */
   .card-palestrantes h6 {
-    font-size: 15px;
+    font-size: var(--fs-body);
   }
+
   .card-palestrantes p {
-    font-size: 12px;
+    font-size: var(--fs-caption);
   }
 }

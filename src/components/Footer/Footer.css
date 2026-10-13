@@ -3,30 +3,33 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  padding-inline: 12%;
-  padding-block: 5%;
-  color: #fff;
+  padding-inline: var(--section-px);
+  padding-block: var(--section-py);
+  color: var(--text-on-dark);
 
   /* estrutura */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
+  gap: var(--space-6);
   text-align: center;
 }
 
 .content-logo {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-1);
 }
 
+/* Rótulo "Realização" e endereço: metadados. */
 .content-logo p {
   text-align: left;
+  font-size: var(--fs-small);
+  line-height: var(--lh-body);
 }
 
 .adress-open {
-  font-weight: 300;
-  padding-top: 20px;
+  font-weight: var(--fw-light);
+  padding-top: var(--space-3);
 }
 
 .content-logo img {
@@ -43,25 +46,32 @@
 
 .content-text-footer {
   text-align: left;
-  font-weight: 300;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-body);
 }
 
+/* Título "X GTAP" em cima e links embaixo, alinhados à esquerda; o bloco
+   fica centralizado na coluna. */
 .content-menu-footer {
   display: flex;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: fit-content;
+  margin-inline: auto;
   text-align: left;
-  justify-content: center;
 }
 
 .content-menu-footer p {
-  color: #fff;
-  font-weight: 600;
-  font-size: 22px;
-  padding-block: 5px;
+  color: var(--text-on-dark);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  padding-block: var(--space-0-5);
 }
 
 .content-menu-footer li {
-  padding-block: 5px;
+  padding-block: var(--space-0-5);
 }
 
 .container-footer .content-menu-footer a {
@@ -128,7 +138,7 @@
   .container-footer {
     display: flex;
     flex-direction: column;
-    font-size: 13px;
+    gap: var(--space-3);
   }
 
   .content-logo img {
@@ -136,7 +146,6 @@
   }
 
   .adress-open {
-    font-size: 13px;
     width: 80%;
   }
 

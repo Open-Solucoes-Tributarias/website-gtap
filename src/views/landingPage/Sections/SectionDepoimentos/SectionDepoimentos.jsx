@@ -5,44 +5,60 @@ import { useEffect, useRef, useState } from "react";
 import "./SectionDepoimentos.css";
 
 export const SectionDepoimentos = ({ data }) => {
+  // Só um vídeo por vez: o card ativo troca a capa pelo player.
+  const [ativoId, setAtivoId] = useState(null);
   const depoimentos = data.filter((d) => d.type === 3);
   const sliderRef = useRef(null);
-  const [bordas, setBordas] = useState({ inicio: true, fim: false });
+  // Carrossel infinito: três cópias da lista; o visitante fica sempre na do meio.
+  // Ao parar de rolar dentro de uma cópia lateral, salta (sem animação) a largura
+  // de uma cópia — o conteúdo é idêntico, então o salto é invisível.
+  const copias = depoimentos.length > 1 ? [0, 1, 2] : [1];
 
-  // Início/fim do slider sem ler scrollLeft: observa o primeiro e o último card.
+  const larguraCopia = () => {
+    const slider = sliderRef.current;
+    const cards = slider?.children;
+    if (!slider || !cards || cards.length < depoimentos.length * 2) return 0;
+    return cards[depoimentos.length].offsetLeft - cards[0].offsetLeft;
+  };
+
   useEffect(() => {
     const slider = sliderRef.current;
-    const primeiro = slider?.firstElementChild;
-    const ultimo = slider?.lastElementChild;
-    if (!primeiro || !("IntersectionObserver" in window)) return undefined;
+    if (!slider || copias.length === 1) return undefined;
+    // Saltos sempre instantâneos: o slider tem scroll-behavior: smooth, e uma
+    // rolagem animada no carregamento faz o Chrome parar de medir o LCP.
+    const saltar = (left) => slider.scrollTo({ left, behavior: "instant" });
+    saltar(larguraCopia()); // começa na cópia do meio
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        setBordas((atual) => {
-          let { inicio, fim } = atual;
-          entries.forEach((entry) => {
-            const inteiro = entry.intersectionRatio >= 0.95;
-            if (entry.target === primeiro) inicio = inteiro;
-            if (entry.target === ultimo) fim = inteiro;
-          });
-          return inicio === atual.inicio && fim === atual.fim ? atual : { inicio, fim };
-        });
-      },
-      { root: slider, threshold: 0.95 },
-    );
-    observer.observe(primeiro);
-    observer.observe(ultimo);
-    return () => observer.disconnect();
-  }, [depoimentos.length]);
+    let timer = 0;
+    const recentrar = () => {
+      const copia = larguraCopia();
+      if (!copia) return;
+      if (slider.scrollLeft < copia * 0.5) saltar(slider.scrollLeft + copia);
+      else if (slider.scrollLeft > copia * 1.5) saltar(slider.scrollLeft - copia);
+    };
+    // Sem scrollend (o Lenis o engole): espera a rolagem ficar parada 150 ms.
+    const aoRolar = () => {
+      clearTimeout(timer);
+      timer = setTimeout(recentrar, 150);
+    };
+    slider.addEventListener("scroll", aoRolar, { passive: true });
+    window.addEventListener("resize", recentrar);
+    return () => {
+      clearTimeout(timer);
+      slider.removeEventListener("scroll", aoRolar);
+      window.removeEventListener("resize", recentrar);
+    };
+  }, [depoimentos.length, copias.length]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const cardWidth = 330;
-  const cardsPerSlide = 1;
-  const slideSize = cardWidth * cardsPerSlide;
+  const passo = () => {
+    const card = sliderRef.current?.firstElementChild;
+    if (!card) return 0;
+    const estilo = getComputedStyle(card);
+    return card.offsetWidth + parseFloat(estilo.marginRight || 0);
+  };
 
   const pauseAllVideos = () => {
-    if (!sliderRef.current) return;
-    const vids = sliderRef.current.querySelectorAll("video");
-    vids.forEach(v => {
+    sliderRef.current?.querySelectorAll("video").forEach((v) => {
       try { v.pause(); } catch { /* Video may already be stopped. */ }
     });
   };
@@ -52,62 +68,74 @@ export const SectionDepoimentos = ({ data }) => {
 
   const scrollLeft = () => {
     pauseAllVideos();
-    sliderRef.current?.scrollBy({ left: -slideSize, behavior: scrollBehavior() });
+    sliderRef.current?.scrollBy({ left: -passo(), behavior: scrollBehavior() });
   };
 
   const scrollRight = () => {
     pauseAllVideos();
-    sliderRef.current?.scrollBy({ left: slideSize, behavior: scrollBehavior() });
+    sliderRef.current?.scrollBy({ left: passo(), behavior: scrollBehavior() });
   };
 
   return (
     <section className="section-depoimentos">
-      <div>
-        <h3 data-reveal>Depoimentos</h3>
-        <h4 data-reveal>
-          Veja o que <b>nosso público</b> fala sobre o GTAP
-        </h4>
+      <div className="section-depoimentos-head">
+        <h3 data-reveal>Veja o que <b>nosso público</b> fala sobre o GTAP</h3>
       </div>
 
       <div className="slider-wrapper" data-reveal>
-        <button type="button" className="testimonial-arrow testimonial-arrow-prev" onClick={scrollLeft} aria-label="Anterior" aria-disabled={bordas.inicio}><Icon name="chevron-left" /></button>
+        <button type="button" className="testimonial-arrow testimonial-arrow-prev" onClick={scrollLeft} aria-label="Anterior"><Icon name="chevron-left" /></button>
 
         <div className="slider" ref={sliderRef} data-lenis-prevent-horizontal>
-          {depoimentos.map((depoimento, index) => (
-            <div
-              className="depoimento-card"
-              key={depoimento.id}
-              style={index % 2 !== 0 ? { marginTop: 30 } : {}}
-            >
-              <div className="video-container">
-                <video
-                  controls
-                  playsInline
-                  preload="none"
-                  width="300"
-                  // poster={depoimento.posterUrl ?? undefined} // se tiver
-                  style={{ borderRadius: 10, width: "100%", height: "100%", display: "block" }}
-                  onPlay={(e) => {
-                    // pausa outros vídeos quando um começar
-                    const me = e.currentTarget;
-                    sliderRef.current
-                      ?.querySelectorAll("video")
-                      .forEach(v => { if (v !== me) v.pause(); });
-                  }}
-                >
-                  <source src={depoimento.mediaUrl} type="video/mp4" />
-                  Seu navegador não suporta vídeo HTML5.
-                </video>
-              </div>
+          {copias.flatMap((copia) => depoimentos.map((depoimento) => {
+            const chave = `${copia}-${depoimento.id}`;
+            const ativo = ativoId === chave;
+            const clone = copia !== 1;
+            return (
+              <div className="depoimento-card" key={chave} aria-hidden={clone || undefined}>
+                {/* Capa estática (public/posters/depoimentos) + play; o vídeo só é
+                    carregado quando o visitante clica. */}
+                <div className="video-container">
+                  {ativo ? (
+                    <video
+                      className="depoimento-video"
+                      src={depoimento.mediaUrl}
+                      controls
+                      autoPlay
+                      playsInline
+                      onEnded={() => setAtivoId(null)}
+                    />
+                  ) : (
+                    <button
+                      type="button"
+                      className="depoimento-capa"
+                      onClick={() => setAtivoId(chave)}
+                      tabIndex={clone ? -1 : undefined}
+                      aria-label={`Assistir ao depoimento de ${depoimento.title}`}
+                    >
+                      <img
+                        src={`/posters/depoimentos/${depoimento.id}.webp`}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="720"
+                        height="405"
+                      />
+                      <span className="depoimento-play" aria-hidden="true">
+                        <img src="/assets/icons/play-triangle.svg" alt="" width="18" height="16" />
+                      </span>
+                    </button>
+                  )}
+                </div>
 
-              <h6>{depoimento.title}</h6>
-              <p>{depoimento.description}</p>
-              <p>{depoimento.annotation}</p>
-            </div>
-          ))}
+                <h6>{depoimento.title}</h6>
+                <p className="depoimento-inst">{depoimento.description}</p>
+                <blockquote className="depoimento-quote">{depoimento.annotation}</blockquote>
+              </div>
+            );
+          }))}
         </div>
 
-        <button type="button" className="testimonial-arrow testimonial-arrow-next" onClick={scrollRight} aria-label="Próximo" aria-disabled={bordas.fim}><Icon name="chevron-right" /></button>
+        <button type="button" className="testimonial-arrow testimonial-arrow-next" onClick={scrollRight} aria-label="Próximo"><Icon name="chevron-right" /></button>
       </div>
     </section>
   );

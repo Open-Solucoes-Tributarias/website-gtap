@@ -1,139 +1,74 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "../../../../components/Icon/Icon";
-import { useEffect, useState, useRef } from "react";
 import ResponsiveImage from "../../../../components/ResponsiveImage/ResponsiveImage";
 import "./SectionGaleria.css";
 
-const IMAGES_VISIBLE = 6;
-const INTERVAL_MS = 5000;
-// Crossfade: 700 ms por card + 80 ms de cascata entre eles (ver SectionGaleria.css).
-const TROCA_MS = 700 + 80 * (IMAGES_VISIBLE - 1) + 100;
-// Se a decodificação travar (rede lenta), troca assim mesmo depois disso.
-const DECODE_LIMITE_MS = 3000;
+const CELULAS = 4;
+const INTERVALO = 6000;
 
+// Galeria compacta: texto à esquerda e 4 fotos em grade 2×2 que trocam uma de
+// cada vez (crossfade). Cada célula mantém no DOM só a foto anterior (opaca, por
+// baixo), a atual e a próxima; pausa fora da tela, com a aba oculta ou com
+// movimento reduzido.
 export const SectionGaleria = ({ images }) => {
-  const sectionRef = useRef(null);
-  const proximoRef = useRef(null);
-  const [nearViewport, setNearViewport] = useState(false);
+  const celulas = Array.from({ length: CELULAS }, (_, c) => images.filter((_, i) => i % CELULAS === c));
+  const [indices, setIndices] = useState(() => celulas.map(() => 0));
+  const ref = useRef(null);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => setNearViewport(entry.isIntersecting), { rootMargin: "300px" });
-    observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-  const [startIndex, setStartIndex] = useState(0);
-  // Grupo que vai entrar: fica empilhado sobre o atual (mesma célula do grid, sem mudar altura).
-  const [nextIndex, setNextIndex] = useState(null);
-  const [trocando, setTrocando] = useState(false);
-  // Pausa enquanto o mouse está sobre a seção ou o foco está dentro dela.
-  const [hover, setHover] = useState(false);
-  const [foco, setFoco] = useState(false);
-  const pausado = hover || foco;
-
-  // 1) A cada 5 s, monta o próximo grupo (ainda invisível).
-  useEffect(() => {
-    if (!nearViewport || pausado || nextIndex !== null || images.length <= IMAGES_VISIBLE) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const timeout = setTimeout(() => {
-      setNextIndex((startIndex + IMAGES_VISIBLE) % images.length); // avança um grupo
-    }, INTERVAL_MS);
-
-    return () => clearTimeout(timeout);
-  }, [images.length, nearViewport, pausado, nextIndex, startIndex]);
-
-  // 2) Só começa o fade depois que as imagens do próximo grupo estão decodificadas.
-  useEffect(() => {
-    if (nextIndex === null || trocando || pausado || !nearViewport) return;
-
-    let cancelado = false;
-    let limite;
-    const imgs = [...(proximoRef.current?.querySelectorAll("img") ?? [])];
-    Promise.race([
-      Promise.all(imgs.map((img) => img.decode().catch(() => {}))),
-      new Promise((resolve) => { limite = setTimeout(resolve, DECODE_LIMITE_MS); }),
-    ]).then(() => {
-      if (!cancelado) setTrocando(true);
-    });
-
-    return () => { cancelado = true; clearTimeout(limite); };
-  }, [nextIndex, trocando, pausado, nearViewport]);
-
-  // 3) Fim do crossfade: o grupo novo vira o atual e o antigo sai do DOM.
-  useEffect(() => {
-    if (!trocando) return;
-
-    const timeout = setTimeout(() => {
-      setStartIndex(nextIndex);
-      setNextIndex(null);
-      setTrocando(false);
-    }, TROCA_MS);
-
-    return () => clearTimeout(timeout);
-  }, [trocando, nextIndex]);
-
-  const getVisibleImages = (inicio) => {
-    const visibleImages = [];
-    for (let i = 0; i < Math.min(IMAGES_VISIBLE, images.length); i++) {
-      const index = (inicio + i) % images.length;
-      if (images[index]) visibleImages.push(images[index]);
-    }
-    return visibleImages;
-  };
-
-  const renderGrupo = (inicio, loading) =>
-    getVisibleImages(inicio).map((img) => (
-      <div className="card-imagens" key={img.id}>
-        <ResponsiveImage image={img.image} src={img.imageUrl} alt="Registro de uma edição do GTAP" sizes="(max-width: 768px) 45vw, 240px" loading={loading} />
-      </div>
-    ));
-
-  const aoEntrarPonteiro = (event) => {
-    if (event.pointerType !== "touch") setHover(true);
-  };
-  const aoSairPonteiro = (event) => {
-    if (event.pointerType !== "touch") setHover(false);
-  };
-  const aoSairFoco = (event) => {
-    if (!event.currentTarget.contains(event.relatedTarget)) setFoco(false);
-  };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    let visivel = false;
+    let timer = 0;
+    let vez = 0;
+    // Uma célula troca por vez, em sequência: 0, 3, 1, 2 (diagonais alternadas).
+    const ordem = [0, 3, 1, 2];
+    const passo = () => {
+      const c = ordem[vez % CELULAS];
+      vez += 1;
+      setIndices((atual) => atual.map((i, k) => (k === c ? (i + 1) % celulas[c].length : i)));
+    };
+    const sync = () => {
+      clearInterval(timer);
+      if (visivel && !document.hidden) timer = setInterval(passo, INTERVALO / CELULAS * 2);
+    };
+    const observer = new IntersectionObserver(([entry]) => { visivel = entry.isIntersecting; sync(); });
+    observer.observe(ref.current);
+    document.addEventListener("visibilitychange", sync);
+    return () => { clearInterval(timer); observer.disconnect(); document.removeEventListener("visibilitychange", sync); };
+  }, [celulas.length]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <section
-      ref={sectionRef}
-      className="section-galeria"
-      id="galeria"
-      onPointerEnter={aoEntrarPonteiro}
-      onPointerLeave={aoSairPonteiro}
-      onFocus={() => setFoco(true)}
-      onBlur={aoSairFoco}
-    >
-       <h3 className="title-galeria-mobile" data-reveal>Galeria</h3>
-      <div className="section-galeria-left" data-reveal="scale">
-        <div
-          className={`galeria-grupo${trocando ? " is-saindo" : ""}`}
-          key={`grupo-${startIndex}`}
-          aria-hidden={trocando || undefined}
-        >
-          {renderGrupo(startIndex, "lazy")}
-        </div>
-        {nextIndex !== null && (
-          <div
-            className={`galeria-grupo ${trocando ? "is-entrando" : "is-preparando"}`}
-            key={`grupo-${nextIndex}`}
-            ref={proximoRef}
-            aria-hidden={!trocando || undefined}
-          >
-            {renderGrupo(nextIndex, "eager")}
-          </div>
-        )}
-      </div>
-      <div className="section-galeria-right" data-reveal-stagger>
-        <h3 data-reveal>Galeria</h3>
-        <h5 data-reveal>Acompanhe de perto o que o GTAP tem realizado nos últimos anos.</h5>
-        <a href="/galeria/" className="galeria-cta" data-reveal>
-          <Icon name="camera"  />ACESSE A GALERIA
+    <section className="section-galeria" id="galeria" ref={ref}>
+      <div className="galeria-texto" data-reveal-stagger>
+        <h2 className="galeria-titulo" data-reveal><b>Galeria</b></h2>
+        <p className="galeria-lead" data-reveal>
+          Acompanhe de perto o que o GTAP tem realizado nos últimos anos.
+        </p>
+        <a href="/galeria/" className="galeria-cta btn btn--gold" data-reveal>
+          <Icon name="camera" />Acesse a galeria
         </a>
+      </div>
+
+      <div className="galeria-grade" aria-hidden="true" data-reveal="scale">
+        {celulas.map((fotos, c) => {
+          const atual = indices[c];
+          const proxima = (atual + 1) % fotos.length;
+          const anterior = (atual - 1 + fotos.length) % fotos.length;
+          return (
+            <div className="galeria-celula" key={c}>
+              {fotos.map((foto, i) => (i === atual || i === proxima || i === anterior) && (
+                <div
+                  key={foto.id}
+                  className={`galeria-camada${i === atual ? " is-active" : i === anterior ? " is-prev" : ""}`}
+                >
+                  <ResponsiveImage image={foto.image} src={foto.imageUrl} alt="" sizes="(max-width: 768px) 45vw, 280px" />
+                </div>
+              ))}
+            </div>
+          );
+        })}
       </div>
     </section>
   );

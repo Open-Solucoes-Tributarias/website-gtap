@@ -3,6 +3,8 @@
 import "./CardButton.css";
 import { useLoteAtual } from "../../Utils/useLoteAtual";
 
+const DATA_EVENTO = "DATA A CONFIRMAR";
+
 export const CardButton = () => {
   const { precoAtual, nomeLoteAtual } = useLoteAtual();
 
@@ -29,12 +31,16 @@ export const CardButton = () => {
         </div>
         <hr />
         <div className="button-left-data">
-          <p>08 E 09 DE OUTUBRO DE 2026</p>
-          <p>08 E 09 DE OUTUBRO DE 2026</p>
-          <p>08 E 09 DE OUTUBRO DE 2026</p>
-          <p>08 E 09 DE OUTUBRO DE 2026</p>
-          <p>08 E 09 DE OUTUBRO DE 2026</p>
-          <p>08 E 09 DE OUTUBRO DE 2026</p>
+          {/* Dois grupos iguais para o loop sem emenda; leitores de tela leem a data uma vez. */}
+          <div className="button-left-track">
+            {[0, 1].map((group) => (
+              <div className="button-left-group" key={group} aria-hidden={group === 1 || undefined}>
+                <p>{DATA_EVENTO}</p>
+                <p aria-hidden="true">{DATA_EVENTO}</p>
+                <p aria-hidden="true">{DATA_EVENTO}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="card-button-right">
@@ -44,13 +50,12 @@ export const CardButton = () => {
         </div>
         <div className="button-right-submit">
           <a
-            className="card-button-cta"
+            className="btn btn--gold card-button-cta"
             href="https://api.whatsapp.com/send/?phone=5571992084907&text=Quero%20informa%C3%A7%C3%A3o%20sobre%20o%20GTAP&type=phone_number&app_absent=0"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {/* span (e não <button>): botão dentro de link é HTML inválido e gera dois tabs */}
-            <span>Garanta a sua vaga</span>
+            Garanta a sua vaga
           </a>
         </div>
       </div>

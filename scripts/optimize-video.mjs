@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 const data = JSON.parse(await readFile('public/api/landing_page.json', 'utf8'));
 const source = data.find((item) => item.type === 6)?.mediaUrl;
 if (!source || new URL(source).hostname !== 'gtap.com.br') throw new Error('Missing GTAP banner video URL.');
-const profile = 'h264-1280-crf28-24fps-noaudio-faststart-v1';
+const profile = 'h264-1600-crf24-24fps-noaudio-faststart-v2';
 const manifestPath = 'src/data/generated-video.json';
 const fileExists = (file) => access(file).then(() => true, () => false);
 
@@ -42,7 +42,7 @@ async function encode() {
   const exists = await fileExists(output);
   if (!exists) {
     const temporary = `${cache}/encoded-${hash}.mp4`;
-    const args = ['-hide_banner', '-loglevel', 'error', '-y', '-i', resolve(input), '-vf', "scale=w='min(1280,iw)':h=-2,fps=24", '-c:v', 'libx264', '-crf', '28', '-preset', 'medium', '-pix_fmt', 'yuv420p', '-an', '-movflags', '+faststart', resolve(temporary)];
+    const args = ['-hide_banner', '-loglevel', 'error', '-y', '-i', resolve(input), '-vf', "scale=w='min(1600,iw)':h=-2,fps=24", '-c:v', 'libx264', '-crf', '24', '-preset', 'medium', '-pix_fmt', 'yuv420p', '-an', '-movflags', '+faststart', resolve(temporary)];
     await new Promise((resolveRun, reject) => {
       const child = spawn(process.env.FFMPEG_PATH || 'ffmpeg', args, { stdio: ['ignore', 'ignore', 'pipe'] });
       let error = '';

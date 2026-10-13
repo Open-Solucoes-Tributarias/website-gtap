@@ -15,14 +15,8 @@ export const SectionPalestrantes = ({ data }) => {
 
   return (
     <section className="section-palestrantes" id="palestrantes">
-      <div>
-        <h3 data-reveal>Palestrantes</h3>
-      </div>
-      <div>
-        <h5 data-reveal>
-          Grandes nomes do universo tributário reunidos para debater temas
-          cruciais junto a participantes de várias partes do Brasil.
-        </h5>
+      <div className="section-palestrantes-header">
+        <h3 data-reveal>Quem vai <b>conduzir as discussões</b></h3>
       </div>
       <div className="container-palestrantes">
         {palestrantes.map((palestrante) => (

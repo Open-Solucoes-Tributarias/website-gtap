@@ -1,79 +1,116 @@
+/* Card do formulário: texto + campos à esquerda (centralizados na altura),
+   foto à direita. */
 .container-forms {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-  background: linear-gradient(to left, #dda92e, #ffdf92);
-  color: #fff;
-  border-radius: 10px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  min-height: 520px;
+  /* Mesmas cores de --gradient-gold, espelhado: claro à esquerda (atrás do
+     texto), dourado à direita (junto à foto). */
+  background: linear-gradient(270deg, var(--color-gold-500), var(--color-gold-200));
+  color: var(--text-on-dark);
+  border-radius: var(--radius-md);
 }
 
 .container-forms-left {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding-inline: 8%;
-  padding-block: 15%;
-  color: #02093a;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  color: var(--text-on-light);
+}
+
+@media (min-width: 1200px) {
+  .container-forms-left {
+    padding: var(--space-8);
+  }
+}
+
+.container-forms .forms-title {
+  max-width: 24ch;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-regular);
+  color: var(--text-on-light);
+  text-wrap: balance;
+}
+
+/* Campos em grade: nome inteiro; e-mail e WhatsApp lado a lado; botão e
+   mensagem ocupam a linha toda. */
+.container-forms form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.container-forms .form-input--full,
+.container-forms .form-status {
+  grid-column: 1 / -1;
 }
 
 .form-input {
   display: flex;
   flex-direction: column;
-  margin-block: 10px;
+  gap: var(--space-1);
 }
 
 .form-input label {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
 }
 
 .form-input input {
-  border: 1px solid #7c7c7c;
-  color: #02093a;
-  border-radius: 5px;
-  background-color: #fff;
-  padding-block: 8px;
-  padding-inline: 3px;
+  height: 48px;
+  padding-inline: var(--space-2);
+  border: 1px solid rgb(2 9 58 / 22%); /* navy-900 a 22% (sem token) */
+  border-radius: var(--radius-sm);
+  background-color: var(--color-white);
+  color: var(--text-on-light);
+  font-size: var(--fs-body);
 }
 
-.form-input button {
-  background-color: #02093a;
-  color: #fff;
-  padding-block: 2%;
-  border-radius: 5px;
-  cursor: pointer;
+.form-input input::placeholder {
+  color: var(--text-on-light-muted);
 }
 
-.container-forms-left p {
-  font-size: 28px;
-  color: #02093a;
-  font-weight: 600;
+/* Botão de envio: estilo vem do padrão global (.btn .btn--navy); aqui só o
+   layout de largura total. */
+.container-forms .form-submit {
+  width: 100%;
+  margin-top: var(--space-1);
 }
 
 .container-forms-right {
   background-image: var(--gtap-bg-src-assets-eventogtapforms-webp);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
   background-size: cover;
   background-position-x: right;
   background-repeat: no-repeat;
 }
 
+@media (max-width: 900px) {
+  .container-forms form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .container-forms {
-    display: flex;
-    flex-direction: column;
-    padding-inline: 2%;
+    display: block;
+    min-height: 0;
   }
 
   .container-forms-right {
     display: none;
   }
 
-  .container-forms-left p {
-    font-size: 22px;
+  .container-forms-left {
+    gap: var(--space-3);
+    /* Embaixo menos padding: o espaço reservado da mensagem já respira. */
+    padding: var(--space-4) var(--space-3) var(--space-2);
   }
-
 }
 
 /* ====================== Microinterações ====================== */
@@ -100,7 +137,7 @@
 }
 
 .container-forms .form-input:focus-within label {
-  color: #1d2f9e;
+  color: var(--color-blue-500);
 }
 
 .container-forms .form-input input {
@@ -111,92 +148,32 @@
 
 @media (hover: hover) and (pointer: fine) {
   .container-forms .form-input input:hover {
-    border-color: #4a4f6e;
+    border-color: var(--text-on-light-muted);
   }
 }
 
 .container-forms .form-input input:focus-visible {
   outline: 2px solid transparent; /* mantém indicador no modo de alto contraste */
   border-color: var(--color-navy);
-  box-shadow: 0 0 0 3px rgb(2 9 58 / 22%);
+  box-shadow: 0 0 0 3px rgb(2 9 58 / 22%); /* anel de foco: navy-900 a 22% */
 }
 
 .container-forms .form-input input:user-invalid {
-  border-color: #7f1710;
-}
-
-/* Botão: sobe 2px com sombra suave; volta ao lugar no clique (120ms). */
-.container-forms .form-input button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6em;
-  transition:
-    transform 300ms var(--ease-out),
-    background-color 300ms var(--ease-out),
-    opacity var(--dur-ui) var(--ease-out);
-}
-
-/* Sombra num pseudo-elemento: só a opacidade anima. */
-.container-forms .form-input button::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: 0 10px 24px -12px rgb(2 9 58 / 60%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 300ms var(--ease-out);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .container-forms .form-input button:not(:disabled):hover {
-    transform: translateY(-2px);
-    background-color: #0a1560;
-  }
-
-  .container-forms .form-input button:not(:disabled):hover::after {
-    opacity: 1;
-  }
+  border-color: var(--color-error);
 }
 
 /* O anel dourado global some no fundo amarelo: no card ele fica azul. */
-.container-forms .form-input button:focus-visible {
+.container-forms .form-submit:focus-visible {
   outline-color: var(--color-navy);
 }
 
-.container-forms .form-input button:not(:disabled):focus-visible {
-  transform: translateY(-2px);
-  background-color: #0a1560;
-}
-
-.container-forms .form-input button:not(:disabled):focus-visible::after {
-  opacity: 1;
-}
-
-.container-forms .form-input button:not(:disabled):active {
-  transform: none;
-  transition-duration: 120ms;
-}
-
-.container-forms .form-input button:not(:disabled):active::after {
-  opacity: 0;
-  transition-duration: 120ms;
-}
-
-.container-forms .form-input button:disabled {
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-/* Indicador de envio ao lado de "ENVIANDO...". */
+/* Indicador de envio ao lado de "Enviando...". */
 .container-forms .form-spinner {
   flex: none;
   width: 1em;
   height: 1em;
-  border: 2px solid rgb(255 255 255 / 35%);
-  border-top-color: #fff;
+  border: 2px solid rgb(255 255 255 / 35%); /* trilho do spinner (sem token) */
+  border-top-color: var(--color-white);
   border-radius: 50%;
   animation: gtap-forms-spin 700ms linear infinite;
 }
@@ -207,12 +184,13 @@
   }
 }
 
-/* Mensagem de retorno: espaço reservado (2 linhas) para não empurrar a página. */
+/* Mensagem de retorno: espaço reservado para não empurrar a página
+   (1 linha no desktop, 2 no mobile, onde o texto quebra). */
 .container-forms .form-status {
-  min-height: 2.7em;
-  font-size: 16px;
-  line-height: 1.35;
-  font-weight: 600;
+  min-height: 1.5em;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-semibold);
 }
 
 .container-forms .form-status-message {
@@ -221,17 +199,25 @@
 }
 
 .container-forms .form-status-success {
-  color: #0f4a29;
+  color: var(--color-success);
 }
 
-.container-forms .form-status-error {
-  color: #7f1710;
+.container-forms .form-status-error,
+.container-forms .form-status-invalid {
+  color: var(--color-error);
 }
 
 @keyframes gtap-forms-status {
   from {
     opacity: 0;
     translate: 0 6px;
+  }
+}
+
+@media (max-width: 900px) {
+  .container-forms .form-status {
+    min-height: 3em;
+    margin-top: calc(-1 * var(--space-1));
   }
 }
 

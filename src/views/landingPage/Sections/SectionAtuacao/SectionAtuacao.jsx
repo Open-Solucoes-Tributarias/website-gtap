@@ -1,7 +1,7 @@
 import ResponsiveImage from "../../../../components/ResponsiveImage/ResponsiveImage";
 import { Icon } from "../../../../components/Icon/Icon";
 import "./SectionAtuacao.css";
-import image1 from "../../../../assets/image1.webp";
+import { getMedia } from "../../../../data/media";
 import image2 from "../../../../assets/image-mobile.webp";
 
 export const SectionAtuacao = ({ localImages = {} }) => {
@@ -14,7 +14,7 @@ export const SectionAtuacao = ({ localImages = {} }) => {
           <hr className="mobile-hr-display" />
           <div className="data-section-mobile">
             <h3>
-              <Icon name="calendar"  />08 e 09 de Outubro de 2026
+              <Icon name="calendar"  />Data a confirmar
             </h3>
             <h3>
               <Icon name="location-dot"  />Salvador/BA
@@ -29,7 +29,7 @@ export const SectionAtuacao = ({ localImages = {} }) => {
         </div>
         <div className="data-section">
           <h3 data-reveal>
-            <Icon name="calendar"  />08 e 09 de Outubro de 2026
+            <Icon name="calendar"  />Data a confirmar
           </h3>
           <h3 data-reveal>
             <Icon name="location-dot"  />Salvador/BA
@@ -37,15 +37,22 @@ export const SectionAtuacao = ({ localImages = {} }) => {
         </div>
       </div>
       <div className="right">
-        <ResponsiveImage image={localImages.image1} sizes="(max-width: 768px) 90vw, 600px" src={image1.src} width={image1.width} height={image1.height} alt="banner evento gtap" loading="lazy" data-reveal="scale" />
+        {/* Colagem: três fotos independentes, cada uma com entrada e hover próprios. */}
+        <div className="atuacao-collage">
+          <figure className="atuacao-photo atuacao-photo--main" data-reveal="scale">
+            <ResponsiveImage image={getMedia("src/assets/temas-foto-1.webp")} sizes="(max-width: 768px) 0px, 500px" alt="Participante fotografando o palco do GTAP" loading="lazy" />
+          </figure>
+          <figure className="atuacao-photo atuacao-photo--city" data-reveal="scale">
+            <ResponsiveImage image={getMedia("src/assets/atuacao-salvador.webp")} sizes="(max-width: 768px) 0px, 200px" alt="Elevador Lacerda, em Salvador" loading="lazy" />
+          </figure>
+          <figure className="atuacao-photo atuacao-photo--speaker" data-reveal="scale">
+            <ResponsiveImage image={getMedia("src/assets/temas-foto-2.webp")} sizes="(max-width: 768px) 0px, 200px" alt="Palestrante no GTAP" loading="lazy" />
+          </figure>
+        </div>
       </div>
       <div className="bottom">
         <div className="container-box" data-reveal>
-          <h3>Confira as áreas de atuação do público-alvo</h3>
-          <h4>
-            Quem lida com os desafios tributários da administração pública marca
-            presença no X GTAP.
-          </h4>
+          <h3>Confira as áreas de atuação do <b>público-alvo</b></h3>
           <div className="container-tags" data-reveal-stagger>
             <span data-reveal="scale">Recursos Humanos</span>
             <span data-reveal="scale">Gestão Orçamentária</span>

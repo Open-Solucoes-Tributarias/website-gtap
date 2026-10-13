@@ -6,7 +6,7 @@
   border: none;
   padding: 0;
   background: transparent;
-  width: 90vw;              /* ou 50vw se quiser mais estreito */         /* Limita a altura visível */
+  width: 90vw;
   overflow-x: hidden;           /* Permite rolagem do próprio dialog */
   box-sizing: border-box;
 }
@@ -16,8 +16,9 @@
   display: none;
 }
 
+/* Véu escuro do modal (preto 70%: não há token de overlay). */
 .modal-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgb(0 0 0 / 70%);
 }
 
 /* Estrutura do modal */
@@ -31,7 +32,7 @@
   width: 60%;
 }
 
-/* Lado esquerdo - foto */
+/* Lado esquerdo - foto (pílula: o raio se limita à metade da largura) */
 .modal-photo {
   display: flex;
   background-size: cover;
@@ -40,71 +41,81 @@
   width: 300px;
   min-height: 350px;
   height: 350px;
-  border-radius: 150px;
-  border: 2px solid #dda92e;
-  margin-right: 30px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-gold-500);
+  margin-right: var(--space-4);
 }
+
 /* Lado direito - texto */
 .modal-box {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background: white;
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    padding-block: 15px;
-    padding-inline: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--color-white);
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.modal-box .modal-texto:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
 }
 
 /* Título */
 .modal-box h2 {
-  font-size: 26px;
-  font-weight: 500;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
   text-align: left;
-  color: #02093a;
- 
+  color: var(--text-on-light);
 }
 
 /* Subtítulo */
 .modal-box h4 {
-  font-size: 17px;
-  color: #02093a;
-  font-weight: 400;
+  font-size: var(--fs-lead);
+  color: var(--text-on-light);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-snug);
   text-align: left;
- 
 }
 
 /* Texto do corpo */
 .modal-box p {
-  font-size: 0.95rem;
-    text-align: left;
-  color: #02093A;
-  line-height: 1.5;
-  margin-bottom: 1rem;
+  font-size: var(--fs-body);
+  text-align: left;
+  color: var(--text-on-light);
+  line-height: var(--lh-body);
 }
 
 /* Ícone do LinkedIn */
 .modal-box .linkedin-icon {
   width: 28px;
-  margin-top: 1rem;
+  margin-top: var(--space-2);
   cursor: pointer;
 }
+
 .footer-modal {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: var(--space-2);
   text-align: left;
 }
+
+/* Botão circular de rede social: 40×40 fixo, ícone centralizado */
 .iconbutton-social {
-  display: inline-block;
-  border: 2px solid #c7c7c7;
-  padding-block: 7px;
-  padding-inline: 10px;
-  border-radius: 100%;
-  font-size: 16px;
-  text-align: left;
-  color: #02093A;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-5);
+  height: var(--space-5);
+  box-sizing: border-box;
+  border: 2px solid var(--color-gray-300);
+  border-radius: 50%;
+  font-size: var(--fs-body);
+  color: var(--text-on-light);
   cursor: pointer;
   transition:
     transform var(--dur-ui) var(--ease-out),
@@ -118,16 +129,18 @@
 }
 
 .modal-dialog .link-social:focus-visible .iconbutton-social {
-  outline: 3px solid var(--color-gold);
+  outline: 3px solid var(--color-gold-500);
   outline-offset: 3px;
 }
 
 /* Botão de fechar */
 .close {
   position: absolute;
-  top: 1rem;
-  right: 1.2rem;
-  font-size: 20px;
+  top: var(--space-2);
+  right: var(--space-2);
+  font-size: var(--fs-lead);
+  line-height: 1;
+  color: var(--text-on-light);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -143,12 +156,12 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 36px;
-  height: 36px;
-  margin: -18px 0 0 -18px;
+  width: var(--space-5);
+  height: var(--space-5);
+  margin: calc(var(--space-5) / -2) 0 0 calc(var(--space-5) / -2);
   z-index: -1;
   border-radius: 50%;
-  background: rgba(2, 9, 58, 0.08);
+  background: rgb(2 9 58 / 8%); /* navy-900 a 8% */
   opacity: 0;
   transform: scale(0.6);
   transition:
@@ -162,15 +175,19 @@
   position: absolute;
   top: 50%;
   transform: translateY(var(--nav-arrow-y));
-  background: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  color: var(--text-on-light);
   border-radius: 50%;
   border: none;
-  font-size: 1.6rem;
-  width: 38px;
-  padding-top: 4px;
-  height: 38px;
+  font-size: var(--fs-h3);
+  width: var(--space-5);
+  height: var(--space-5);
+  padding: 0;
   cursor: pointer;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-sm);
   z-index: 10; /* garante que fique acima do modal */
   transition:
     transform var(--dur-ui) var(--ease-out),
@@ -203,31 +220,20 @@
     flex-direction: column;
     width: 100%;
     align-items: center;
-    padding-inline: 10px;
+    padding-inline: var(--space-1);
   }
 
-    .modal-photo {
-      display: none;
-    }
+  .modal-photo {
+    display: none;
+  }
 
   .modal-box {
-    width: 100%;
-    padding: 16px;
-    border-radius: 16px;
+    padding: var(--space-2);
   }
 
-  .modal-box h2 {
-    font-size: 20px;
-    text-align: center;
-  }
-
-  .modal-box h4 {
-    font-size: 15px;
-    text-align: center;
-  }
-
+  .modal-box h2,
+  .modal-box h4,
   .modal-box p {
-    font-size: 0.9rem;
     text-align: center;
   }
 
@@ -237,25 +243,23 @@
   }
 
   .close {
-    top: 10px;
-    right: 25px;
+    top: var(--space-2);
+    right: var(--space-3);
   }
 
   .nav-arrow {
     --nav-arrow-y: 0px;
-    bottom: 10px;
+    bottom: var(--space-2);
     top: unset;
-    width: 36px;
-    height: 36px;
-    font-size: 1.2rem;
+    font-size: var(--fs-lead);
   }
 
   .nav-left {
-    left: 10px;
+    left: var(--space-1);
   }
 
   .nav-right {
-    right: 10px;
+    right: var(--space-1);
   }
 }
 
@@ -264,8 +268,8 @@
 @media (hover: hover) and (pointer: fine) {
   .modal-dialog .nav-arrow:hover {
     transform: translateY(var(--nav-arrow-y)) scale(1.08);
-    background: #ffdf92;
-    color: #02093a;
+    background: var(--color-gold-200);
+    color: var(--color-navy-900);
   }
 
   .modal-dialog .nav-left:hover svg {
@@ -278,7 +282,7 @@
 
   .modal-dialog .close:hover {
     transform: rotate(90deg);
-    color: #02093a;
+    color: var(--color-navy-900);
   }
 
   .modal-dialog .close:hover::before {
@@ -288,16 +292,16 @@
 
   .modal-dialog .link-social:hover .iconbutton-social {
     transform: translateY(-2px);
-    border-color: #dda92e;
-    background-color: #ffdf92;
+    border-color: var(--color-gold-500);
+    background-color: var(--color-gold-200);
   }
 }
 
 /* Foco pelo teclado = mesmo retorno visual do hover */
 .modal-dialog .nav-arrow:focus-visible {
   transform: translateY(var(--nav-arrow-y)) scale(1.08);
-  background: #ffdf92;
-  color: #02093a;
+  background: var(--color-gold-200);
+  color: var(--color-navy-900);
 }
 
 .modal-dialog .close:focus-visible::before {
@@ -307,8 +311,8 @@
 
 .modal-dialog .link-social:focus-visible .iconbutton-social {
   transform: translateY(-2px);
-  border-color: #dda92e;
-  background-color: #ffdf92;
+  border-color: var(--color-gold-500);
+  background-color: var(--color-gold-200);
 }
 
 /* Clique: "aperto" curto */
