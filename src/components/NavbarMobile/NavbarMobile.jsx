@@ -76,7 +76,7 @@ export const NavbarMobile = () => {
                 <div className="navbar-header">
                     <h1 className="navbar-logo">
                         <a href="/">
-                            <img src="/logo.svg" alt="logo do site" />
+                            <img src="/logo-xi-gtap.webp" alt="XI GTAP — página inicial" width="480" height="150" fetchPriority="high" />
                         </a>
                     </h1>
                     <button

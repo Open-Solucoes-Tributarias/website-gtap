@@ -68,7 +68,7 @@ export async function optimizeImage(input, { outputDirectory, urlPrefix = '/opti
   if (!width || !height) throw new Error('Image dimensions unavailable');
   const largest = Math.max(...sizes);
   const widths = [...new Set(sizes.filter((size) => size < width).concat(Math.min(width, largest)))];
-  const digest = name ?? hash(Buffer.concat([Buffer.from('gtap-media-v1-webp78-avif48-'), input])).slice(0, 20);
+  const digest = name ?? hash(Buffer.concat([Buffer.from('gtap-media-v2-webp85-avif60-'), input])).slice(0, 20);
   await mkdir(outputDirectory, { recursive: true });
   const variants = Object.fromEntries(formats.map((format) => [format, []]));
   for (const size of widths) {
@@ -79,7 +79,7 @@ export async function optimizeImage(input, { outputDirectory, urlPrefix = '/opti
         const pipeline = sharp(input, { limitInputPixels: 40_000_000 }).rotate().resize({ width: size, withoutEnlargement: true });
         const temporary = `${destination}.${randomUUID()}.tmp`;
         try {
-          await pipeline[format]({ quality: format === 'webp' ? 78 : 48, effort: 4 }).toFile(temporary);
+          await pipeline[format]({ quality: format === 'webp' ? 85 : 60, effort: 4 }).toFile(temporary);
           await rename(temporary, destination);
         } finally {
           await rm(temporary, { force: true });
@@ -99,7 +99,8 @@ export async function optimizeImage(input, { outputDirectory, urlPrefix = '/opti
 
 export function backgroundStyles(manifest) {
   const declarations = Object.entries(manifest)
-    .filter(([source]) => source.startsWith('src/assets/'))
+    // Capas dos álbuns (src/assets/capas) são <img>, não fundo: ficam fora do CSS global.
+    .filter(([source]) => source.startsWith('src/assets/') && !source.startsWith('src/assets/capas/'))
     .sort(([left], [right]) => left < right ? -1 : left > right ? 1 : 0)
     .map(([source, image]) => {
       const token = `--gtap-bg-${source.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
@@ -144,14 +145,83 @@ export async function collectGallerySources(root = ROOT) {
   const sources = new Set();
   for (const filename of (await readdir(directory)).filter((name) => name.endsWith('.json')).sort()) {
     for (const row of JSON.parse(await readFile(path.join(directory, filename), 'utf8'))) {
-      if (row.url && RASTER.test(new URL(row.url).pathname)) sources.add(row.url);
+      // Linhas locais (já otimizadas, com thumb) entram por collectLocalGalleryRows.
+      if (row.url?.startsWith('https://') && RASTER.test(new URL(row.url).pathname)) sources.add(row.url);
     }
   }
   return [...sources].sort();
 }
 
+// Álbuns importados já otimizados (ex.: X GTAP, scripts/import-pictime-gallery.mjs):
+// cada linha traz url (full) e thumb locais, com width/height. Não geram as
+// variantes 240/480/960/1280; só uma intermediária (MID_WIDTH) para as miniaturas
+// em telas densas, ao lado de /full/ em /mid/.
+export const MID_WIDTH = 800;
+const LOCAL_PATH = /^\/galerias\/[a-z0-9-]+\/(?:full|thumb)\/[a-z0-9-]+\.webp$/;
+
+export function assertLocalPath(value) {
+  if (typeof value !== 'string' || value.includes('..') || !LOCAL_PATH.test(value)) {
+    throw new Error(`Caminho local inválido no álbum: ${value}`);
+  }
+  return value;
+}
+
+export const midPath = (url) => url.replace('/full/', '/mid/');
+
+export async function collectLocalGalleryRows(root = ROOT) {
+  const directory = path.join(root, 'public/api/galerias');
+  const rows = [];
+  for (const filename of (await readdir(directory)).filter((name) => name.endsWith('.json')).sort()) {
+    for (const row of JSON.parse(await readFile(path.join(directory, filename), 'utf8'))) {
+      if (!row.url || row.url.startsWith('https://')) continue;
+      assertLocalPath(row.url);
+      assertLocalPath(row.thumb);
+      if (!(row.width > 0 && row.height > 0)) throw new Error(`${row.url}: width/height ausentes`);
+      rows.push(row);
+    }
+  }
+  return rows;
+}
+
+/** Entrada do manifesto para uma foto local: thumb, intermediária (se couber) e full. */
+export function localGalleryEntry(row, thumbWidth) {
+  const variants = [[row.thumb, thumbWidth]];
+  if (row.width > MID_WIDTH) variants.push([midPath(row.url), MID_WIDTH]);
+  variants.push([row.url, row.width]);
+  return {
+    src: row.url,
+    srcSet: variants.map(([src, width]) => `${src} ${width}w`).join(', '),
+    width: row.width,
+    height: row.height,
+  };
+}
+
+async function buildLocalGallery(root, previous) {
+  const rows = await collectLocalGalleryRows(root);
+  const entries = {};
+  let created = 0;
+  await runPool(rows, async (row) => {
+    const full = path.join(root, 'public', row.url);
+    if (row.width > MID_WIDTH) {
+      const mid = path.join(root, 'public', midPath(row.url));
+      if (!(await exists(mid))) {
+        await mkdir(path.dirname(mid), { recursive: true });
+        await sharp(full).resize({ width: MID_WIDTH }).webp({ quality: 72, effort: 4 }).toFile(mid);
+        created += 1;
+      }
+    }
+    // Largura real da thumb: reaproveitada do manifesto anterior quando possível.
+    const known = previous[row.url]?.srcSet?.match(/^\S+ (\d+)w/);
+    const thumbWidth = known && previous[row.url].srcSet.startsWith(`${row.thumb} `)
+      ? Number(known[1])
+      : (await sharp(path.join(root, 'public', row.thumb)).metadata()).width;
+    entries[row.url] = localGalleryEntry(row, thumbWidth);
+  }, 12);
+  return { rows, entries, created };
+}
+
 // Fotos dos álbuns: o gtap.com.br serve originais de ~1 MB (eram usados até nas
-// miniaturas). As versões otimizadas (WebP 240/960 px) ficam versionadas em
+// miniaturas). As versões otimizadas (WebP 240/480/960/1280 px) ficam versionadas em
 // public/galeria-otimizada/ com o manifesto src/data/gallery-media.json, e o nome
 // de cada arquivo vem da URL. Assim o build não baixa nada: só fotos novas (ou
 // --refresh) são baixadas e convertidas, em paralelo.
@@ -159,9 +229,12 @@ export const GALLERY = {
   manifest: 'src/data/gallery-media.json',
   directory: 'public/galeria-otimizada',
   urlPrefix: '/galeria-otimizada',
-  sizes: [240, 960],
+  sizes: [240, 480, 960, 1280],
 };
-const galleryName = (source) => hash(`gallery-v1|${source}`).slice(0, 16);
+const galleryName = (source) => hash(`gallery-v3|${source}`).slice(0, 16);
+// Larguras que o perfil atual gera para uma foto (as maiores que o original viram uma só).
+const expectedWidths = (width) => [...new Set(GALLERY.sizes.filter((size) => size < width).concat(Math.min(width, Math.max(...GALLERY.sizes))))];
+const hasAllWidths = (image) => expectedWidths(image.width).every((size) => image.srcSet.includes(`-${size}.webp ${size}w`));
 const variantFiles = (image) => [image.srcSet, image.avifSrcSet].filter(Boolean)
   .flatMap((srcSet) => srcSet.split(', ').map((item) => path.basename(item.split(' ')[0])));
 
@@ -186,23 +259,27 @@ export async function buildGallery({ root = ROOT, refresh = false, fetchImpl = f
   for (const source of sources) {
     const image = previous[source];
     const complete = image && (await Promise.all(variantFiles(image).map((file) => exists(path.join(outputDirectory, file))))).every(Boolean);
-    if (complete && !refresh) manifest[source] = image;
+    // Arquivos de outra versão do perfil (nome diferente) são regerados.
+    if (complete && !refresh && hasAllWidths(image) && variantFiles(image).every((file) => file.startsWith(galleryName(source)))) manifest[source] = image;
     else pending.push(source);
   }
   if (pending.length) await mkdir(cache, { recursive: true });
   const failures = await runPool(pending, async (source) => {
     const name = galleryName(source);
     const input = await readSource(source, { root, cache, refresh, fetchImpl });
-    await Promise.all(GALLERY.sizes.map((size) => rm(path.join(outputDirectory, `${name}-${size}.webp`), { force: true })));
+    // Com --refresh tudo é regerado; sem ele, só as larguras que faltam (as existentes são reaproveitadas).
+    if (refresh) await Promise.all(GALLERY.sizes.map((size) => rm(path.join(outputDirectory, `${name}-${size}.webp`), { force: true })));
     manifest[source] = await optimizeImage(input, { outputDirectory, urlPrefix: GALLERY.urlPrefix, sizes: GALLERY.sizes, formats: ['webp'], name });
   }, 12);
   if (failures.length) throw new Error(`Gallery images failed (${failures.length}):\n${failures.join('\n')}`);
   const ordered = Object.fromEntries(sources.map((source) => [source, manifest[source]]));
-  // Remove variantes de fotos que saíram dos álbuns.
+  // Remove variantes de fotos que saíram dos álbuns (só as geradas aqui).
   await prune(outputDirectory, ordered);
-  await writeIfChanged(manifestPath, `${JSON.stringify(ordered, null, 2)}\n`);
-  console.log(`Gallery: ${sources.length} photos, ${pending.length} downloaded/converted; ${((Date.now() - start) / 1000).toFixed(1)}s.`);
-  return ordered;
+  const local = await buildLocalGallery(root, previous);
+  const combined = { ...ordered, ...Object.fromEntries(local.rows.map((row) => [row.url, local.entries[row.url]])) };
+  await writeIfChanged(manifestPath, `${JSON.stringify(combined, null, 2)}\n`);
+  console.log(`Gallery: ${sources.length} photos, ${pending.length} downloaded/converted; ${local.rows.length} local (${local.created} new ${MID_WIDTH}px); ${((Date.now() - start) / 1000).toFixed(1)}s.`);
+  return combined;
 }
 
 // Imagens do site: as variantes ficam versionadas em public/optimized/ com o

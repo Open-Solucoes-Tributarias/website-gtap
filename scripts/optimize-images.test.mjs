@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readdir, readFile, stat, rm, writeFile } from 'node:fs/
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import sharp from 'sharp';
-import { backgroundStyles, buildGallery, buildMedia, download, GALLERY, optimizeImage } from './optimize-images.mjs';
+import { assertLocalPath, backgroundStyles, buildGallery, buildMedia, download, GALLERY, localGalleryEntry, MID_WIDTH, optimizeImage } from './optimize-images.mjs';
 
 test('background tokens select largest formats deterministically and omit remote media', () => {
   const image = { src: '/optimized/hash-640.webp', avifSrcSet: '/optimized/hash-320.avif 320w, /optimized/hash-640.avif 640w' };
@@ -94,7 +94,7 @@ test('gallery reuses versioned photos without network and only fetches new ones'
     assert.equal(fetches, 1);
     assert.deepEqual(Object.keys(next), [second]);
     const files = await readdir(path.join(root, GALLERY.directory));
-    assert.equal(files.length, 2);
+    assert.equal(files.length, GALLERY.sizes.length);
     assert.ok(JSON.parse(await readFile(path.join(root, GALLERY.manifest), 'utf8'))[second]);
   } finally {
     await rm(root, { recursive: true, force: true });
@@ -122,6 +122,44 @@ test('site images reuse versioned variants offline and prune unused files', asyn
     assert.deepEqual(await buildMedia({ root, fetchImpl: offline }), initial);
     assert.ok(!(await readdir(path.join(root, 'public/optimized'))).includes('sobra-320.webp'));
     assert.match(await readFile(path.join(root, 'src/styles/generated-media.css'), 'utf8'), /--gtap-bg-src-assets-fundo-webp/);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('local album paths reject traversal and anything outside /galerias/<album>/(full|thumb)', () => {
+  assert.equal(assertLocalPath('/galerias/x-gtap/full/dia-1-001.webp'), '/galerias/x-gtap/full/dia-1-001.webp');
+  for (const bad of ['/galerias/x-gtap/full/../../secret.webp', '/galerias/../x/full/a.webp', '/etc/passwd', 'https://x.com/a.webp', '/galerias/x-gtap/full/a.jpg', undefined]) {
+    assert.throws(() => assertLocalPath(bad), /inválido/);
+  }
+});
+
+test('local album entry lists thumb, mid and full without generating 240-1280 variants', () => {
+  const row = { url: '/galerias/x-gtap/full/dia-1-001.webp', thumb: '/galerias/x-gtap/thumb/dia-1-001.webp', width: 1600, height: 1065 };
+  assert.deepEqual(localGalleryEntry(row, 360), {
+    src: row.url,
+    srcSet: `/galerias/x-gtap/thumb/dia-1-001.webp 360w, /galerias/x-gtap/mid/dia-1-001.webp ${MID_WIDTH}w, ${row.url} 1600w`,
+    width: 1600,
+    height: 1065,
+  });
+  // Foto menor que a intermediária: só thumb e full.
+  assert.equal(localGalleryEntry({ ...row, width: 700, height: 466 }, 360).srcSet, `${row.thumb} 360w, ${row.url} 700w`);
+});
+
+test('gallery build adds local albums to the manifest without touching optimized remote photos', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'gtap-local-gallery-'));
+  try {
+    await mkdir(path.join(root, 'public/api/galerias'), { recursive: true });
+    await mkdir(path.join(root, 'public/galerias/x-gtap/full'), { recursive: true });
+    await mkdir(path.join(root, 'public/galerias/x-gtap/thumb'), { recursive: true });
+    await sharp({ create: { width: 1200, height: 800, channels: 3, background: '#335' } }).webp().toFile(path.join(root, 'public/galerias/x-gtap/full/a-1.webp'));
+    await sharp({ create: { width: 300, height: 200, channels: 3, background: '#335' } }).webp().toFile(path.join(root, 'public/galerias/x-gtap/thumb/a-1.webp'));
+    const row = { id: 'a-1', url: '/galerias/x-gtap/full/a-1.webp', thumb: '/galerias/x-gtap/thumb/a-1.webp', width: 1200, height: 800, scene: 'Primeiro Dia' };
+    await writeFile(path.join(root, 'public/api/galerias/x-gtap.json'), JSON.stringify([row]));
+    const manifest = await buildGallery({ root, fetchImpl: () => assert.fail('no network') });
+    assert.equal(manifest[row.url].srcSet, `${row.thumb} 300w, /galerias/x-gtap/mid/a-1.webp ${MID_WIDTH}w, ${row.url} 1200w`);
+    assert.equal((await sharp(path.join(root, 'public/galerias/x-gtap/mid/a-1.webp')).metadata()).width, MID_WIDTH);
+    assert.deepEqual(await readdir(path.join(root, GALLERY.directory)), []);
   } finally {
     await rm(root, { recursive: true, force: true });
   }
