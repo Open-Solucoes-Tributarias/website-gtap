@@ -26,6 +26,18 @@ const GALERIA_FOTOS = [
   return { id: url, image: galleryMedia[url] };
 });
 
+// Palestrantes exibidos (ids em public/api/landing_page.json). Filtrar aqui, e não no componente,
+// evita que os dados dos ocultos sigam no HTML. Para exibir de novo, descomente o id.
+const PALESTRANTES_EXIBIDOS = [
+  1, // Alexandre Marques
+  65, // Gustavo Reis
+  108, // Arick Farias
+  // 109, // Bernard Appy
+  // 110, // Vanessa Canado
+  // 111, // Eduardo Tanaka
+  // 112, // Paulo Henrique Pêgas
+];
+
 export const LandingPage = ({ data, poster }) => {
   return (
     <>
@@ -35,7 +47,7 @@ export const LandingPage = ({ data, poster }) => {
       <SectionAtuacao localImages={{ image2: getMedia("src/assets/image-mobile.webp") }} />
       <SectionTemas data={data.filter((item) => item.type === 1)} />
       <SectionIdealizador localImages={{ ImageAlexandre: getMedia("src/assets/alexandre.webp") }} />
-      <SectionPalestrantes data={data.filter((item) => item.type === 0)} />
+      <SectionPalestrantes data={data.filter((item) => item.type === 0 && PALESTRANTES_EXIBIDOS.includes(item.id))} />
       <SectionGaleria images={GALERIA_FOTOS} />
       <SectionPublico data={data.filter((item) => item.type === 2)} />
       <SectionInvestimento />

@@ -19,9 +19,9 @@ export const PHOTOS = {
   imageMobile: { id: 'dia-1-304', focus: [0.5, 0.5] },
   imagebg1: { id: 'dia-1-187', focus: [0.5, 0.45] }, // palestrante no púlpito + plateia
   forms: { id: 'dia-2-147', focus: [0.5, 0.4] }, // participantes sorrindo
-  bannerLeft: { id: 'dia-2-091', focus: [0.33, 0.5] }, // plateia atenta
-  bannerCenter: { id: 'dia-2-046', focus: [0.5, 0.5] }, // palestrante no palco
-  bannerRight: { id: 'dia-1-307', focus: [0.5, 0.5] }, // dupla em frente ao painel
+  bannerLeft: { id: 'dia-1-257', focus: [0.5, 0.45] }, // clientes: duas participantes de crachá (foto 55)
+  bannerCenter: { id: 'dia-2-118', focus: [0.5, 0.5] }, // os 3 palestrantes em frente ao painel X GTAP (foto 160)
+  bannerRight: { id: 'dia-1-185', focus: [0.22, 0.5] }, // evento: palestra com o auditório e a iluminação (foto 35)
   bannerMobile: { id: 'dia-1-305', focus: [0.5, 0.45] }, // trio em frente ao painel
 };
 
@@ -128,10 +128,15 @@ async function forms() {
   await save(sharp(await photo(PHOTOS.forms, 772, 772)), 'eventogtapforms.webp');
 }
 
-// Banner da galeria: três fotos verticais lado a lado (1920x1080).
+// Banner da galeria (1920x1080): clientes | 3 palestrantes (painel central mais largo) | evento.
+const BANNER_PANELS = [['bannerLeft', 560], ['bannerCenter', 800], ['bannerRight', 560]];
 async function bannerGaleria() {
-  const panels = [PHOTOS.bannerLeft, PHOTOS.bannerCenter, PHOTOS.bannerRight];
-  const inputs = await Promise.all(panels.map(async (spec, index) => ({ input: await photo(spec, 640, 1080), left: index * 640, top: 0 })));
+  let left = 0;
+  const inputs = [];
+  for (const [key, width] of BANNER_PANELS) {
+    inputs.push({ input: await photo(PHOTOS[key], width, 1080), left, top: 0 });
+    left += width;
+  }
   await save(transparent(1920, 1080).composite(inputs), 'bannergaleria.webp');
 }
 

@@ -1,86 +1,198 @@
 [
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%201.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%203.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%204.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%205.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%206.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%208.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%209.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2010.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2012.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2013.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2014.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2015.webp"
-    },    
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2017.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2018.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2019.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2020.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2021.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2023.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2024.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2026.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2027.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2028.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2029.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2030.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2031.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2032.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2033.webp"
-    },
-    {
-        "url": "https://gtap.com.br/midias/IX%20GTAP/PADRÃO%20-%20FOTOS%20GTAP%2034.webp"
-    }
+  {
+    "id": "ix-001",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-001.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-001.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-002",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-002.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-002.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-003",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-003.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-003.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-004",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-004.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-004.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-005",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-005.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-005.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-006",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-006.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-006.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-007",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-007.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-007.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-008",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-008.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-008.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-009",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-009.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-009.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-010",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-010.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-010.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-011",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-011.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-011.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-012",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-012.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-012.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-013",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-013.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-013.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-014",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-014.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-014.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-015",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-015.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-015.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-016",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-016.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-016.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-017",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-017.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-017.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-018",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-018.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-018.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-019",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-019.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-019.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-020",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-020.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-020.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-021",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-021.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-021.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-022",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-022.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-022.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-023",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-023.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-023.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-024",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-024.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-024.webp",
+    "width": 1600,
+    "height": 1069
+  },
+  {
+    "id": "ix-025",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-025.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-025.webp",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "ix-026",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-026.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-026.webp",
+    "width": 1600,
+    "height": 1066
+  },
+  {
+    "id": "ix-027",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-027.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-027.webp",
+    "width": 1600,
+    "height": 1066
+  },
+  {
+    "id": "ix-028",
+    "url": "https://gtap.com.br/midias/IX%20GTAP/full/ix-028.webp",
+    "thumb": "https://gtap.com.br/midias/IX%20GTAP/thumb/ix-028.webp",
+    "width": 1600,
+    "height": 1066
+  }
 ]

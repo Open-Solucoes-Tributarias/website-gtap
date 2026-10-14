@@ -35,9 +35,9 @@ export const SectionPalestrantes = ({ data }) => {
           </button>
         ))}
       </div>
-      <div style={{ display: "none" }}>
-        <h5>Aguarde a confirmação dos próximos!</h5>
-      </div>
+      <p className="section-palestrantes-aviso" data-reveal>
+        Aguarde a confirmação dos próximos palestrantes.
+      </p>
        {palestranteSelecionado && (
           <ModalPalestrantes
           palestrantes={palestrantes}
