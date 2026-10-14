@@ -25,8 +25,3 @@ ErrorDocument 404 /404.html
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 </IfModule>
-
-# Estado do deploy automático (FTP): não deve ser público.
-<Files ".ftp-deploy-sync-state.json">
-  Require all denied
-</Files>

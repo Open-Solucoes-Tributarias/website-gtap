@@ -34,18 +34,23 @@ Páginas exportadas: home, `/galeria/` e nove álbuns. A antiga página interna 
 
 ## Publicação na Hostinger
 
-### Automática (recomendada)
+### Automática via Git (recomendada)
 
-O workflow [`.github/workflows/deploy-hostinger.yml`](.github/workflows/deploy-hostinger.yml) roda a cada push na `main` (ou manualmente em *Actions → Deploy Hostinger → Run workflow*). Ele executa `npm ci`, lint, build e `verify:export` e envia **o conteúdo** de `out/` (incluindo o `.htaccess`) para a **raiz** de `public_html`, nunca como subpasta. O envio só cria e atualiza arquivos: `midias`, `sorteio`, endpoints PHP, banco e qualquer outra pasta do servidor não são tocados, e o job falha se `out/` passar a conter `midias` ou `sorteio`. O action só remove arquivos que ele mesmo enviou antes (controle em `.ftp-deploy-sync-state.json`, bloqueado no `.htaccess`).
+O workflow [`.github/workflows/deploy-hostinger.yml`](.github/workflows/deploy-hostinger.yml) roda a cada push na `main` (ou manualmente em *Actions*): executa `npm ci`, lint, build e `verify:export` e publica **só o conteúdo de `out/`** (com o `.htaccess` na raiz) na branch `hostinger`. Não precisa de FTP nem de secrets. Nunca edite essa branch à mão.
 
-Configure uma vez em GitHub → *Settings → Secrets and variables → Actions*:
+A Hostinger puxa a branch `hostinger` para a **raiz** de `public_html`. O `git pull` só altera arquivos versionados, então `midias`, `sorteio`, PHP, banco e qualquer outra pasta do servidor não são tocados (o job também falha se `out/` passar a conter `midias` ou `sorteio`).
 
-| Secret | Valor |
-| --- | --- |
-| `HOSTINGER_FTP_SERVER` | host FTP da Hostinger (hPanel → Arquivos → Contas FTP) |
-| `HOSTINGER_FTP_USERNAME` | usuário FTP |
-| `HOSTINGER_FTP_PASSWORD` | senha FTP |
-| `HOSTINGER_FTP_DIR` | opcional: pasta de `public_html` vista pelo usuário FTP (padrão `./`; ex.: `./public_html/` ou `./domains/gtap.com.br/public_html/`) |
+Configuração única na Hostinger (hPanel → Avançado → Git, domínio gtap.com.br):
+1. Repositório `https://github.com/Open-Solucoes-Tributarias/website-gtap.git` (privado: adicione a chave SSH/deploy key mostrada no hPanel em *Settings → Deploy keys* do GitHub), branch `hostinger`, pasta de instalação vazia (raiz de `public_html`).
+2. Se a Hostinger recusar clonar em `public_html` por não estar vazio, faça por SSH, sem apagar nada:
+   ```sh
+   cd ~/domains/gtap.com.br/public_html   # ajuste o caminho
+   cp -a .htaccess ../htaccess.backup 2>/dev/null
+   git init && git remote add origin <URL do repositório>
+   git fetch origin hostinger && git reset --hard origin/hostinger
+   ```
+   `reset --hard` só sobrescreve arquivos que existem na branch; `midias`, `sorteio` e o resto continuam no lugar.
+3. Para publicar sozinho a cada push, copie a URL de *Auto Deployment* (webhook) do hPanel e cadastre em GitHub → *Settings → Webhooks* (content type `application/json`, evento *push*). Sem o webhook, clique em *Deploy* no hPanel.
 
 ### Manual
 
