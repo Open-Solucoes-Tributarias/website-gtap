@@ -2,4 +2,4 @@
 :HL["/assets/logos/vgtap.svg","image"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":{"n":"editionText","t":"d","k":"V%20GTAP","s":["galeria"]},"h":65600,"c":"$Q2"}]]
-0:{"b":"ESTQB3Rlq9Ptwr4WLK0DW","t":{"t":{"s":"","h":131088,"c":"$Q1"}}}
+0:{"b":"j_11_YuC_0MM-9XT0j4xk","t":{"t":{"s":"","h":131088,"c":"$Q1"}}}

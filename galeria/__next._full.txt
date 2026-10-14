@@ -9,7 +9,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 7:X
 8:[["children",{"s":"__PAGE__","h":512,"d":{"r":"$L9","p":false,"v":null}}]]
 5:[["children",{"s":"galeria","h":512,"d":{"r":"$L6","p":false,"v":"$7"},"c":"$Q8"}]]
-0:{"P":null,"c":["","galeria",""],"q":"","i":false,"t":{"t":{"s":"","h":528,"d":{"r":["$","$1","c",{"children":[[["$","style","0",{"nonce":"$undefined","precedence":"next","href":"/_next/static/chunks/453cu74d__kbt.css","children":"$2"}],"$L3"],"$L4"]}],"p":false,"v":null},"c":"$Q5"},"h":{"r":"$La","p":false,"v":null}},"m":"$undefined","G":["$c",["$Ld"]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"ESTQB3Rlq9Ptwr4WLK0DW"}
+0:{"P":null,"c":["","galeria",""],"q":"","i":false,"t":{"t":{"s":"","h":528,"d":{"r":["$","$1","c",{"children":[[["$","style","0",{"nonce":"$undefined","precedence":"next","href":"/_next/static/chunks/453cu74d__kbt.css","children":"$2"}],"$L3"],"$L4"]}],"p":false,"v":null},"c":"$Q5"},"h":{"r":"$La","p":false,"v":null}},"m":"$undefined","G":["$c",["$Ld"]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"j_11_YuC_0MM-9XT0j4xk"}
 e:I[39756,["$b"],"default"]
 f:I[37457,["$b"],"default"]
 10:I[79520,["$b"],""]
