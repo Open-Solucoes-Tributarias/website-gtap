@@ -6,7 +6,7 @@ import { MotionRuntime } from "../MotionRuntime/MotionRuntime";
 import { OPEN_URL } from "../../data/links";
 import "./Navbar.css";
 
-// Até aqui (px do topo) o header fica sempre visível e transparente.
+// Até aqui (px do topo) o header fica sempre visível.
 const TOP_ZONE = 80;
 // Rolagem mínima na mesma direção antes de esconder/mostrar (evita tremer).
 const HYSTERESIS = 24;
@@ -24,7 +24,6 @@ function hasKeyboardFocus(header) {
 
 export const Navbar = () => {
   const [hidden, setHidden] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef(null);
 
   useEffect(() => {
@@ -42,7 +41,6 @@ export const Navbar = () => {
         setHidden(false);
         return;
       }
-      setScrolled(y > TOP_ZONE);
       if (y < TOP_ZONE) {
         lastY = y;
         setHidden(false);
@@ -68,7 +66,7 @@ export const Navbar = () => {
 
   // Versão desktop: sempre montada; esconde ao rolar para baixo (transform) e
   // volta ao rolar para cima. Escondida fica inert (fora do Tab e do leitor de tela).
-  const headerClass = `navbar${hidden ? " navbar--hidden" : ""}${scrolled ? " navbar--scrolled" : ""}`;
+  const headerClass = `navbar${hidden ? " navbar--hidden" : ""}`;
 
   return (
     <>
@@ -79,7 +77,7 @@ export const Navbar = () => {
           <nav className="navbar-container" aria-label="Navegação principal">
             <h1 className="navbar-logo">
               <a href="/">
-                <img src="/logo-xi-gtap.webp" alt="XI GTAP — página inicial" width="480" height="150" fetchPriority="high" />
+                <img src="/logo-xi-gtap.svg" alt="XI GTAP — página inicial" width="152" height="49" fetchPriority="high" />
               </a>
             </h1>
             <ul className="navbar-links">

@@ -29,7 +29,7 @@ for (const route of routes) {
   assert.match(html, /<html lang="pt-BR"/);
   assert.match(html, /<link[^>]+rel="canonical"/);
   assert.match(html, /property="og:image" content="[^"]*\/og-gtap\.png"/);
-  assert.match(html, /<img[^>]+src="\/logo-xi-gtap\.webp"[^>]+width="480"[^>]+height="150"/);
+  assert.match(html, /<img[^>]+src="\/logo-xi-gtap\.svg"[^>]+width="152"[^>]+height="49"/);
   assert.doesNotMatch(html, /\/logo\.svg|icon-gtap\.svg/);
   // Meta Pixel em todas as páginas, carregado depois do load (sem <script src> no HTML).
   assert.match(html, /fbq\('init','549971842334998'\)/);
@@ -43,13 +43,14 @@ for (const route of routes) {
   assertBudget(route, html);
   if (!route) {
     assert.match(html, /discutir no XI GTAP/);
-    assert.doesNotMatch(html, /de outubro de 2026/i);
+    assert.match(html, /21 e 22 de Outubro de 2027/);
     assert.match(html, /Alexandre Marques/);
     assert.match(html, /fetchPriority="high"/i);
     assert.match(html, /class="banner-poster"/);
     assert.match(html, /srcSet="\/optimized\/[^" ]+.*w"/i);
     assert.match(html, /class="speaker-photo"[^>]*loading="lazy"|loading="lazy"[^>]*class="speaker-photo"/);
-    assert.doesNotMatch(html, /<video[^>]+src=/);
+    // Vídeo do banner no HTML desde o início, direto do link original (como na versão anterior).
+    assert.match(html, /<video[^>]+src="https:\/\/gtap\.com\.br\/midias\/banner-gt-abertura\.mp4"[^>]+preload="none"/);
     assert.doesNotMatch(html, /banner-play|Reproduzir vídeo de abertura/);
     // Hero e CTA são LCP: sem data-reveal no banner e no CTA inteiros; na seção de atuação, só a raiz.
     const lcp = [...html.matchAll(/<[a-z]+\b[^>]*class="[^"]*(?<![\w-])(banner-container|card-buttons-container|section-atuacao)(?![\w-])[^"]*"[^>]*>/g)];
@@ -122,9 +123,6 @@ for (const image of Object.values(gallery)) {
   assert.ok(image.width > 0 && image.height > 0);
   for (const item of image.srcSet.split(', ')) await access(`out${item.split(' ')[0]}`);
 }
-const video = JSON.parse(await readFile('src/data/generated-video.json', 'utf8'));
-assert.ok(video.optimizedBytes < video.originalBytes);
-await access(`out${video.src}`);
 const htaccess = await readFile('out/.htaccess', 'utf8');
 assert.equal(htaccess, await readFile('public/.htaccess', 'utf8'));
 assert.equal(htaccess, await readFile('.htaccess', 'utf8'));

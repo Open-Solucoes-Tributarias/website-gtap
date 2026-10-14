@@ -93,14 +93,14 @@
   object-position: center 25%;
 }
 
-/* Hover separado por foto: a foto sobe, aproxima a imagem e vem para frente. */
+/* Hover na colagem: ao passar o mouse em qualquer foto, as três sobem e aproximam
+   a imagem juntas, mantendo a ordem das camadas (as menores seguem sobre a principal). */
 @media (hover: hover) and (pointer: fine) {
-  .atuacao-photo:hover {
-    z-index: 2;
+  .atuacao-collage:has(.atuacao-photo:hover) .atuacao-photo {
     transform: translateY(-8px);
   }
 
-  .atuacao-photo:hover img {
+  .atuacao-collage:has(.atuacao-photo:hover) .atuacao-photo img {
     transform: scale(1.06);
   }
 }

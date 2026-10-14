@@ -11,18 +11,19 @@
   width: 100%;
 }
 .card-button-left {
-  background: var(--glass-bg);
-  backdrop-filter: blur(22px) saturate(160%);
+  background: rgb(0 0 0 / 30%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(255 255 255 / 78%);
   border-radius: var(--glass-radius);
-  box-shadow: var(--glass-shadow);
+  box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
   color: var(--text-on-dark);
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
 }
 .button-left-condition {
-  padding-inline: var(--space-12);
-  padding-top: var(--space-0-5);
+  padding-inline: 90px;
+  padding-top: 4px;
   font-size: var(--fs-h3);
   line-height: var(--lh-snug);
   text-align: center;
@@ -82,17 +83,18 @@
 }
 
 .card-button-right {
-  background: var(--glass-bg);
-  backdrop-filter: blur(22px) saturate(160%);
+  background: rgb(0 0 0 / 30%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(255 255 255 / 78%);
   border-radius: var(--glass-radius);
-  box-shadow: var(--glass-shadow);
+  box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
   color: var(--text-on-dark);
   display: flex;
   flex-direction: row;
   gap: var(--space-3);
   justify-content: center;
   align-items: center;
-  padding: var(--space-1);
+  padding: 10px;
   min-width: 50vh;
 }
 
@@ -115,6 +117,10 @@
    ::before (o .btn usa o ::after para a sombra). A faixa é um degradê dentro
    do próprio pseudo-elemento (inset: 0) e anda via background-position, então
    fica recortada no botão sem overflow: hidden (que cortaria a sombra). */
+.card-buttons-container .card-button-cta {
+  padding: 10px 20px;
+}
+
 .card-buttons-container .card-button-cta::before {
   content: "";
   position: absolute;
@@ -173,7 +179,7 @@
     flex-direction: column;
     gap: var(--space-1);
     bottom: var(--float-gap);
-    padding-inline: var(--space-3);
+    padding-inline: 26px;
   }
 
   /* Painel de grupo/datas fica oculto no mobile. */
@@ -194,6 +200,7 @@
 
   .card-buttons-container .card-button-cta {
     width: 100%;
+    padding: 8px 10px;
   }
 
   /* Barra fixa compacta: preço em --fs-h3 em vez de --fs-h2. */

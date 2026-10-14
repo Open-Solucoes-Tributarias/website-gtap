@@ -262,14 +262,6 @@
     "mediaUrl": "https://gtap.com.br/midias/Clientes/SEBRAE.webp"
   },
   {
-    "id": 54,
-    "created_at": "2025-05-22 18:15:32.528453+00",
-    "type": 2,
-    "title": "SEBRAE",
-    "description": "SEBRAE",
-    "mediaUrl": "https://gtap.com.br/midias/Clientes/SEFAZ%20MT.webp"
-  },
-  {
     "id": 55,
     "created_at": "2025-05-22 18:15:54.056459+00",
     "type": 2,
@@ -336,14 +328,6 @@
   {
     "id": 63,
     "created_at": "2025-05-22 18:19:06.211837+00",
-    "type": 2,
-    "title": "UESC",
-    "description": "UESC",
-    "mediaUrl": "https://gtap.com.br/midias/Clientes/UESC.webp"
-  },
-  {
-    "id": 64,
-    "created_at": "2025-05-22 18:21:14.561514+00",
     "type": 2,
     "title": "UESC",
     "description": "UESC",

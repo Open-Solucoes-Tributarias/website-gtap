@@ -1,5 +1,5 @@
 /* Header flutuante: cápsula de vidro recuada das bordas, no mesmo estilo da
-   barra de inscrição (CardButton). */
+   barra de inscrição (CardButton). Fundo, blur e padding iguais aos da versão anterior. */
 .navbar {
   position: fixed;
   top: var(--float-gap);
@@ -15,8 +15,7 @@
 /* O vidro fica num pseudo-elemento: backdrop-filter no próprio header faria
    dele o bloco de contenção dos filhos fixed (o menu mobile sairia do lugar).
    z-index -1 = atrás do conteúdo, dentro do header (contexto de empilhamento). */
-.navbar::before,
-.navigation-desktop .navbar::after {
+.navbar::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -26,9 +25,10 @@
 }
 
 .navbar::before {
-  background: var(--glass-bg);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(22px) saturate(160%);
+  background: rgb(0 0 0 / 30%);
+  border: 1px solid rgb(255 255 255 / 78%);
+  box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
+  backdrop-filter: blur(10px);
 }
 
 /* Header desktop: sempre montado. Esconde ao rolar para baixo só com transform
@@ -41,22 +41,9 @@
   transform: translateY(calc(-100% - var(--float-gap) - var(--space-5)));
 }
 
-/* Fora do topo o vidro fica mais sólido: camada extra que só muda de opacidade
-   (sem animar background nem box-shadow). */
-.navigation-desktop .navbar::after {
-  /* navy-900 a 40%: sem token de alfa equivalente */
-  background-color: rgb(2 9 58 / 40%);
-  opacity: 0;
-  transition: opacity 360ms var(--ease-out);
-}
-
-.navigation-desktop .navbar--scrolled::after {
-  opacity: 1;
-}
-
 .navbar-container {
-  padding-inline: clamp(var(--space-2), 2.5vw, var(--space-4));
-  padding-block: clamp(var(--space-1), 0.9vw, var(--space-2));
+  padding-inline: 12%;
+  padding-block: 1%;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -72,7 +59,7 @@
 }
 
 .navbar-logo img {
-  /* Logo XI GTAP (480x150): altura fixa por faixa, largura proporcional. */
+  /* Logo XI GTAP (152x49): altura fixa por faixa, largura proporcional. */
   width: auto;
   height: 56px;
   transition: transform var(--dur-ui) var(--ease-out);
@@ -164,14 +151,21 @@
   transition-duration: 120ms;
 }
 
+/* Tablet estreito: com 12% de cada lado os links quebrariam de linha. */
+@media (min-width: 769px) and (max-width: 960px) {
+  .navbar-container {
+    padding-inline: 4%;
+  }
+}
+
 @media (max-width: 768px) {
   /* Header mobile (NavbarMobile reaproveita estas classes; os links inline
      ficam ocultos lá e o menu abre em diálogo). */
   .navbar-container {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
-    padding-block: var(--space-2);
+    gap: 20px;
+    padding-block: 4%;
   }
 }
 

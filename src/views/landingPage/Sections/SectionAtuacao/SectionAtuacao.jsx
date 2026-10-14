@@ -14,7 +14,7 @@ export const SectionAtuacao = ({ localImages = {} }) => {
           <hr className="mobile-hr-display" />
           <div className="data-section-mobile">
             <h3>
-              <Icon name="calendar"  />Data a confirmar
+              <Icon name="calendar"  />21 e 22 de Outubro de 2027
             </h3>
             <h3>
               <Icon name="location-dot"  />Salvador/BA
@@ -29,7 +29,7 @@ export const SectionAtuacao = ({ localImages = {} }) => {
         </div>
         <div className="data-section">
           <h3 data-reveal>
-            <Icon name="calendar"  />Data a confirmar
+            <Icon name="calendar"  />21 e 22 de Outubro de 2027
           </h3>
           <h3 data-reveal>
             <Icon name="location-dot"  />Salvador/BA
@@ -37,7 +37,7 @@ export const SectionAtuacao = ({ localImages = {} }) => {
         </div>
       </div>
       <div className="right">
-        {/* Colagem: três fotos independentes, cada uma com entrada e hover próprios. */}
+        {/* Colagem: três fotos com entrada própria; o hover em qualquer uma move as três juntas. */}
         <div className="atuacao-collage">
           <figure className="atuacao-photo atuacao-photo--main" data-reveal="scale">
             <ResponsiveImage image={getMedia("src/assets/temas-foto-1.webp")} sizes="(max-width: 768px) 0px, 500px" alt="Participante fotografando o palco do GTAP" loading="lazy" />

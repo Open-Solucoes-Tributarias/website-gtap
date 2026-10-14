@@ -1,5 +1,9 @@
 import "./SectionPublico.css";
 
+// Logos em vetor (SVG, nítidas em qualquer tela) em public/assets/entidades/<id>.svg.
+// As demais usam o recorte em WebP (<id>.webp) até chegar a versão vetorial.
+const LOGOS_SVG = new Set([37, 41, 44, 46, 51, 56, 58]);
+
 // Entidades participantes em duas faixas de logos rolando em loop contínuo
 // (sentidos opostos), só CSS: cada faixa tem duas cópias e anda metade da
 // própria largura. Pausa no hover; com movimento reduzido vira rolagem manual.
@@ -23,7 +27,7 @@ export const SectionPublico = ({ data = [] }) => {
                   {/* Logos recortados (public/assets/entidades): sem o card branco
                       com sombra que vinha embutido nas imagens originais. */}
                   <img
-                    src={`/assets/entidades/${cliente.id}.webp`}
+                    src={`/assets/entidades/${cliente.id}.${LOGOS_SVG.has(cliente.id) ? "svg" : "webp"}`}
                     alt={copia === 1 ? "" : (cliente.title ?? "Entidade participante")}
                     loading="lazy"
                     decoding="async"

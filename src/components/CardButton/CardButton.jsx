@@ -3,7 +3,7 @@
 import "./CardButton.css";
 import { useLoteAtual } from "../../Utils/useLoteAtual";
 
-const DATA_EVENTO = "DATA A CONFIRMAR";
+const DATA_EVENTO = "21 E 22 DE OUTUBRO DE 2027";
 
 export const CardButton = () => {
   const { precoAtual, nomeLoteAtual } = useLoteAtual();

@@ -1,6 +1,7 @@
 "use client";
 
 import { Icon } from "../Icon/Icon";
+import ResponsiveImage from "../ResponsiveImage/ResponsiveImage";
 import { useEffect, useRef, useState } from "react";
 import { lockScroll, unlockScroll } from "../../motion/scrollLock";
 import "./ModalPalestrante.css";
@@ -127,16 +128,25 @@ export const ModalPalestrantes = ({ palestrantes, selecionado, onClose }) => {
         >
             <button type="button" className="nav-arrow nav-left" onClick={prev} aria-label="Palestrante anterior"><Icon name="chevron-left"  /></button>
             <div className="modal-structure">
-                <div className="modal-photo" key={`foto-${currentIndex}`} style={{ backgroundImage: `url(${current?.image?.src || current?.mediaUrl})` }}>
-
-                </div>
                 <button type="button" className="close" onClick={fecharModal} aria-label="Fechar">✕</button>
                 <div className="modal-box">
-                    {/* key pelo índice: o texto remonta e toca a troca; o rodapé (links) fica, preservando o foco */}
-                    <div className="modal-texto" key={`titulo-${currentIndex}`}>
-                        <h2>{current.title}</h2>
-                        <h4>{current.description}</h4>
+                    {/* key pelo índice: foto e texto remontam e tocam a troca; o rodapé (links) fica, preservando o foco */}
+                    <div className="modal-cabecalho">
+                        <ResponsiveImage
+                            key={`foto-${currentIndex}`}
+                            image={current?.image}
+                            src={current?.mediaUrl}
+                            className="modal-photo"
+                            sizes="96px"
+                            alt=""
+                            loading="eager"
+                        />
+                        <div className="modal-texto" key={`titulo-${currentIndex}`}>
+                            <h2>{current.title}</h2>
+                            <h4>{current.description}</h4>
+                        </div>
                     </div>
+                    <hr className="modal-divisor" />
                     <div className="modal-texto" key={`bio-${currentIndex}`}>
                         <p>{current.annotation}</p>
                     </div>

@@ -21,7 +21,7 @@
   background: rgb(0 0 0 / 70%);
 }
 
-/* Estrutura do modal */
+/* Estrutura do modal: só o cartão; a largura deixa espaço para as setas ⟨ ⟩ */
 .modal-structure {
   display: flex;
   align-items: center;
@@ -29,24 +29,30 @@
   margin: 0 auto;
   background: transparent;
   position: relative;
-  width: 60%;
+  width: min(760px, calc(100% - 2 * (5vw + var(--space-5) + var(--space-2))));
 }
 
-/* Lado esquerdo - foto (pílula: o raio se limita à metade da largura) */
-.modal-photo {
+/* Cabeçalho: avatar redondo ao lado do nome e do cargo (folga à direita para o ✕).
+   Sem gap: o <source> do <picture> também vira item do flex e o gap empurraria o
+   avatar para a direita; o espaço até o texto vem da margem do avatar. */
+.modal-cabecalho {
   display: flex;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  width: 300px;
-  min-height: 350px;
-  height: 350px;
-  border-radius: var(--radius-pill);
-  border: 2px solid var(--color-gold-500);
-  margin-right: var(--space-4);
+  align-items: center;
+  padding-right: var(--space-5);
 }
 
-/* Lado direito - texto */
+.modal-photo {
+  flex-shrink: 0;
+  margin-right: var(--space-3);
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  background: var(--color-navy-900);
+}
+
+/* Cartão branco: cabeçalho, biografia e redes */
 .modal-box {
   display: flex;
   flex-direction: column;
@@ -58,10 +64,19 @@
   padding: var(--space-3);
 }
 
-.modal-box .modal-texto:first-child {
+.modal-cabecalho .modal-texto {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+}
+
+/* Linha divisória entre o cabeçalho e a biografia */
+.modal-divisor {
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: var(--color-gray-300);
 }
 
 /* Título */
@@ -217,29 +232,27 @@
   }
 
   .modal-structure {
-    flex-direction: column;
     width: 100%;
-    align-items: center;
     padding-inline: var(--space-1);
   }
 
+  .modal-cabecalho {
+    padding-right: var(--space-4);
+  }
+
   .modal-photo {
-    display: none;
+    width: 72px;
+    height: 72px;
+    margin-right: var(--space-2);
   }
 
   .modal-box {
     padding: var(--space-2);
   }
 
-  .modal-box h2,
-  .modal-box h4,
-  .modal-box p {
-    text-align: center;
-  }
-
+  /* Redes centralizadas entre as setas ⟨ ⟩ do rodapé. */
   .footer-modal {
     justify-content: center;
-    text-align: center;
   }
 
   .close {

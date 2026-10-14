@@ -13,9 +13,9 @@
     "media:video": "node scripts/optimize-video.mjs",
     "media:logo": "node scripts/generate-logo-assets.mjs",
     "media:pictime": "node scripts/import-pictime-gallery.mjs",
-    "prebuild": "npm run media:images && npm run media:video",
+    "prebuild": "npm run media:images",
     "test": "node --test scripts/*.test.mjs",
-    "predev": "npm run media:images && npm run media:video"
+    "predev": "npm run media:images"
   },
   "dependencies": {
     "@fontsource-variable/roboto-condensed": "^5.3.0",
