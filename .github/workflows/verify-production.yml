@@ -1,0 +1,26 @@
+name: Verificar produção (gtap.com.br)
+
+# Checa o site no ar: rotas, build novo, redirect da Open e os arquivos de midias/ NA ORIGEM
+# (com cache-buster, porque o CDN mascara arquivos que já sumiram do servidor).
+# Roda todo dia e sob demanda (Actions → Verificar produção → Run workflow). Se falhar, o
+# GitHub avisa por e-mail quem acompanha o repositório. Não altera nada em produção.
+on:
+  schedule:
+    - cron: "0 11 * * *" # 08:00 em Brasília
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # O script só usa Node e os arquivos do repositório: não precisa de npm ci.
+      - run: node scripts/verify-production.mjs

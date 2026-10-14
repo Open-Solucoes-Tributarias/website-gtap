@@ -70,9 +70,26 @@ A `main` tem o código-fonte; o site pronto só existe depois do build. Se a Hos
 - `npm test` pode falhar no Windows com `EPERM`/`EBUSY` em `optimize-images.test.mjs` (bloqueio de arquivo na pasta temporária). É problema do ambiente local, não do código; o workflow não roda `npm test`.
 - A Vercel (`vercel.json`) é usada só como preview; produção é a Hostinger.
 
+## CI/CD em resumo
+
+| Workflow (`.github/workflows/`) | Quando roda | O que faz |
+|---|---|---|
+| `ci.yml` — CI (lint, testes e build) | push em `dev` e pull requests | `npm ci`, `lint`, `test`, `build`, `verify:export` e checagem de que `out/` não tem `midias`/`sorteio`. **Não publica.** |
+| `deploy-hostinger.yml` — Build para Hostinger | push na `main` (ou manual) | Mesmo build + validações e publica `out/` na branch `hostinger`; a Hostinger puxa essa branch para `public_html`. |
+| `verify-production.yml` — Verificar produção | todo dia às 08:00 (Brasília) e manual | `node scripts/verify-production.mjs`: rotas, build no ar, redirect da Open e arquivos de `midias/` na origem. Falhou = o GitHub avisa por e-mail. |
+
+Fluxo de um ajuste: trabalhar em `dev` → conferir o CI verde → merge em `main` → acompanhar o deploy → `npm run verify:prod`. Receitas:
+
+- **Texto/layout/seção da home:** editar em `src/views`, `npm run lint && npm run build && npm run verify:export`, publicar.
+- **Foto de álbum nova ou trocada:** gerar `full`/`mid`/`thumb`, **enviar para `midias/<edição> GTAP/` no servidor** (só adicionar, nunca sobrescrever ou apagar), atualizar `public/api/galerias/<edição>.json` e rodar `npm run media:images` (mede só a miniatura nova); depois publicar. Detalhes na seção do álbum X GTAP acima.
+- **Recortes da home/banner da galeria:** trocar os ids em `scripts/compose-home-assets.mjs`, rodar `node scripts/compose-home-assets.mjs` e `npm run media:images`, versionar o que mudou.
+- **Palestrantes exibidos:** lista `PALESTRANTES_EXIBIDOS` em `src/views/landingPage/LandingPage.jsx`. **Temas:** bloco comentado em `SectionTemas.jsx`.
+- **Algo sumiu em produção:** `npm run verify:prod` aponta o arquivo; `midias/` se restaura do backup do hPanel (adicionar sem sobrescrever).
+- **Rollback:** reverter o commit em `dev`, merge em `main` (ver "Recuperação").
+
 ## Checklist antes de publicar
 
-1. `npm run lint` · `npm run build` · `npm run verify:export` passando.
+1. `npm run lint` · `npm run build` · `npm run verify:export` passando (o CI repete isso em `dev`).
 2. `.htaccess` da raiz e `public/.htaccess` idênticos; regras próprias do servidor conciliadas.
 3. `out/` sem `midias`/`sorteio`; `/midias/` e `/sorteio/` no `.gitignore` e em `public/.gitignore`.
 4. Merge em `main` e push; acompanhar o run do workflow (`gh run list`/`gh run watch`) até `success`.
@@ -80,11 +97,19 @@ A `main` tem o código-fonte; o site pronto só existe depois do build. Se a Hos
 
 ## Verificação pós-deploy (produção)
 
+Preferir o script, que já usa cache-buster e confere os arquivos de `midias/` na origem (aguarde o webhook da Hostinger puxar a branch `hostinger`, cerca de 1 minuto):
+
+```sh
+npm run verify:prod
+```
+
+Manualmente (use sempre cache-buster em `midias/`):
+
 ```sh
 curl -sI https://gtap.com.br/ | head -3                      # 200, last-modified recente
 curl -s  https://gtap.com.br/ | grep -c "logo-xi-gtap.svg"   # build novo no ar
 curl -s -o /dev/null -w "%{http_code}\n" https://gtap.com.br/galeria/
-curl -s -o /dev/null -w "%{http_code}\n" https://gtap.com.br/midias/banner-gt-abertura.mp4   # 200 (preservada)
+curl -s -o /dev/null -w "%{http_code}\n" -r 0-0 "https://gtap.com.br/midias/banner-gt-abertura.mp4?cb=$RANDOM"   # 206 (preservada na origem)
 curl -s -o /dev/null -w "%{http_code}\n" https://gtap.com.br/sorteio/                        # 200 (preservada)
 curl -sI https://gtap.com.br/open-solucoes-tributarias/ | head -3   # 301 → site da Open
 curl -s -o /dev/null -w "%{http_code}\n" https://gtap.com.br/naoexiste                       # 404
