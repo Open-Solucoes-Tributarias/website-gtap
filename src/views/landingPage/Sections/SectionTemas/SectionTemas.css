@@ -1,0 +1,159 @@
+/* Temas (base: website-gtap), fundo branco como na referência. */
+.themes {
+  background: var(--color-white);
+  color: var(--text-on-light);
+  padding: var(--section-py) var(--section-px);
+}
+
+.themes__block {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(160px, 16vw, 224px);
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.themes__title {
+  color: var(--color-navy-900);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--stack-gap);
+}
+
+.themes__list {
+  list-style: none;
+}
+
+.theme-row {
+  display: grid;
+  grid-template-columns: var(--space-8) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+  border-top: 1px solid rgb(2 9 58 / 10%);
+}
+
+.theme-row:first-child {
+  border-top: 0;
+}
+
+.theme-row__num {
+  color: var(--color-navy-900);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  transition: color var(--dur-ui) var(--ease-out), transform 360ms var(--ease-out);
+}
+
+.theme-row__text {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  transition: transform 360ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-row:hover .theme-row__num {
+    color: var(--color-gold-500);
+    transform: translateX(6px);
+  }
+
+  .theme-row:hover .theme-row__text {
+    transform: translateX(6px);
+  }
+}
+
+.themes__photos {
+  display: grid;
+  gap: var(--space-3);
+  padding-top: var(--space-1);
+}
+
+/* Inclinação de repouso; a entrada (scale) usa propriedades individuais e compõe. */
+.themes__photo {
+  aspect-ratio: 5 / 6;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  transition: transform 700ms var(--ease-out);
+}
+
+.themes__photo--a {
+  transform: rotate(-4deg);
+}
+
+.themes__photo--b {
+  transform: rotate(5deg);
+}
+
+.themes__photo {
+  position: relative;
+}
+
+/* Camadas empilhadas: a anterior fica opaca por baixo enquanto a nova surge por
+   cima (só opacidade), então não há flash de fundo durante a troca. */
+.themes__photo-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.themes__photo-layer.is-prev {
+  opacity: 1;
+}
+
+.themes__photo-layer.is-active {
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 900ms var(--ease-in-out);
+}
+
+.themes__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .themes__photo:hover {
+    transform: rotate(0deg) scale(1.03);
+  }
+}
+
+@media (max-width: 860px) {
+  .themes__block {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .themes__photos {
+    grid-template-columns: 1fr 1fr;
+    max-width: 440px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .themes__photo {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 720px) {
+  .theme-row {
+    grid-template-columns: var(--space-6) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .theme-row__num {
+    font-size: var(--fs-h3);
+  }
+
+  .theme-row__text {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+  }
+
+  .themes__photo--a,
+  .themes__photo--b {
+    transform: none;
+  }
+}

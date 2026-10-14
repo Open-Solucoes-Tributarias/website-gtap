@@ -1,0 +1,166 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtemp, mkdir, readdir, readFile, stat, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import sharp from 'sharp';
+import { assertLocalPath, backgroundStyles, buildGallery, buildMedia, download, GALLERY, localGalleryEntry, MID_WIDTH, optimizeImage } from './optimize-images.mjs';
+
+test('background tokens select largest formats deterministically and omit remote media', () => {
+  const image = { src: '/optimized/hash-640.webp', avifSrcSet: '/optimized/hash-320.avif 320w, /optimized/hash-640.avif 640w' };
+  const manifest = { 'src/assets/Background Footer.webp': image, 'https://gtap.com.br/image.jpg': image };
+  const css = backgroundStyles(manifest);
+  assert.match(css, /--gtap-bg-src-assets-background-footer-webp:/);
+  assert.match(css, /url\("\/optimized\/hash-640.avif"\) type\("image\/avif"\)/);
+  assert.match(css, /url\("\/optimized\/hash-640.webp"\) type\("image\/webp"\)/);
+  assert.doesNotMatch(css, /320|gtap\.com/);
+  const reversed = Object.fromEntries(Object.entries(manifest).reverse());
+  assert.equal(backgroundStyles(reversed), css);
+});
+
+test('responsive variants preserve orientation, avoid upscale and reuse files', async () => {
+  const directory = await mkdtemp(path.join(tmpdir(), 'gtap-media-test-'));
+  try {
+    const input = await sharp({ create: { width: 200, height: 400, channels: 3, background: '#336699' } })
+      .jpeg().withMetadata({ orientation: 6 }).toBuffer();
+    const image = await optimizeImage(input, { outputDirectory: directory });
+    assert.equal(image.width, 400);
+    assert.equal(image.height, 200);
+    assert.match(image.srcSet, /320w.*400w/);
+    assert.doesNotMatch(image.srcSet, /640w/);
+    const files = await readdir(directory);
+    assert.equal(files.length, 4);
+    const modificationTimes = await Promise.all(files.map(async (file) => (await stat(path.join(directory, file))).mtimeMs));
+    for (const file of files) {
+      const metadata = await sharp(path.join(directory, file)).metadata();
+      const expectedWidth = Number(file.match(/-(\d+)\./)[1]);
+      assert.equal(metadata.width, expectedWidth);
+      assert.equal(metadata.height, expectedWidth / 2);
+      assert.equal(metadata.format, file.endsWith('.webp') ? 'webp' : 'heif');
+    }
+    assert.deepEqual(await optimizeImage(input, { outputDirectory: directory }), image);
+    assert.deepEqual(await Promise.all(files.map(async (file) => (await stat(path.join(directory, file))).mtimeMs)), modificationTimes);
+    await assert.rejects(optimizeImage(Buffer.from('invalid image'), { outputDirectory: directory }));
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('download limits origin, size and retries before surfacing failure', async () => {
+  let attempts = 0;
+  const failingFetch = async () => { attempts++; return new Response('', { status: 404 }); };
+  await assert.rejects(download('https://example.com/image.jpg', { fetchImpl: failingFetch }), /Unapproved media origin/);
+  assert.equal(attempts, 0);
+  await assert.rejects(download('https://gtap.com.br/image.jpg', { fetchImpl: failingFetch }), /HTTP 404/);
+  assert.equal(attempts, 3);
+  await assert.rejects(download('https://gtap.com.br/image.jpg', {
+    maxBytes: 2,
+    fetchImpl: async () => new Response('oversized'),
+  }), /byte limit/);
+  const output = await download('https://gtap.com.br/image.jpg', {
+    fetchImpl: async (_url, options) => {
+      assert.equal(options.redirect, 'error');
+      assert.ok(options.signal);
+      return new Response('ok');
+    },
+  });
+  assert.equal(output.toString(), 'ok');
+});
+
+test('gallery reuses versioned photos without network and only fetches new ones', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'gtap-gallery-'));
+  try {
+    const photo = await sharp({ create: { width: 1200, height: 800, channels: 3, background: '#123456' } }).jpeg().toBuffer();
+    const first = 'https://gtap.com.br/midias/I%20GTAP/a.jpg';
+    const second = 'https://gtap.com.br/midias/I%20GTAP/b.jpg';
+    await mkdir(path.join(root, 'public/api/galerias'), { recursive: true });
+    const album = path.join(root, 'public/api/galerias/i-gtap.json');
+    await writeFile(album, JSON.stringify([{ url: first }]));
+    let fetches = 0;
+    const fetchImpl = async () => { fetches++; return new Response(photo); };
+    const initial = await buildGallery({ root, fetchImpl });
+    assert.equal(fetches, 1);
+    assert.match(initial[first].srcSet, new RegExp(`^${GALLERY.urlPrefix}/[a-f0-9]{16}-240\\.webp 240w, `));
+
+    // Máquina nova: sem .cache, só com o que está versionado. Nenhum download.
+    await rm(path.join(root, '.cache'), { recursive: true, force: true });
+    const offline = async () => { throw new Error('network not allowed'); };
+    assert.deepEqual(await buildGallery({ root, fetchImpl: offline }), initial);
+
+    // Foto nova: só ela é baixada; foto removida tem as variantes apagadas.
+    await writeFile(album, JSON.stringify([{ url: second }]));
+    fetches = 0;
+    const next = await buildGallery({ root, fetchImpl });
+    assert.equal(fetches, 1);
+    assert.deepEqual(Object.keys(next), [second]);
+    const files = await readdir(path.join(root, GALLERY.directory));
+    assert.equal(files.length, GALLERY.sizes.length);
+    assert.ok(JSON.parse(await readFile(path.join(root, GALLERY.manifest), 'utf8'))[second]);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('site images reuse versioned variants offline and prune unused files', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'gtap-media-'));
+  try {
+    const photo = await sharp({ create: { width: 700, height: 400, channels: 3, background: '#abcdef' } }).webp().toBuffer();
+    const remote = 'https://gtap.com.br/midias/palestrante.webp';
+    await mkdir(path.join(root, 'public/api'), { recursive: true });
+    await mkdir(path.join(root, 'src/assets'), { recursive: true });
+    await writeFile(path.join(root, 'public/api/landing_page.json'), JSON.stringify([{ mediaUrl: remote }]));
+    await writeFile(path.join(root, 'public/api/galeria.json'), '[]');
+    await writeFile(path.join(root, 'src/assets/fundo.webp'), photo);
+    await writeFile(path.join(root, 'public/preloadBanner.webp'), photo);
+    let fetches = 0;
+    const initial = await buildMedia({ root, fetchImpl: async () => { fetches++; return new Response(photo); } });
+    assert.equal(fetches, 1);
+    await writeFile(path.join(root, 'public/optimized/sobra-320.webp'), 'stale');
+
+    await rm(path.join(root, '.cache'), { recursive: true, force: true });
+    const offline = async () => { throw new Error('network not allowed'); };
+    assert.deepEqual(await buildMedia({ root, fetchImpl: offline }), initial);
+    assert.ok(!(await readdir(path.join(root, 'public/optimized'))).includes('sobra-320.webp'));
+    assert.match(await readFile(path.join(root, 'src/styles/generated-media.css'), 'utf8'), /--gtap-bg-src-assets-fundo-webp/);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('local album paths reject traversal and anything outside /galerias/<album>/(full|thumb)', () => {
+  assert.equal(assertLocalPath('/galerias/x-gtap/full/dia-1-001.webp'), '/galerias/x-gtap/full/dia-1-001.webp');
+  for (const bad of ['/galerias/x-gtap/full/../../secret.webp', '/galerias/../x/full/a.webp', '/etc/passwd', 'https://x.com/a.webp', '/galerias/x-gtap/full/a.jpg', undefined]) {
+    assert.throws(() => assertLocalPath(bad), /inválido/);
+  }
+});
+
+test('local album entry lists thumb, mid and full without generating 240-1280 variants', () => {
+  const row = { url: '/galerias/x-gtap/full/dia-1-001.webp', thumb: '/galerias/x-gtap/thumb/dia-1-001.webp', width: 1600, height: 1065 };
+  assert.deepEqual(localGalleryEntry(row, 360), {
+    src: row.url,
+    srcSet: `/galerias/x-gtap/thumb/dia-1-001.webp 360w, /galerias/x-gtap/mid/dia-1-001.webp ${MID_WIDTH}w, ${row.url} 1600w`,
+    width: 1600,
+    height: 1065,
+  });
+  // Foto menor que a intermediária: só thumb e full.
+  assert.equal(localGalleryEntry({ ...row, width: 700, height: 466 }, 360).srcSet, `${row.thumb} 360w, ${row.url} 700w`);
+});
+
+test('gallery build adds local albums to the manifest without touching optimized remote photos', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'gtap-local-gallery-'));
+  try {
+    await mkdir(path.join(root, 'public/api/galerias'), { recursive: true });
+    await mkdir(path.join(root, 'public/galerias/x-gtap/full'), { recursive: true });
+    await mkdir(path.join(root, 'public/galerias/x-gtap/thumb'), { recursive: true });
+    await sharp({ create: { width: 1200, height: 800, channels: 3, background: '#335' } }).webp().toFile(path.join(root, 'public/galerias/x-gtap/full/a-1.webp'));
+    await sharp({ create: { width: 300, height: 200, channels: 3, background: '#335' } }).webp().toFile(path.join(root, 'public/galerias/x-gtap/thumb/a-1.webp'));
+    const row = { id: 'a-1', url: '/galerias/x-gtap/full/a-1.webp', thumb: '/galerias/x-gtap/thumb/a-1.webp', width: 1200, height: 800, scene: 'Primeiro Dia' };
+    await writeFile(path.join(root, 'public/api/galerias/x-gtap.json'), JSON.stringify([row]));
+    const manifest = await buildGallery({ root, fetchImpl: () => assert.fail('no network') });
+    assert.equal(manifest[row.url].srcSet, `${row.thumb} 300w, /galerias/x-gtap/mid/a-1.webp ${MID_WIDTH}w, ${row.url} 1200w`);
+    assert.equal((await sharp(path.join(root, 'public/galerias/x-gtap/mid/a-1.webp')).metadata()).width, MID_WIDTH);
+    assert.deepEqual(await readdir(path.join(root, GALLERY.directory)), []);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});

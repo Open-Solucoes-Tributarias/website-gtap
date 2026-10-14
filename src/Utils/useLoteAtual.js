@@ -1,43 +1,43 @@
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 // Essa função é um hook que verifica a data atual e retorna como resultado o lote "presente",
 // baseado na lista de lotes (array). Mantive sua estrutura e apenas tratei o caso de cruzar o ano.
 
 // ATUALIZE AQUI se precisar mudar meses de início/fim.
-// Interpretei sua regra assim:
-// - LOTE 1: R$ 3.690,00 até abril/2026 (começando em out/2025)
-// - LOTE 2: R$ 3.990,00 até junho/2026 (maio e junho/2026)
-// - LOTE 3: R$ 4.290,00 a partir de julho/2026 (usei jul→dez como padrão)
+// Evento: 21 e 22 de outubro de 2027. Mesmo cronograma de antes, deslocado em um ano:
+// - LOTE 1: R$ 3.990,00 de outubro/2026 a abril/2027
+// - LOTE 2: R$ 4.290,00 em maio e junho/2027
+// - LOTE 3: R$ 4.790,00 de julho/2027 até o mês do evento (outubro/2027)
 const lotes = [
   {
     nome: "Primeiro Lote",
-    preco: "R$ 3.690,00",
-    ano: 2025,
-    mesInicio: 10, // OUT/2025
-    mesFim: 4,     // ABR/2026 (cruza o ano)
-    label: "OUTUBRO/2025 A ABRIL/2026",
+    preco: "R$ 3.990,00",
+    ano: 2026,
+    mesInicio: 10, // OUT/2026
+    mesFim: 4,     // ABR/2027 (cruza o ano)
+    label: "OUTUBRO/2026 A ABRIL/2027",
   },
   {
     nome: "Segundo Lote",
-    preco: "R$ 3.990,00",
-    ano: 2026,
-    mesInicio: 5, // MAI/2026
-    mesFim: 6,    // JUN/2026
-    label: "MAIO A JUNHO/2026",
+    preco: "R$ 4.290,00",
+    ano: 2027,
+    mesInicio: 5, // MAI/2027
+    mesFim: 6,    // JUN/2027
+    label: "MAIO A JUNHO/2027",
   },
   {
     nome: "Terceiro Lote",
-    preco: "R$ 4.290,00",
-    ano: 2026,
-    mesInicio: 7,  // JUL/2026
-    mesFim: 10,    // DEZ/2026 (ajuste se quiser ir além)
-    label: "JULHO A OUTUBRO/2026",
+    preco: "R$ 4.790,00",
+    ano: 2027,
+    mesInicio: 7,  // JUL/2027
+    mesFim: 10,    // OUT/2027 (mês do evento)
+    label: "JULHO A OUTUBRO/2027",
   },
 ];
 
-// Lógica com suporte a intervalos que cruzam o ano (ex.: OUT/2025 → ABR/2026)
-const getStatusDoLote = (ano, mesInicio, mesFim) => {
-  const hoje = new Date();
+// Lógica com suporte a intervalos que cruzam o ano (ex.: OUT/2026 → ABR/2027)
+const getStatusDoLote = (ano, mesInicio, mesFim, hoje) => {
+  if (!hoje) return "futuro";
   const anoAtual = hoje.getFullYear();
   const mesAtual = hoje.getMonth() + 1;
 
@@ -72,12 +72,12 @@ const getStatusDoLote = (ano, mesInicio, mesFim) => {
 };
 
 export const useLoteAtual = () => {
-  const lotesComStatus = useMemo(() => {
-    return lotes.map((lote) => ({
-      ...lote,
-      status: getStatusDoLote(lote.ano, lote.mesInicio, lote.mesFim),
-    }));
-  }, []);
+  const [hoje, setHoje] = useState(null);
+  useEffect(() => { setHoje(new Date()); }, []);
+  const lotesComStatus = lotes.map((lote) => ({
+    ...lote,
+    status: getStatusDoLote(lote.ano, lote.mesInicio, lote.mesFim, hoje),
+  }));
 
   const loteAtual = lotesComStatus.find((lote) => lote.status === "presente");
 

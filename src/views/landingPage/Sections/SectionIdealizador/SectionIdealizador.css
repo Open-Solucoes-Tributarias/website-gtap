@@ -1,0 +1,146 @@
+.section-idealizador {
+  background-image: var(--gtap-bg-src-assets-backgroundescritorio-webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  /* Uma tela de altura. Antes vinha de height:100% sobre html/body com
+     height:100% (removido para a janela voltar a ser o contêiner de rolagem). */
+  min-height: 100vh;
+  min-height: 100svh;
+  /* Sem respiro embaixo: a foto do idealizador encosta na base da seção. */
+  padding-block: var(--section-py) 0;
+  padding-inline: var(--section-px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.content-idealizador {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-block: var(--space-3);
+  padding-inline: var(--space-4);
+  margin-bottom: var(--space-8);
+  margin-inline: var(--space-4);
+  /* vidro neutro (cinza translúcido) próprio deste painel: sem token */
+  background-color: rgb(100 100 100 / 30%);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  justify-content: space-between;
+}
+
+.content-idealizador h3 {
+  color: var(--color-gold-500);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
+}
+
+.content-idealizador p {
+  color: var(--text-on-dark);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.content-idealizador b {
+  font-weight: var(--fw-semibold);
+  color: var(--color-gold-200);
+}
+
+.content-image-idealizador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-image-idealizador img {
+  width: 500px;
+}
+.mobile-button-instagram {
+  display: none;
+}
+
+/* Botão do Instagram: visual vem do padrão global .btn .btn--gold;
+   aqui só a largura e o respiro dentro do painel. */
+.desktop-button-instagram .btn {
+  width: fit-content;
+  margin-bottom: var(--space-2);
+}
+
+/* ====== Movimento ======
+   Entrada (data-reveal): o painel de vidro desliza da esquerda (a animação
+   fica no próprio elemento com backdrop-filter, nunca num ancestral), o
+   conteúdo dele sobe em seguida e a foto vem da direita. */
+.section-idealizador .content-idealizador > :nth-child(1) {
+  --i: 1;
+}
+
+.section-idealizador .content-idealizador > :nth-child(2) {
+  --i: 2;
+}
+
+.section-idealizador .content-idealizador > :nth-child(3) {
+  --i: 3;
+}
+
+.section-idealizador .content-image-idealizador {
+  --i: 1;
+}
+
+/* Desktop: seção mais compacta (altura vem do conteúdo, menos respiro em cima),
+   título/texto/botão juntos no painel (sem espaço esticado entre eles) e a foto
+   encostada na base da seção, sem margem inferior. */
+@media (min-width: 769px) {
+  .section-idealizador {
+    min-height: 0;
+    padding-block: var(--space-8) 0;
+  }
+
+  .content-idealizador {
+    align-self: center;
+    justify-content: flex-start;
+    gap: var(--space-3);
+    margin-bottom: 0;
+  }
+
+  .content-image-idealizador {
+    align-items: flex-end;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-idealizador {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-image-idealizador img {
+    z-index: 1;
+    width: 300px;
+    margin-top: calc(var(--space-6) * -1);
+  }
+
+  .desktop-button-instagram {
+    display: none;
+  }
+
+  .mobile-button-instagram {
+    display: block;
+    position: relative;
+  }
+
+  /* Botão mobile sobreposto à foto, centralizado sem transform
+     (o transform fica livre para o hover/clique do .btn). */
+  .mobile-button-instagram .btn {
+    position: absolute;
+    z-index: 10;
+    bottom: var(--space-8);
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: max-content;
+    max-width: calc(100% - 2 * var(--space-2));
+  }
+}

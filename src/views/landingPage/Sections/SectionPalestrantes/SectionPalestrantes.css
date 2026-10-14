@@ -1,0 +1,191 @@
+.section-palestrantes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap);
+  padding-block: var(--section-py);
+  padding-inline: var(--section-px);
+  text-align: center;
+}
+
+/* Bloco de título: título + texto de abertura */
+.section-palestrantes-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.section-palestrantes h3 {
+  color: var(--color-navy-900);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
+}
+
+/* card dos palestrantes */
+.container-palestrantes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.card-palestrantes {
+  position: relative;
+  background: var(--color-navy-900);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-0-5);
+  width: 230px;
+  height: 350px;
+  padding-inline: var(--space-1);
+  padding-block-end: var(--space-3);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: transform 400ms var(--ease-out);
+}
+
+/* Máscara da foto (antes era o overflow do card): recorta o zoom sem cortar o brilho.
+   Raio interno = raio do card menos a borda de 2px. */
+.card-palestrantes-foto {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+/* Degradê no rodapé da foto: só aparece no hover/foco, para o nome seguir legível com o zoom. */
+.card-palestrantes-foto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-scrim);
+  opacity: 0;
+  transition: opacity 400ms var(--ease-out);
+}
+
+.card-palestrantes .speaker-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 900ms var(--ease-out);
+}
+
+/* Sombra do hover: box-shadow fixo num pseudo-elemento; só a opacidade anima. */
+.card-palestrantes::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    0 24px 40px -20px rgb(2 9 58 / 60%);
+  opacity: 0;
+  transition: opacity 400ms var(--ease-out);
+  pointer-events: none;
+}
+
+.card-palestrantes h6, .card-palestrantes p { position: relative; z-index: 1; }
+.card-palestrantes:focus-visible { outline: 3px solid var(--color-navy-900); outline-offset: 4px; }
+
+.card-palestrantes h6 {
+  color: var(--text-on-dark);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+}
+
+.card-palestrantes p {
+  color: var(--text-on-dark);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-snug);
+}
+
+/* Hover (só mouse/trackpad) e foco pelo teclado: card sobe e foto aproxima. */
+@media (hover: hover) and (pointer: fine) {
+  .card-palestrantes:hover {
+    transform: translateY(-6px);
+  }
+
+  .card-palestrantes:hover::after,
+  .card-palestrantes:hover .card-palestrantes-foto::after {
+    opacity: 1;
+  }
+
+  .card-palestrantes:hover .speaker-photo {
+    transform: scale(1.06);
+  }
+
+}
+
+.card-palestrantes:focus-visible {
+  transform: translateY(-6px);
+}
+
+.card-palestrantes:focus-visible::after,
+.card-palestrantes:focus-visible .card-palestrantes-foto::after {
+  opacity: 1;
+}
+
+.card-palestrantes:focus-visible .speaker-photo {
+  transform: scale(1.06);
+}
+
+
+/* Clique: volta ao repouso rápido, com leve "aperto". */
+.card-palestrantes:active {
+  transform: scale(0.98);
+  transition-duration: 120ms;
+}
+
+/* Entrada em cascata por coluna (o --i é lido pelo data-reveal="scale"). */
+.container-palestrantes {
+  --reveal-stagger: 90ms;
+}
+
+.container-palestrantes > :nth-child(4n + 2) { --i: 1; }
+.container-palestrantes > :nth-child(4n + 3) { --i: 2; }
+.container-palestrantes > :nth-child(4n + 4) { --i: 3; }
+
+/* 4 cards = 4×230 + 3×24 = 992px de conteúdo + 2×24 de gutter: abaixo de 1040px cabem 3. */
+@media (max-width: 1039px) {
+  .container-palestrantes > :nth-child(n) { --i: 0; }
+  .container-palestrantes > :nth-child(3n + 2) { --i: 1; }
+  .container-palestrantes > :nth-child(3n + 3) { --i: 2; }
+}
+
+/* 3 cards = 738px + 48px de gutter: abaixo de 786px ficam 2 colunas (desktop estreito e mobile). */
+@media (max-width: 785px) {
+  .container-palestrantes > :nth-child(n) { --i: 0; }
+  .container-palestrantes > :nth-child(2n + 2) { --i: 1; }
+}
+
+@media (max-width: 768px) {
+  .container-palestrantes {
+    gap: var(--space-2);
+  }
+
+  .card-palestrantes {
+    width: calc(50% - var(--space-1)); /* duas por linha com gap */
+    max-width: 200px;
+    height: 250px;
+    padding-block-end: var(--space-2);
+  }
+
+  /* Card estreito (~170px): o nome desce um degrau na escala para não quebrar demais. */
+  .card-palestrantes h6 {
+    font-size: var(--fs-body);
+  }
+
+  .card-palestrantes p {
+    font-size: var(--fs-caption);
+  }
+}

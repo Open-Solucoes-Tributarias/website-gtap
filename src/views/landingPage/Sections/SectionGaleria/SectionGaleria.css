@@ -1,0 +1,108 @@
+/* Galeria compacta: texto (hierarquia clara) + grade 2×2 de fotos que trocam. */
+.section-galeria {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-8);
+  padding-block: var(--section-py);
+  padding-inline: var(--section-px);
+  background-image: var(--gtap-bg-src-assets-backgroundsalvador-webp);
+  background-position: center;
+  background-size: cover;
+}
+
+.galeria-texto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 480px;
+}
+
+.galeria-titulo {
+  color: var(--color-navy-900);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
+}
+
+.galeria-lead {
+  color: var(--text-on-light);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+}
+
+/* Botão dourado padrão do site. */
+.galeria-cta {
+  margin-top: var(--space-1);
+}
+
+.galeria-grade {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 560px;
+  justify-self: end;
+}
+
+.galeria-celula {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  background: var(--color-gray-100);
+}
+
+/* Anterior opaca por baixo, atual surge por cima: troca sem flash. */
+.galeria-camada {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.galeria-camada.is-prev {
+  opacity: 1;
+}
+
+.galeria-camada.is-active {
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 900ms var(--ease-in-out);
+}
+
+.galeria-camada img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1000ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .galeria-celula:hover .galeria-camada.is-active img {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 768px) {
+  .section-galeria {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .galeria-texto {
+    align-items: center;
+    max-width: none;
+    text-align: center;
+  }
+
+  .galeria-lead {
+    font-size: var(--fs-lead);
+  }
+
+  .galeria-grade {
+    justify-self: center;
+    gap: var(--space-1);
+  }
+}

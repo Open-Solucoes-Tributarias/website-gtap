@@ -1,20 +1,27 @@
 /* Modal base */
+/* Sem position aqui: o dialog modal precisa do position: fixed do navegador
+   (com relative ele vira absolute no top layer e o showModal() rola a janela ao topo). */
 .modal-dialog {
   display: flex;
   border: none;
   padding: 0;
   background: transparent;
-  position: relative;
-  width: 90vw;              /* ou 50vw se quiser mais estreito */         /* Limita a altura visível */
+  width: 90vw;
   overflow-x: hidden;           /* Permite rolagem do próprio dialog */
   box-sizing: border-box;
 }
 
-.modal-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.7);
+/* O display: flex acima anularia o "fechado" do navegador. */
+.modal-dialog:not([open]) {
+  display: none;
 }
 
-/* Estrutura do modal */
+/* Véu escuro do modal (preto 70%: não há token de overlay). */
+.modal-dialog::backdrop {
+  background: rgb(0 0 0 / 70%);
+}
+
+/* Estrutura do modal: só o cartão; a largura deixa espaço para as setas ⟨ ⟩ */
 .modal-structure {
   display: flex;
   align-items: center;
@@ -22,113 +29,189 @@
   margin: 0 auto;
   background: transparent;
   position: relative;
-  width: 60%;
+  width: min(760px, calc(100% - 2 * (5vw + var(--space-5) + var(--space-2))));
 }
 
-/* Lado esquerdo - foto */
-.modal-photo {
+/* Cabeçalho: avatar redondo ao lado do nome e do cargo (folga à direita para o ✕).
+   Sem gap: o <source> do <picture> também vira item do flex e o gap empurraria o
+   avatar para a direita; o espaço até o texto vem da margem do avatar. */
+.modal-cabecalho {
   display: flex;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  width: 300px;
-  min-height: 350px;
-  height: 350px;
-  border-radius: 150px;
-  border: 2px solid #dda92e;
-  margin-right: 30px;
+  align-items: center;
+  padding-right: var(--space-5);
 }
-/* Lado direito - texto */
+
+.modal-photo {
+  flex-shrink: 0;
+  margin-right: var(--space-3);
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  background: var(--color-navy-900);
+}
+
+/* Cartão branco: cabeçalho, biografia e redes */
 .modal-box {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background: white;
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    padding-block: 15px;
-    padding-inline: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--color-white);
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.modal-cabecalho .modal-texto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* Linha divisória entre o cabeçalho e a biografia */
+.modal-divisor {
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: var(--color-gray-300);
 }
 
 /* Título */
 .modal-box h2 {
-  font-size: 26px;
-  font-weight: 500;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
   text-align: left;
-  color: #02093a;
- 
+  color: var(--text-on-light);
 }
 
 /* Subtítulo */
 .modal-box h4 {
-  font-size: 17px;
-  color: #02093a;
-  font-weight: 400;
+  font-size: var(--fs-lead);
+  color: var(--text-on-light);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-snug);
   text-align: left;
- 
 }
 
 /* Texto do corpo */
 .modal-box p {
-  font-size: 0.95rem;
-    text-align: left;
-  color: #02093A;
-  line-height: 1.5;
-  margin-bottom: 1rem;
+  font-size: var(--fs-body);
+  text-align: left;
+  color: var(--text-on-light);
+  line-height: var(--lh-body);
 }
 
 /* Ícone do LinkedIn */
 .modal-box .linkedin-icon {
   width: 28px;
-  margin-top: 1rem;
+  margin-top: var(--space-2);
   cursor: pointer;
 }
+
 .footer-modal {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: var(--space-2);
   text-align: left;
 }
+
+/* Botão circular de rede social: 40×40 fixo, ícone centralizado */
 .iconbutton-social {
-  border: 2px solid #c7c7c7;
-  padding-block: 7px;
-  padding-inline: 10px;
-  border-radius: 100%;
-  font-size: 16px;
-  text-align: left;
-  color: #02093A;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-5);
+  height: var(--space-5);
+  box-sizing: border-box;
+  border: 2px solid var(--color-gray-300);
+  border-radius: 50%;
+  font-size: var(--fs-body);
+  color: var(--text-on-light);
   cursor: pointer;
-  
+  transition:
+    transform var(--dur-ui) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+/* O anel de foco fica no círculo, não no link retangular em volta. */
+.modal-dialog .link-social:focus-visible {
+  outline: none;
+}
+
+.modal-dialog .link-social:focus-visible .iconbutton-social {
+  outline: 3px solid var(--color-gold-500);
+  outline-offset: 3px;
 }
 
 /* Botão de fechar */
 .close {
   position: absolute;
-  top: 1rem;
-  right: 1.2rem;
-  font-size: 20px;
+  top: var(--space-2);
+  right: var(--space-2);
+  font-size: var(--fs-lead);
+  line-height: 1;
+  color: var(--text-on-light);
   background: transparent;
   border: none;
   cursor: pointer;
   z-index: 10;
+  transition:
+    transform var(--dur-ui) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+/* Círculo de hover atrás do ✕ (também aumenta a área de toque). */
+.modal-dialog .close::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--space-5);
+  height: var(--space-5);
+  margin: calc(var(--space-5) / -2) 0 0 calc(var(--space-5) / -2);
+  z-index: -1;
+  border-radius: 50%;
+  background: rgb(2 9 58 / 8%); /* navy-900 a 8% */
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity var(--dur-ui) var(--ease-out),
+    transform var(--dur-ui) var(--ease-out);
 }
 
 /* Botões de navegação ⟨ ⟩ */
 .nav-arrow {
+  --nav-arrow-y: -50%;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  background: white;
+  transform: translateY(var(--nav-arrow-y));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  color: var(--text-on-light);
   border-radius: 50%;
   border: none;
-  font-size: 1.6rem;
-  width: 38px;
-  padding-top: 4px;
-  height: 38px;
+  font-size: var(--fs-h3);
+  width: var(--space-5);
+  height: var(--space-5);
+  padding: 0;
   cursor: pointer;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-sm);
   z-index: 10; /* garante que fique acima do modal */
+  transition:
+    transform var(--dur-ui) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.modal-dialog .nav-arrow svg {
+  transition: transform var(--dur-ui) var(--ease-out);
 }
 
 .nav-left {
@@ -149,62 +232,173 @@
   }
 
   .modal-structure {
-    flex-direction: column;
     width: 100%;
-    align-items: center;
-    padding-inline: 10px;
+    padding-inline: var(--space-1);
   }
 
-    .modal-photo {
-      display: none;
-    }
+  .modal-cabecalho {
+    padding-right: var(--space-4);
+  }
+
+  .modal-photo {
+    width: 72px;
+    height: 72px;
+    margin-right: var(--space-2);
+  }
 
   .modal-box {
-    width: 100%;
-    padding: 16px;
-    border-radius: 16px;
+    padding: var(--space-2);
   }
 
-  .modal-box h2 {
-    font-size: 20px;
-    text-align: center;
-  }
-
-  .modal-box h4 {
-    font-size: 15px;
-    text-align: center;
-  }
-
-  .modal-box p {
-    font-size: 0.9rem;
-    text-align: center;
-  }
-
+  /* Redes centralizadas entre as setas ⟨ ⟩ do rodapé. */
   .footer-modal {
     justify-content: center;
-    text-align: center;
   }
 
   .close {
-    top: 10px;
-    right: 25px;
+    top: var(--space-2);
+    right: var(--space-3);
   }
 
   .nav-arrow {
-    bottom: 10px;
+    --nav-arrow-y: 0px;
+    bottom: var(--space-2);
     top: unset;
-    transform: none;
-    width: 36px;
-    height: 36px;
-    font-size: 1.2rem;
+    font-size: var(--fs-lead);
   }
 
   .nav-left {
-    left: 10px;
+    left: var(--space-1);
   }
 
   .nav-right {
-    right: 10px;
+    right: var(--space-1);
   }
 }
 
+/* ==================== Microinterações ==================== */
+
+@media (hover: hover) and (pointer: fine) {
+  .modal-dialog .nav-arrow:hover {
+    transform: translateY(var(--nav-arrow-y)) scale(1.08);
+    background: var(--color-gold-200);
+    color: var(--color-navy-900);
+  }
+
+  .modal-dialog .nav-left:hover svg {
+    transform: translateX(-2px);
+  }
+
+  .modal-dialog .nav-right:hover svg {
+    transform: translateX(2px);
+  }
+
+  .modal-dialog .close:hover {
+    transform: rotate(90deg);
+    color: var(--color-navy-900);
+  }
+
+  .modal-dialog .close:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .modal-dialog .link-social:hover .iconbutton-social {
+    transform: translateY(-2px);
+    border-color: var(--color-gold-500);
+    background-color: var(--color-gold-200);
+  }
+}
+
+/* Foco pelo teclado = mesmo retorno visual do hover */
+.modal-dialog .nav-arrow:focus-visible {
+  transform: translateY(var(--nav-arrow-y)) scale(1.08);
+  background: var(--color-gold-200);
+  color: var(--color-navy-900);
+}
+
+.modal-dialog .close:focus-visible::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-dialog .link-social:focus-visible .iconbutton-social {
+  transform: translateY(-2px);
+  border-color: var(--color-gold-500);
+  background-color: var(--color-gold-200);
+}
+
+/* Clique: "aperto" curto */
+.modal-dialog .nav-arrow:active {
+  transform: translateY(var(--nav-arrow-y)) scale(0.94);
+  transition-duration: 120ms;
+}
+
+.modal-dialog .close:active {
+  transform: scale(0.9);
+  transition-duration: 120ms;
+}
+
+.modal-dialog .link-social:active .iconbutton-social {
+  transform: scale(0.94);
+  transition-duration: 120ms;
+}
+
+/* ==================== Abertura, saída e troca ==================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  .modal-dialog[open] {
+    animation: gtap-modal-entrada 240ms var(--ease-out);
+  }
+
+  .modal-dialog[open]::backdrop {
+    animation: gtap-modal-fundo 240ms var(--ease-out);
+  }
+
+  .modal-dialog[open].is-fechando {
+    animation: gtap-modal-saida 160ms var(--ease-in-out) forwards;
+  }
+
+  .modal-dialog[open].is-fechando::backdrop {
+    animation: gtap-modal-fundo-saida 160ms var(--ease-in-out) forwards;
+  }
+
+  /* Anterior/próximo: foto e textos remontam (key) e entram do lado certo. */
+  .modal-dialog[data-direcao="proximo"] .modal-photo,
+  .modal-dialog[data-direcao="proximo"] .modal-texto {
+    animation: gtap-modal-troca-proximo 260ms var(--ease-out) backwards;
+  }
+
+  .modal-dialog[data-direcao="anterior"] .modal-photo,
+  .modal-dialog[data-direcao="anterior"] .modal-texto {
+    animation: gtap-modal-troca-anterior 260ms var(--ease-out) backwards;
+  }
+
+  .modal-dialog[data-direcao] .modal-texto + .modal-texto {
+    animation-delay: 40ms;
+  }
+}
+
+@keyframes gtap-modal-entrada {
+  from { opacity: 0; translate: 0 12px; scale: 0.97; }
+}
+
+@keyframes gtap-modal-saida {
+  to { opacity: 0; translate: 0 8px; scale: 0.98; }
+}
+
+@keyframes gtap-modal-fundo {
+  from { opacity: 0; }
+}
+
+@keyframes gtap-modal-fundo-saida {
+  to { opacity: 0; }
+}
+
+@keyframes gtap-modal-troca-proximo {
+  from { opacity: 0; translate: 16px 0; }
+}
+
+@keyframes gtap-modal-troca-anterior {
+  from { opacity: 0; translate: -16px 0; }
+}

@@ -1,77 +1,100 @@
+"use client";
+
 import { useEffect, useState, useRef } from "react";
 import { NavbarMobile } from "../NavbarMobile/NavbarMobile";
+import { MotionRuntime } from "../MotionRuntime/MotionRuntime";
+import { OPEN_URL } from "../../data/links";
 import "./Navbar.css";
 
-export const Navbar = ({ lightTemplate }) => {
-  const [isMobile, setIsMobile] = useState(false);
-  const [renderNav, setRenderNav] = useState(true);
-  const lastDirection = useRef(null);
+// Até aqui (px do topo) o header fica sempre visível.
+const TOP_ZONE = 80;
+// Rolagem mínima na mesma direção antes de esconder/mostrar (evita tremer).
+const HYSTERESIS = 24;
 
-  // Detecta se a tela é mobile
+// Foco de teclado dentro do header: não esconder (ele ficaria inert com o foco dentro).
+function hasKeyboardFocus(header) {
+  const active = document.activeElement;
+  if (!header || !active || !header.contains(active)) return false;
+  try {
+    return active.matches(":focus-visible");
+  } catch {
+    return true;
+  }
+}
+
+export const Navbar = () => {
+  const [hidden, setHidden] = useState(false);
+  const headerRef = useRef(null);
+
   useEffect(() => {
-    const checkSize = () => {
-      setIsMobile(window.innerWidth <= 768);
+    const header = headerRef.current;
+    const mobile = window.matchMedia("(max-width: 768px)");
+    let lastY = window.scrollY;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      // No mobile o header desktop está em display:none.
+      if (mobile.matches) {
+        lastY = y;
+        setHidden(false);
+        return;
+      }
+      if (y < TOP_ZONE) {
+        lastY = y;
+        setHidden(false);
+        return;
+      }
+      if (Math.abs(y - lastY) < HYSTERESIS) return;
+      const goingDown = y > lastY;
+      lastY = y;
+      if (!goingDown) setHidden(false);
+      else if (!hasKeyboardFocus(header)) setHidden(true);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
     };
 
-    checkSize();
-    window.addEventListener("resize", checkSize);
-    return () => window.removeEventListener("resize", checkSize);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
-  // Scroll para esconder/exibir navbar (somente desktop)
-  useEffect(() => {
-    if (!isMobile) {
-      const handleScroll = (event) => {
-        const delta = event.deltaY;
-        const direction = delta > 0 ? "down" : "up";
+  // Versão desktop: sempre montada; esconde ao rolar para baixo (transform) e
+  // volta ao rolar para cima. Escondida fica inert (fora do Tab e do leitor de tela).
+  const headerClass = `navbar${hidden ? " navbar--hidden" : ""}`;
 
-        if (direction !== lastDirection.current) {
-          lastDirection.current = direction;
-          setRenderNav(direction !== "down");
-        }
-      };
-
-      window.addEventListener("wheel", handleScroll);
-      return () => window.removeEventListener("wheel", handleScroll);
-    }
-  }, [isMobile]);
-
-  // Redirecionamento com hash
-  const hrefRedirect = (id) => {
-    window.location.href = `/#${id}`;
-  };
-
-  // Se for mobile, renderiza o componente separado
-  if (isMobile) {
-    return <NavbarMobile lightTemplate={lightTemplate} />;
-  }
-
-  // Versão desktop com renderNav
   return (
     <>
-      {renderNav && (
-        <header className={lightTemplate ? "navbar-light" : "navbar"}>
+      <MotionRuntime />
+      <div className="navigation-mobile"><NavbarMobile /></div>
+      <div className="navigation-desktop">
+        <header ref={headerRef} className={headerClass} inert={hidden}>
           <nav className="navbar-container" aria-label="Navegação principal">
             <h1 className="navbar-logo">
               <a href="/">
-                {lightTemplate ? (
-                  <img src="./logo-gtap.svg" alt="logo gtap" />
-                ) : (
-                  <img src="./logo.svg" alt="logo do site" />
-                )}
+                <img src="/logo-xi-gtap.svg" alt="XI GTAP — página inicial" width="152" height="49" fetchPriority="high" />
               </a>
             </h1>
             <ul className="navbar-links">
-              <li><a onClick={() => hrefRedirect("temas")}>TEMAS</a></li>
-              <li><a onClick={() => hrefRedirect("palestrantes")}>PALESTRANTES</a></li>
-              <li><a href="galeria">GALERIA</a></li>
-              <li><a onClick={() => hrefRedirect("preços")}>PREÇOS</a></li>
-              <li><a href="open-solucoes-tributarias">A OPEN</a></li>
-              <li><a onClick={() => hrefRedirect("contato")}>CONTATO</a></li>
+              <li><a href="/#temas">TEMAS</a></li>
+              <li><a href="/#palestrantes">PALESTRANTES</a></li>
+              <li><a href="/galeria/">GALERIA</a></li>
+              <li><a href="/#preços">PREÇOS</a></li>
+              <li>
+                <a href={OPEN_URL} target="_blank" rel="noopener noreferrer">
+                  A OPEN<span className="sr-only"> (abre em nova aba)</span>
+                </a>
+              </li>
+              <li><a href="/#contato">CONTATO</a></li>
             </ul>
           </nav>
         </header>
-      )}
+      </div>
     </>
   );
 };

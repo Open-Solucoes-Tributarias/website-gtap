@@ -1,0 +1,142 @@
+.container-banner-galeria {
+    height: 100vh;
+    background: var(--gtap-bg-src-assets-bannergaleria-webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.content-text-galeria-banner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: end;
+    color: var(--text-on-dark);
+    text-align: center;
+    /* Distância relativa à altura da tela: separa título e CTA sobre a arte do banner. */
+    gap: 20vh;
+}
+
+/* Entrada no primeiro paint (data-enter): título, subtítulo e CTA em sequência.
+   A seção em si nunca anima: o fundo dela pode ser o LCP. */
+.div-text-galeria h5 {
+    margin: 0 0 var(--space-2);
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    /* Sombra de legibilidade sobre foto (sem token equivalente). */
+    text-shadow:
+        0 2px 4px rgb(0 0 0 / 80%),
+        0 4px 8px rgb(0 0 0 / 50%);
+}
+
+.div-text-galeria p {
+    --i: 1;
+    margin: 0;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-snug);
+    text-shadow:
+        0 2px 4px rgb(0 0 0 / 80%),
+        0 4px 8px rgb(0 0 0 / 50%);
+}
+
+.div-button-galeria-banner {
+    padding-bottom: var(--space-3);
+}
+
+/* CTA no padrão global (.btn .btn--gold); aqui só o atraso da entrada (data-enter). */
+.container-banner-galeria .galeria-banner-cta {
+    --i: 2;
+}
+
+/* Edições: cabeçalho + grade (a mais recente em destaque 2x2). */
+.container-card-gtaps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-gap);
+    padding-block: var(--section-py);
+    padding-inline: var(--section-px);
+}
+
+.card-gtaps-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    max-width: 640px;
+}
+
+.card-gtaps-head h3 {
+    margin: 0;
+    font-size: var(--fs-h1);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-tight);
+    color: var(--text-on-light);
+}
+
+.card-gtaps-head p {
+    --i: 1;
+    margin: 0;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-body);
+    color: var(--text-on-light-muted);
+}
+
+.content-card-gtaps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+/* Stagger da entrada (data-reveal="scale") por coluna, sem estilo inline. */
+.content-card-gtaps > :nth-child(3n + 1) {
+    --i: 1;
+}
+
+.content-card-gtaps > :nth-child(3n + 2) {
+    --i: 2;
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .content-card-gtaps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    /* Altura mínima da tela (antes vinha do height: 100% de html/body). */
+    .container-banner-galeria {
+        height: auto;
+        background: var(--gtap-bg-src-assets-banner-mobile-galeria-webp);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    /* No mobile o subtítulo do banner desce para o tamanho de abertura. */
+    .div-text-galeria p {
+        font-weight: var(--fw-light);
+        font-size: var(--fs-lead);
+        padding-inline: var(--space-2);
+    }
+
+    .content-text-galeria-banner {
+        min-height: 100vh;
+        min-height: 100svh;
+        justify-content: center;
+        gap: var(--space-3);
+        /* Deixa livre o topo da arte mobile do banner. */
+        padding-top: calc(var(--space-16) + var(--space-12));
+        padding-bottom: var(--space-3);
+    }
+
+    .content-card-gtaps {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-2);
+    }
+
+    /* Uma coluna: cada card entra sozinho, sem atraso. */
+    .content-card-gtaps > * {
+        --i: 0;
+    }
+}
