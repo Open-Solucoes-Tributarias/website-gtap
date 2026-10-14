@@ -34,6 +34,8 @@ Páginas exportadas: home, `/galeria/` e nove álbuns. A antiga página interna 
 
 ## Publicação na Hostinger
 
+> Fluxo de deploy para agentes/LLMs: veja [AGENTS.md](AGENTS.md) (fonte da verdade: `dev` → `main` → branch `hostinger` → Git da Hostinger).
+
 ### Automática via Git (recomendada)
 
 O workflow [`.github/workflows/deploy-hostinger.yml`](.github/workflows/deploy-hostinger.yml) roda a cada push na `main` (ou manualmente em *Actions*): executa `npm ci`, lint, build e `verify:export` e publica **só o conteúdo de `out/`** (com o `.htaccess` na raiz) na branch `hostinger`. Não precisa de FTP nem de secrets. Nunca edite essa branch à mão.
