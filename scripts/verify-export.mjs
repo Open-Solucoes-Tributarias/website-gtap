@@ -67,7 +67,8 @@ for (const route of routes) {
     // Fotos otimizadas versionadas (240/480/960/1280 px); a capa (LCP) com AVIF e prioridade alta.
     if (route !== 'X GTAP') assert.match(html, /<img[^>]+srcSet="\/galeria-otimizada\/[^"]+ 240w, [^"]+ 480w/);
     assert.match(html, /<source type="image\/avif" srcSet="\/optimized\/[^"]+"[^>]*><img[^>]+fetchPriority="high"[^>]+class="album-hero-img"/i);
-    assert.doesNotMatch(html, /<img[^>]+src="https:\/\/gtap\.com\.br\/midias\//);
+    // Álbuns antigos não apontam para os originais; o X GTAP usa as versões já otimizadas do servidor.
+    assert.doesNotMatch(html, /<img[^>]+src="https:\/\/gtap\.com\.br\/midias\/(?!X%20GTAP\/(?:full|mid|thumb)\/)/);
     // Chips por dia e "Carregar mais" só no álbum grande importado (X GTAP). O CSS do
     // álbum vem embutido em todas as páginas: checa o markup, não as classes no CSS.
     const chips = html.match(/<button[^>]+class="album-chip"/g) ?? [];
@@ -78,7 +79,8 @@ for (const route of routes) {
       assert.match(html, /Fotos: Alan Gois/);
       assert.match(html, /src="\/assets\/logos\/xgtap\.webp"/);
       assert.equal(html.match(/<li class="album-item/g)?.length, 60, 'X GTAP: 60 fotos no HTML inicial');
-      assert.match(html, /srcSet="\/galerias\/x-gtap\/thumb\/[^"]+ 360w, \/galerias\/x-gtap\/mid\/[^"]+ 800w/);
+      assert.match(html, /srcSet="https:\/\/gtap\.com\.br\/midias\/X%20GTAP\/thumb\/[^"]+ \d+w, https:\/\/gtap\.com\.br\/midias\/X%20GTAP\/mid\/[^"]+ 800w/);
+      assert.doesNotMatch(html, /\/galerias\/x-gtap\//);
     } else {
       assert.equal(chips.length, 0, `${route}: sem chips de dia`);
       assert.doesNotMatch(html, />Carregar mais fotos</);
@@ -91,7 +93,8 @@ for (const route of routes) {
   }
   if (!route) {
     // Fotos de evento da home vêm do X GTAP (2026).
-    assert.match(html, /\/galerias\/x-gtap\/(?:thumb|mid|full)\//);
+    assert.match(html, /https:\/\/gtap\.com\.br\/midias\/X%20GTAP\/(?:thumb|mid|full)\//);
+    assert.doesNotMatch(html, /\/galerias\/x-gtap\//);
     assert.doesNotMatch(html, /galeria-otimizada\//);
   }
   // data-href: lista de CSS embutido (experimental.inlineCss), separada por espaço.
@@ -121,7 +124,12 @@ const gallery = JSON.parse(await readFile('src/data/gallery-media.json', 'utf8')
 assert.ok(Object.keys(gallery).length > 0);
 for (const image of Object.values(gallery)) {
   assert.ok(image.width > 0 && image.height > 0);
-  for (const item of image.srcSet.split(', ')) await access(`out${item.split(' ')[0]}`);
+  // URLs absolutas (midias/ no servidor, ex.: X GTAP) não fazem parte do export.
+  for (const item of image.srcSet.split(', ')) {
+    const src = item.split(' ')[0];
+    if (!src.startsWith('https://')) await access(`out${src}`);
+    else assert.match(src, /^https:\/\/gtap\.com\.br\/midias\/[IVX]+%20GTAP\/(?:full|mid|thumb)\/[a-z0-9-]+\.webp$/);
+  }
 }
 const htaccess = await readFile('out/.htaccess', 'utf8');
 assert.equal(htaccess, await readFile('public/.htaccess', 'utf8'));

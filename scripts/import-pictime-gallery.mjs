@@ -3,11 +3,14 @@ import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { MID_WIDTH } from './optimize-images.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BASE = 'https://pictime7eus1public-pub-hdf3hecqdpaqeuev.a02.azurefd.net/pictures/54/44/54044754/332r2e3vmx6d5kh0tl';
 const GALLERY_URL = `${BASE}/gallery.json.txt`;
 const photoUrl = (photoId) => `${BASE}/lowres/${photoId}.jpg`;
+// As fotos do álbum ficam no servidor (public_html/midias/X GTAP/{full,mid,thumb}); o JSON só aponta para elas.
+const MIDIAS = 'https://gtap.com.br/midias/X%20GTAP';
 const SCENE_ORDER = ['Primeiro Dia', 'Segundo Dia'];
 const MAX_BYTES = 20 * 1024 * 1024;
 const CONCURRENCY = 8;
@@ -40,8 +43,8 @@ export function buildEntries(orderedScenes) {
     return {
       id,
       photoId,
-      url: `/galerias/x-gtap/full/${id}.webp`,
-      thumb: `/galerias/x-gtap/thumb/${id}.webp`,
+      url: `${MIDIAS}/full/${id}.webp`,
+      thumb: `${MIDIAS}/thumb/${id}.webp`,
       scene: scene.sceneName,
     };
   }));
@@ -77,11 +80,14 @@ async function writeAtomic(destination, pipeline) {
   }
 }
 
+// Gera as três versões em .cache/midias/X GTAP/ (pasta a enviar para public_html/midias/, fora do Git).
 export async function importGallery({ root = ROOT, force = false } = {}) {
   const cache = path.join(root, '.cache/pictime');
-  const fullDir = path.join(root, 'public/galerias/x-gtap/full');
-  const thumbDir = path.join(root, 'public/galerias/x-gtap/thumb');
-  await Promise.all([cache, fullDir, thumbDir, path.join(root, 'public/api/galerias')].map((d) => mkdir(d, { recursive: true })));
+  const midiasDir = path.join(root, '.cache/midias/X GTAP');
+  const fullDir = path.join(midiasDir, 'full');
+  const midDir = path.join(midiasDir, 'mid');
+  const thumbDir = path.join(midiasDir, 'thumb');
+  await Promise.all([cache, fullDir, midDir, thumbDir, path.join(root, 'public/api/galerias')].map((d) => mkdir(d, { recursive: true })));
 
   const gallery = JSON.parse((await fetchBuffer(GALLERY_URL)).toString('utf8'));
   const entries = buildEntries(orderScenes(parseScenes(gallery)));
@@ -96,6 +102,7 @@ export async function importGallery({ root = ROOT, force = false } = {}) {
       const entry = entries[index];
       try {
         const fullPath = path.join(fullDir, `${entry.id}.webp`);
+        const midPath = path.join(midDir, `${entry.id}.webp`);
         const thumbPath = path.join(thumbDir, `${entry.id}.webp`);
         let input;
         const need = async () => {
@@ -110,6 +117,9 @@ export async function importGallery({ root = ROOT, force = false } = {}) {
         };
         if (force || !(await exists(fullPath))) {
           await writeAtomic(fullPath, sharp(await need()).rotate().resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true }).webp({ quality: 72 }));
+        }
+        if (force || !(await exists(midPath))) {
+          await writeAtomic(midPath, sharp(fullPath).resize({ width: MID_WIDTH, withoutEnlargement: true }).webp({ quality: 72, effort: 4 }));
         }
         if (force || !(await exists(thumbPath))) {
           await writeAtomic(thumbPath, sharp(await need()).rotate().resize({ width: 360, height: 360, fit: 'inside', withoutEnlargement: true }).webp({ quality: 60 }));
@@ -126,7 +136,7 @@ export async function importGallery({ root = ROOT, force = false } = {}) {
   if (failures.length) throw new Error(`Failed ${failures.length} photos:\n${failures.join('\n')}`);
 
   await writeFile(path.join(root, 'public/api/galerias/x-gtap.json'), `${JSON.stringify(results, null, 2)}\n`);
-  console.log(`Imported ${results.length} photos.`);
+  console.log(`Imported ${results.length} photos. Envie a pasta .cache/midias/X GTAP para public_html/midias/.`);
   return results;
 }
 

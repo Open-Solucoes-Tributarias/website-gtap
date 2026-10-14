@@ -40,8 +40,8 @@ test('buildEntries numbers photos per scene with zero-padded counters', () => {
   assert.deepEqual(entries[0], {
     id: 'dia-1-001',
     photoId: 1001,
-    url: '/galerias/x-gtap/full/dia-1-001.webp',
-    thumb: '/galerias/x-gtap/thumb/dia-1-001.webp',
+    url: 'https://gtap.com.br/midias/X%20GTAP/full/dia-1-001.webp',
+    thumb: 'https://gtap.com.br/midias/X%20GTAP/thumb/dia-1-001.webp',
     scene: 'Primeiro Dia',
   });
   assert.equal(entries[3].scene, 'Segundo Dia');

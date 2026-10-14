@@ -1,5 +1,6 @@
 import { getMedia } from "../../data/media";
 import galleryMedia from "../../data/gallery-media.json";
+import { xGtapFullUrl } from "../../data/xgtap";
 import { BannerSection } from "../../components/Banner/Banner";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { SectionAtuacao } from "./Sections/SectionAtuacao/SectionAtuacao";
@@ -21,7 +22,7 @@ const GALERIA_FOTOS = [
   "dia-1-088", "dia-2-018", "dia-1-122", "dia-2-106", "dia-1-186", "dia-2-128", "dia-1-192", "dia-2-201",
   "dia-1-236", "dia-2-260", "dia-1-252", "dia-1-278", "dia-1-286", "dia-1-346", "dia-1-423", "dia-1-440",
 ].map((id) => {
-  const url = `/galerias/x-gtap/full/${id}.webp`;
+  const url = xGtapFullUrl(id);
   return { id: url, image: galleryMedia[url] };
 });
 

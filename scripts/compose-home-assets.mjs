@@ -1,10 +1,13 @@
-// Regenera as fotos de evento da home/galeria em src/assets/ a partir das fotos locais de 2026
-// (public/galerias/x-gtap/full/<id>.webp), mantendo nome, dimensões e tratamento visual dos originais.
+// Regenera as fotos de evento da home/galeria em src/assets/ a partir das fotos de 2026 no
+// servidor (https://gtap.com.br/midias/X GTAP/full/<id>.webp), mantendo nome, dimensões e
+// tratamento visual dos originais.
 // Uso: node scripts/compose-home-assets.mjs  (saídas versionadas; não faz parte do build —
 // depois rode `npm run media:images` para regerar os srcsets em public/optimized/).
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { xGtapFullUrl } from '../src/data/xgtap.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
@@ -58,12 +61,24 @@ export function tintPixels(luma, { mean, sd }) {
   return out;
 }
 
+// Foto full do servidor (midias/X GTAP/full), guardada em .cache para não baixar de novo.
+async function source(id) {
+  const cached = path.join(root, '.cache/xgtap-full', `${id}.webp`);
+  if (await stat(cached).then(() => true, () => false)) return readFile(cached);
+  const response = await fetch(xGtapFullUrl(id));
+  if (!response.ok) throw new Error(`${xGtapFullUrl(id)}: HTTP ${response.status}`);
+  const body = Buffer.from(await response.arrayBuffer());
+  await mkdir(path.dirname(cached), { recursive: true });
+  await writeFile(cached, body);
+  return body;
+}
+
 async function photo({ id, focus }, width, height) {
-  const source = path.join(root, 'public/galerias/x-gtap/full', `${id}.webp`);
-  const meta = await sharp(source).metadata();
+  const input = await source(id);
+  const meta = await sharp(input).metadata();
   const usableHeight = Math.round(meta.height * (1 - WATERMARK_TRIM));
   const rect = coverRect(meta.width, usableHeight, width, height, focus);
-  return sharp(source).extract(rect).resize(width, height).toBuffer();
+  return sharp(input).extract(rect).resize(width, height).toBuffer();
 }
 
 function roundedMask(width, height, radius) {

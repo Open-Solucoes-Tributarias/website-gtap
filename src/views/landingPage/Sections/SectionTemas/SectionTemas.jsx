@@ -1,9 +1,10 @@
 import gallery from "../../../../data/gallery-media.json";
+import { xGtapFullUrl } from "../../../../data/xgtap";
 import { ThemesPhotos } from "./ThemesPhotos";
 import "./SectionTemas.css";
 
 // Fotos do X GTAP (2026) que se alternam: plateia/painéis à esquerda, palestrantes à direita.
-const foto = (id) => gallery[`/galerias/x-gtap/full/${id}.webp`];
+const foto = (id) => gallery[xGtapFullUrl(id)];
 const GRUPOS = [
   ["dia-1-147", "dia-1-357", "dia-2-087", "dia-2-181"].map(foto),
   ["dia-1-351", "dia-2-065", "dia-2-166", "dia-2-207"].map(foto),
