@@ -1,23 +1,23 @@
-name: Deploy Hostinger (gtap.com.br)
+name: Build para Hostinger (branch hostinger)
 
-# Publica o conteúdo de out/ (com o .htaccess) na RAIZ de public_html, via FTP.
-# Só envia e atualiza arquivos: nada que esteja no servidor e fora do export
-# (midias, sorteio, endpoints PHP, banco etc.) é lido ou apagado. O action guarda
-# um arquivo de estado no servidor e remove apenas o que ele mesmo enviou antes.
+# Gera o site estático (out/) e publica SOMENTE o conteúdo dele na branch `hostinger`,
+# com o .htaccess na raiz. O Git da Hostinger (hPanel) puxa essa branch para public_html.
+# O `git pull` só toca nos arquivos versionados: midias, sorteio, PHP e demais pastas
+# do servidor ficam intactos.
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
 
 concurrency:
-  group: deploy-hostinger
+  group: build-hostinger
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -42,16 +42,13 @@ jobs:
             fi
           done
 
-      - name: Enviar out/ para public_html (sem apagar o que é do servidor)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Publicar out/ na branch hostinger
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
-          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
-          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
-          protocol: ftps
-          local-dir: ./out/
-          server-dir: ${{ secrets.HOSTINGER_FTP_DIR || './' }}
-          dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.git*/**
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: hostinger
+          publish_dir: ./out
+          disable_nojekyll: true
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_message: "build: ${{ github.sha }}"
