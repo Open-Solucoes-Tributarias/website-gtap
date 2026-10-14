@@ -1,0 +1,4 @@
+# Pastas que pertencem ao servidor da Hostinger. O deploy por Git só preserva o que
+# está no .gitignore ("Preserving paths matched by .gitignore"); nunca versionar nem apagar.
+/midias/
+/sorteio/

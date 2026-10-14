@@ -40,6 +40,8 @@ O workflow [`.github/workflows/deploy-hostinger.yml`](.github/workflows/deploy-h
 
 A Hostinger puxa a branch `hostinger` para a **raiz** de `public_html`. O `git pull` só altera arquivos versionados, então `midias`, `sorteio`, PHP, banco e qualquer outra pasta do servidor não são tocados (o job também falha se `out/` passar a conter `midias` ou `sorteio`).
 
+O deploy por Git da Hostinger só preserva com certeza os caminhos listados no `.gitignore` ("Preserving paths matched by .gitignore" no log). Por isso `/midias/` e `/sorteio/` estão no `.gitignore` da raiz e em `public/.gitignore` (que vai para a raiz da branch `hostinger`). Ao criar outra pasta que só existe no servidor, inclua-a nos dois.
+
 Configuração única na Hostinger (hPanel → Avançado → Git, domínio gtap.com.br):
 1. Repositório `https://github.com/Open-Solucoes-Tributarias/website-gtap.git` (privado: adicione a chave SSH/deploy key mostrada no hPanel em *Settings → Deploy keys* do GitHub), branch `hostinger`, pasta de instalação vazia (raiz de `public_html`).
 2. Se a Hostinger recusar clonar em `public_html` por não estar vazio, faça por SSH, sem apagar nada:
