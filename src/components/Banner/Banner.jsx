@@ -3,12 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import "./Banner.css";
 import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
+import generatedVideo from "../../data/generated-video.json";
 
 const POSTER_URL = "/preloadBanner.webp";
 
 export const BannerSection = ({ data, poster }) => {
   const videoBackground = data.find((video) => video.type === 6);
-  const videoUrl = videoBackground?.mediaUrl;
+  // O original em midias/ tem 122 MB; usa a versão otimizada versionada (public/optimized-video/).
+  const videoUrl = videoBackground?.mediaUrl === generatedVideo.source ? generatedVideo.src : videoBackground?.mediaUrl;
   const videoRef = useRef(null);
   const [videoPlaying, setVideoPlaying] = useState(false);
 

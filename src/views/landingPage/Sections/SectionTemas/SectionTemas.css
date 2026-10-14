@@ -24,6 +24,56 @@
   list-style: none;
 }
 
+/* Aviso no lugar da lista de temas, até a divulgação: card centralizado na coluna de texto. */
+.themes__col {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+.themes__soon {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: center;
+  width: 100%;
+  max-width: 34rem;
+  margin: auto; /* centraliza na horizontal e no espaço vertical abaixo do título */
+  padding: var(--space-5) var(--space-6);
+  border-top: 3px solid var(--color-gold-500);
+  border-radius: var(--radius-md);
+  background: rgb(2 9 58 / 4%);
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .themes__soon {
+    padding: var(--space-4) var(--space-3);
+  }
+}
+
+.themes__soon-tag {
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--color-navy-900);
+  color: var(--color-gold-200);
+  font-size: var(--fs-small, 0.875rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.themes__soon-title {
+  color: var(--color-navy-900);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+}
+
+.themes__soon-text {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
 .theme-row {
   display: grid;
   grid-template-columns: var(--space-8) minmax(0, 1fr);

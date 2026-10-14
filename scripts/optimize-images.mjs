@@ -140,47 +140,31 @@ async function runPool(items, task, concurrency) {
   return failures;
 }
 
-export async function collectGallerySources(root = ROOT) {
-  const directory = path.join(root, 'public/api/galerias');
-  const sources = new Set();
-  for (const filename of (await readdir(directory)).filter((name) => name.endsWith('.json')).sort()) {
-    for (const row of JSON.parse(await readFile(path.join(directory, filename), 'utf8'))) {
-      // Linhas já otimizadas (com thumb: X GTAP) entram por collectLocalGalleryRows.
-      if (!row.thumb && row.url?.startsWith('https://') && RASTER.test(new URL(row.url).pathname)) sources.add(row.url);
-    }
-  }
-  return [...sources].sort();
-}
-
-// Álbuns importados já otimizados (ex.: X GTAP, scripts/import-pictime-gallery.mjs):
-// cada linha traz url (full) e thumb, com width/height, apontando para o servidor
-// (https://gtap.com.br/midias/<edição>/full|mid|thumb/, como os álbuns antigos) ou,
-// em desenvolvimento, para /galerias/<álbum>/. Não geram as variantes
-// 240/480/960/1280: o srcset usa as três versões já publicadas (thumb, mid de
-// MID_WIDTH e full).
+// Álbuns (public/api/galerias/*.json): as fotos ficam no servidor, em
+// https://gtap.com.br/midias/<edição>/{full,mid,thumb}/<id>.webp, já otimizadas
+// (scripts/import-pictime-gallery.mjs gera as três versões). Cada linha traz url (full),
+// thumb, width e height; o manifesto só monta o srcset (thumb, mid de MID_WIDTH e full)
+// e não baixa nem converte nada, exceto a miniatura de uma foto nova (para saber a largura).
+export const GALLERY_MANIFEST = 'src/data/gallery-media.json';
 export const MID_WIDTH = 800;
-const ALBUM_PATH = /^(?:\/galerias\/[a-z0-9-]+|https:\/\/gtap\.com\.br\/midias\/[IVX]+%20GTAP)\/(?:full|thumb)\/[a-z0-9-]+\.webp$/;
+const ALBUM_PATH = /^https:\/\/gtap\.com\.br\/midias\/[IVX]+%20GTAP\/(?:full|thumb)\/[a-z0-9-]+\.webp$/;
 
-export function assertLocalPath(value) {
+export function assertAlbumPath(value) {
   if (typeof value !== 'string' || value.includes('..') || !ALBUM_PATH.test(value)) {
     throw new Error(`Caminho inválido no álbum: ${value}`);
   }
   return value;
 }
 
-const isRemote = (value) => value.startsWith('https://');
-
 export const midPath = (url) => url.replace('/full/', '/mid/');
 
-export async function collectLocalGalleryRows(root = ROOT) {
+export async function collectAlbumRows(root = ROOT) {
   const directory = path.join(root, 'public/api/galerias');
   const rows = [];
   for (const filename of (await readdir(directory)).filter((name) => name.endsWith('.json')).sort()) {
     for (const row of JSON.parse(await readFile(path.join(directory, filename), 'utf8'))) {
-      // Fotos de álbuns antigos (sem thumb) são baixadas e otimizadas por buildGallery.
-      if (!row.url || (isRemote(row.url) && !row.thumb)) continue;
-      assertLocalPath(row.url);
-      assertLocalPath(row.thumb);
+      assertAlbumPath(row.url);
+      assertAlbumPath(row.thumb);
       if (!(row.width > 0 && row.height > 0)) throw new Error(`${row.url}: width/height ausentes`);
       rows.push(row);
     }
@@ -188,8 +172,8 @@ export async function collectLocalGalleryRows(root = ROOT) {
   return rows;
 }
 
-/** Entrada do manifesto para uma foto de álbum já otimizado: thumb, intermediária (se couber) e full. */
-export function localGalleryEntry(row, thumbWidth) {
+/** Entrada do manifesto de uma foto: thumb, intermediária (se couber) e full. */
+export function albumEntry(row, thumbWidth) {
   const variants = [[row.thumb, thumbWidth]];
   if (row.width > MID_WIDTH) variants.push([midPath(row.url), MID_WIDTH]);
   variants.push([row.url, row.width]);
@@ -201,49 +185,31 @@ export function localGalleryEntry(row, thumbWidth) {
   };
 }
 
-async function buildLocalGallery(root, previous, fetchImpl) {
-  const rows = await collectLocalGalleryRows(root);
+export async function buildGallery({ root = ROOT, fetchImpl = fetch } = {}) {
+  const start = Date.now();
+  const manifestPath = path.join(root, GALLERY_MANIFEST);
+  const previous = await exists(manifestPath) ? JSON.parse(await readFile(manifestPath, 'utf8')) : {};
+  const rows = await collectAlbumRows(root);
   const entries = {};
-  let created = 0;
-  await runPool(rows, async (row) => {
-    // No servidor (midias/) a thumb e a intermediária já estão publicadas.
-    const remote = isRemote(row.url);
-    const full = remote ? null : path.join(root, 'public', row.url);
-    if (!remote && row.width > MID_WIDTH) {
-      const mid = path.join(root, 'public', midPath(row.url));
-      if (!(await exists(mid))) {
-        await mkdir(path.dirname(mid), { recursive: true });
-        await sharp(full).resize({ width: MID_WIDTH }).webp({ quality: 72, effort: 4 }).toFile(mid);
-        created += 1;
-      }
-    }
-    // Largura real da thumb: reaproveitada do manifesto anterior quando possível
-    // (foto nova no servidor: baixa só a miniatura).
+  let downloaded = 0;
+  const failures = await runPool(rows, async (row) => {
+    // Largura real da thumb: reaproveitada do manifesto anterior; foto nova baixa só a miniatura.
     const known = previous[row.url]?.srcSet?.match(/^\S+ (\d+)w/);
-    const thumbWidth = known && previous[row.url].srcSet.startsWith(`${row.thumb} `)
-      ? Number(known[1])
-      : (await sharp(remote ? await download(row.thumb, { fetchImpl }) : path.join(root, 'public', row.thumb))
-        .metadata()).width;
-    entries[row.url] = localGalleryEntry(row, thumbWidth);
+    let thumbWidth;
+    if (known && previous[row.url].srcSet.startsWith(`${row.thumb} `)) thumbWidth = Number(known[1]);
+    else {
+      thumbWidth = (await sharp(await download(row.thumb, { fetchImpl })).metadata()).width;
+      downloaded += 1;
+    }
+    entries[row.url] = albumEntry(row, thumbWidth);
   }, 12);
-  return { rows, entries, created };
+  if (failures.length) throw new Error(`Gallery photos failed (${failures.length}):\n${failures.join('\n')}`);
+  const ordered = Object.fromEntries(rows.map((row) => [row.url, entries[row.url]]));
+  await writeIfChanged(manifestPath, `${JSON.stringify(ordered, null, 2)}\n`);
+  console.log(`Gallery: ${rows.length} photos, ${downloaded} thumbs measured; ${((Date.now() - start) / 1000).toFixed(1)}s.`);
+  return ordered;
 }
 
-// Fotos dos álbuns: o gtap.com.br serve originais de ~1 MB (eram usados até nas
-// miniaturas). As versões otimizadas (WebP 240/480/960/1280 px) ficam versionadas em
-// public/galeria-otimizada/ com o manifesto src/data/gallery-media.json, e o nome
-// de cada arquivo vem da URL. Assim o build não baixa nada: só fotos novas (ou
-// --refresh) são baixadas e convertidas, em paralelo.
-export const GALLERY = {
-  manifest: 'src/data/gallery-media.json',
-  directory: 'public/galeria-otimizada',
-  urlPrefix: '/galeria-otimizada',
-  sizes: [240, 480, 960, 1280],
-};
-const galleryName = (source) => hash(`gallery-v3|${source}`).slice(0, 16);
-// Larguras que o perfil atual gera para uma foto (as maiores que o original viram uma só).
-const expectedWidths = (width) => [...new Set(GALLERY.sizes.filter((size) => size < width).concat(Math.min(width, Math.max(...GALLERY.sizes))))];
-const hasAllWidths = (image) => expectedWidths(image.width).every((size) => image.srcSet.includes(`-${size}.webp ${size}w`));
 const variantFiles = (image) => [image.srcSet, image.avifSrcSet].filter(Boolean)
   .flatMap((srcSet) => srcSet.split(', ').map((item) => path.basename(item.split(' ')[0])));
 
@@ -253,42 +219,6 @@ async function prune(directory, manifest) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     if (entry.isFile() && !used.has(entry.name)) await rm(path.join(directory, entry.name));
   }
-}
-
-export async function buildGallery({ root = ROOT, refresh = false, fetchImpl = fetch } = {}) {
-  const start = Date.now();
-  const sources = await collectGallerySources(root);
-  const cache = path.join(root, '.cache/gtap-media');
-  const outputDirectory = path.join(root, GALLERY.directory);
-  const manifestPath = path.join(root, GALLERY.manifest);
-  const previous = await exists(manifestPath) ? JSON.parse(await readFile(manifestPath, 'utf8')) : {};
-  await mkdir(outputDirectory, { recursive: true });
-  const manifest = {};
-  const pending = [];
-  for (const source of sources) {
-    const image = previous[source];
-    const complete = image && (await Promise.all(variantFiles(image).map((file) => exists(path.join(outputDirectory, file))))).every(Boolean);
-    // Arquivos de outra versão do perfil (nome diferente) são regerados.
-    if (complete && !refresh && hasAllWidths(image) && variantFiles(image).every((file) => file.startsWith(galleryName(source)))) manifest[source] = image;
-    else pending.push(source);
-  }
-  if (pending.length) await mkdir(cache, { recursive: true });
-  const failures = await runPool(pending, async (source) => {
-    const name = galleryName(source);
-    const input = await readSource(source, { root, cache, refresh, fetchImpl });
-    // Com --refresh tudo é regerado; sem ele, só as larguras que faltam (as existentes são reaproveitadas).
-    if (refresh) await Promise.all(GALLERY.sizes.map((size) => rm(path.join(outputDirectory, `${name}-${size}.webp`), { force: true })));
-    manifest[source] = await optimizeImage(input, { outputDirectory, urlPrefix: GALLERY.urlPrefix, sizes: GALLERY.sizes, formats: ['webp'], name });
-  }, 12);
-  if (failures.length) throw new Error(`Gallery images failed (${failures.length}):\n${failures.join('\n')}`);
-  const ordered = Object.fromEntries(sources.map((source) => [source, manifest[source]]));
-  // Remove variantes de fotos que saíram dos álbuns (só as geradas aqui).
-  await prune(outputDirectory, ordered);
-  const local = await buildLocalGallery(root, previous, fetchImpl);
-  const combined = { ...ordered, ...Object.fromEntries(local.rows.map((row) => [row.url, local.entries[row.url]])) };
-  await writeIfChanged(manifestPath, `${JSON.stringify(combined, null, 2)}\n`);
-  console.log(`Gallery: ${sources.length} photos, ${pending.length} downloaded/converted; ${local.rows.length} já otimizadas (${local.created} new ${MID_WIDTH}px); ${((Date.now() - start) / 1000).toFixed(1)}s.`);
-  return combined;
 }
 
 // Imagens do site: as variantes ficam versionadas em public/optimized/ com o
@@ -331,7 +261,7 @@ export async function buildMedia({ root = ROOT, refresh = false, fetchImpl = fet
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const refresh = process.argv.includes('--refresh');
-  buildMedia({ refresh }).then(() => buildGallery({ refresh })).catch((error) => {
+  buildMedia({ refresh }).then(() => buildGallery()).catch((error) => {
     console.error(error.message);
     process.exitCode = 1;
   });
