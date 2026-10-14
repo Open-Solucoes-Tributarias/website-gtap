@@ -1,12 +1,10 @@
 "use client";
 
 import { Icon } from "../../../../components/Icon/Icon";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import "./SectionDepoimentos.css";
 
 export const SectionDepoimentos = ({ data }) => {
-  // Só um vídeo por vez: o card ativo troca a capa pelo player.
-  const [ativoId, setAtivoId] = useState(null);
   const depoimentos = data.filter((d) => d.type === 3);
   const sliderRef = useRef(null);
   // Carrossel infinito: três cópias da lista; o visitante fica sempre na do meio.
@@ -57,6 +55,13 @@ export const SectionDepoimentos = ({ data }) => {
     return card.offsetWidth + parseFloat(estilo.marginRight || 0);
   };
 
+  // Ao iniciar um vídeo, pausa os outros (como no site anterior).
+  const aoIniciar = (evento) => {
+    sliderRef.current?.querySelectorAll("video").forEach((v) => {
+      if (v !== evento.currentTarget) v.pause();
+    });
+  };
+
   const pauseAllVideos = () => {
     sliderRef.current?.querySelectorAll("video").forEach((v) => {
       try { v.pause(); } catch { /* Video may already be stopped. */ }
@@ -88,43 +93,26 @@ export const SectionDepoimentos = ({ data }) => {
         <div className="slider" ref={sliderRef} data-lenis-prevent-horizontal>
           {copias.flatMap((copia) => depoimentos.map((depoimento) => {
             const chave = `${copia}-${depoimento.id}`;
-            const ativo = ativoId === chave;
             const clone = copia !== 1;
             return (
               <div className="depoimento-card" key={chave} aria-hidden={clone || undefined}>
-                {/* Capa estática (public/posters/depoimentos) + play; o vídeo só é
-                    carregado quando o visitante clica. */}
+                {/* Player nativo, como no site anterior: o visitante aperta o play do próprio
+                    navegador (sem autoplay, que os navegadores bloqueiam). O pôster vem de
+                    public/posters/depoimentos e preload="none" evita baixar vídeos de até
+                    130 MB antes do clique. */}
                 <div className="video-container">
-                  {ativo ? (
-                    <video
-                      className="depoimento-video"
-                      src={depoimento.mediaUrl}
-                      controls
-                      autoPlay
-                      playsInline
-                      onEnded={() => setAtivoId(null)}
-                    />
-                  ) : (
-                    <button
-                      type="button"
-                      className="depoimento-capa"
-                      onClick={() => setAtivoId(chave)}
-                      tabIndex={clone ? -1 : undefined}
-                      aria-label={`Assistir ao depoimento de ${depoimento.title}`}
-                    >
-                      <img
-                        src={`/posters/depoimentos/${depoimento.id}.webp`}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        width="720"
-                        height="405"
-                      />
-                      <span className="depoimento-play" aria-hidden="true">
-                        <img src="/assets/icons/play-triangle.svg" alt="" width="18" height="16" />
-                      </span>
-                    </button>
-                  )}
+                  <video
+                    className="depoimento-video"
+                    controls
+                    playsInline
+                    preload="none"
+                    poster={`/posters/depoimentos/${depoimento.id}.webp`}
+                    tabIndex={clone ? -1 : undefined}
+                    onPlay={aoIniciar}
+                  >
+                    <source src={depoimento.mediaUrl} type="video/mp4" />
+                    Seu navegador não suporta vídeo HTML5.
+                  </video>
                 </div>
 
                 <h6>{depoimento.title}</h6>
