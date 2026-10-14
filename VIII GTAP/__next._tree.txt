@@ -1,0 +1,5 @@
+:HL["/_next/static/media/roboto_condensed_latin_wght_normal-s.p.0w9y22r4h2q0k.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/assets/logos/viiigtap.svg","image"]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":{"n":"editionText","t":"d","k":"VIII%20GTAP","s":["galeria"]},"h":65600,"c":"$Q2"}]]
+0:{"b":"7KanSsXmtF92N27NaiDqN","t":{"t":{"s":"","h":131088,"c":"$Q1"}}}

@@ -1,0 +1,436 @@
+[
+  {
+    "id": 1,
+    "created_at": "2025-05-22 18:35:35+00",
+    "type": 0,
+    "title": "Alexandre Marques",
+    "description": "CEO da Open Soluções Tributárias",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/alexandre-marques.jpg",
+    "annotation": "Advogado atuante nas áreas de Direito Tributário e Empresarial; Contabilista; Consultor municipal e empresarial na área tributária e previdenciária; Pós-graduado em Direito Processual Civil; Sócio do escritório Damasceno & Marques Advocacia, em Salvador–Ba; Professor em cursos de pós-graduação e de capacitação para empresas e entidades públicas de todo o país. Autor dos livros Gestão Tributária de Contratos e Convênios e Tributação da Atividade de Saúde. Co-autor das obras ISS – Lei Complementar 116/03, coordenada por Ives Gandra da Silva Martins e Planejamento Tributário, coordenada por Marcelo Magalhães.",
+    "instagram": "https://www.instagram.com/foco.tributario/",
+    "youtube": "https://www.youtube.com/@FocoTribut%C3%A1rio",
+    "linkedin": "https://www.linkedin.com/in/alexandremarques-open/"
+  },
+  {
+    "id": 109,
+    "created_at": "2026-06-10T11:41:00.000Z",
+    "type": 0,
+    "title": "Bernard Appy",
+    "description": "Ex-Secretário Extraordinário da Reforma Tributária",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/bernard.png",
+    "annotation": "Economista formado pela USP, entre 2003 e 2009 foi secretário-executivo, secretário de Política Econômica e secretário de Reformas Econômico-Fiscais do Ministério da Fazenda. Neste período também foi presidente do Conselho de Administração do Banco do Brasil. De 2015 a 2022 foi diretor do Centro de Cidadania Fiscal, um think tank voltado ao desenvolvimento de propostas de aprimoramento do sistema tributário brasileiro. Também foi sócio e diretor da LCA Consultores e diretor da BM&FBOVESPA S.A.",
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "https://www.linkedin.com/in/bernard-appy-53687843/"
+  },
+  {
+    "id": 110,
+    "created_at": "2026-06-16T15:10:00.000Z",
+    "type": 0,
+    "title": "Vanessa Canado",
+    "description": "Ex-Assessora Especial do Ministro da Economia",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/vanessa.png",
+    "annotation": "Doutora e Mestra em Direito pela PUC/SP, atua hoje como Assessora Especial do Ministro da Economia para a reforma tributária e como professora e coordenadora no Insper. Com vasta trajetória acadêmica na FGV-SP e experiência como advogada e diretora do Centro de Cidadania Fiscal (CCiF), dedica-se especialmente ao estudo da reforma tributária e tributos sobre o consumo, como IBS e CBS. É também coautora de obra vencedora do Prêmio Jabuti em Direito (2008).",
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "https://www.linkedin.com/in/vanessa-rahal-canado/"
+  },
+  {
+    "id": 111,
+    "created_at": "2026-06-16T15:10:00.000Z",
+    "type": 0,
+    "title": "Eduardo Tanaka",
+    "description": "Auditor-Fiscal da Receita Federal do Brasil",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/tanaka.png",
+    "annotation": "Auditor-Fiscal da Receita Federal do Brasil e Professor de Direito Previdenciário, Direito Constitucional, Direito Administrativo e Direito Tributário. Desenvolvedor dos programas eSocial e EFD-REINF - Escrituração Fiscal Digital de Retenções e Outras Informações Fiscais. Membro do Grupo de Trabalho eSocial e EFD-REINF pela Secretaria da Receita Federal do Brasil. Especialista em Direito Constitucional. Graduado em Direito pela Universidade Federal de Mato Grosso do Sul, tendo iniciado seus estudos por três semestres na USP. Graduado em Odontologia. Autor de diversas obras sobre Direito, dentre elas: Direito Previdenciário - Editora Campus Elsevier - 2ª edição - 2011; Direito e Responsabilidade - em co-autoria com Giselda Hironaka - Editora Del Rey - 2002. YouTuber de conteúdo educacional nas áreas preparatórias para concursos públicos (Direito Previdenciário e Direito Administrativo) e conteúdo profissional e técnico referente ao eSocial e EFD-REINF",
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "https://www.linkedin.com/in/profeduardotanaka/"
+  },
+  {
+    "id": 112,
+    "created_at": "2026-09-22T00:00:00.000Z",
+    "type": 0,
+    "title": "Paulo Henrique Pêgas",
+    "description": "Professor e Contador",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/paulo-pegas.png",
+    "annotation": "Professor e Contador, com 40 anos de atuação profissional, 90% do tempo na área contábil-tributária e 2/3 em funções executivas, principalmente em instituições financeiras. Foi Superintendente de Risco de Crédito do BNDES no biênio 2019-2020. Desde 2011 é professor titular no curso de graduação em Ciências Contábeis do IBMEC-RJ e, desde 2008, atua como professor em cursos de MBA na FIPECAFI-SP). É coordenador do MBA de Reforma Tributária na BSSP e é sócio do Instituto de Pesquisa e Estudos Contábeis (IPEC-RJ), onde atua como professor em cursos de capacitação profissional, inclusive no formato in company. É conselheiro do CRC-RJ e autor de alguns livros na área contábil-tributária, sendo o principal o Manual de Contabilidade Tributária – 10ª edição.",
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "https://www.linkedin.com/in/paulo-henrique-p%C3%AAgas-92238a152/"
+  },
+  {
+    "id": 16,
+    "created_at": "2025-05-09 17:48:04.780231+00",
+    "type": 6,
+    "title": "Banner video principal",
+    "description": "Banner video principal",
+    "mediaUrl": "https://gtap.com.br/midias/banner-gt-abertura.mp4"
+  },
+  {
+    "id": 26,
+    "created_at": "2025-05-14 17:40:30.927768+00",
+    "type": 7,
+    "title": "Farol de Itapuã",
+    "description": "Farol de Itapuã",
+    "mediaUrl": "https://gtap.com.br/midias/farolitapua.png"
+  },
+  {
+    "id": 27,
+    "created_at": "2025-05-14 17:47:31.944606+00",
+    "type": 7,
+    "title": "Farol da Barra",
+    "description": "Farol da Barra",
+    "mediaUrl": "https://gtap.com.br/midias/BackgroundFaroldabarra.png"
+  },
+  {
+    "id": 29,
+    "created_at": "2025-05-19 18:17:06.87659+00",
+    "type": 3,
+    "title": "Alex Diego",
+    "description": "DNIT - Bahia",
+    "mediaUrl": "https://gtap.com.br/midias/depoimentos/DEPOIMENTO%20-%20ALEX%20DNIT%20(1).mp4",
+    "annotation": "“Um evento de uma singularidade, de uma perfeição… é ímpar no nosso país e tem tudo pra prosperar muito — e cada vez mais. Com certeza, a gente estará presente na próxima!”"
+  },
+  {
+    "id": 30,
+    "created_at": "2025-05-19 18:18:37.565735+00",
+    "type": 3,
+    "title": "Josenubia",
+    "description": "GOINFRA - Goiânia",
+    "mediaUrl": "https://gtap.com.br/midias/depoimentos/DEPOIMENTO%20-%20JOSENUBIA%20GOINFRA%20(1).mp4",
+    "annotation": "“Tá aqui, né? Dentro das novas atualizações na área tributária, tá agregando muito conhecimento pra execução do nosso trabalho!”"
+  },
+  {
+    "id": 37,
+    "created_at": "2025-05-22 18:06:22.193531+00",
+    "type": 2,
+    "title": "BNDS",
+    "description": "BNDS",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/BNDS.webp"
+  },
+  {
+    "id": 38,
+    "created_at": "2025-05-22 18:07:28.973803+00",
+    "type": 2,
+    "title": "CNJ",
+    "description": "CNJ",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/CNJ.webp"
+  },
+  {
+    "id": 73,
+    "created_at": "2025-05-22 18:21:14.561514+00",
+    "type": 5,
+    "title": "STF",
+    "description": "STF",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/STF.webp"
+  },
+  {
+    "id": 74,
+    "created_at": "2025-05-22 18:21:14.561514+00",
+    "type": 5,
+    "title": "AGU",
+    "description": "AGU",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/AGU.webp"
+  },
+  {
+    "id": 75,
+    "created_at": "2025-05-22 18:21:14.561514+00",
+    "type": 5,
+    "title": "TSE",
+    "description": "TSE",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/TSE.webp"
+  },
+  {
+    "id": 39,
+    "created_at": "2025-05-22 18:08:03.71536+00",
+    "type": 2,
+    "title": "DPE PR",
+    "description": "DPE PR",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/DPE%20PR.webp"
+  },
+  {
+    "id": 40,
+    "created_at": "2025-05-22 18:08:28.236674+00",
+    "type": 2,
+    "title": "ELETROBRAS",
+    "description": "ELETROBRAS",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/Eletrobras.webp"
+  },
+  {
+    "id": 41,
+    "created_at": "2025-05-22 18:08:50.836566+00",
+    "type": 2,
+    "title": "EMBASA",
+    "description": "EMBASA",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/Embasa.webp"
+  },
+  {
+    "id": 42,
+    "created_at": "2025-05-22 18:09:49.119546+00",
+    "type": 2,
+    "title": "GOV BA",
+    "description": "GOV BA",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/Governo%20do%20estado%20BA.webp"
+  },
+  {
+    "id": 43,
+    "created_at": "2025-05-22 18:10:15.887845+00",
+    "type": 2,
+    "title": "IFBA",
+    "description": "IFBA",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/IFBA.webp"
+  },
+  {
+    "id": 44,
+    "created_at": "2025-05-22 18:10:37.469596+00",
+    "type": 2,
+    "title": "IFES",
+    "description": "IFES",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/IFES.webp"
+  },
+  {
+    "id": 45,
+    "created_at": "2025-05-22 18:11:04.662557+00",
+    "type": 2,
+    "title": "IFGO",
+    "description": "IFGO",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/IFGO.webp"
+  },
+  {
+    "id": 46,
+    "created_at": "2025-05-22 18:11:41.070984+00",
+    "type": 2,
+    "title": "IFSP",
+    "description": "IFSP",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/IFSP.webp"
+  },
+  {
+    "id": 47,
+    "created_at": "2025-05-22 18:12:09.291649+00",
+    "type": 2,
+    "title": "INEMA",
+    "description": "INEMA",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/inema.webp"
+  },
+  {
+    "id": 48,
+    "created_at": "2025-05-22 18:12:39.189808+00",
+    "type": 2,
+    "title": "TRT CE",
+    "description": "TRT CE",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/TRT%20ceara.webp"
+  },
+  {
+    "id": 49,
+    "created_at": "2025-05-22 18:13:01.641548+00",
+    "type": 2,
+    "title": "MPBA",
+    "description": "MPBA",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/Ministerio%20Publico%20BA.webp"
+  },
+  {
+    "id": 50,
+    "created_at": "2025-05-22 18:13:22.127789+00",
+    "type": 2,
+    "title": "MPSE",
+    "description": "MPSE",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/MPSE.webp"
+  },
+  {
+    "id": 51,
+    "created_at": "2025-05-22 18:13:48.828396+00",
+    "type": 2,
+    "title": "PGE RJ",
+    "description": "PGE RJ",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/PGE%20-%20RJ.webp"
+  },
+  {
+    "id": 52,
+    "created_at": "2025-05-22 18:14:11.056421+00",
+    "type": 2,
+    "title": "SAEB",
+    "description": "SAEB",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/SAEB.webp"
+  },
+  {
+    "id": 53,
+    "created_at": "2025-05-22 18:14:55.184635+00",
+    "type": 2,
+    "title": "SEBRAE",
+    "description": "SEBRAE",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/SEBRAE.webp"
+  },
+  {
+    "id": 55,
+    "created_at": "2025-05-22 18:15:54.056459+00",
+    "type": 2,
+    "title": "SEFAZ MT",
+    "description": "SEFAZ MT",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/SEFAZ%20MT.webp"
+  },
+  {
+    "id": 56,
+    "created_at": "2025-05-22 18:16:21.512543+00",
+    "type": 2,
+    "title": "SENAC",
+    "description": "SENAC",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/Senac.webp"
+  },
+  {
+    "id": 57,
+    "created_at": "2025-05-22 18:16:43.061534+00",
+    "type": 2,
+    "title": "SESI",
+    "description": "SESI",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/Sesi.webp"
+  },
+  {
+    "id": 58,
+    "created_at": "2025-05-22 18:17:09.105278+00",
+    "type": 2,
+    "title": "TCE PR",
+    "description": "TCE PR",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/TCEPR.webp"
+  },
+  {
+    "id": 59,
+    "created_at": "2025-05-22 18:17:30.889041+00",
+    "type": 2,
+    "title": "TCU",
+    "description": "TCU",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/TCU.webp"
+  },
+  {
+    "id": 60,
+    "created_at": "2025-05-22 18:18:00.868877+00",
+    "type": 2,
+    "title": "TJPR",
+    "description": "TJPR",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/TJPR.webp"
+  },
+  {
+    "id": 61,
+    "created_at": "2025-05-22 18:18:20.574393+00",
+    "type": 2,
+    "title": "TRE ES",
+    "description": "TRE ES",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/TRE-ES.webp"
+  },
+  {
+    "id": 62,
+    "created_at": "2025-05-22 18:18:48.079365+00",
+    "type": 2,
+    "title": "TRF2",
+    "description": "TRF2",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/TRF2.webp"
+  },
+  {
+    "id": 63,
+    "created_at": "2025-05-22 18:19:06.211837+00",
+    "type": 2,
+    "title": "UESC",
+    "description": "UESC",
+    "mediaUrl": "https://gtap.com.br/midias/Clientes/UESC.webp"
+  },
+  {
+    "id": 65,
+    "created_at": "2025-05-22 18:36:41.586831+00",
+    "type": 0,
+    "title": "Gustavo Reis",
+    "description": "Consultor na Open Soluções Tributárias",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/gustavo-reis.jpg",
+    "annotation": "Advogado atuante na área de Direito Tributário, prestando assessoria jurídica e consultoria para empresas e entidades públicas. Pós-graduado em Planejamento Tributário. Advogado Associado do escritório Damasceno & Marques Advocacia, em Salvador/BA. Consultor da Open Soluções Tributárias. Supervisor do sistema web Gestão Tributária (gestaotributaria.com.br), inclusive do simulador de retenções online GT-Fácil. Colaborador do blog Foco Tributário (focotributario.com.br). Professor de cursos na área da Gestão Tributária de Contratos e Convênios pelo Brasil, já tendo realizado treinamentos abertos e in company para diversas entidades públicas e empresas de grande porte.",
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "https://www.linkedin.com/in/gustavo-reis-14b503129/"
+  },
+  {
+    "id": 68,
+    "created_at": "2025-05-19 18:18:37.565735+00",
+    "type": 3,
+    "title": "Edno de Paula",
+    "description": "PGE - Rio de janeiro",
+    "mediaUrl": "https://gtap.com.br/midias/depoimentos/Edno%20de%20Paula.mp4",
+    "annotation": "“Espero poder tá participando mais vezes desse grande evento nessa cidade maravilhosa que é Salvador!”"
+  },
+  {
+    "id": 69,
+    "created_at": "2025-05-19 18:18:37.565735+00",
+    "type": 3,
+    "title": "Raimundo Donato",
+    "description": "GOINFRA - Goiânia",
+    "mediaUrl": "https://gtap.com.br/midias/depoimentos/Raimundo%20Donato.mp4",
+    "annotation": "“Participar desse evento pra mim foi maravilhoso!”"
+  },
+  {
+    "id": 70,
+    "created_at": "2025-05-19 18:18:37.565735+00",
+    "type": 3,
+    "title": "Valmir Tosta",
+    "description": "Secretaria da Fazenda - Bahia",
+    "mediaUrl": "https://gtap.com.br/midias/depoimentos/Valmir%20Tosta.mp4",
+    "annotation": "“Achei fantástico! São tantos conhecimentos que a gente leva pra casa… e isso aí vai nos ajudar muito, muito mesmo no nosso dia a dia!”"
+  },
+  {
+    "id": 101,
+    "created_at": "2026-05-15T17:58:12.097Z",
+    "type": 1,
+    "title": "1",
+    "description": "A nova era dos documentos fiscais eletrônicos."
+  },
+  {
+    "id": 102,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "2",
+    "description": "Imunidades tributárias no contexto do IBS e da CBS."
+  },
+  {
+    "id": 103,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "3",
+    "description": "Contratos administrativos e a Reforma Tributária - é verdade que os preços vão aumentar?"
+  },
+  {
+    "id": 104,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "4",
+    "description": "Base de cálculo do IBS e da CBS e sua repercussão nas incidências não alcançadas pela Reforma Tributária."
+  },
+  {
+    "id": 105,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "5",
+    "description": "Local de incidência do IBS e os aspectos relacionados a sua destinação."
+  },
+  {
+    "id": 106,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "6",
+    "description": "Formas de quitação do IBS e da CBS - É o fim da retenção na fonte?"
+  },
+  {
+    "id": 107,
+    "created_at": "2026-05-15T17:58:12.098Z",
+    "type": 1,
+    "title": "7",
+    "description": "O Simples Nacional sob a ótica da Reforma Tributária."
+  },
+  {
+    "id": 108,
+    "created_at": "2026-05-15T18:23:26.997Z",
+    "type": 0,
+    "title": "Arick Farias",
+    "description": "Consultor na Open Soluções Tributárias",
+    "mediaUrl": "https://gtap.com.br/midias/Palestrantes/arick.jpg",
+    "annotation": "Arick Pires Farias é consultor tributário na Open Soluções Tributárias, onde atua desde 2022 prestando consultoria a órgãos públicos e empresas privadas, elaborando pareceres, petições, recursos tributários e cíveis. Formado em Direito pela Faculdade Baiana de Direito e integrou a Comissão das Sociedades de Advogados da OAB/BA. Foi campeão do II Moot Brasileiro de Direito Tributário (2020) e admitido para o LLM em Direito Americano na George Mason University (EUA).",
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "https://www.linkedin.com/in/arickfarias/"
+  }
+]

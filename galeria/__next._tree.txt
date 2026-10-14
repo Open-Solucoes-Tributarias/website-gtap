@@ -1,0 +1,4 @@
+:HL["/_next/static/media/roboto_condensed_latin_wght_normal-s.p.0w9y22r4h2q0k.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"galeria","h":64,"c":"$Q2"}]]
+0:{"b":"7KanSsXmtF92N27NaiDqN","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
