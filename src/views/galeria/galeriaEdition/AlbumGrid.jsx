@@ -10,7 +10,7 @@ import "./AlbumGrid.css";
 const isFeatured = (index) => index % 9 === 0;
 const thumbOf = (image) => image?.srcSet?.split(",")[0].trim().split(" ")[0];
 const hashOf = (index) => `#foto-${index + 1}`;
-// Álbuns grandes (X GTAP: 780 fotos) entram aos poucos; os antigos (até 151) inteiros.
+// Álbuns grandes (X GTAP: ~230 fotos) entram aos poucos; os antigos (até 151) inteiros.
 const PROGRESSIVE_FROM = 200;
 const PAGE = 60;
 
