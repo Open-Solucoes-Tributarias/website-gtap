@@ -1,0 +1,57 @@
+name: Deploy Hostinger (gtap.com.br)
+
+# Publica o conteúdo de out/ (com o .htaccess) na RAIZ de public_html, via FTP.
+# Só envia e atualiza arquivos: nada que esteja no servidor e fora do export
+# (midias, sorteio, endpoints PHP, banco etc.) é lido ou apagado. O action guarda
+# um arquivo de estado no servidor e remove apenas o que ele mesmo enviou antes.
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-hostinger
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run verify:export
+
+      - name: Conferir que out/ não colide com pastas do servidor
+        run: |
+          test -f out/.htaccess || { echo "out/.htaccess ausente"; exit 1; }
+          test -f out/index.html || { echo "out/index.html ausente"; exit 1; }
+          for protegida in midias sorteio; do
+            if [ -e "out/$protegida" ]; then
+              echo "out/$protegida não pode existir: essa pasta pertence ao servidor"; exit 1
+            fi
+          done
+
+      - name: Enviar out/ para public_html (sem apagar o que é do servidor)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./out/
+          server-dir: ${{ secrets.HOSTINGER_FTP_DIR || './' }}
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**

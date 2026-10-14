@@ -34,14 +34,32 @@ Páginas exportadas: home, `/galeria/` e nove álbuns. A antiga página interna 
 
 ## Publicação na Hostinger
 
+### Automática (recomendada)
+
+O workflow [`.github/workflows/deploy-hostinger.yml`](.github/workflows/deploy-hostinger.yml) roda a cada push na `main` (ou manualmente em *Actions → Deploy Hostinger → Run workflow*). Ele executa `npm ci`, lint, build e `verify:export` e envia **o conteúdo** de `out/` (incluindo o `.htaccess`) para a **raiz** de `public_html`, nunca como subpasta. O envio só cria e atualiza arquivos: `midias`, `sorteio`, endpoints PHP, banco e qualquer outra pasta do servidor não são tocados, e o job falha se `out/` passar a conter `midias` ou `sorteio`. O action só remove arquivos que ele mesmo enviou antes (controle em `.ftp-deploy-sync-state.json`, bloqueado no `.htaccess`).
+
+Configure uma vez em GitHub → *Settings → Secrets and variables → Actions*:
+
+| Secret | Valor |
+| --- | --- |
+| `HOSTINGER_FTP_SERVER` | host FTP da Hostinger (hPanel → Arquivos → Contas FTP) |
+| `HOSTINGER_FTP_USERNAME` | usuário FTP |
+| `HOSTINGER_FTP_PASSWORD` | senha FTP |
+| `HOSTINGER_FTP_DIR` | opcional: pasta de `public_html` vista pelo usuário FTP (padrão `./`; ex.: `./public_html/` ou `./domains/gtap.com.br/public_html/`) |
+
+### Manual
+
 1. Gere e valide `out/` com os comandos acima.
 2. Faça backup dos arquivos atuais de `public_html`, incluindo `.htaccess`.
 3. Publique **o conteúdo** de `out/` em `public_html`, incluindo `out/.htaccess` (arquivo oculto). Não envie a pasta `out` como subdiretório.
-4. Preserve o diretório `midias`, banco de dados e quaisquer outros endpoints PHP existentes. Eles não são fornecidos pelo export. Não apague `public_html` para publicar. O formulário de contato não usa mais o `form-handler.php`: envia direto para o RD Station (identificador `site-gtap-xi`).
-5. Substitua o `.htaccess` antigo pelo exportado e concilie regras próprias de HTTPS, domínio e PHP, mantendo a `RewriteRule` que redireciona `/open-solucoes-tributarias/` (301) para o site oficial da Open. O arquivo ativa Deflate para tipos textuais e cache longo para arquivos com hash, cache de um dia para mídias e revalidação para HTML/JSON. Cada URL tem seu `index.html`; não deve haver fallback geral para a home. O `.htaccess` da raiz e o de `public/` são iguais; o de `public/` é copiado automaticamente no build.
-6. A pasta antiga `public_html/open-solucoes-tributarias/` pode ser apagada. Se ela continuar no servidor, o redirecionamento funciona do mesmo jeito.
-7. Confira acesso direto e reload à home, à galeria e aos dez álbuns, o 301 de `/open-solucoes-tributarias/`, a resposta 404, as mídias e o formulário. Limpe o cache do host/CDN e refaça PageSpeed desktop e mobile em produção.
+4. Preserve o diretório `midias`, a pasta `sorteio`, banco de dados e quaisquer outros endpoints PHP existentes. Eles não são fornecidos pelo export. Não apague `public_html` para publicar. O formulário de contato não usa mais o `form-handler.php`: envia direto para o RD Station (identificador `site-gtap-xi`).
+
+### Depois de publicar
+
+1. O `.htaccess` exportado substitui o antigo; se o servidor tinha regras próprias de HTTPS, domínio ou PHP (por exemplo para o `sorteio`), concilie-as antes, mantendo a `RewriteRule` que redireciona `/open-solucoes-tributarias/` (301) para o site oficial da Open. O arquivo ativa Deflate para tipos textuais e cache longo para arquivos com hash, cache de um dia para mídias e revalidação para HTML/JSON. Cada URL tem seu `index.html`; não deve haver fallback geral para a home. O `.htaccess` da raiz e o de `public/` são iguais; o de `public/` é copiado automaticamente no build.
+2. A pasta antiga `public_html/open-solucoes-tributarias/` pode ser apagada. Se ela continuar no servidor, o redirecionamento funciona do mesmo jeito.
+3. Confira acesso direto e reload à home, à galeria e aos dez álbuns, o 301 de `/open-solucoes-tributarias/`, a resposta 404, as mídias, o `sorteio` e o formulário. Limpe o cache do host/CDN e refaça PageSpeed desktop e mobile em produção.
 
 `robots.txt` e `sitemap.xml` são gerados estaticamente. O domínio canônico adotado é `https://gtap.com.br`.
 
-Especificação, plano, critérios de aceitação e evidências: [docs/specs/static-performance/spec.md](docs/specs/static-performance/spec.md). Nenhuma publicação em produção é feita pelos scripts deste projeto.
+Especificação, plano, critérios de aceitação e evidências: [docs/specs/static-performance/spec.md](docs/specs/static-performance/spec.md). Os scripts npm deste projeto não publicam; a publicação é feita só pelo workflow acima ou manualmente.
