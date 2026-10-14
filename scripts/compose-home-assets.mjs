@@ -21,7 +21,7 @@ export const PHOTOS = {
   forms: { id: 'dia-2-147', focus: [0.5, 0.4] }, // participantes sorrindo
   bannerLeft: { id: 'dia-1-257', focus: [0.5, 0.45] }, // clientes: duas participantes de crachá (foto 55)
   bannerCenter: { id: 'dia-2-118', focus: [0.5, 0.5] }, // os 3 palestrantes em frente ao painel X GTAP (foto 160)
-  bannerRight: { id: 'dia-1-185', focus: [0.22, 0.5] }, // evento: palestra com o auditório e a iluminação (foto 35)
+  bannerRight: { id: 'dia-2-261', focus: [0.5, 0.5] }, // evento: público de braços para o alto (foto 198)
   bannerMobile: { id: 'dia-1-305', focus: [0.5, 0.45] }, // trio em frente ao painel
 };
 
