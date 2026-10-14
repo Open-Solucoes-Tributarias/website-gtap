@@ -12,6 +12,7 @@ npm test
 npm run build
 npm run verify:export
 npm run preview
+npm run verify:prod   # confere o site no ar (rotas e arquivos de midias/ na origem)
 ```
 
 `npm test` executa os sete testes Node atuais. `npm run build` e `npm run dev` otimizam as mídias antes de iniciar. O preview serve `out/` em `http://127.0.0.1:4173`, sem servidor Next. Para usar outra porta, execute `PORT=4175 npm run preview`. A compressão gzip do preview é opcional e vem desativada por padrão: `GTAP_PREVIEW_GZIP=1 PORT=4175 npm run preview`.
@@ -38,7 +39,7 @@ Páginas exportadas: home, `/galeria/` e nove álbuns. A antiga página interna 
 
 ### Automática via Git (recomendada)
 
-O workflow [`.github/workflows/deploy-hostinger.yml`](.github/workflows/deploy-hostinger.yml) roda a cada push na `main` (ou manualmente em *Actions*): executa `npm ci`, lint, build e `verify:export` e publica **só o conteúdo de `out/`** (com o `.htaccess` na raiz) na branch `hostinger`. Não precisa de FTP nem de secrets. Nunca edite essa branch à mão.
+O workflow [`.github/workflows/deploy-hostinger.yml`](.github/workflows/deploy-hostinger.yml) roda a cada push na `main` (ou manualmente em *Actions*): executa `npm ci`, lint, build e `verify:export` e publica **só o conteúdo de `out/`** (com o `.htaccess` na raiz) na branch `hostinger`. Não precisa de FTP nem de secrets. Nunca edite essa branch à mão. Em `dev` e em pull requests roda o [`ci.yml`](.github/workflows/ci.yml) (lint, testes, build e verificação, sem publicar), e o [`verify-production.yml`](.github/workflows/verify-production.yml) confere o site no ar todo dia. Visão geral e receitas de ajuste no `AGENTS.md` (seção "CI/CD em resumo").
 
 A Hostinger puxa a branch `hostinger` para a **raiz** de `public_html`. O `git pull` só altera arquivos versionados, então `midias`, `sorteio`, PHP, banco e qualquer outra pasta do servidor não são tocados (o job também falha se `out/` passar a conter `midias` ou `sorteio`).
 

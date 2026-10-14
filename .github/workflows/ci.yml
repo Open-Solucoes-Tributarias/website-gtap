@@ -1,0 +1,40 @@
+name: CI (lint, testes e build)
+
+# Valida o código em `dev` e em pull requests ANTES de chegar à main. Não publica nada:
+# a publicação continua sendo só o workflow "Build para Hostinger" (push na main).
+on:
+  push:
+    branches: ["dev"]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - run: npm run verify:export
+
+      - name: Conferir que out/ não colide com pastas do servidor
+        run: |
+          for protegida in midias sorteio; do
+            if [ -e "out/$protegida" ]; then
+              echo "out/$protegida não pode existir: essa pasta pertence ao servidor"; exit 1
+            fi
+          done

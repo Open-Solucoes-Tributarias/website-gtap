@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "node scripts/serve-static.mjs",
     "verify:export": "node scripts/verify-export.mjs",
+    "verify:prod": "node scripts/verify-production.mjs",
     "media:images": "node scripts/optimize-images.mjs",
     "media:video": "node scripts/optimize-video.mjs",
     "media:logo": "node scripts/generate-logo-assets.mjs",
