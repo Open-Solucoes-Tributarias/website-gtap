@@ -19,9 +19,9 @@ export const PHOTOS = {
   imageMobile: { id: 'dia-1-304', focus: [0.5, 0.5] },
   imagebg1: { id: 'dia-1-187', focus: [0.5, 0.45] }, // palestrante no púlpito + plateia
   forms: { id: 'dia-2-147', focus: [0.5, 0.4] }, // participantes sorrindo
-  bannerLeft: { id: 'dia-1-257', focus: [0.5, 0.45] }, // clientes: duas participantes de crachá (foto 55)
+  bannerLeft: { id: 'dia-2-091', focus: [0.33, 0.5] }, // plateia atenta
   bannerCenter: { id: 'dia-2-118', focus: [0.5, 0.5] }, // os 3 palestrantes em frente ao painel X GTAP (foto 160)
-  bannerRight: { id: 'dia-2-261', focus: [0.5, 0.5] }, // evento: público de braços para o alto (foto 198)
+  bannerRight: { id: 'dia-1-307', focus: [0.5, 0.5] }, // dupla em frente ao painel
   bannerMobile: { id: 'dia-1-305', focus: [0.5, 0.45] }, // trio em frente ao painel
 };
 
@@ -128,7 +128,7 @@ async function forms() {
   await save(sharp(await photo(PHOTOS.forms, 772, 772)), 'eventogtapforms.webp');
 }
 
-// Banner da galeria (1920x1080): clientes | 3 palestrantes (painel central mais largo) | evento.
+// Banner da galeria (1920x1080): plateia | 3 palestrantes (painel central mais largo, para caberem os três) | dupla.
 const BANNER_PANELS = [['bannerLeft', 560], ['bannerCenter', 800], ['bannerRight', 560]];
 async function bannerGaleria() {
   let left = 0;
