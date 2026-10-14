@@ -145,26 +145,30 @@ export async function collectGallerySources(root = ROOT) {
   const sources = new Set();
   for (const filename of (await readdir(directory)).filter((name) => name.endsWith('.json')).sort()) {
     for (const row of JSON.parse(await readFile(path.join(directory, filename), 'utf8'))) {
-      // Linhas locais (já otimizadas, com thumb) entram por collectLocalGalleryRows.
-      if (row.url?.startsWith('https://') && RASTER.test(new URL(row.url).pathname)) sources.add(row.url);
+      // Linhas já otimizadas (com thumb: X GTAP) entram por collectLocalGalleryRows.
+      if (!row.thumb && row.url?.startsWith('https://') && RASTER.test(new URL(row.url).pathname)) sources.add(row.url);
     }
   }
   return [...sources].sort();
 }
 
 // Álbuns importados já otimizados (ex.: X GTAP, scripts/import-pictime-gallery.mjs):
-// cada linha traz url (full) e thumb locais, com width/height. Não geram as
-// variantes 240/480/960/1280; só uma intermediária (MID_WIDTH) para as miniaturas
-// em telas densas, ao lado de /full/ em /mid/.
+// cada linha traz url (full) e thumb, com width/height, apontando para o servidor
+// (https://gtap.com.br/midias/<edição>/full|mid|thumb/, como os álbuns antigos) ou,
+// em desenvolvimento, para /galerias/<álbum>/. Não geram as variantes
+// 240/480/960/1280: o srcset usa as três versões já publicadas (thumb, mid de
+// MID_WIDTH e full).
 export const MID_WIDTH = 800;
-const LOCAL_PATH = /^\/galerias\/[a-z0-9-]+\/(?:full|thumb)\/[a-z0-9-]+\.webp$/;
+const ALBUM_PATH = /^(?:\/galerias\/[a-z0-9-]+|https:\/\/gtap\.com\.br\/midias\/[IVX]+%20GTAP)\/(?:full|thumb)\/[a-z0-9-]+\.webp$/;
 
 export function assertLocalPath(value) {
-  if (typeof value !== 'string' || value.includes('..') || !LOCAL_PATH.test(value)) {
-    throw new Error(`Caminho local inválido no álbum: ${value}`);
+  if (typeof value !== 'string' || value.includes('..') || !ALBUM_PATH.test(value)) {
+    throw new Error(`Caminho inválido no álbum: ${value}`);
   }
   return value;
 }
+
+const isRemote = (value) => value.startsWith('https://');
 
 export const midPath = (url) => url.replace('/full/', '/mid/');
 
@@ -173,7 +177,8 @@ export async function collectLocalGalleryRows(root = ROOT) {
   const rows = [];
   for (const filename of (await readdir(directory)).filter((name) => name.endsWith('.json')).sort()) {
     for (const row of JSON.parse(await readFile(path.join(directory, filename), 'utf8'))) {
-      if (!row.url || row.url.startsWith('https://')) continue;
+      // Fotos de álbuns antigos (sem thumb) são baixadas e otimizadas por buildGallery.
+      if (!row.url || (isRemote(row.url) && !row.thumb)) continue;
       assertLocalPath(row.url);
       assertLocalPath(row.thumb);
       if (!(row.width > 0 && row.height > 0)) throw new Error(`${row.url}: width/height ausentes`);
@@ -183,7 +188,7 @@ export async function collectLocalGalleryRows(root = ROOT) {
   return rows;
 }
 
-/** Entrada do manifesto para uma foto local: thumb, intermediária (se couber) e full. */
+/** Entrada do manifesto para uma foto de álbum já otimizado: thumb, intermediária (se couber) e full. */
 export function localGalleryEntry(row, thumbWidth) {
   const variants = [[row.thumb, thumbWidth]];
   if (row.width > MID_WIDTH) variants.push([midPath(row.url), MID_WIDTH]);
@@ -196,13 +201,15 @@ export function localGalleryEntry(row, thumbWidth) {
   };
 }
 
-async function buildLocalGallery(root, previous) {
+async function buildLocalGallery(root, previous, fetchImpl) {
   const rows = await collectLocalGalleryRows(root);
   const entries = {};
   let created = 0;
   await runPool(rows, async (row) => {
-    const full = path.join(root, 'public', row.url);
-    if (row.width > MID_WIDTH) {
+    // No servidor (midias/) a thumb e a intermediária já estão publicadas.
+    const remote = isRemote(row.url);
+    const full = remote ? null : path.join(root, 'public', row.url);
+    if (!remote && row.width > MID_WIDTH) {
       const mid = path.join(root, 'public', midPath(row.url));
       if (!(await exists(mid))) {
         await mkdir(path.dirname(mid), { recursive: true });
@@ -210,11 +217,13 @@ async function buildLocalGallery(root, previous) {
         created += 1;
       }
     }
-    // Largura real da thumb: reaproveitada do manifesto anterior quando possível.
+    // Largura real da thumb: reaproveitada do manifesto anterior quando possível
+    // (foto nova no servidor: baixa só a miniatura).
     const known = previous[row.url]?.srcSet?.match(/^\S+ (\d+)w/);
     const thumbWidth = known && previous[row.url].srcSet.startsWith(`${row.thumb} `)
       ? Number(known[1])
-      : (await sharp(path.join(root, 'public', row.thumb)).metadata()).width;
+      : (await sharp(remote ? await download(row.thumb, { fetchImpl }) : path.join(root, 'public', row.thumb))
+        .metadata()).width;
     entries[row.url] = localGalleryEntry(row, thumbWidth);
   }, 12);
   return { rows, entries, created };
@@ -275,10 +284,10 @@ export async function buildGallery({ root = ROOT, refresh = false, fetchImpl = f
   const ordered = Object.fromEntries(sources.map((source) => [source, manifest[source]]));
   // Remove variantes de fotos que saíram dos álbuns (só as geradas aqui).
   await prune(outputDirectory, ordered);
-  const local = await buildLocalGallery(root, previous);
+  const local = await buildLocalGallery(root, previous, fetchImpl);
   const combined = { ...ordered, ...Object.fromEntries(local.rows.map((row) => [row.url, local.entries[row.url]])) };
   await writeIfChanged(manifestPath, `${JSON.stringify(combined, null, 2)}\n`);
-  console.log(`Gallery: ${sources.length} photos, ${pending.length} downloaded/converted; ${local.rows.length} local (${local.created} new ${MID_WIDTH}px); ${((Date.now() - start) / 1000).toFixed(1)}s.`);
+  console.log(`Gallery: ${sources.length} photos, ${pending.length} downloaded/converted; ${local.rows.length} já otimizadas (${local.created} new ${MID_WIDTH}px); ${((Date.now() - start) / 1000).toFixed(1)}s.`);
   return combined;
 }
 

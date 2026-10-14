@@ -1,6 +1,5 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync } from 'node:fs';
 import { PHOTOS, coverRect, tintPixels } from './compose-home-assets.mjs';
 
 test('coverRect keeps target ratio, follows focus and stays inside the source', () => {
@@ -25,6 +24,7 @@ test('tintPixels reproduces the target mean and spread per channel', () => {
   }
 });
 
-test('every chosen photo exists in the local X GTAP gallery', () => {
-  for (const { id } of Object.values(PHOTOS)) assert.ok(existsSync(new URL(`../public/galerias/x-gtap/full/${id}.webp`, import.meta.url)), id);
+// As fotos vêm de https://gtap.com.br/midias/X GTAP/full/<id>.webp (álbum curado + as usadas só nos recortes).
+test('every chosen photo id follows the X GTAP naming', () => {
+  for (const { id } of Object.values(PHOTOS)) assert.match(id, /^dia-[12]-\d{3}$/);
 });

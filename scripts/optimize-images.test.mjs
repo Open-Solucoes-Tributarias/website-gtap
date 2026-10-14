@@ -164,3 +164,63 @@ test('gallery build adds local albums to the manifest without touching optimized
     await rm(root, { recursive: true, force: true });
   }
 });
+
+const REMOTE = 'https://gtap.com.br/midias/X%20GTAP';
+
+test('album paths accept the approved midias origin and reject other hosts or traversal', () => {
+  assert.equal(assertLocalPath(`${REMOTE}/full/dia-1-001.webp`), `${REMOTE}/full/dia-1-001.webp`);
+  for (const bad of [
+    'https://evil.com/midias/X%20GTAP/full/a.webp',
+    'https://gtap.com.br/midias/X%20GTAP/full/../../a.webp',
+    'https://gtap.com.br/midias/%2e%2e/full/a.webp',
+    'https://gtap.com.br/midias/X%20GTAP/full/a.jpg',
+  ]) {
+    assert.throws(() => assertLocalPath(bad), /inválido/);
+  }
+});
+
+test('remote album entry points thumb, mid and full to midias/ without generating files', () => {
+  const row = { url: `${REMOTE}/full/dia-1-001.webp`, thumb: `${REMOTE}/thumb/dia-1-001.webp`, width: 1600, height: 1065 };
+  assert.deepEqual(localGalleryEntry(row, 360), {
+    src: row.url,
+    srcSet: `${row.thumb} 360w, ${REMOTE}/mid/dia-1-001.webp ${MID_WIDTH}w, ${row.url} 1600w`,
+    width: 1600,
+    height: 1065,
+  });
+});
+
+test('gallery build lists remote pre-optimized albums with no network when the thumb width is known', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'gtap-remote-gallery-'));
+  try {
+    await mkdir(path.join(root, 'public/api/galerias'), { recursive: true });
+    await mkdir(path.join(root, 'src/data'), { recursive: true });
+    const row = { id: 'a-1', url: `${REMOTE}/full/a-1.webp`, thumb: `${REMOTE}/thumb/a-1.webp`, width: 1200, height: 800, scene: 'Primeiro Dia' };
+    await writeFile(path.join(root, 'public/api/galerias/x-gtap.json'), JSON.stringify([row]));
+    await writeFile(path.join(root, GALLERY.manifest), JSON.stringify({ [row.url]: { srcSet: `${row.thumb} 300w, ${REMOTE}/mid/a-1.webp ${MID_WIDTH}w, ${row.url} 1200w` } }));
+    const manifest = await buildGallery({ root, fetchImpl: () => assert.fail('no network') });
+    assert.equal(manifest[row.url].srcSet, `${row.thumb} 300w, ${REMOTE}/mid/a-1.webp ${MID_WIDTH}w, ${row.url} 1200w`);
+    assert.deepEqual(await readdir(path.join(root, GALLERY.directory)), []);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('gallery build downloads only the thumb of a new remote photo to learn its width', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'gtap-remote-new-'));
+  try {
+    await mkdir(path.join(root, 'public/api/galerias'), { recursive: true });
+    const row = { id: 'b-1', url: `${REMOTE}/full/b-1.webp`, thumb: `${REMOTE}/thumb/b-1.webp`, width: 1600, height: 1065, scene: 'Primeiro Dia' };
+    await writeFile(path.join(root, 'public/api/galerias/x-gtap.json'), JSON.stringify([row]));
+    const thumb = await sharp({ create: { width: 360, height: 240, channels: 3, background: '#335' } }).webp().toBuffer();
+    const requested = [];
+    const fetchImpl = async (url) => {
+      requested.push(String(url));
+      return new Response(thumb, { headers: { 'content-length': String(thumb.length) } });
+    };
+    const manifest = await buildGallery({ root, fetchImpl });
+    assert.deepEqual(requested, [row.thumb]);
+    assert.equal(manifest[row.url].srcSet, `${row.thumb} 360w, ${REMOTE}/mid/b-1.webp ${MID_WIDTH}w, ${row.url} 1600w`);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
