@@ -24,13 +24,14 @@ export function editionSummaries() {
   }).reverse();
 }
 
-// Álbuns com índice facial (busca da galeria), do mais recente para o mais antigo: o cliente
-// recebe só os ids das fotos (na ordem do álbum) para montar miniaturas e links #foto-N.
+// Álbuns com índice facial (busca da galeria), do mais recente para o mais antigo. O cliente
+// recebe só [id, largura, altura] de cada foto, na ordem do álbum (miniaturas, links #foto-N
+// e proporção do visualizador); as URLs seguem o padrão midias/<edição>/{thumb,mid,full}/<id>.webp.
 export function faceAlbums() {
   return editions.filter((edition) => hasFaceIndex(edition.folder)).map((edition) => ({
     key: edition.folder,
     editionText: edition.editionText,
     href: href(edition.editionText),
-    ids: loadAlbum(edition).map((item) => item.url.split('/').pop().replace(/\.\w+$/, '')),
+    photos: loadAlbum(edition).map((item) => [item.url.split('/').pop().replace(/\.\w+$/, ''), item.image.width, item.image.height]),
   })).reverse();
 }
