@@ -76,6 +76,7 @@ A `main` tem o código-fonte; o site pronto só existe depois do build. Se a Hos
 - Arquivos versionados em `public/face-search/` (manifest, `lib/`, `models/`, `data/<álbum>.<hash>.bin`): **não edite à mão**. Gere com `npm run faces:assets` (só se trocar a versão da lib) e `npm run faces:index [-- <álbum>]` (retoma do cache em `.cache/faces/`; baixa as fotos de `midias/` se não houver cópia local).
 - **Foto nova/removida em álbum ⇒ rodar `npm run faces:index` e versionar.** O `verify-export` falha se o índice citar foto que não existe mais.
 - `.htaccess` tem regra de cache imutável para `*.<hash10>.bin` (mantenha os três idênticos). Os `.bin` e a lib têm hash no nome: nunca renomeie sem regenerar.
+- Mudou `src/faceSearch/describe.js` (normalização de luz/detecção)? Suba `CACHE_VERSION` em `scripts/build-face-index.mjs` e reindexe: índice e selfie precisam usar o mesmo caminho.
 - Os descritores publicados são dado biométrico (LGPD): não adicionar caixas, nomes ou qualquer rótulo de pessoa ao índice.
 
 ## CI/CD em resumo

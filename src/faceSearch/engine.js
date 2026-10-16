@@ -1,12 +1,13 @@
 // Motor da busca facial no navegador. Tudo é carregado sob demanda (clique no botão);
 // as páginas dos álbuns não trazem a biblioteca nem os modelos.
+import { describeAll } from './describe';
 import { averageDescriptors, search, unpackIndex } from './format';
 
 export const FACE_BASE = '/face-search/';
 // O MESMO detector da indexação (SSD): o recorte do rosto muda o descritor, e com o Tiny
 // Face Detector a distância para o mesmo rosto indexado chegou a 0.47 (SSD: 0.07).
 const MAX_SIDE = 640;
-const MIN_SCORE = 0.6;
+const MIN_SCORE = 0.5; // mais tolerante que o índice (0.6): a selfie tem um rosto só e luz pior
 const MIN_FACE = 0.12; // largura do rosto em relação à imagem
 const FRAMES = 3;
 
@@ -73,8 +74,25 @@ export const loadEngine = once(async () => {
     faceapi.nets.faceLandmark68Net.loadFromUri(uri),
     faceapi.nets.faceRecognitionNet.loadFromUri(uri),
   ]);
+  await warmUp(faceapi);
   return faceapi;
 });
+
+// A primeira inferência compila shaders (WebGL) e leva segundos no celular: rodamos os 3 modelos uma
+// vez com imagens em branco enquanto a pessoa ainda lê o aviso, para a primeira busca ser rápida.
+async function warmUp(faceapi) {
+  const blank = (size) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    return canvas;
+  };
+  try {
+    await faceapi.detectAllFaces(blank(160), new faceapi.SsdMobilenetv1Options({ minConfidence: MIN_SCORE }));
+    await faceapi.nets.faceLandmark68Net.detectLandmarks(blank(112));
+    await faceapi.nets.faceRecognitionNet.computeFaceDescriptor(blank(150));
+  } catch { /* aquecimento é só otimização */ }
+}
 
 // Reduz a imagem (câmera, upload) para detectar mais rápido.
 export function toCanvas(source) {
@@ -88,23 +106,27 @@ export function toCanvas(source) {
   return canvas;
 }
 
-// Descritor do rosto dominante da imagem. status: ok | none | multiple | small
+// Descritor do rosto dominante da imagem (mesmo caminho do indexador, com luz normalizada).
+// status: ok | none | multiple | small
 export async function describeFace(faceapi, canvas) {
-  const options = new faceapi.SsdMobilenetv1Options({ minConfidence: MIN_SCORE });
-  const found = await faceapi.detectAllFaces(canvas, options).withFaceLandmarks().withFaceDescriptors();
+  const { width, height } = canvas;
+  const { data } = canvas.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, width, height);
+  const found = await describeAll(faceapi, { data, width, height, channels: 4 }, { minConfidence: MIN_SCORE, boostDark: true });
   if (!found.length) return { status: 'none' };
-  const area = (face) => face.detection.box.width * face.detection.box.height;
+  const area = (face) => face.box.width * face.box.height;
   const [main, second] = found.sort((a, b) => area(b) - area(a));
   if (second && area(second) > area(main) * 0.5) return { status: 'multiple' };
-  if (main.detection.box.width < canvas.width * MIN_FACE) return { status: 'small' };
+  if (main.box.width < width * MIN_FACE) return { status: 'small' };
   return { status: 'ok', descriptor: main.descriptor };
 }
 
 // Câmera: alguns quadros seguidos, descritor médio (mais estável do que um quadro só).
-export async function describeVideo(faceapi, video) {
+// onFrame(n, total) avisa o progresso para a interface.
+export async function describeVideo(faceapi, video, onFrame = () => {}) {
   const descriptors = [];
   let last = { status: 'none' };
   for (let n = 0; n < FRAMES; n += 1) {
+    onFrame(n + 1, FRAMES);
     last = await describeFace(faceapi, toCanvas(video));
     if (last.status === 'ok') descriptors.push(last.descriptor);
     await new Promise((resolve) => setTimeout(resolve, 150));

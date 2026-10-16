@@ -164,6 +164,34 @@
 .face-trigger:hover:not(:disabled) { background: var(--color-navy-800); }
 .face-trigger:disabled { opacity: 0.6; cursor: progress; }
 
+/* Ocupado: o botão continua com cara de ativo (spinner + texto), não de desligado. */
+.face-trigger[data-busy]:disabled { opacity: 1; }
+.face-trigger--light[data-busy]:disabled { background: var(--color-gray-100); }
+
+.face-spinner {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: face-spin 0.75s linear infinite;
+}
+
+@keyframes face-spin {
+  to { transform: rotate(360deg); }
+}
+
+.face-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--text-on-light);
+}
+
 .face-trigger--light {
   background: var(--color-white);
   color: var(--text-on-light);
@@ -289,6 +317,45 @@
 
 .face-camera { display: grid; gap: var(--space-2); }
 
+/* Moldura de câmera sobre a prévia, com varredura dourada enquanto analisa. */
+.face-stage { position: relative; overflow: hidden; border-radius: var(--radius-md); }
+
+.face-stage .face-video { display: block; }
+
+.face-scan { position: absolute; inset: 0; pointer-events: none; }
+
+.face-scan::before {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  --corner: var(--color-gold-300);
+  background:
+    linear-gradient(var(--corner), var(--corner)) top left / 28px 3px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) top left / 3px 28px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) top right / 28px 3px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) top right / 3px 28px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) bottom left / 28px 3px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) bottom left / 3px 28px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) bottom right / 28px 3px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) bottom right / 3px 28px no-repeat;
+}
+
+/* Faixa que desce pela imagem. Só transform: roda no compositor, sem depender da thread principal. */
+.face-scan-sweep {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 38%;
+  background: linear-gradient(to bottom, rgb(242 196 83 / 0%), rgb(242 196 83 / 28%) 94%, rgb(255 223 146 / 95%) 98%, rgb(242 196 83 / 0%));
+  transform: translateY(-100%);
+  animation: face-sweep 1.5s var(--ease-in-out) infinite;
+  will-change: transform;
+}
+
+@keyframes face-sweep {
+  to { transform: translateY(263%); }
+}
+
 .face-video {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -310,4 +377,9 @@
   color: var(--color-gold-200);
   font-size: var(--fs-caption);
   pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .face-spinner { animation-duration: 2.4s; }
+  .face-scan-sweep { animation: none; transform: translateY(100%); opacity: 0.6; }
 }

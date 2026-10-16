@@ -11,7 +11,7 @@
   "models": "models",
   "albums": {
     "vii-gtap": {
-      "file": "data/vii-gtap.c4a17af7d7.bin",
+      "file": "data/vii-gtap.d9f72de09f.bin",
       "faces": 17,
       "photos": [
         "vii-002",
@@ -23,8 +23,8 @@
       ]
     },
     "i-gtap": {
-      "file": "data/i-gtap.34ca8043a6.bin",
-      "faces": 125,
+      "file": "data/i-gtap.53f7cfc6b1.bin",
+      "faces": 122,
       "photos": [
         "i-001",
         "i-002",
@@ -73,8 +73,8 @@
       ]
     },
     "ii-gtap": {
-      "file": "data/ii-gtap.4bef8923dd.bin",
-      "faces": 102,
+      "file": "data/ii-gtap.94acf30379.bin",
+      "faces": 100,
       "photos": [
         "ii-003",
         "ii-004",
@@ -117,10 +117,9 @@
       ]
     },
     "iii-gtap": {
-      "file": "data/iii-gtap.630c23f578.bin",
-      "faces": 17,
+      "file": "data/iii-gtap.64bc82b141.bin",
+      "faces": 16,
       "photos": [
-        "iii-001",
         "iii-003",
         "iii-008",
         "iii-009",
@@ -133,8 +132,8 @@
       ]
     },
     "iv-gtap": {
-      "file": "data/iv-gtap.d5b60f837d.bin",
-      "faces": 78,
+      "file": "data/iv-gtap.04d1c44161.bin",
+      "faces": 75,
       "photos": [
         "iv-002",
         "iv-005",
@@ -170,8 +169,8 @@
       ]
     },
     "v-gtap": {
-      "file": "data/v-gtap.5a182e9066.bin",
-      "faces": 101,
+      "file": "data/v-gtap.374401a5e8.bin",
+      "faces": 96,
       "photos": [
         "v-001",
         "v-002",
@@ -215,8 +214,8 @@
       ]
     },
     "vi-gtap": {
-      "file": "data/vi-gtap.9333500044.bin",
-      "faces": 83,
+      "file": "data/vi-gtap.610156225a.bin",
+      "faces": 82,
       "photos": [
         "vi-001",
         "vi-002",
@@ -263,8 +262,8 @@
       ]
     },
     "viii-gtap": {
-      "file": "data/viii-gtap.f15b702add.bin",
-      "faces": 267,
+      "file": "data/viii-gtap.d54ff17d09.bin",
+      "faces": 249,
       "photos": [
         "viii-003",
         "viii-004",
@@ -378,8 +377,8 @@
       ]
     },
     "ix-gtap": {
-      "file": "data/ix-gtap.6abb2f3870.bin",
-      "faces": 57,
+      "file": "data/ix-gtap.efabc0b9ea.bin",
+      "faces": 48,
       "photos": [
         "ix-002",
         "ix-003",
@@ -408,8 +407,8 @@
       ]
     },
     "x-gtap": {
-      "file": "data/x-gtap.aaf3e0126a.bin",
-      "faces": 394,
+      "file": "data/x-gtap.8e12189184.bin",
+      "faces": 377,
       "photos": [
         "dia-1-050",
         "dia-1-052",
@@ -444,7 +443,6 @@
         "dia-1-177",
         "dia-1-195",
         "dia-1-196",
-        "dia-1-199",
         "dia-1-202",
         "dia-1-208",
         "dia-1-209",
@@ -587,7 +585,6 @@
         "dia-2-332",
         "dia-2-334",
         "dia-2-081",
-        "dia-2-109",
         "dia-2-185",
         "dia-2-259"
       ]

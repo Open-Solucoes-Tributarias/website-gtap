@@ -109,10 +109,23 @@ npm run preview               # http://127.0.0.1:4173 (localhost permite a câme
 
 ## 10. Estado da execução (16/10/2026)
 
-- Índice gerado para as 10 edições: 1.241 rostos em 522 fotos, **≈ 160 KB no total** (X GTAP: 50 KB, 179 de 226 fotos). Indexação completa em ~5 min (WASM, cache por foto).
+- Índice gerado para as 10 edições (versão 3, com luz normalizada): 1.182 rostos em 519 fotos, ≈ 160 KB no total. Indexação completa em ~20 min (WASM, 1 processo; cache por foto, versão do cache em `CACHE_VERSION`).
 - `public/face-search/` pesa ~14 MB no Git (lib 1,3 MB + modelos 12,4 MB).
 - Teste local (`npm run preview`, WebGL): preparo na 1ª abertura ~5 s em localhost; busca ~1 s depois de aquecida (inclui compilar shaders). Selfie = foto do X GTAP com um rosto: 32 fotos, 15 em alta confiança.
 - **Calibração (Fase 3) ainda pendente.** Observado: a mesma pessoa de perfil/com óculos fica em 0.47–0.55 da foto frontal, e pessoas diferentes também chegam a ~0.54. Por isso existem as duas faixas e o selo "Possível". Sem autorização das pessoas não validei com mais ninguém.
 - Busca geral na galeria feita (Fase 4). Teste: a mesma foto deu 67 "alta confiança" com o detector Tiny (descritor do mesmo rosto a 0.47 do indexado) e 18 depois de trocar para o SSD usado no índice (0.07). **Detector da selfie = detector do índice, sempre.**
 - Ordem dos resultados: na galeria a grade é uma lista só, da foto mais parecida para a menos (com a edição em cada miniatura), e o visualizador (`Lightbox`, extraído do `AlbumGrid`) percorre exatamente essa ordem, com legenda da edição e link "Ver no álbum". Antes o clique abria o álbum na ordem normal.
 - Não feito: Web Worker (UI não trava; ver se precisa em celular antigo), banner de cookies.
+
+## 11. Luz e qualidade da selfie (16/10/2026)
+
+Relato: a selfie "não achava rosto" ou não casava com pouca luz ou fundo escuro. O que medimos:
+
+- **A detecção aguenta pouca luz; o reconhecimento não.** Foto escurecida por fator (distância do descritor ao da foto original): ×0.7 → 0.23, ×0.5 → 0.30, ×0.25 → 0.29. O limiar de alta confiança é 0.50, então só a luz já consumia metade da margem.
+- **Normalização de luz por rosto** (`src/faceSearch/describe.js`, compartilhado entre o indexador e o navegador): detecta → recorta o rosto com folga → ajusta o ganho para o centro do rosto ir a luma 125 → redetecta no recorte → descritor. A mesma série cai para 0.05–0.15. Normalização por gama foi testada e piorou (descartada). Foto estourada (clipada) não tem conserto.
+- **Redetecção no recorte:** a 0.3 só 84% dos rostos eram redetectados; há uma segunda tentativa a 0.03 que só vale se a caixa for plausível (centro do recorte, ≥ 20% da largura). Sem ela o índice perdia ~15% dos rostos (1.054 vs 1.241).
+- **Quadro escuro na câmera (só navegador, `boostDark`):** o SSD do rosto grande caiu a 0.27 (abaixo do limiar) num quadro com luma média 38 e voltou a 0.83 com ganho global antes da detecção. Sem isso a selfie escura virava "não encontramos um rosto".
+- **Resultado (câmera simulada, rosto ocupando o quadro):** normal → 10 fotos de alta confiança; 50% de brilho → 19 (5 em comum); 30% → 13 (6 em comum); 15% → 48 (2 em comum, luz extrema). Detecta em todos os níveis, mas o dlib continua sensível: pouca luz aumenta o ruído. Se isso incomodar na prática, o próximo passo é trocar o modelo (ArcFace).
+- **Resolução também pesa:** descritor do mesmo rosto vs. índice (1600 px): 1000 px → 0.07, 640 px → 0.12, 480 px → 0.18. Por isso a selfie deve ocupar bem o quadro.
+- **Feedback do botão:** a primeira análise trava a thread principal por segundos no celular; agora o estado "ocupado" é pintado antes da conta (`nextPaint`), o motor é aquecido ao abrir a busca (`warmUp`) e o botão, a prévia e a linha de status mostram o progresso (animações só com `transform`).
+- **Mudou `describe.js`? Reindexe** (`CACHE_VERSION` + `npm run faces:index`): o índice e a selfie precisam usar exatamente o mesmo caminho.

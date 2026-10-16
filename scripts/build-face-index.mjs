@@ -14,6 +14,7 @@ import { access, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promise
 import path from 'node:path';
 import sharp from 'sharp';
 import { editions } from '../src/data/editions.js';
+import { describeAll } from '../src/faceSearch/describe.js';
 import { packIndex } from '../src/faceSearch/format.js';
 import { faceDir, root, shortHash, writeManifest } from './face-manifest.mjs';
 
@@ -21,7 +22,9 @@ import { faceDir, root, shortHash, writeManifest } from './face-manifest.mjs';
 const MIN_SCORE = 0.6;
 const MIN_BOX = 64; // lado menor da caixa, em pixels da foto indexada (1280–1600 px)
 const DETECTION_FLOOR = 0.5; // o cache guarda tudo acima disto; MIN_SCORE filtra depois
-const CACHE_VERSION = 1;
+// 2: descritor com luz normalizada (src/faceSearch/describe.js), igual ao da selfie.
+// 3: redetecção no recorte com segunda tentativa (recall de 84% → ~100%).
+const CACHE_VERSION = 3;
 
 const args = process.argv.slice(2);
 const force = args.includes('--force');
@@ -34,11 +37,15 @@ require('@tensorflow/tfjs-backend-wasm');
 const faceapi = require('@vladmandic/face-api/dist/face-api.node-wasm.js');
 await faceapi.tf.setBackend('wasm');
 await faceapi.tf.ready();
+// O backend WASM relança qualquer promessa rejeitada sem dono e derruba o processo; um rosto com alinhamento
+// degenerado (rejeição interna da biblioteca) não pode abortar a indexação inteira.
+process.removeAllListeners('unhandledRejection');
+let ignoredRejections = 0;
+process.on('unhandledRejection', () => { ignoredRejections += 1; });
 const modelDir = path.join(root, 'node_modules/@vladmandic/face-api/model');
 await faceapi.nets.ssdMobilenetv1.loadFromDisk(modelDir);
 await faceapi.nets.faceLandmark68Net.loadFromDisk(modelDir);
 await faceapi.nets.faceRecognitionNet.loadFromDisk(modelDir);
-const options = new faceapi.SsdMobilenetv1Options({ minConfidence: DETECTION_FLOOR });
 
 const exists = (file) => access(file).then(() => true, () => false);
 
@@ -63,17 +70,12 @@ async function photoBytes(edition, row) {
 
 async function detect(bytes) {
   const { data, info } = await sharp(bytes).removeAlpha().raw().toBuffer({ resolveWithObject: true });
-  const tensor = faceapi.tf.tensor3d(new Uint8Array(data), [info.height, info.width, 3], 'int32');
-  try {
-    const found = await faceapi.detectAllFaces(tensor, options).withFaceLandmarks().withFaceDescriptors();
-    return found.map(({ detection, descriptor }) => ({
-      score: Number(detection.score.toFixed(3)),
-      box: [detection.box.x, detection.box.y, detection.box.width, detection.box.height].map(Math.round),
-      descriptor: Array.from(descriptor, (value) => Number(value.toFixed(5))),
-    }));
-  } finally {
-    tensor.dispose();
-  }
+  const found = await describeAll(faceapi, { data, width: info.width, height: info.height, channels: 3 }, { minConfidence: DETECTION_FLOOR });
+  return found.map(({ score, box, descriptor }) => ({
+    score: Number(score.toFixed(3)),
+    box: [box.x, box.y, box.width, box.height].map(Math.round),
+    descriptor: Array.from(descriptor, (value) => Number(value.toFixed(5))),
+  }));
 }
 
 const summary = {};
@@ -87,7 +89,13 @@ for (const edition of albums) {
 
   for (const [position, row] of rows.entries()) {
     const cacheFile = path.join(cacheDir, `${row.id}.json`);
-    let entry = !force && await exists(cacheFile) ? JSON.parse(await readFile(cacheFile, 'utf8')) : null;
+    // Cache truncado (processo interrompido no meio da escrita) conta como ausente.
+    let entry = null;
+    if (!force && await exists(cacheFile)) {
+      try {
+        entry = JSON.parse(await readFile(cacheFile, 'utf8'));
+      } catch { /* refaz a foto */ }
+    }
     if (entry?.v !== CACHE_VERSION) {
       entry = { v: CACHE_VERSION, faces: await detect(await photoBytes(edition, row)) };
       await writeFile(cacheFile, JSON.stringify(entry));
@@ -126,3 +134,4 @@ for (const edition of albums) {
   if (withoutFaces.length) console.log(`  sem rosto aproveitável: ${withoutFaces.length} (${withoutFaces.slice(0, 8).join(', ')}${withoutFaces.length > 8 ? '…' : ''})`);
 }
 console.table(summary);
+if (ignoredRejections) console.log(`Rejeições internas ignoradas (rosto sem alinhamento válido): ${ignoredRejections}`);
