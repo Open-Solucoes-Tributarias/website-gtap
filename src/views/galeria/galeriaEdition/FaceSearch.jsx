@@ -150,7 +150,7 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
               <h2 className="face-bar-title">
                 Encontre suas fotos <b>{scope === "all" ? "em todas as edições" : "neste álbum"}</b>
               </h2>
-              <p className="face-bar-sub">Tire uma selfie ou envie uma foto sua. Mostramos só as fotos em que você aparece.</p>
+              <p className="face-bar-sub">Tire uma selfie ou envie uma foto. Mostramos só as fotos em que você aparece.</p>
               <p className="face-bar-trust"><Icon name="lock" /> Sua foto é analisada no seu aparelho e não é enviada.</p>
             </div>
             <button type="button" className="btn btn--gold face-bar-cta" onClick={open} onPointerEnter={warm} onFocus={warm}>
@@ -164,7 +164,7 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
               <span>{matchCount === 1 ? "foto" : "fotos"} com você {scope === "all" ? "na galeria" : "neste álbum"}</span>
             </p>
             <div className="face-bar-actions">
-              <button type="button" className="btn btn--ghost" onClick={open}>Buscar de novo</button>
+              <button type="button" className="btn btn--outline" onClick={open}>Buscar de novo</button>
               <button type="button" className="face-bar-clear" onClick={onClear}>Ver todas as fotos</button>
             </div>
           </>
