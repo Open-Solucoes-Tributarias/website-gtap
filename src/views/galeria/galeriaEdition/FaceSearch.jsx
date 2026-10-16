@@ -144,19 +144,28 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
       <div className="face-bar" id={FACE_ANCHOR} data-active={matchCount != null || undefined}>
         {matchCount == null ? (
           <>
-            <p className="face-bar-text"><b>Participou do evento?</b> Encontre as fotos em que você aparece{scope === "all" ? " em todas as edições" : ""}.</p>
-            <button type="button" className="face-trigger" onClick={open} onPointerEnter={warm} onFocus={warm}>
-              <Icon name="user" /> Encontre suas fotos
+            {/* Moldura de câmera com linha de varredura: sinaliza "reconhecimento de rosto" sem expor ninguém. */}
+            <div className="face-viewfinder" aria-hidden="true"><Icon name="user" /></div>
+            <div className="face-bar-copy">
+              <h2 className="face-bar-title">
+                Encontre suas fotos <b>{scope === "all" ? "em todas as edições" : "neste álbum"}</b>
+              </h2>
+              <p className="face-bar-sub">Tire uma selfie ou envie uma foto sua. Mostramos só as fotos em que você aparece.</p>
+              <p className="face-bar-trust"><Icon name="lock" /> Sua foto é analisada no seu aparelho e não é enviada.</p>
+            </div>
+            <button type="button" className="btn btn--gold face-bar-cta" onClick={open} onPointerEnter={warm} onFocus={warm}>
+              <Icon name="camera" /> Buscar minhas fotos
             </button>
           </>
         ) : (
           <>
-            <p className="face-bar-text" aria-live="polite">
-              <b>{matchCount === 1 ? "1 foto" : `${matchCount} fotos`}</b> com você {scope === "all" ? "na galeria" : "neste álbum"}.
+            <p className="face-bar-count" aria-live="polite">
+              <b>{matchCount}</b>
+              <span>{matchCount === 1 ? "foto" : "fotos"} com você {scope === "all" ? "na galeria" : "neste álbum"}</span>
             </p>
             <div className="face-bar-actions">
-              <button type="button" className="face-trigger" onClick={open}>Buscar de novo</button>
-              <button type="button" className="face-link" onClick={onClear}>Ver todas as fotos</button>
+              <button type="button" className="btn btn--ghost" onClick={open}>Buscar de novo</button>
+              <button type="button" className="face-bar-clear" onClick={onClear}>Ver todas as fotos</button>
             </div>
           </>
         )}
