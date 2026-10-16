@@ -151,7 +151,7 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
                 Encontre suas fotos <b>{scope === "all" ? "em todas as edições" : "neste álbum"}</b>
               </h2>
               <p className="face-bar-sub">Tire uma selfie ou envie uma foto. Mostramos só as fotos em que você aparece.</p>
-              <p className="face-bar-trust"><Icon name="lock" /> Sua foto é analisada no seu aparelho e não é enviada.</p>
+              <p className="face-bar-trust"><Icon name="lock" /> Seus dados estão seguros</p>
             </div>
             <button type="button" className="btn btn--gold face-bar-cta" onClick={open} onPointerEnter={warm} onFocus={warm}>
               <Icon name="camera" /> Buscar minhas fotos
