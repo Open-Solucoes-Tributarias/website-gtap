@@ -6,8 +6,9 @@ import path from 'node:path';
 import { faceDir, root, shortHash, writeManifest } from './face-manifest.mjs';
 
 const pkg = path.join(root, 'node_modules/@vladmandic/face-api');
-// Selfie: detector leve + landmarks + reconhecimento (~6,7 MB). O SSD (5,6 MB) só é usado na indexação.
-const MODELS = ['tiny_face_detector_model', 'face_landmark_68_model', 'face_recognition_model'];
+// Selfie: os mesmos 3 modelos da indexação (SSD + landmarks + reconhecimento, ~12,4 MB). O Tiny Face
+// Detector (190 KB) foi descartado: o recorte diferente muda o descritor e quebra a comparação.
+const MODELS = ['ssd_mobilenetv1_model', 'face_landmark_68_model', 'face_recognition_model'];
 
 await rm(path.join(faceDir, 'lib'), { recursive: true, force: true });
 await rm(path.join(faceDir, 'models'), { recursive: true, force: true });

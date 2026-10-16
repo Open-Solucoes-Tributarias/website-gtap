@@ -1,0 +1,78 @@
+/* ====== Busca facial na galeria (todas as edições) ====== */
+.galeria-face {
+  padding: var(--space-6) var(--section-px) 0;
+  background: var(--color-white);
+}
+
+.face-results {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  scroll-margin-top: var(--header-h);
+}
+
+.face-results-note {
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--text-on-light-muted);
+}
+
+.face-group h3 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  margin: 0 0 var(--space-2);
+  color: var(--text-on-light);
+  font-size: var(--fs-h3);
+}
+
+.face-group h3 span {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+  color: var(--text-on-light-muted);
+}
+
+.face-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.face-thumbs li { position: relative; }
+
+.face-thumbs a {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-gray-100);
+}
+
+.face-thumbs img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform var(--dur-ui) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .face-thumbs a:hover img { transform: scale(1.04); }
+}
+
+.face-thumb--maybe::after {
+  content: "Possível";
+  position: absolute;
+  top: var(--space-1);
+  left: var(--space-1);
+  padding: 2px var(--space-1);
+  border-radius: var(--radius-pill);
+  background: rgb(2 9 58 / 80%);
+  color: var(--color-gold-200);
+  font-size: var(--fs-caption);
+  pointer-events: none;
+}
+
+.face-results-more { justify-self: start; }

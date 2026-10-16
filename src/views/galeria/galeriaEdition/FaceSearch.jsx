@@ -11,12 +11,14 @@ const NOTICES = {
   multiple: "Há mais de um rosto na imagem. Use uma foto só sua.",
   small: "O rosto ficou pequeno na imagem. Aproxime-se da câmera ou use uma foto mais fechada.",
   empty: "Não encontramos fotos suas neste álbum. Tente com outra foto, de frente e bem iluminada.",
+  emptyAll: "Não encontramos fotos suas na galeria. Tente com outra foto, de frente e bem iluminada.",
   camera: "Não foi possível acessar a câmera. Envie uma foto sua.",
 };
 
 // "Encontre suas fotos": a selfie é processada no próprio aparelho (nada é enviado).
 // Biblioteca, modelos e índice só são baixados quando a pessoa abre o diálogo.
-export const FaceSearch = ({ albumKey, matchCount, onResults, onClear }) => {
+// albums: pastas dos álbuns pesquisados (um, na página do álbum; todos, na galeria).
+export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onClear }) => {
   const dialogRef = useRef(null);
   const videoRef = useRef(null);
   const fileRef = useRef(null);
@@ -30,19 +32,19 @@ export const FaceSearch = ({ albumKey, matchCount, onResults, onClear }) => {
 
   // Ao passar o mouse/foco no botão, só o manifest e o índice (poucos KB) são antecipados.
   const warm = useCallback(() => {
-    loadManifest().then(() => loadIndex(albumKey)).catch(() => {});
-  }, [albumKey]);
+    loadManifest().then(() => Promise.all(albums.map(loadIndex))).catch(() => {});
+  }, [albums]);
 
   const prepare = useCallback(async () => {
     setPhase("preparing");
     setNotice("");
     try {
-      await Promise.all([loadIndex(albumKey), loadEngine()]);
+      await Promise.all([...albums.map(loadIndex), loadEngine()]);
       setPhase("ready");
     } catch {
       setPhase("error");
     }
-  }, [albumKey]);
+  }, [albums]);
 
   const open = (event) => {
     triggerRef.current = event.currentTarget;
@@ -102,9 +104,9 @@ export const FaceSearch = ({ albumKey, matchCount, onResults, onClear }) => {
         setPhase("ready");
         return;
       }
-      const hits = await findPhotos(albumKey, result.descriptor);
+      const hits = await findPhotos(albums, result.descriptor);
       if (!hits.length) {
-        setNotice(NOTICES.empty);
+        setNotice(NOTICES[scope === "all" ? "emptyAll" : "empty"]);
         setPhase("ready");
         return;
       }
@@ -138,7 +140,7 @@ export const FaceSearch = ({ albumKey, matchCount, onResults, onClear }) => {
       <div className="face-bar" data-active={matchCount != null || undefined}>
         {matchCount == null ? (
           <>
-            <p className="face-bar-text"><b>Participou do evento?</b> Encontre as fotos em que você aparece.</p>
+            <p className="face-bar-text"><b>Participou do evento?</b> Encontre as fotos em que você aparece{scope === "all" ? " em todas as edições" : ""}.</p>
             <button type="button" className="face-trigger" onClick={open} onPointerEnter={warm} onFocus={warm}>
               <Icon name="user" /> Encontre suas fotos
             </button>
@@ -146,7 +148,7 @@ export const FaceSearch = ({ albumKey, matchCount, onResults, onClear }) => {
         ) : (
           <>
             <p className="face-bar-text" aria-live="polite">
-              <b>{matchCount === 1 ? "1 foto" : `${matchCount} fotos`}</b> com você neste álbum.
+              <b>{matchCount === 1 ? "1 foto" : `${matchCount} fotos`}</b> com você {scope === "all" ? "na galeria" : "neste álbum"}.
             </p>
             <div className="face-bar-actions">
               <button type="button" className="face-trigger" onClick={open}>Buscar de novo</button>
@@ -168,7 +170,7 @@ export const FaceSearch = ({ albumKey, matchCount, onResults, onClear }) => {
 
           {notice && <p className="face-notice" role="alert">{notice}</p>}
 
-          {phase === "preparing" && <p className="face-status" role="status">Preparando a busca… na primeira vez, baixamos cerca de 8 MB.</p>}
+          {phase === "preparing" && <p className="face-status" role="status">Preparando a busca… na primeira vez, baixamos cerca de 12 MB.</p>}
 
           {phase === "error" && (
             <div className="face-status" role="alert">

@@ -8,7 +8,7 @@ Plano de implementação e execução. Branch: `feat/busca-facial` (a partir da 
  build local (Node, 1x por álbum novo)                     site estático (Hostinger)             navegador do visitante
 ┌─────────────────────────────────────┐   versiona   ┌──────────────────────────────┐   ┌──────────────────────────────────────┐
 │ npm run faces:index                 │ ───────────▶ │ public/face-search/          │   │ clique em "Encontre suas fotos"      │
-│  fotos (servidor/cache) → detecta   │              │   manifest.json (no-cache)   │   │  1. baixa lib + modelos (~7 MB, 1x)  │
+│  fotos (servidor/cache) → detecta   │              │   manifest.json (no-cache)   │   │  1. baixa lib + modelos (~13 MB, 1x)  │
 │  rostos → descritor 128-d → int8    │              │   data/<álbum>.<hash>.bin    │──▶│  2. selfie/upload → descritor 128-d  │
 │  → data/<álbum>.<hash>.bin          │              │   models/*.<hash>.bin        │   │  3. distância euclidiana vs. .bin    │
 └─────────────────────────────────────┘              │   lib/face-api.<hash>.js     │   │  4. filtra a grade do álbum          │
@@ -26,9 +26,9 @@ Plano de implementação e execução. Branch: `feat/busca-facial` (a partir da 
 | Biblioteca | `@vladmandic/face-api` 1.7.15 | O `face-api.js` original está abandonado (TF.js 1.x). O fork mantém a mesma API e os mesmos modelos de 128-d, com TF.js 4. |
 | Indexação (Node) | TF.js com backend **WASM** (+ `sharp` para decodificar) | `tfjs-node` exige binário nativo e costuma quebrar no Node 24/Windows. WASM roda igual em qualquer máquina e o custo é só de build. |
 | Detector (índice) | SSD MobileNet v1, `minConfidence` 0.6 | Mais preciso em rostos pequenos de fotos de grupo; o tempo não importa offline. |
-| Detector (selfie) | Tiny Face Detector, `inputSize` 320 | 190 KB e dezenas de ms; basta para um rosto grande e frontal. |
+| Detector (selfie) | **o mesmo SSD MobileNet v1 do índice** | Medido: com o Tiny Face Detector o descritor do MESMO rosto ficou a 0.47 do indexado (equivale a outra pessoa); com SSD, 0.07. O detector define o recorte do rosto, então precisa ser igual no índice e na selfie. |
 | Formato do índice | binário **int8 por álbum** (não JSON) | 128 B por rosto. ~3 mil rostos ≈ 400 KB no total, contra ~3 MB em JSON. Um álbum por arquivo: o visitante só baixa o álbum que está vendo. |
-| Escopo da busca (MVP) | álbum aberto | Combina com o `AlbumGrid` (filtra a grade existente). "Todas as edições" fica para a Fase 4. |
+| Escopo da busca | **galeria (todas as edições)** e álbum aberto | Em `/galeria/` a busca percorre os 10 índices (~160 KB) e mostra as fotos agrupadas por edição, com link `/<edição>/#foto-N`. Na página do álbum o botão filtra a grade. Na busca geral só "alta confiança" aparece de início; as "possíveis" ficam atrás de um botão. |
 
 ## 3. Parâmetros de velocidade e precisão
 
@@ -39,8 +39,8 @@ Plano de implementação e execução. Branch: `feat/busca-facial` (a partir da 
 - Quantização int8 com escala fixa (`round(v * 127 / 0.5)`), validada por teste: erro de distância < 0.02 (limiar é 0.5–0.6).
 
 **Selfie (navegador)**
-- Lib, modelos e índice são carregados **só ao clicar** (import dinâmico); `pointerenter`/`focus` no botão pré-busca apenas manifest e índice (poucos KB), nunca os 7 MB de modelos.
-- Modelos carregados em paralelo (`Promise.all`); só os necessários: Tiny Face Detector + Landmark68 + Recognition (~6,7 MB). O SSD não é baixado.
+- Lib, modelos e índice são carregados **só ao clicar** (import dinâmico); `pointerenter`/`focus` no botão pré-busca apenas manifest e índice (poucos KB), nunca os ~12 MB de modelos.
+- Modelos carregados em paralelo (`Promise.all`); SSD + Landmark68 + Recognition (~12,4 MB, uma vez; depois cache imutável).
 - Backend `webgl`, com fallback para `wasm` e depois `cpu`; `tf.enableProdMode()`; uma inferência de aquecimento após o carregamento.
 - Imagem reduzida para no máximo 640 px antes de detectar; câmera pede 640×480.
 - Câmera: 3 quadros, descritor médio (mais estável que um quadro só). Upload: 1 imagem. Exige exatamente um rosto dominante.
@@ -104,13 +104,14 @@ npm run preview               # http://127.0.0.1:4173 (localhost permite a câme
 
 - **Precisão**: o modelo 128-d é inferior a ArcFace em rostos de perfil/pequenos/com óculos escuros. Mitigação: duas faixas de confiança e orientação de selfie frontal. Plano B: trocar o motor por ONNX/ArcFace (512-d) mantendo o mesmo formato de índice, só mudando `DIM`.
 - **iOS/Android antigos**: WebGL limitado → fallback WASM é mais lento (alguns segundos). Aceitável; a UI mostra progresso.
-- **Peso do primeiro uso**: ~7 MB uma vez, depois cache imutável.
+- **Peso do primeiro uso**: ~13 MB uma vez (lib + modelos), depois cache imutável.
 - **Fotos no servidor**: o indexador baixa de `gtap.com.br/midias/` (ou usa `.cache/midias`); se o servidor perder arquivos, a indexação falha de forma visível.
 
 ## 10. Estado da execução (16/10/2026)
 
 - Índice gerado para as 10 edições: 1.241 rostos em 522 fotos, **≈ 160 KB no total** (X GTAP: 50 KB, 179 de 226 fotos). Indexação completa em ~5 min (WASM, cache por foto).
-- `public/face-search/` pesa 8,2 MB no Git (lib 1,3 MB + modelos 7 MB; só os modelos da selfie).
+- `public/face-search/` pesa ~14 MB no Git (lib 1,3 MB + modelos 12,4 MB).
 - Teste local (`npm run preview`, WebGL): preparo na 1ª abertura ~5 s em localhost; busca ~1 s depois de aquecida (inclui compilar shaders). Selfie = foto do X GTAP com um rosto: 32 fotos, 15 em alta confiança.
 - **Calibração (Fase 3) ainda pendente.** Observado: a mesma pessoa de perfil/com óculos fica em 0.47–0.55 da foto frontal, e pessoas diferentes também chegam a ~0.54. Por isso existem as duas faixas e o selo "Possível". Sem autorização das pessoas não validei com mais ninguém.
-- Não feito: modo "todas as edições" (Fase 4), Web Worker (UI não trava; ver se precisa em celular antigo), banner de cookies.
+- Busca geral na galeria feita (Fase 4). Teste: a mesma foto deu 67 "alta confiança" com o detector Tiny (descritor do mesmo rosto a 0.47 do indexado) e 18 depois de trocar para o SSD usado no índice (0.07). **Detector da selfie = detector do índice, sempre.**
+- Não feito: Web Worker (UI não trava; ver se precisa em celular antigo), banner de cookies.

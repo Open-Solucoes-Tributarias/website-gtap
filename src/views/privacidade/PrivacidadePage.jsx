@@ -36,8 +36,8 @@ export const PrivacidadePage = () => (
       <section id="busca-facial">
         <h2>Busca facial nos álbuns</h2>
         <p>
-          Nos álbuns com a função “Encontre suas fotos”, você pode enviar uma foto sua ou tirar uma selfie para ver só as
-          fotos em que aparece. O uso é <b>opcional</b> e depende do seu aceite desta política, que pedimos a cada visita.
+          Na galeria e nos álbuns com a função “Encontre suas fotos”, você pode enviar uma foto sua ou tirar uma selfie para
+          ver só as fotos em que aparece, em todas as edições ou só no álbum aberto. O uso é <b>opcional</b> e depende do seu aceite desta política, que pedimos a cada visita.
         </p>
         <ul>
           <li><b>A sua foto não sai do seu aparelho.</b> A análise acontece no seu navegador. Não enviamos, gravamos nem compartilhamos a selfie ou o resultado com nenhum servidor.</li>

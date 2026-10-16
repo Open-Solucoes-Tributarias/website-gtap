@@ -90,6 +90,9 @@ for (const route of routes) {
     }
   }
   if (route === 'galeria') {
+    // Busca facial geral: botão e, no HTML, só os ids das fotos (sem lib nem modelos).
+    assert.match(html, /Encontre suas fotos/);
+    assert.doesNotMatch(html, /face-api|face-search\/lib/);
     // Banner e CTA apontam para a edição mais recente.
     assert.match(html, /<h5[^>]*>X GTAP<\/h5>/);
     assert.match(html, /class="galeria-banner-cta[^"]*"[^>]+href="\/X%20GTAP\/"|href="\/X%20GTAP\/"[^>]+class="galeria-banner-cta/);
@@ -147,7 +150,7 @@ for (const file of [faceManifest.lib, ...Object.values(faceManifest.albums).map(
   assert.match(file, hashed, `${file}: sem hash no nome`);
   await access(`out/face-search/${file}`);
 }
-for (const name of ['tiny_face_detector_model', 'face_landmark_68_model', 'face_recognition_model']) {
+for (const name of ['ssd_mobilenetv1_model', 'face_landmark_68_model', 'face_recognition_model']) {
   const weights = JSON.parse(await readFile(`out/face-search/${faceManifest.models}/${name}-weights_manifest.json`, 'utf8'));
   for (const shard of weights.flatMap((group) => group.paths)) {
     assert.match(shard, hashed, `${shard}: sem hash no nome`);

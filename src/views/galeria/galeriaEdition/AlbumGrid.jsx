@@ -28,6 +28,7 @@ export const AlbumGrid = ({ images = [], editionText, faceAlbum }) => {
   const [loaded, setLoaded] = useState(false);
   const [scene, setScene] = useState(null); // null = todos os dias
   const [hits, setHits] = useState(null); // busca facial: [{ id, distance, strong }] ou null
+  const faceAlbums = useMemo(() => [faceAlbum], [faceAlbum]);
   const progressive = images.length > PROGRESSIVE_FROM;
   const [shown, setShown] = useState(progressive ? PAGE : images.length);
 
@@ -154,7 +155,7 @@ export const AlbumGrid = ({ images = [], editionText, faceAlbum }) => {
     <>
       {faceAlbum && (
         <FaceSearch
-          albumKey={faceAlbum}
+          albums={faceAlbums}
           matchCount={hits ? hits.length : null}
           onResults={chooseHits}
           onClear={() => chooseHits(null)}

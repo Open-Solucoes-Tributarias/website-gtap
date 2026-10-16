@@ -3,9 +3,10 @@
 import { averageDescriptors, search, unpackIndex } from './format';
 
 export const FACE_BASE = '/face-search/';
-// Detector leve (≈190 KB). 416 enxerga o rosto de uma selfie ou de um retrato enviado.
-const INPUT_SIZE = 416;
-const MAX_SIDE = 800;
+// O MESMO detector da indexação (SSD): o recorte do rosto muda o descritor, e com o Tiny
+// Face Detector a distância para o mesmo rosto indexado chegou a 0.47 (SSD: 0.07).
+const MAX_SIDE = 640;
+const MIN_SCORE = 0.6;
 const MIN_FACE = 0.12; // largura do rosto em relação à imagem
 const FRAMES = 3;
 
@@ -68,7 +69,7 @@ export const loadEngine = once(async () => {
   tf.enableProdMode();
   const uri = FACE_BASE + manifest.models;
   await Promise.all([
-    faceapi.nets.tinyFaceDetector.loadFromUri(uri),
+    faceapi.nets.ssdMobilenetv1.loadFromUri(uri),
     faceapi.nets.faceLandmark68Net.loadFromUri(uri),
     faceapi.nets.faceRecognitionNet.loadFromUri(uri),
   ]);
@@ -89,7 +90,7 @@ export function toCanvas(source) {
 
 // Descritor do rosto dominante da imagem. status: ok | none | multiple | small
 export async function describeFace(faceapi, canvas) {
-  const options = new faceapi.TinyFaceDetectorOptions({ inputSize: INPUT_SIZE, scoreThreshold: 0.5 });
+  const options = new faceapi.SsdMobilenetv1Options({ minConfidence: MIN_SCORE });
   const found = await faceapi.detectAllFaces(canvas, options).withFaceLandmarks().withFaceDescriptors();
   if (!found.length) return { status: 'none' };
   const area = (face) => face.detection.box.width * face.detection.box.height;
@@ -111,12 +112,17 @@ export async function describeVideo(faceapi, video) {
   return descriptors.length ? { status: 'ok', descriptor: averageDescriptors(descriptors) } : last;
 }
 
-// Fotos do álbum parecidas com o descritor: [{ id, distance, strong }], da mais parecida para a menos.
-export async function findPhotos(albumKey, descriptor) {
-  const { index, photos, thresholds } = await loadIndex(albumKey);
-  return search(index, descriptor, thresholds.possible).map(({ photo, distance }) => ({
-    id: photos[photo],
-    distance,
-    strong: distance <= thresholds.strong,
+// Fotos dos álbuns parecidas com o descritor: [{ album, id, distance, strong }], da mais
+// parecida para a menos. Carrega os índices que faltarem (todos juntos somam ~160 KB).
+export async function findPhotos(albumKeys, descriptor) {
+  const found = await Promise.all(albumKeys.map(async (album) => {
+    const { index, photos, thresholds } = await loadIndex(album);
+    return search(index, descriptor, thresholds.possible).map(({ photo, distance }) => ({
+      album,
+      id: photos[photo],
+      distance,
+      strong: distance <= thresholds.strong,
+    }));
   }));
+  return found.flat().sort((a, b) => a.distance - b.distance);
 }
