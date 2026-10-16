@@ -3,7 +3,7 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 
 export default [
-  { ignores: ['dist', 'out', '.next'] },
+  { ignores: ['dist', 'out', '.next', 'public/face-search/lib'] },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {

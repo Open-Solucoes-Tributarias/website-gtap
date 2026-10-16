@@ -70,6 +70,14 @@ A `main` tem o código-fonte; o site pronto só existe depois do build. Se a Hos
 - `npm test` pode falhar no Windows com `EPERM`/`EBUSY` em `optimize-images.test.mjs` (bloqueio de arquivo na pasta temporária). É problema do ambiente local, não do código; o workflow não roda `npm test`.
 - A Vercel (`vercel.json`) é usada só como preview; produção é a Hostinger.
 
+## Busca facial na galeria
+
+- Plano e estado: [`docs/busca-facial.md`](docs/busca-facial.md). Tudo roda no navegador; o site continua estático. Política em `/privacidade/` (aceite obrigatório no diálogo).
+- Arquivos versionados em `public/face-search/` (manifest, `lib/`, `models/`, `data/<álbum>.<hash>.bin`): **não edite à mão**. Gere com `npm run faces:assets` (só se trocar a versão da lib) e `npm run faces:index [-- <álbum>]` (retoma do cache em `.cache/faces/`; baixa as fotos de `midias/` se não houver cópia local).
+- **Foto nova/removida em álbum ⇒ rodar `npm run faces:index` e versionar.** O `verify-export` falha se o índice citar foto que não existe mais.
+- `.htaccess` tem regra de cache imutável para `*.<hash10>.bin` (mantenha os três idênticos). Os `.bin` e a lib têm hash no nome: nunca renomeie sem regenerar.
+- Os descritores publicados são dado biométrico (LGPD): não adicionar caixas, nomes ou qualquer rótulo de pessoa ao índice.
+
 ## CI/CD em resumo
 
 | Workflow (`.github/workflows/`) | Quando roda | O que faz |

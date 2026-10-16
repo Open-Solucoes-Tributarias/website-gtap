@@ -2,8 +2,9 @@ import "./GaleriaPage.css";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { Footer } from "../../components/Footer/Footer";
 import { EditionCard } from "./EditionCard";
+import { GaleriaFaceSearch } from "./GaleriaFaceSearch";
 
-export const GaleriaPage = ({ editions = [] }) => {
+export const GaleriaPage = ({ editions = [], faceAlbums = [] }) => {
     // Banner e CTA apontam para a edição mais recente (a lista vem da mais nova).
     const latest = editions[0];
 
@@ -21,6 +22,7 @@ export const GaleriaPage = ({ editions = [] }) => {
                     </div>
                 </div>
             </section>
+            {faceAlbums.length > 0 && <GaleriaFaceSearch albums={faceAlbums} />}
             <section className="container-card-gtaps">
                 <div className="card-gtaps-head">
                     <h3 data-reveal>Confira as fotos das <b>edições passadas</b></h3>

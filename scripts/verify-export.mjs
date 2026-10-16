@@ -3,10 +3,12 @@ import { readFile, access } from 'node:fs/promises';
 
 const openUrl = /https:\/\/www\.opensolucoestributarias\.com\.br\//;
 const editions = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
-const routes = ['', 'galeria', ...editions.map((n) => `${n} GTAP`)];
+const routes = ['', 'galeria', 'privacidade', ...editions.map((n) => `${n} GTAP`)];
 // Teto de [<script src>, <link rel="stylesheet">] por página, medido no build anterior às animações.
 // Home: +1 script assíncrono de ~260 B (carregador dos imports dinâmicos do modal e do Lenis).
-const budgets = { '': [8, 5], galeria: [7, 3], ...Object.fromEntries(editions.map((n) => [`${n} GTAP`, [7, 4]])), 404: [6, 1] };
+// Álbuns: 8 (era 7). O agrupamento de chunks do Turbopack muda com qualquer acréscimo de bytes nos módulos
+// compartilhados (ex.: um ícone no Icon.jsx) e a busca facial já deixava a página no limite; o total de JS é o mesmo.
+const budgets = { '': [8, 5], galeria: [7, 3], privacidade: [7, 3], ...Object.fromEntries(editions.map((n) => [`${n} GTAP`, [8, 4]])), 404: [6, 1] };
 function assertBudget(page, html) {
   const [scripts, styles] = budgets[page];
   const count = (pattern) => html.match(pattern)?.length ?? 0;
@@ -90,6 +92,9 @@ for (const route of routes) {
     }
   }
   if (route === 'galeria') {
+    // Busca facial geral: botão e, no HTML, só os ids das fotos (sem lib nem modelos).
+    assert.match(html, /Encontre suas fotos/);
+    assert.doesNotMatch(html, /face-api|face-search\/lib/);
     // Banner e CTA apontam para a edição mais recente.
     assert.match(html, /<h5[^>]*>X GTAP<\/h5>/);
     assert.match(html, /class="galeria-banner-cta[^"]*"[^>]+href="\/X%20GTAP\/"|href="\/X%20GTAP\/"[^>]+class="galeria-banner-cta/);
@@ -137,6 +142,34 @@ assert.equal(htaccess, await readFile('public/.htaccess', 'utf8'));
 assert.equal(htaccess, await readFile('.htaccess', 'utf8'));
 assert.match(htaccess, /DEFLATE.*text\/javascript/);
 assert.match(htaccess, /immutable/);
+assert.match(htaccess, /FilesMatch "\\\.\[a-f0-9\]\{10\}\\\.bin\$"/);
+// Busca facial: manifest, biblioteca, modelos e índices vão para o export com hash no nome,
+// e só os álbuns indexados mostram o botão.
+const faceManifest = JSON.parse(await readFile('out/face-search/manifest.json', 'utf8'));
+assert.equal(faceManifest.dim, 128);
+const hashed = /\.[a-f0-9]{10}\.(?:bin|js)$/;
+for (const file of [faceManifest.lib, ...Object.values(faceManifest.albums).map((album) => album.file)]) {
+  assert.match(file, hashed, `${file}: sem hash no nome`);
+  await access(`out/face-search/${file}`);
+}
+for (const name of ['ssd_mobilenetv1_model', 'face_landmark_68_model', 'face_recognition_model']) {
+  const weights = JSON.parse(await readFile(`out/face-search/${faceManifest.models}/${name}-weights_manifest.json`, 'utf8'));
+  for (const shard of weights.flatMap((group) => group.paths)) {
+    assert.match(shard, hashed, `${shard}: sem hash no nome`);
+    await access(`out/face-search/${faceManifest.models}/${shard}`);
+  }
+}
+for (const edition of editions) {
+  const folder = `${edition.toLowerCase()}-gtap`;
+  const html = await readFile(`out/${edition} GTAP/index.html`, 'utf8');
+  const album = faceManifest.albums[folder];
+  assert.equal(/Encontre suas fotos/.test(html), Boolean(album?.faces), `${edition} GTAP: botão da busca facial`);
+  if (!album) continue;
+  const ids = new Set(JSON.parse(await readFile(`public/api/galerias/${folder}.json`, 'utf8')).map((row) => row.id));
+  for (const id of album.photos) assert.ok(ids.has(id), `${folder}: índice facial com foto removida (${id}); rode npm run faces:index`);
+  // Nenhum script da busca facial no HTML do álbum: lib e modelos só entram ao clicar.
+  assert.doesNotMatch(html, /face-api|face-search\/lib/);
+}
 assert.match(htaccess, new RegExp(`RewriteRule \\^open-solucoes-tributarias\\S* ${openUrl.source} \\[[^\\]]*\\bR=301\\b`));
 // Fallback sem JS da antiga página da Open (preview local e hosts sem .htaccess).
 const openFallback = await readFile('out/open-solucoes-tributarias/index.html', 'utf8');

@@ -6,7 +6,7 @@ import { Icon } from "../../../components/Icon/Icon";
 import { AlbumGrid } from "./AlbumGrid";
 import { EditionCard } from "../EditionCard";
 
-export const GaleriaEdition = ({ editionText, images, cover, logo, logoWidth, logoHeight, newer, older, photographer }) => {
+export const GaleriaEdition = ({ editionText, images, cover, logo, logoWidth, logoHeight, newer, older, photographer, faceAlbum }) => {
 
     return (
         <>
@@ -36,7 +36,7 @@ export const GaleriaEdition = ({ editionText, images, cover, logo, logoWidth, lo
             </section>
 
             <section className="album-fotos" id="fotos" aria-label={`Fotos do ${editionText}`}>
-                <AlbumGrid images={images} editionText={editionText} />
+                <AlbumGrid images={images} editionText={editionText} faceAlbum={faceAlbum} />
             </section>
 
             {(newer || older) && (

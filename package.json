@@ -16,7 +16,9 @@
     "media:pictime": "node scripts/import-pictime-gallery.mjs",
     "prebuild": "npm run media:images",
     "test": "node --test scripts/*.test.mjs",
-    "predev": "npm run media:images"
+    "predev": "npm run media:images",
+    "faces:assets": "node scripts/prepare-face-assets.mjs",
+    "faces:index": "node scripts/build-face-index.mjs"
   },
   "dependencies": {
     "@fontsource-variable/roboto-condensed": "^5.3.0",
@@ -27,8 +29,11 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@tensorflow/tfjs": "^4.22.0",
+    "@tensorflow/tfjs-backend-wasm": "^4.22.0",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@vladmandic/face-api": "^1.7.15",
     "eslint": "^9.22.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.0.0",
