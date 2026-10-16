@@ -134,29 +134,22 @@
   transition-duration: 120ms;
 }
 
-/* Links legais: linha própria na base do rodapé (o menu some no mobile). */
-.content-legal {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-1) var(--space-3);
-  padding-top: var(--space-3);
-  border-top: 1px solid rgb(255 255 255 / 20%);
-  font-size: var(--fs-small);
+/* Link legal discreto, abaixo do endereço (visível também no mobile, onde o menu some). */
+.container-footer .legal-link {
+  align-self: flex-start;
+  font-size: var(--fs-caption);
   font-weight: var(--fw-light);
-}
-
-.container-footer .content-legal a {
+  color: var(--text-on-dark-muted);
   text-decoration: underline;
   text-underline-offset: 3px;
+  text-decoration-color: rgb(255 255 255 / 35%);
   transition: color var(--dur-ui) var(--ease-out);
 }
 
-.container-footer .content-legal a:focus-visible { color: var(--color-gold-light); }
+.container-footer .legal-link:focus-visible { color: var(--color-gold-light); }
 
 @media (hover: hover) and (pointer: fine) {
-  .container-footer .content-legal a:hover { color: var(--color-gold-light); }
+  .container-footer .legal-link:hover { color: var(--color-gold-light); }
 }
 
 @media (max-width: 768px) {

@@ -20,6 +20,7 @@ export const Footer = () => {
         <p className="adress-open">R. Frederico Simões, 125 - SL 401<br />
           Edf. Liz Empresarial  - Caminho das Árvores<br />
           Salvador/ BA <br />CEP 41820-774</p>
+        <a className="legal-link" href="/privacidade/">Privacidade e cookies</a>
       </div>
       <div className="content-text-footer" data-reveal>
         <p>
@@ -51,10 +52,6 @@ export const Footer = () => {
           <li><a href="/#contato">Contato</a></li>
         </ul>
       </div>
-      <nav className="content-legal" aria-label="Privacidade" data-reveal>
-        <a href="/privacidade/">Política de Privacidade</a>
-        <a href="/privacidade/#busca-facial">Privacidade na busca facial</a>
-      </nav>
     </footer>
   );
 };
