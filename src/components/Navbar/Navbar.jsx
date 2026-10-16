@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { NavbarMobile } from "../NavbarMobile/NavbarMobile";
 import { MotionRuntime } from "../MotionRuntime/MotionRuntime";
-import { OPEN_URL } from "../../data/links";
+import { OPEN_URL, LOGO_SRC } from "../../data/links";
 import "./Navbar.css";
 
 // Até aqui (px do topo) o header fica sempre visível.
@@ -77,7 +77,7 @@ export const Navbar = () => {
           <nav className="navbar-container" aria-label="Navegação principal">
             <h1 className="navbar-logo">
               <a href="/">
-                <img src="/logo-xi-gtap.svg" alt="XI GTAP — página inicial" width="152" height="49" fetchPriority="high" />
+                <img src={LOGO_SRC} alt="XI GTAP — página inicial" width="152" height="49" fetchPriority="high" />
               </a>
             </h1>
             <ul className="navbar-links">

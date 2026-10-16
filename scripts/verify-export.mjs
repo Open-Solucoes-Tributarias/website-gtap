@@ -29,7 +29,7 @@ for (const route of routes) {
   assert.match(html, /<html lang="pt-BR"/);
   assert.match(html, /<link[^>]+rel="canonical"/);
   assert.match(html, /property="og:image" content="[^"]*\/og-gtap\.png"/);
-  assert.match(html, /<img[^>]+src="\/logo-xi-gtap\.svg"[^>]+width="152"[^>]+height="49"/);
+  assert.match(html, /<img[^>]+src="\/logo-xi-gtap\.svg\?v=\d+"[^>]+width="152"[^>]+height="49"/);
   assert.doesNotMatch(html, /\/logo\.svg|icon-gtap\.svg/);
   // Meta Pixel em todas as páginas, carregado depois do load (sem <script src> no HTML).
   assert.match(html, /fbq\('init','549971842334998'\)/);
