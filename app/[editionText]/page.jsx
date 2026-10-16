@@ -3,6 +3,7 @@ import { editions } from '../../src/data/editions';
 import { GaleriaEdition } from '../../src/views/galeria/galeriaEdition/GaleriaEdition';
 import { sharedOpenGraph } from '../../src/data/metadata';
 import { loadAlbum, editionSummaries, coverOf } from '../../src/data/albums';
+import { hasFaceIndex } from '../../src/data/faceSearch';
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -35,6 +36,7 @@ export default async function Edition({ params }) {
       images={images}
       cover={coverOf(edition)}
       photographer={edition.photographer}
+      faceAlbum={hasFaceIndex(edition.folder) ? edition.folder : undefined}
       newer={summaries[position - 1]}
       older={summaries[position + 1]}
     />

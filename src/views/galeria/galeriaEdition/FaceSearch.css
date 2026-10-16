@@ -1,0 +1,200 @@
+/* ====== Busca facial ("Encontre suas fotos") ====== */
+.face-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  background: var(--color-gray-100);
+}
+
+.face-bar[data-active] {
+  border-color: var(--color-navy-900);
+  background: var(--color-white);
+}
+
+.face-bar-text {
+  margin: 0;
+  font-size: var(--fs-body);
+  color: var(--text-on-light);
+}
+
+.face-bar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.face-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: var(--space-5);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-navy-900);
+  border-radius: var(--radius-pill);
+  background: var(--color-navy-900);
+  color: var(--text-on-dark);
+  font: inherit;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: background-color var(--dur-ui) var(--ease-out), border-color var(--dur-ui) var(--ease-out);
+}
+
+.face-trigger:hover:not(:disabled) { background: var(--color-navy-800); }
+.face-trigger:disabled { opacity: 0.6; cursor: progress; }
+
+.face-trigger--light {
+  background: var(--color-white);
+  color: var(--text-on-light);
+}
+
+.face-trigger--light:hover:not(:disabled) { background: var(--color-gray-100); }
+
+.face-link {
+  padding: var(--space-1);
+  border: 0;
+  background: none;
+  color: var(--text-on-light);
+  font: inherit;
+  font-size: var(--fs-body);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.face-link:disabled { opacity: 0.6; cursor: default; }
+
+/* ====== Diálogo ====== */
+.face-dialog {
+  width: min(480px, calc(100vw - 2 * var(--space-2)));
+  max-height: calc(100dvh - 2 * var(--space-2));
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  color: var(--text-on-light);
+  overscroll-behavior: contain;
+}
+
+.face-dialog::backdrop { background: rgb(2 6 30 / 70%); }
+
+.face-dialog[open] { animation: face-in 240ms var(--ease-out); }
+
+@keyframes face-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+.face-panel {
+  position: relative;
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-3) var(--space-3);
+}
+
+.face-close {
+  position: absolute;
+  top: var(--space-1);
+  right: var(--space-1);
+  display: grid;
+  place-items: center;
+  width: var(--space-5);
+  height: var(--space-5);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-on-light);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.face-close:hover { background: var(--color-gray-100); }
+
+.face-title {
+  margin: 0;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+}
+
+.face-privacy,
+.face-hint,
+.face-status,
+.face-notice {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: var(--lh-body);
+}
+
+.face-privacy,
+.face-hint { color: var(--text-on-light-muted); }
+
+.face-status { display: grid; gap: var(--space-2); justify-items: start; }
+
+.face-notice {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  background: #fdecea;
+  color: var(--color-error);
+}
+
+.face-consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  line-height: var(--lh-body);
+  cursor: pointer;
+}
+
+.face-consent input {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--color-navy-900);
+}
+
+.face-consent a { color: var(--color-blue-500); text-decoration: underline; }
+
+.face-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.face-camera { display: grid; gap: var(--space-2); }
+
+.face-video {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  background: var(--color-navy-900);
+  object-fit: cover;
+  transform: scaleX(-1); /* espelhada, como uma selfie */
+}
+
+/* Fotos "possíveis" (menos parecidas) ganham um selo discreto na grade. */
+.album-item--maybe a::after {
+  content: "Possível";
+  position: absolute;
+  top: var(--space-1);
+  left: var(--space-1);
+  padding: 2px var(--space-1);
+  border-radius: var(--radius-pill);
+  background: rgb(2 9 58 / 80%);
+  color: var(--color-gold-200);
+  font-size: var(--fs-caption);
+  pointer-events: none;
+}

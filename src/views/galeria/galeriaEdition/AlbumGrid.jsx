@@ -4,19 +4,22 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ResponsiveImage from "../../../components/ResponsiveImage/ResponsiveImage";
 import { Icon } from "../../../components/Icon/Icon";
 import { lockScroll, unlockScroll } from "../../../motion/scrollLock";
+import { FaceSearch } from "./FaceSearch";
 import "./AlbumGrid.css";
 
 // Uma foto em destaque (2x2) a cada 9: quebra a monotonia da grade.
 const isFeatured = (index) => index % 9 === 0;
 const thumbOf = (image) => image?.srcSet?.split(",")[0].trim().split(" ")[0];
 const hashOf = (index) => `#foto-${index + 1}`;
+// Id da foto no índice facial: nome do arquivo sem extensão (…/full/dia-1-050.webp).
+const idOf = (item) => item.url.split("/").pop().replace(/\.\w+$/, "");
 // Álbuns grandes (X GTAP: ~230 fotos) entram aos poucos; os antigos (até 151) inteiros.
 const PROGRESSIVE_FROM = 200;
 const PAGE = 60;
 
 // Grade do álbum + visualizador em tela cheia (<dialog>). Sem JS, cada foto é um
 // link para a imagem em alta; com JS, o clique abre o visualizador.
-export const AlbumGrid = ({ images = [], editionText }) => {
+export const AlbumGrid = ({ images = [], editionText, faceAlbum }) => {
   const dialogRef = useRef(null);
   const swipeRef = useRef(null);
   const triggerRef = useRef(null);
@@ -24,26 +27,41 @@ export const AlbumGrid = ({ images = [], editionText }) => {
   const [direction, setDirection] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [scene, setScene] = useState(null); // null = todos os dias
+  const [hits, setHits] = useState(null); // busca facial: [{ id, distance, strong }] ou null
   const progressive = images.length > PROGRESSIVE_FROM;
   const [shown, setShown] = useState(progressive ? PAGE : images.length);
 
+  // Fotos do álbum (ou só as da busca facial, da mais parecida para a menos), com o
+  // índice de cada uma no álbum inteiro (#foto-N).
+  const base = useMemo(() => {
+    const all = images.map((item, n) => ({ ...item, n }));
+    if (!hits) return all;
+    const byId = new Map(hits.map((hit) => [hit.id, hit]));
+    return all
+      .filter((item) => byId.has(idOf(item)))
+      .map((item) => ({ ...item, hit: byId.get(idOf(item)) }))
+      .sort((a, b) => a.hit.distance - b.hit.distance);
+  }, [images, hits]);
   // Dias do álbum (campo scene), na ordem em que aparecem, com a contagem de fotos.
   const scenes = useMemo(() => {
     const counts = new Map();
-    images.forEach((item) => item.scene && counts.set(item.scene, (counts.get(item.scene) ?? 0) + 1));
+    base.forEach((item) => item.scene && counts.set(item.scene, (counts.get(item.scene) ?? 0) + 1));
     return [...counts];
-  }, [images]);
-  // Lista atual (filtrada), com o índice de cada foto no álbum inteiro (#foto-N).
-  const list = useMemo(
-    () => images.map((item, n) => ({ ...item, n })).filter((item) => !scene || item.scene === scene),
-    [images, scene],
-  );
+  }, [base]);
+  // Lista atual (filtrada por dia).
+  const list = useMemo(() => base.filter((item) => !scene || item.scene === scene), [base, scene]);
   const total = list.length;
   const open = index !== null;
 
   const chooseScene = (next) => {
     if (next === scene) return; // chip já ativo: mantém a lista como está
     setScene(next);
+    setShown(progressive ? PAGE : images.length);
+  };
+
+  const chooseHits = (next) => {
+    setHits(next);
+    setScene(null);
     setShown(progressive ? PAGE : images.length);
   };
 
@@ -134,9 +152,18 @@ export const AlbumGrid = ({ images = [], editionText }) => {
 
   return (
     <>
+      {faceAlbum && (
+        <FaceSearch
+          albumKey={faceAlbum}
+          matchCount={hits ? hits.length : null}
+          onResults={chooseHits}
+          onClear={() => chooseHits(null)}
+        />
+      )}
+
       {scenes.length > 1 && (
         <div className="album-filters" role="group" aria-label="Filtrar fotos por dia">
-          {[[null, images.length], ...scenes].map(([name, count]) => (
+          {[[null, base.length], ...scenes].map(([name, count]) => (
             <button
               type="button"
               className="album-chip"
@@ -152,7 +179,11 @@ export const AlbumGrid = ({ images = [], editionText }) => {
 
       <ul className="album-grid">
         {visible.map((item, i) => (
-          <li className={`album-item${isFeatured(i) ? " album-item--featured" : ""}`} key={item.url} data-reveal="fade">
+          <li
+            className={`album-item${isFeatured(i) ? " album-item--featured" : ""}${item.hit && !item.hit.strong ? " album-item--maybe" : ""}`}
+            key={item.url}
+            data-reveal="fade"
+          >
             <a
               href={item.image?.src ?? item.url}
               aria-label={`Abrir foto ${i + 1} de ${total}`}
