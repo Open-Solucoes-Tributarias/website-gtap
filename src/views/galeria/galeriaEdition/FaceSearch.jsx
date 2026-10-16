@@ -154,7 +154,7 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
               <p className="face-bar-trust"><Icon name="lock" /> Seus dados estão seguros</p>
             </div>
             <button type="button" className="btn btn--gold face-bar-cta" onClick={open} onPointerEnter={warm} onFocus={warm}>
-              <Icon name="camera" /> Buscar minhas fotos
+              <Icon name="search" /> Buscar minhas fotos
             </button>
           </>
         ) : (

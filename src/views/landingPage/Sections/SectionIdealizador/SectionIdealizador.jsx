@@ -1,5 +1,5 @@
 import ResponsiveImage from "../../../../components/ResponsiveImage/ResponsiveImage";
-import { Icon } from "../../../../components/Icon/Icon";
+import { InstagramIcon } from "../../../../components/Icon/BrandIcons";
 import "./SectionIdealizador.css";
 import ImageAlexandre from "@/assets/alexandre.webp";
 
@@ -34,7 +34,7 @@ export const SectionIdealizador = ({ localImages = {} }) => {
         </div>
         <div className="desktop-button-instagram" data-reveal>
           <a className="btn btn--gold" href="https://www.instagram.com/foco.tributario/" target="_blank" rel="noopener noreferrer">
-            <Icon name="camera" />Acompanhe pelo Instagram
+            <InstagramIcon />Acompanhe pelo Instagram
           </a>
         </div>
       </div>
@@ -44,7 +44,7 @@ export const SectionIdealizador = ({ localImages = {} }) => {
       </div>
       <div className="mobile-button-instagram" data-reveal>
           <a className="btn btn--gold" href="https://www.instagram.com/foco.tributario/" target="_blank" rel="noopener noreferrer">
-            <Icon name="camera" />Acompanhe pelo Instagram
+            <InstagramIcon />Acompanhe pelo Instagram
           </a>
         </div>
     </section>

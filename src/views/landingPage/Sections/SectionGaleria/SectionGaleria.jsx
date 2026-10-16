@@ -47,7 +47,7 @@ export const SectionGaleria = ({ images }) => {
           Acompanhe de perto o que o GTAP tem realizado nos últimos anos.
         </p>
         <a href="/galeria/" className="galeria-cta btn btn--gold" data-reveal>
-          <Icon name="camera" />Acesse a galeria
+          <Icon name="search" />Acesse a galeria
         </a>
       </div>
 
