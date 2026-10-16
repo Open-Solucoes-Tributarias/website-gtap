@@ -1,4 +1,5 @@
 import { attachLenis } from './scrollLock';
+import { SCROLL_TO_EVENT } from './scrollTo';
 
 // Rolagem com inércia (Lenis), como no website-gtap, mas só onde faz diferença:
 // desktop com mouse/trackpad. Toque continua 100% nativo e o pacote nem é baixado.
@@ -31,6 +32,18 @@ export function startSmoothScroll() {
     rafId = requestAnimationFrame(loop);
   };
 
+  const goTo = (target) => {
+    kick();
+    lenis.scrollTo(target, { duration: 1.1 });
+  };
+
+  // Pedido de outros componentes (ex.: resultados da busca facial): rola suave até o elemento.
+  const onScrollTo = (event) => {
+    if (!lenis || !event.detail?.target) return;
+    event.preventDefault(); // sinaliza que o Lenis cuidou da rolagem
+    goTo(event.detail.target);
+  };
+
   // Âncoras da mesma página (/#temas, #preços): Lenis anima respeitando scroll-padding-top.
   const onClick = (event) => {
     // detail 0 = ativado pelo teclado: a navegação nativa move o foco para a seção.
@@ -44,8 +57,7 @@ export function startSmoothScroll() {
     if (!target) return;
     event.preventDefault();
     if (url.hash !== window.location.hash) window.history.pushState(null, '', url.hash);
-    kick();
-    lenis.scrollTo(target, { duration: 1.1 });
+    goTo(target);
   };
 
   import('lenis').then(({ default: Lenis }) => {
@@ -58,6 +70,7 @@ export function startSmoothScroll() {
     attachLenis(lenis);
     window.addEventListener('wheel', kick, { passive: true });
     document.addEventListener('click', onClick);
+    window.addEventListener(SCROLL_TO_EVENT, onScrollTo);
   });
 
   return () => {
@@ -65,6 +78,7 @@ export function startSmoothScroll() {
     cancelAnimationFrame(rafId);
     window.removeEventListener('wheel', kick);
     document.removeEventListener('click', onClick);
+    window.removeEventListener(SCROLL_TO_EVENT, onScrollTo);
     attachLenis(null);
     lenis?.destroy();
   };

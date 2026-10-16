@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FaceSearch } from "./galeriaEdition/FaceSearch";
 import { Lightbox } from "./Lightbox";
+import { scrollToElement } from "../../motion/scrollTo";
 import "./GaleriaFaceSearch.css";
 
 const midiasOf = (editionText) => `https://gtap.com.br/midias/${encodeURIComponent(editionText)}`;
@@ -60,7 +61,7 @@ export const GaleriaFaceSearch = ({ albums }) => {
   };
 
   useEffect(() => {
-    if (hits) resultsRef.current?.scrollIntoView({ block: "start" });
+    if (hits) scrollToElement(resultsRef.current);
   }, [hits]);
 
   const onLightboxClose = useCallback(() => {
