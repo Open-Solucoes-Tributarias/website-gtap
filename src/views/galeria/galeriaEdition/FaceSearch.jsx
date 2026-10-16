@@ -9,6 +9,13 @@ import "./FaceSearch.css";
 // Âncora da seção: /galeria/#encontre-suas-fotos leva direto ao botão (e é o endereço que fica na barra ao abrir a busca).
 export const FACE_ANCHOR = "encontre-suas-fotos";
 
+// Deixa o navegador pintar o estado "ocupado" antes de começar a conta pesada (a primeira inferência
+// trava a thread principal por segundos no celular; sem isso o clique parece não ter feito nada).
+const nextPaint = () => new Promise((resolve) => {
+  const timer = setTimeout(resolve, 120);
+  requestAnimationFrame(() => requestAnimationFrame(() => { clearTimeout(timer); resolve(); }));
+});
+
 const NOTICES = {
   none: "Não encontramos um rosto na imagem. Tente de novo com boa luz, de frente e sem boné ou óculos escuros.",
   multiple: "Há mais de um rosto na imagem. Use uma foto só sua.",
@@ -28,6 +35,7 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
   const triggerRef = useRef(null);
   const [phase, setPhase] = useState("preparing"); // preparing | ready | camera | error
   const [busy, setBusy] = useState(false);
+  const [stage, setStage] = useState(""); // o que está acontecendo durante a busca
   // Aceite da política (pedido a cada visita; nada é gravado no aparelho).
   const [accepted, setAccepted] = useState(false);
   const [notice, setNotice] = useState("");
@@ -68,6 +76,7 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
       unlockScroll();
       setPhase("preparing");
       setBusy(false);
+      setStage("");
       triggerRef.current?.focus({ preventScroll: true });
     };
     dialog.addEventListener("close", onClose);
@@ -100,6 +109,8 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
   const run = async (describe) => {
     setBusy(true);
     setNotice("");
+    setStage("Analisando seu rosto…");
+    await nextPaint();
     try {
       const faceapi = await loadEngine();
       const result = await describe(faceapi);
@@ -108,6 +119,8 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
         setPhase("ready");
         return;
       }
+      setStage("Procurando nas fotos…");
+      await nextPaint();
       const hits = await findPhotos(albums, result.descriptor);
       if (!hits.length) {
         setNotice(NOTICES[scope === "all" ? "emptyAll" : "empty"]);
@@ -120,10 +133,15 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
       setPhase("error");
     } finally {
       setBusy(false);
+      setStage("");
     }
   };
 
-  const capture = () => run((faceapi) => describeVideo(faceapi, videoRef.current));
+  const capture = () => run((faceapi) => describeVideo(
+    faceapi,
+    videoRef.current,
+    (step, total) => setStage(`Analisando seu rosto (${step} de ${total})…`),
+  ));
 
   const onFile = async (event) => {
     const file = event.target.files?.[0];
@@ -209,21 +227,27 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
                   <Icon name="camera" /> Tirar uma selfie
                 </button>
               )}
-              <button type="button" className="face-trigger face-trigger--light" onClick={() => fileRef.current?.click()} disabled={busy || !accepted}>
-                Enviar uma foto minha
+              <button type="button" className="face-trigger face-trigger--light" onClick={() => fileRef.current?.click()} disabled={busy || !accepted} data-busy={busy || undefined}>
+                {busy ? <><span className="face-spinner" aria-hidden="true" /> Analisando…</> : "Enviar uma foto minha"}
               </button>
               <input ref={fileRef} type="file" accept="image/*" hidden onChange={onFile} />
-              {busy && <p className="face-status" role="status">Procurando você nas fotos…</p>}
+              {busy && <p className="face-progress" role="status"><span className="face-spinner" aria-hidden="true" />{stage}</p>}
             </div>
           )}
 
           {phase === "camera" && (
             <div className="face-camera">
-              <video ref={videoRef} className="face-video" playsInline muted aria-label="Prévia da câmera" />
-              <p className="face-hint">Fique de frente, com boa luz, e olhe para a câmera.</p>
+              <div className="face-stage" data-busy={busy || undefined}>
+                <video ref={videoRef} className="face-video" playsInline muted aria-label="Prévia da câmera" />
+                {/* Moldura e varredura (só transform: seguem animando mesmo com a thread ocupada). */}
+                {busy && <span className="face-scan" aria-hidden="true"><span className="face-scan-sweep" /></span>}
+              </div>
+              {busy
+                ? <p className="face-progress" role="status"><span className="face-spinner" aria-hidden="true" />{stage}</p>
+                : <p className="face-hint">Fique de frente, com boa luz, e olhe para a câmera.</p>}
               <div className="face-actions">
-                <button type="button" className="face-trigger" onClick={capture} disabled={busy || !accepted}>
-                  {busy ? "Procurando…" : "Tirar foto e buscar"}
+                <button type="button" className="face-trigger" onClick={capture} disabled={busy || !accepted} data-busy={busy || undefined}>
+                  {busy ? <><span className="face-spinner" aria-hidden="true" /> Analisando…</> : "Tirar foto e buscar"}
                 </button>
                 <button type="button" className="face-link" onClick={() => setPhase("ready")} disabled={busy}>Voltar</button>
               </div>
