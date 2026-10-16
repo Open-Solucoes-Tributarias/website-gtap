@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { OPEN_URL } from "../../data/links";
+import { OPEN_URL, LOGO_SRC } from "../../data/links";
 import { lockScroll, unlockScroll } from "../../motion/scrollLock";
 import "./NavbarMobile.css";
 
@@ -76,7 +76,7 @@ export const NavbarMobile = () => {
                 <div className="navbar-header">
                     <h1 className="navbar-logo">
                         <a href="/">
-                            <img src="/logo-xi-gtap.svg" alt="XI GTAP — página inicial" width="152" height="49" fetchPriority="high" />
+                            <img src={LOGO_SRC} alt="XI GTAP — página inicial" width="152" height="49" fetchPriority="high" />
                         </a>
                     </h1>
                     <button
