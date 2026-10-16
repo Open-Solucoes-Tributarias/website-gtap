@@ -6,6 +6,9 @@ import { lockScroll, unlockScroll } from "../../../motion/scrollLock";
 import { describeFace, describeVideo, findPhotos, loadEngine, loadIndex, loadManifest, toCanvas } from "../../../faceSearch/engine";
 import "./FaceSearch.css";
 
+// Âncora da seção: /galeria/#encontre-suas-fotos leva direto ao botão (e é o endereço que fica na barra ao abrir a busca).
+export const FACE_ANCHOR = "encontre-suas-fotos";
+
 const NOTICES = {
   none: "Não encontramos um rosto na imagem. Tente de novo com boa luz, de frente e sem boné ou óculos escuros.",
   multiple: "Há mais de um rosto na imagem. Use uma foto só sua.",
@@ -52,6 +55,7 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
     if (!dialog || dialog.open) return;
     dialog.showModal();
     lockScroll();
+    history.replaceState(null, "", `#${FACE_ANCHOR}`);
     prepare();
   };
 
@@ -137,7 +141,7 @@ export const FaceSearch = ({ albums, scope = "album", matchCount, onResults, onC
 
   return (
     <>
-      <div className="face-bar" data-active={matchCount != null || undefined}>
+      <div className="face-bar" id={FACE_ANCHOR} data-active={matchCount != null || undefined}>
         {matchCount == null ? (
           <>
             <p className="face-bar-text"><b>Participou do evento?</b> Encontre as fotos em que você aparece{scope === "all" ? " em todas as edições" : ""}.</p>
