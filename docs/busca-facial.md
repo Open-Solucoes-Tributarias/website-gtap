@@ -62,7 +62,7 @@ Plano de implementação e execução. Branch: `feat/busca-facial` (a partir da 
 
 ## 5. Privacidade e LGPD (decidir antes de publicar)
 
-**Já implementado:** página `/privacidade/` (link no rodapé e no sitemap) com a seção `#busca-facial`, e aceite obrigatório (checkbox com link para a política) no diálogo antes de câmera/upload, pedido a cada visita e sem gravar nada no aparelho. **Pendente de revisão jurídica:** razão social/CNPJ do controlador, canal formal de privacidade (hoje o formulário de contato), prazo de 15 dias para remoção, base legal e se o Meta Pixel exige banner de cookies.
+**Já implementado:** página `/privacidade/` (link no rodapé e no sitemap) com a seção `#busca-facial`, e aceite obrigatório (checkbox com link para a política) no diálogo antes de câmera/upload, pedido a cada visita e sem gravar nada no aparelho. **Pendente de revisão jurídica:** razão social/CNPJ do controlador, encarregado (DPO) — o canal público hoje é o e-mail contato@opensolucoestributarias.com.br, prazo de 15 dias para remoção, base legal e se o Meta Pixel exige banner de cookies.
 
 - Os descritores publicados são **dados biométricos de todas as pessoas que aparecem nas fotos** (LGPD, art. 5º II e 11: dado pessoal sensível). Qualquer pessoa pode baixar o `.bin`. Isso é diferente da selfie, que não sai do aparelho.
 - Mitigações previstas: aviso e canal de descadastro (remover fotos/rosto do índice e republicar); revisão jurídica/termo de consentimento da inscrição no evento; começar só pelo X GTAP (mais recente) para limitar o escopo; não publicar caixas nem nomes, só vetores; sem analytics da selfie.

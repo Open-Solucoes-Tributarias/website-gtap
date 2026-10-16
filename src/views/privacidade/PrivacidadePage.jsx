@@ -3,6 +3,10 @@ import { Navbar } from "../../components/Navbar/Navbar";
 import { Footer } from "../../components/Footer/Footer";
 
 // Versão do texto: ao mudar o conteúdo da busca facial, incremente (FaceSearch pede novo aceite).
+// Canal de privacidade (pedidos de titulares, remoção de fotos e do índice facial).
+const CONTACT_EMAIL = "contato@opensolucoestributarias.com.br";
+const ContactLink = () => <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>;
+
 export const PRIVACY_UPDATED = "16 de outubro de 2026";
 
 export const PrivacidadePage = () => (
@@ -46,8 +50,8 @@ export const PrivacidadePage = () => (
           <li><b>Base legal:</b> para a sua busca, o seu consentimento (art. 11, I, da LGPD), que você pode revogar a qualquer momento deixando de usar a função.</li>
         </ul>
         <p>
-          Aparece em alguma foto e quer que seu rosto saia do índice, ou que a foto seja removida do álbum? Peça pelo
-          formulário de contato e atendemos em até 15 dias. A foto é retirada do álbum e o índice é regerado.
+          Aparece em alguma foto e quer que seu rosto saia do índice, ou que a foto seja removida do álbum? Escreva para
+          <ContactLink /> e atendemos em até 15 dias. A foto é retirada do álbum e o índice é regerado.
         </p>
       </section>
 
@@ -72,8 +76,7 @@ export const PrivacidadePage = () => (
         <h2>Seus direitos</h2>
         <p>
           Você pode pedir confirmação do tratamento, acesso, correção, anonimização, portabilidade, informação sobre
-          compartilhamento, eliminação dos dados e a revogação do consentimento (art. 18 da LGPD). Fale com a gente pelo{" "}
-          <a href="/#contato">formulário de contato</a>. Se preferir, você também pode recorrer à Autoridade Nacional de
+          compartilhamento, eliminação dos dados e a revogação do consentimento (art. 18 da LGPD). Fale com a gente pelo e-mail <ContactLink />. Se preferir, você também pode recorrer à Autoridade Nacional de
           Proteção de Dados (ANPD).
         </p>
       </section>

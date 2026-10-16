@@ -49,9 +49,12 @@ export const Footer = () => {
             </a>
           </li>
           <li><a href="/#contato">Contato</a></li>
-          <li><a href="/privacidade/">Privacidade</a></li>
         </ul>
       </div>
+      <nav className="content-legal" aria-label="Privacidade" data-reveal>
+        <a href="/privacidade/">Política de Privacidade</a>
+        <a href="/privacidade/#busca-facial">Privacidade na busca facial</a>
+      </nav>
     </footer>
   );
 };
