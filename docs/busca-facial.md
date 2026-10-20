@@ -129,3 +129,15 @@ Relato: a selfie "não achava rosto" ou não casava com pouca luz ou fundo escur
 - **Resolução também pesa:** descritor do mesmo rosto vs. índice (1600 px): 1000 px → 0.07, 640 px → 0.12, 480 px → 0.18. Por isso a selfie deve ocupar bem o quadro.
 - **Feedback do botão:** a primeira análise trava a thread principal por segundos no celular; agora o estado "ocupado" é pintado antes da conta (`nextPaint`), o motor é aquecido ao abrir a busca (`warmUp`) e o botão, a prévia e a linha de status mostram o progresso (animações só com `transform`).
 - **Mudou `describe.js`? Reindexe** (`CACHE_VERSION` + `npm run faces:index`): o índice e a selfie precisam usar exatamente o mesmo caminho.
+
+## 12. Carregamento sem espera (20/10/2026)
+
+Relato (iPhone): o diálogo ficava em "Preparando a busca… baixamos cerca de 12 MB" na primeira vez. Mudanças:
+
+- **Pré-carga na página** (`preloadEngine`, `src/faceSearch/engine.js`): quando a barra "Encontre suas fotos" chega perto da tela (`IntersectionObserver`, margem de 300 px) e a conexão permite (sem `saveData`, fora de 2G), o navegador baixa lib + modelos + índices no tempo ocioso. Em conexão lenta/econômica só carrega por intenção (hover, foco, clique). A pré-carga é idempotente.
+- **Baixa uma vez, usa da memória:** lib por Blob URL e pesos por `tf.io.decodeWeights` + `loadFromWeightMap`, sem depender do cache HTTP (antes o `loadFromUri` baixava os modelos de novo). Os tamanhos vêm do `manifest.preload` (`npm run faces:assets`) e dão o progresso real.
+- **Diálogo já mostra as ações:** aceite, "Tirar uma selfie" e "Enviar uma foto minha" aparecem de imediato; uma faixa "Preparando a busca…" (spinner, % e barra dourada, só com `transform`) fica acima enquanto carrega e some quando pronto. Sem texto de MB. Se a pessoa já abrir a câmera ou escolher a foto antes de terminar, a análise espera sozinha ("Preparando…") e segue.
+- **Botão da barra:** fio de progresso na base enquanto pré-carrega (o botão já funciona).
+- **Lento/erro:** sem avanço por 20 s → "Está demorando mais que o normal" + "Tentar de novo"; falha → mensagem + "Tentar de novo".
+- **Hidratação:** `hasCamera` é decidido depois da hidratação (o diálogo vem desenhado no HTML e o servidor não sabe se há câmera).
+- **Não verificado:** iPhone real. No emulador de celular (sem GPU) a pré-carga leva ~2 s localmente e o fluxo completo (clique antes de terminar → câmera → captura → resultado) funciona com rede simulada lenta.

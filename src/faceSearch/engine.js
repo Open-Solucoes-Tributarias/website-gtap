@@ -1,5 +1,6 @@
-// Motor da busca facial no navegador. Tudo é carregado sob demanda (clique no botão);
-// as páginas dos álbuns não trazem a biblioteca nem os modelos.
+// Motor da busca facial no navegador. As páginas não trazem a biblioteca nem os modelos no HTML:
+// preloadEngine() baixa tudo (uma vez, para a memória) quando a barra da busca aparece na tela (ou na
+// intenção: hover, foco, clique), com progresso, para o diálogo já abrir pronto.
 import { describeAll } from './describe';
 import { averageDescriptors, search, unpackIndex } from './format';
 
@@ -43,23 +44,66 @@ export function loadIndex(albumKey) {
   return indexes.get(albumKey);
 }
 
-function loadScript(src) {
+// Lê o arquivo inteiro contando bytes (progresso). Os arquivos pesados são baixados UMA vez e usados da
+// memória (script por Blob URL, pesos por decodeWeights): não dependemos do cache HTTP para não baixar de novo.
+async function fetchBuffer(url, onBytes) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${url}: ${response.status}`);
+  const reader = response.body?.getReader?.();
+  if (!reader) {
+    const whole = await response.arrayBuffer();
+    onBytes(whole.byteLength);
+    return whole;
+  }
+  const chunks = [];
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value);
+    onBytes(value.length);
+  }
+  return new Blob(chunks).arrayBuffer();
+}
+
+// Fração de bytes já baixados (0–1); a pré-carga conecta isto ao progresso da interface.
+let reportBytes = () => {};
+
+// Biblioteca + pesos dos 3 modelos, em paralelo. { 'lib/x.js': ArrayBuffer, 'models/y.bin': ArrayBuffer }
+const loadAssets = once(async () => {
+  const manifest = await loadManifest();
+  const files = manifest.preload ?? [];
+  const total = files.reduce((sum, file) => sum + file.bytes, 0) || 1;
+  let got = 0;
+  const entries = await Promise.all(files.map(async (file) => [
+    file.path,
+    await fetchBuffer(FACE_BASE + file.path, (bytes) => {
+      got += bytes;
+      reportBytes(Math.min(got / total, 1));
+    }),
+  ]));
+  return Object.fromEntries(entries);
+});
+
+function loadLibrary(buffer) {
+  if (window.faceapi) return Promise.resolve(window.faceapi);
   return new Promise((resolve, reject) => {
-    if (window.faceapi) return resolve(window.faceapi);
+    const url = URL.createObjectURL(new Blob([buffer], { type: 'text/javascript' }));
     const script = document.createElement('script');
-    script.src = src;
-    script.async = true;
-    script.onload = () => resolve(window.faceapi);
+    script.src = url;
+    script.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(window.faceapi);
+    };
     script.onerror = () => reject(new Error('Não foi possível carregar a biblioteca'));
     document.head.append(script);
-    return undefined;
   });
 }
 
-// Biblioteca + backend (WebGL, com CPU de reserva) + 3 modelos baixados em paralelo.
+// Biblioteca + backend (WebGL, com CPU de reserva) + 3 modelos carregados dos bytes já baixados.
 export const loadEngine = once(async () => {
   const manifest = await loadManifest();
-  const faceapi = await loadScript(FACE_BASE + manifest.lib);
+  const assets = await loadAssets();
+  const faceapi = await loadLibrary(assets[manifest.lib]);
   const { tf } = faceapi;
   for (const backend of ['webgl', 'cpu']) {
     try {
@@ -68,15 +112,72 @@ export const loadEngine = once(async () => {
   }
   await tf.ready();
   tf.enableProdMode();
-  const uri = FACE_BASE + manifest.models;
-  await Promise.all([
-    faceapi.nets.ssdMobilenetv1.loadFromUri(uri),
-    faceapi.nets.faceLandmark68Net.loadFromUri(uri),
-    faceapi.nets.faceRecognitionNet.loadFromUri(uri),
-  ]);
+  const nets = {
+    ssd_mobilenetv1_model: faceapi.nets.ssdMobilenetv1,
+    face_landmark_68_model: faceapi.nets.faceLandmark68Net,
+    face_recognition_model: faceapi.nets.faceRecognitionNet,
+  };
+  await Promise.all(Object.entries(nets).map(async ([name, net]) => {
+    const [group] = await getJson(`${FACE_BASE}${manifest.models}/${name}-weights_manifest.json`);
+    const weights = assets[`${manifest.models}/${group.paths[0]}`];
+    net.loadFromWeightMap(tf.io.decodeWeights(weights, group.weights));
+  }));
   await warmUp(faceapi);
   return faceapi;
 });
+
+// ---- Estado da pré-carga (lido pela interface via useSyncExternalStore) ----
+const STALL_MS = 20000; // sem avançar por tanto tempo = "está demorando"
+const IDLE_STATUS = { state: 'idle', progress: 0, stalled: false };
+let status = IDLE_STATUS;
+const listeners = new Set();
+function setStatus(patch) {
+  status = { ...status, ...patch };
+  listeners.forEach((listener) => listener());
+}
+export const getEngineStatus = () => status;
+export const getServerStatus = () => IDLE_STATUS;
+export const subscribeEngine = (listener) => {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+};
+
+let preloading;
+// Baixa lib + modelos (com progresso), carrega os índices dos álbuns e prepara o motor.
+// Idempotente: chamadas repetidas devolvem a mesma promessa. Resolve com o faceapi pronto.
+export function preloadEngine(albumKeys = []) {
+  if (preloading) return preloading;
+  setStatus({ state: 'loading', progress: 0.02, stalled: false });
+  let lastMove = Date.now();
+  const watchdog = setInterval(() => {
+    if (status.state === 'loading' && Date.now() - lastMove > STALL_MS) setStatus({ stalled: true });
+  }, 4000);
+  const move = (progress) => {
+    lastMove = Date.now();
+    setStatus({ progress: Math.max(status.progress, Math.min(progress, 0.99)), stalled: false });
+  };
+  reportBytes = (fraction) => move(0.05 + 0.85 * fraction);
+  preloading = (async () => {
+    await Promise.all([loadAssets(), ...albumKeys.map((album) => loadIndex(album))]);
+    move(0.92); // o resto (nets + aquecimento) não tem como medir: a interface mostra varredura
+    const faceapi = await loadEngine();
+    clearInterval(watchdog);
+    setStatus({ state: 'ready', progress: 1, stalled: false });
+    return faceapi;
+  })().catch((error) => {
+    clearInterval(watchdog);
+    preloading = undefined;
+    setStatus({ state: 'error', progress: 0, stalled: false });
+    throw error;
+  });
+  return preloading;
+}
+
+// "Tentar de novo" depois de erro ou lentidão: recomeça (o que já está em cache sai de lá).
+export function retryEngine(albumKeys = []) {
+  preloading = undefined;
+  return preloadEngine(albumKeys);
+}
 
 // A primeira inferência compila shaders (WebGL) e leva segundos no celular: rodamos os 3 modelos uma
 // vez com imagens em branco enquanto a pessoa ainda lê o aviso, para a primeira busca ser rápida.
