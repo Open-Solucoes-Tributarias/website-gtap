@@ -75,7 +75,19 @@
   color: var(--text-on-light-muted);
 }
 
-.face-bar-cta { white-space: nowrap; }
+.face-bar-cta { white-space: nowrap; overflow: hidden; }
+
+/* Pré-carga em andamento: fio de progresso na base do botão, sem trocar o texto (o botão já funciona). */
+.face-bar-cta[data-loading]::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  background: rgb(2 9 58 / 55%);
+  transform-origin: left center;
+  transform: scaleX(var(--p, 0));
+  transition: transform 320ms var(--ease-out);
+}
 
 /* Depois da busca: só o resultado e as duas saídas. */
 .face-bar[data-active] {
@@ -180,6 +192,67 @@
 
 @keyframes face-spin {
   to { transform: rotate(360deg); }
+}
+
+/* Faixa de preparo do motor, dentro do diálogo: aparece enquanto carrega e some quando está pronto. */
+.face-prepare {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-gray-100);
+}
+
+.face-prepare[data-tone="warn"] {
+  background: #fdf3d8;
+  justify-items: start;
+}
+
+.face-prepare-text {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--text-on-light);
+}
+
+.face-prepare-pct {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-on-light-muted);
+}
+
+/* Trilho + preenchimento dourado. Tudo em transform: segue fluido com a thread principal ocupada. */
+.face-meter {
+  position: relative;
+  height: 4px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--color-gray-300);
+}
+
+.face-meter i {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-gold);
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 320ms var(--ease-out);
+}
+
+/* Reta final (aquecer a IA) não tem como medir: faixa que corre continuamente. */
+.face-meter[data-warming] i {
+  inset: 0 auto 0 0;
+  width: 38%;
+  transform: translateX(-100%);
+  transition: none;
+  animation: face-meter-run 1.1s var(--ease-in-out) infinite;
+}
+
+@keyframes face-meter-run {
+  to { transform: translateX(263%); }
 }
 
 .face-progress {
@@ -381,5 +454,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .face-spinner { animation-duration: 2.4s; }
+  .face-meter[data-warming] i { animation: none; inset: 0; width: auto; transform: none; opacity: 0.55; }
+  .face-bar-cta[data-loading]::before, .face-meter i { transition: none; }
   .face-scan-sweep { animation: none; transform: translateY(100%); opacity: 0.6; }
 }
