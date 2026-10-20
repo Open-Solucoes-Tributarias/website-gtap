@@ -2,4 +2,4 @@
 :HL["/assets/logos/vigtap.svg","image"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":{"n":"editionText","t":"d","k":"VI%20GTAP","s":["galeria","privacidade"]},"h":65600,"c":"$Q2"}]]
-0:{"b":"5fr-K5na7tvHQ-KHek8lt","t":{"t":{"s":"","h":131088,"c":"$Q1"}}}
+0:{"b":"8B-WIu6BCzcZ6ejnI4IwU","t":{"t":{"s":"","h":131088,"c":"$Q1"}}}

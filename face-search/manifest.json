@@ -589,5 +589,23 @@
         "dia-2-259"
       ]
     }
-  }
+  },
+  "preload": [
+    {
+      "path": "lib/face-api.0160f7af3a.js",
+      "bytes": 1333943
+    },
+    {
+      "path": "models/ssd_mobilenetv1_model.2835640602.bin",
+      "bytes": 5616957
+    },
+    {
+      "path": "models/face_landmark_68_model.4611ef65c8.bin",
+      "bytes": 356840
+    },
+    {
+      "path": "models/face_recognition_model.b413e420d6.bin",
+      "bytes": 6444032
+    }
+  ]
 }
